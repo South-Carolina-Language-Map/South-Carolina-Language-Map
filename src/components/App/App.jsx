@@ -20,6 +20,12 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
+
+import Admin from '../Admin/Admin';
+import AdminLanguage from '../AdminLanguage/AdminLanguage';
+import AdminCategory from '../AdminCategory/AdminCategory';
+import AdminApprovals from '../AdminApprovals/AdminApprovals';
+
 import './App.css';
 
 function App() {
@@ -34,7 +40,6 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav/>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -43,7 +48,7 @@ function App() {
           <Route
             // shows AboutPage at all times (logged in or not)
             exact
-            path="/admin/about"
+            path="/about"
           >
             <AboutPage />
           </Route>
@@ -55,9 +60,9 @@ function App() {
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
             exact
-            path="/user"
+            path="/admin"
           >
-            <UserPage />
+            <Admin />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -75,7 +80,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/admin" />
               :
               // Otherwise, show the login page
               <LoginPage />
@@ -89,7 +94,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/admin" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
