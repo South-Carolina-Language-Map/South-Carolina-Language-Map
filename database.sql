@@ -1,3 +1,5 @@
+-- create db sc_language_map
+
 CREATE TABLE "public.user" (
 	"id" serial NOT NULL,
 	"username" serial(48) NOT NULL,
