@@ -7,13 +7,15 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   // GET route code here
+
+  let queryTextForMap = `
+  SELECT * FROM "sites"
+  JOIN "languages" ON "languages".id = "sites".languages_id
+  `
+
+
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
-});
+
 
 module.exports = router;

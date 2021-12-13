@@ -52,7 +52,7 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
-//ADMIN clearance_level approval
+//ADMIN clearance_level set to 1 for approval
 router.put('/admin/:id', rejectUnauthenticated, (req, res) => {
   //this is the id of user to approve
   const userToApprove = req.params.id;
@@ -76,6 +76,7 @@ router.put('/admin/:id', rejectUnauthenticated, (req, res) => {
 }) //end put 
 
 
+//DELETE a user not approved for admin
 router.delete('/admin/:id', rejectUnauthenticated, (req, res) => {
   //this is the id of user to approve
   const userToDelete = req.params.id;
