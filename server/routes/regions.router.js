@@ -1,19 +1,19 @@
+const { response } = require('express');
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
-  // GET route code here
+router.get('/regions', (req, res) => {
+  pool.query(`SELECT * FROM "regions";`)
+  .then((response) => {
+    res.send(response.rows);
+    console.log('Regions GET successful');
+  })
+  .catch((err) => {
+    res.sendStatus(500);
+    console.log('ERROR in Regions GET');
+  })
 });
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-  // POST route code here
-});
 
 module.exports = router;
