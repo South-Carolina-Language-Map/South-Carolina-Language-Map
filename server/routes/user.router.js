@@ -91,10 +91,9 @@ router.delete('/admin/:id', rejectUnauthenticated, (req, res) => {
         res.sendStatus(200);
       })
       .catch(error => {
-        console.log('ERROR IN UPDATE', error);
+        console.log('ERROR IN DELETE', error);
         res.sendStatus(500);
       })
-
 }) //end put 
 
 module.exports = router;
