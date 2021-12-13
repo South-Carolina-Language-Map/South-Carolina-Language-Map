@@ -10,7 +10,7 @@ const router = express.Router();
 
 //GET ALL ADMINS
 // Handles Ajax request for user information if user is authenticated
-router.get('/', rejectUnauthenticated, (req, res) => {
+router.get('/admin', rejectUnauthenticated, (req, res) => {
   // Send back user object from the session (previously queried from the database)
   res.send(req.user);
 });
@@ -53,17 +53,18 @@ router.post('/logout', (req, res) => {
 });
 
 //ADMIN clearance_level approval
-router.put('/', rejectUnauthenticated, (req, res) => {
+router.put('/admin/:id', rejectUnauthenticated, (req, res) => {
   //this is the id of user to approve
-  const idToApprove = req.params.id;
+  const userToApprove = req.params.id;
 
   //query to update clearance_level
   let queryTextApproval = `
   UPDATE "user"
-  SET "clearance_level" = 1
-  WHERE "user"."id" = $1
+  SET "clearance_level" = 1 && "pending" = FALSE
+  WHERE "id" = $1
   `
-  pool.query(queryTextApproval, idToApprove)
+
+  pool.query(queryTextApproval, userToApprove)
       .then(respond => {
         res.sendStatus(200);
       })
@@ -74,5 +75,26 @@ router.put('/', rejectUnauthenticated, (req, res) => {
 
 }) //end put 
 
+
+router.delete('/admin/:id', rejectUnauthenticated, (req, res) => {
+  //this is the id of user to approve
+  const userToDelete = req.params.id;
+
+  //query to update clearance_level
+  let queryTextUserToDelete = `
+  DELETE FROM "user"
+  WHERE "id" = $1
+  `
+  
+  pool.query(queryTextUserToDelete, userToDelete)
+      .then(respond => {
+        res.sendStatus(200);
+      })
+      .catch(error => {
+        console.log('ERROR IN UPDATE', error);
+        res.sendStatus(500);
+      })
+
+}) //end put 
 
 module.exports = router;
