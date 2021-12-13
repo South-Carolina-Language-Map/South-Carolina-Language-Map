@@ -61,8 +61,8 @@ router.put('/admin/:id', rejectUnauthenticated, (req, res) => {
   let queryTextApproval = `
   UPDATE "user"
   SET "clearance_level" = 1 && "pending" = FALSE
-  WHERE "id" = $1
-  `
+  WHERE "id" = $1;
+  `;
 
   pool.query(queryTextApproval, userToApprove)
       .then(respond => {
