@@ -34,7 +34,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        <Nav/>
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -43,7 +43,7 @@ function App() {
           <Route
             // shows AboutPage at all times (logged in or not)
             exact
-            path="/about"
+            path="/admin/about"
           >
             <AboutPage />
           </Route>
