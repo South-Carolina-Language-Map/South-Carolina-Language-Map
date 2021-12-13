@@ -2,18 +2,13 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
-  // GET route code here
-});
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
+
+//POST new language(1st query) and its examples (2nd query)
+router.post('/', rejectUnauthenticated, (req, res) => {
   // POST route code here
+  console.log('This is REQ.BODY', req.body)
+
 });
 
 module.exports = router;
