@@ -23,6 +23,12 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/admin', userRouter);
+app.use('/api/categories', userRouter);
+app.use('/api/languages', userRouter);
+app.use('/api/regions', userRouter);
+app.use('/api/map', userRouter);
+app.use('/api/sites', userRouter);
 
 // Serve static files
 app.use(express.static('build'));
