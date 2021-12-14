@@ -4,7 +4,7 @@ CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" varchar(127) NOT NULL UNIQUE,
 	"fullName" varchar(256),
-	"pending" bool DEFAULT 'TRUE',
+	"pending" bool DEFAULT 'true',
 	"clearance_level" int DEFAULT '0',
 	"password" varchar(127),
 	"email" varchar(255) NOT NULL,
@@ -69,10 +69,8 @@ CREATE TABLE "examples" (
 
 --Declare Foreign Keys
 ALTER TABLE "languages" ADD CONSTRAINT "languages_fk0" FOREIGN KEY ("category_id") REFERENCES "categories"("id") ON DELETE CASCADE;
-
 ALTER TABLE "sites" ADD CONSTRAINT "sites_fk0" FOREIGN KEY ("language_id") REFERENCES "languages"("id") ON DELETE CASCADE;
 ALTER TABLE "sites" ADD CONSTRAINT "sites_fk1" FOREIGN KEY ("region_id") REFERENCES "regions"("id") ON DELETE CASCADE;
-
 ALTER TABLE "examples" ADD CONSTRAINT "examples_fk0" FOREIGN KEY ("language_id") REFERENCES "languages"("id") ON DELETE CASCADE;
 
 --Fill Categories Table
@@ -84,6 +82,13 @@ VALUES('Native American'),
 ('Latino'),
 ('Varieties of English'),
 ('Sign Lanugage');
+
+--Fill Regions Table
+INSERT INTO regions ("name")
+VALUES ('Lowcountry'),
+('Midlands'),
+('Pee Dee'),
+('Upstate');
 
 --Fill Language Table
 INSERT INTO languages (language, endonym, global_speakers, sc_speakers, category_id, description, status, glottocode)
@@ -118,3 +123,25 @@ VALUES('Cherokee','Cherokeee',2000,0,1,'','Current', 'Cher1273'),
 ('Gullah','Gullah',5000,333,6,'','Current','Gull1241'),
 ('ASL','American Sign Language',500000,333,7,'','Current','Amer1248'),
 ('BASL','Black Sign Language',333,333,7,'','Current','Amer1248');
+
+INSERT INTO sites (address, region_id, site_name, language_id, latitude, longitude)
+VALUES('3688 Warrior Creek Church Road,Gray Court, SC 29645',4,'Warrior Creek Tribal Grounds',1,-82.031686,34.580612),
+('996 Avenue of Nations',4,'Catawba Nation Cultural Center',2,-80.883596,34.904709),
+('4542 Silver Bluff Rd, Jackson, SC 29831',2,'Audubon’s Silver Bluff Center and Sanctuary',3,-81.846087,33.324609),
+('20 Bridge Street, P.O. Box 386, Bluffton, SC 29910',1,'Bluffton Visitor’s Center',4,-80.858886,32.232333),
+('200 Knights Hill Road Camden, SC 29020',2,'Camden (horse) Race Track (near former Cofitachequi)',6,-80.624509,34.27561),
+('90 Hasell St. Charleston, SC 29401',1,'Kahal Kadosh Beth Elohim Synagogue',7,-79.932725,32.782257),
+('Parris Island, Beaufort, SC 29902',1,'Fort Santa Elena (At Parris Island)',8,-80.725429,32.380694),
+('136 Church Street Charleston, SC 29401',1,'French Huguenot Church',9,-79.929152,32.77821),
+('1130 Saint Peter''s Rd., Lexington, SC 29072',2,'Saint Peter’s Lutheran Church',10,-81.303104,34.005342),
+('182 Rainbow Lake Rd, Boiling Springs, SC 29316',4,'Boiling Springs Community Park',13,-81.982045,35.053724),
+('697 Asheville Highway, Spartanburg, SC 29303',4,'St. Nicholas Greek Orthodox Church',12,-81.944875,34.96415),
+('8014 N Kings Hwy B, Myrtle Beach, SC 29572',3,'Restaurant',15,-78.8146,33.74962),
+('209-201 Boundary Dr, Spartanburg, SC 29303',4,'Calvary Hmong Alliance Church',16,-81.9263,34.97142),
+('1540D Wade Hampton Blvd, Greenville, SC 29609',4,'Restaurant',19,-82.368367,34.873192),
+('225 S Pleasantburg Dr, Greenville, SC 29607',4,'Hispanic Alliance',24,-82.362515,34.838207),
+('601 New St, Beaufort, SC 29902',1,'First African Baptist Church',26,-80.66868,32.434582),
+('138 Hagood Mill Rd. Pickens, SC 29671',4,'Hagood Mill',27,-82.722829,34.924995),
+('51 Meeting St, Charleston, SC 29401',1,'Nathaniel Russell House',28,-79.931051,32.773964),
+('355 Cedar Springs Road, Spartanburg, SC 29302',4,'South Carolina School for the Deaf and Blind',30,-81.881309,34.910471),
+('355 Cedar Springs Road, Spartanburg, SC 29302',4,'South Carolina School for the Deaf and Blind',31,-81.881309,34.910471);

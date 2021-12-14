@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
 //query to get geolocation and language variety +id for map view
   let queryTextForMap = `
   SELECT * FROM "sites"
-  JOIN "languages" ON "languages".id = "sites".languages_id
+  JOIN "languages" ON "languages".id = "sites".language_id
   `
     pool.query(queryTextForMap)
         .then((result) => {
