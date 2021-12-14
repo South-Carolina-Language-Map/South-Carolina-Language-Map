@@ -3,6 +3,40 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
+//get all languages
+router.get('/', (req, res) => {
+  pool.query(`SELECT * FROM "languages";`)
+    .then((response) => {
+      res.send(response.rows);
+      console.log('GET Languages success');
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      console.log('ERROR in Languages GET', err);
+    })
+});
+
+
+//get a specific language
+router.get('/:id', (req, res) => {
+  const languageID = req.params.id;
+  const queryText = `
+  SELECT * FROM "languages"
+  WHERE "id" = $1
+  ;`;
+
+  pool.query(queryText, [languageID])
+    .then((result) => {
+      res.send(result.rows);
+      console.log('GET Language by id success');
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      console.log('ERROR in GET Language by id');
+    })
+});
+
+
 //*****NICKS EYEBALLS HERE */
 //POST new language(1st query) and its examples (2nd query)
 router.post('/languages', (req, res) => {
@@ -60,5 +94,55 @@ router.post('/languages', (req, res) => {
             console.log('ERROR in Language POST first query', err);
         })
 }); //end POST
+
+//edit a language
+router.put('/:id', (req, res) => {
+  const id = req.params.id;
+  const updatedLanguage = req.body;
+  const queryText = `
+  UPDATE "languages"
+  SET "language" = $2,
+  "glottocode" = $3,
+  "description" = $4,
+  "endonym" = $5,
+  "global_speakers" = $6,
+  "sc_speakers" = $7,
+  "category_id" = $8
+  WHERE "id" = $1
+  ;`;
+
+  pool.query(queryText, [id, updatedLanguage.language, updatedLanguage.glottocode, updatedLanguage.description,
+    updatedLanguage.endonym, updatedLanguage.global_speakers, updatedLanguage.sc_speakers, updatedLanguage.category_id])
+    .then(() => {
+      res.sendStatus(200);
+      console.log('PUT Language success');
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      console.log('ERROR in Language PUT', err);
+    })
+});
+
+
+//delete a language
+router.delete('/:id', (req, res) => {
+  const languageID = req.params.id;
+  const queryText = `
+  DELETE FROM "languages"
+  WHERE "id" = $1
+  ;`;
+
+  pool.query(queryText, [languageID])
+    .then(() => {
+      res.sendStatus(204);
+      console.log('DELETE Language success');
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      console.log('ERROR in DELETE Language', err);
+    })
+}); 
+
+
 
 module.exports = router;
