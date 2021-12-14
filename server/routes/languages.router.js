@@ -39,8 +39,9 @@ router.get('/:id', (req, res) => {
 
 //*****NICKS EYEBALLS HERE */
 //POST new language(1st query) and its examples (2nd query)
-router.post('/languages', (req, res) => {
+router.post('/', (req, res) => {
     const newLanguage = req.body;
+    const examples = req.body.examples
 
     //query to create new language
     const queryText = `
@@ -51,10 +52,10 @@ router.post('/languages', (req, res) => {
     pool.query(queryText, [newLanguage.language, newLanguage.glottocode, newLanguage.description,
     newLanguage.endonym, newLanguage.global_speakers, newLanguage.sc_speakers, newLanguage.category_id])
         .then((result) => {
-            console.log('New language id:', result.row[0].id);
+            console.log('New language id:', result.rows[0].id);
 
             //new language ID
-            const newLangId = result.row[0].id;
+            const newLangId = result.rows[0].id;
 
             //second query to add examples into the example table
             let insertExamplesQuery = `
@@ -69,7 +70,7 @@ router.post('/languages', (req, res) => {
             //create new array to push examples into
             newExampleArray = []
             //loop
-            for (example of examples){
+            for (let example of examples){
             //push into new array
             newExampleArray.push(example.link_text)
             newExampleArray.push(example.hyperlink)
