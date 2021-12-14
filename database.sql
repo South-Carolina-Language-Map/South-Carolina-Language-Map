@@ -2,9 +2,9 @@
 -- init tables
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
-	"username" serial NOT NULL,
+	"username" varchar(127) NOT NULL UNIQUE,
 	"fullName" varchar(256),
-	"pending" bool DEFAULT 'false',
+	"pending" bool DEFAULT 'true',
 	"clearance_level" int DEFAULT '0',
 	"password" varchar(127),
 	"email" varchar(255) NOT NULL,
@@ -69,10 +69,8 @@ CREATE TABLE "examples" (
 
 --Declare Foreign Keys
 ALTER TABLE "languages" ADD CONSTRAINT "languages_fk0" FOREIGN KEY ("category_id") REFERENCES "categories"("id") ON DELETE CASCADE;
-
 ALTER TABLE "sites" ADD CONSTRAINT "sites_fk0" FOREIGN KEY ("language_id") REFERENCES "languages"("id") ON DELETE CASCADE;
 ALTER TABLE "sites" ADD CONSTRAINT "sites_fk1" FOREIGN KEY ("region_id") REFERENCES "regions"("id") ON DELETE CASCADE;
-
 ALTER TABLE "examples" ADD CONSTRAINT "examples_fk0" FOREIGN KEY ("language_id") REFERENCES "languages"("id") ON DELETE CASCADE;
 
 --Fill Categories Table
