@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-
+//*****NICKS EYEBALLS HERE */
 //POST new language(1st query) and its examples (2nd query)
 router.post('/languages', (req, res) => {
     const newLanguage = req.body;
@@ -37,11 +37,13 @@ router.post('/languages', (req, res) => {
             //loop
             for (example of examples){
             //push into new array
-            newExampleArray.push(...example)
+            newExampleArray.push(example.link_text)
+            newExampleArray.push(example.hyperlink)
             }
             //call every other in pool.query
             
-            pool.query(insertExamplesQuery, [newLangId, ...req.body.examples.link_text, ...req.body.examples.hyperlink])
+            console.log('This is newExampleArray', newExampleArray)
+            pool.query(insertExamplesQuery, [newLangId, ...newExampleArray])
                 .then(result => {
                     res.sendStatus(201)
                 })
