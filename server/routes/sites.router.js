@@ -4,7 +4,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router(); 
 
-
+require('dotenv');
 
 
 //GET in maps.router***
@@ -15,7 +15,7 @@ async function createGeoTag (req, res) {
     //function to get geotag (lat/long) from address
     const string = req.body.address.replace(/\s/g, '%20');
 
-    const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${string}.json?access_token=${'pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag'}`);
+    const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${string}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`);
 
     let coords = response.data.features[0].center; // gives an array [lat, long];
 
