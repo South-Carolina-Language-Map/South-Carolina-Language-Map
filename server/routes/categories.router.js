@@ -2,41 +2,42 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/catagories', (req, res) => {
-  pool.query(`SELECT * FROM "catagories";`)
+router.get('/', (req, res) => {
+  pool.query(`SELECT * FROM "categories";`)
     .then((response) => {
       res.send(response.rows);
-      console.log('GET Catagories success');
+      console.log('GET Categories success');
     })
     .catch((err) => {
       res.sendStatus(500);
-      console.log('ERROR in Catagories GET', err);
+      console.log('ERROR in Categories GET', err);
     })
 });
 
-router.post('/catagories', (req, res) => {
-  const name = req.body.category;
+router.post('/', (req, res) => {
+  const name = req.body.name;
   const queryText = `
-  INSERT INTO "catagories" (name)
+  INSERT INTO "categories" (name)
   VALUES ($1);
   `;
 
   pool.query(queryText, [name])
     .then(() => {
-      sendStatus(201);
-      console.log('POST Catagories success');
+      res.sendStatus(201);
+      console.log('POST Categories success');
     })
     .catch((err) => {
       sendStatus(500);
-      console.log('ERROR in Catagories POST', err);
+      console.log('ERROR in Categories POST', err);
     });
 });
 
-router.put('/catagories/${id}', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
+
   const queryText = `
-  UPDATE "category"
+  UPDATE "categories"
   SET "name" = $1
   WHERE "id" = $2
   ;`
@@ -44,27 +45,27 @@ router.put('/catagories/${id}', (req, res) => {
   pool.query(queryText, [name, id])
     .then(() => {
       res.sendStatus(200);
-      console.log('PUT Catagories success');
+      console.log('PUT Categories success');
     })
     .catch((err) => {
       res.sendStatus(500);
-      console.log('ERROR in category PUT', err);
+      console.log('ERROR in Categories PUT', err);
     })
 });
 
-router.delete('/categories/${id}', (req, res) => {
+router.delete('/:id', (req, res) => {
   const categoryID = req.params.id;
   const queryText = `
-  DELETE FROM "catagories" WHERE "id" = $1
+  DELETE FROM "categories" WHERE "id" = $1
   ;`
 
   pool.query(queryText, [categoryID])
     .then(() => {
-      console.log('DELETE Category success')
+      console.log('DELETE Categories success')
       res.sendStatus(200)
     })
     .catch((err) => {
-      console.log('ERROR in category DELETE', err);
+      console.log('ERROR in Categories DELETE', err);
       res.sendStatus(500);
     })
 });
