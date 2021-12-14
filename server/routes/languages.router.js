@@ -32,6 +32,15 @@ router.post('/languages', (req, res) => {
                 insertExamplesQuery += `, ($1, $${(i + 1) * 2}, $${(i + 1) *2 + 1})`
             }
 
+            //create new array to push examples into
+            newExampleArray = []
+            //loop
+            for (example of examples){
+            //push into new array
+            newExampleArray.push(...example)
+            }
+            //call every other in pool.query
+            
             pool.query(insertExamplesQuery, [newLangId, ...req.body.examples.link_text, ...req.body.examples.hyperlink])
                 .then(result => {
                     res.sendStatus(201)
