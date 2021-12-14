@@ -9,8 +9,8 @@ function Nav() {
 
   return (
     <div className="nav">
-      <Link to="/home">
-        <h2 className="nav-title">Prime Solo Project</h2>
+      <Link to="/admin">
+        <h2 className="nav-title">South Carolina Language Map</h2>
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
@@ -24,19 +24,27 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Link className="navLink" to="/user">
-              Home
+            <Link className="navLink" to="/admin/site">
+              Site
             </Link>
 
-            <Link className="navLink" to="/info">
-              Info Page
+            <Link className="navLink" to="/admin/language">
+              Language
+            </Link>
+
+            <Link className="navLink" to="/admin/category">
+              Category
+            </Link>
+
+            <Link className="navLink" to="/admin/approvals">
+              Approvals
             </Link>
 
             <LogOutButton className="navLink" />
           </>
         )}
 
-        <Link className="navLink" to="/about">
+        <Link className="navLink" to="/admin/about">
           About
         </Link>
       </div>
