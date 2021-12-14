@@ -2,6 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+
+//get all languages
 router.get('/', (req, res) => {
   pool.query(`SELECT * FROM "languages";`)
     .then((response) => {
@@ -14,6 +16,8 @@ router.get('/', (req, res) => {
     })
 });
 
+
+//get a specific language
 router.get('/:id', (req, res) => {
   const languageID = req.params.id;
   const queryText = `
@@ -32,26 +36,67 @@ router.get('/:id', (req, res) => {
     })
 });
 
+
+//*****NICKS EYEBALLS HERE */
+//POST new language(1st query) and its examples (2nd query)
 router.post('/', (req, res) => {
-  const newLanguage = req.body;
-  const queryText = `
-  INSERT INTO "languages" (language, glottocode, description, endonym, global_speakers, sc_speakers, category_id)
-  VALUES ($1, $2, $3, $4, $5, $6, $7)
-  ;`;
+    const newLanguage = req.body;
+    const examples = req.body.examples
 
-  pool.query(queryText, [newLanguage.language, newLanguage.glottocode, newLanguage.description,
-  newLanguage.endonym, newLanguage.global_speakers, newLanguage.sc_speakers, newLanguage.category_id])
-    .then(() => {
-      res.sendStatus(201);
-      console.log('POST Language success');
-    })
-    .catch((err) => {
-      res.sendStatus(500);
-      console.log('ERROR in Language POST', err);
-    })
+    //query to create new language
+    const queryText = `
+    INSERT INTO "languages" (language, glottocode, description, endonym, global_speakers, sc_speakers, category_id)
+    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    RETURNING "id";
+    `;
+    pool.query(queryText, [newLanguage.language, newLanguage.glottocode, newLanguage.description,
+    newLanguage.endonym, newLanguage.global_speakers, newLanguage.sc_speakers, newLanguage.category_id])
+        .then((result) => {
+            console.log('New language id:', result.rows[0].id);
 
-});
+            //new language ID
+            const newLangId = result.rows[0].id;
 
+            //second query to add examples into the example table
+            let insertExamplesQuery = `
+            INSERT INTO "examples" (language_id, link_text, hyperlink)
+            VALUES ($1, $2, $3)
+            `
+            //loop for added examples
+            for (let i = 1; i < req.body.examples.length; i++) {
+                insertExamplesQuery += `, ($1, $${(i + 1) * 2}, $${(i + 1) *2 + 1})`
+            }
+
+            //create new array to push examples into
+            newExampleArray = []
+            //loop
+            for (let example of examples){
+            //push into new array
+            newExampleArray.push(example.link_text)
+            newExampleArray.push(example.hyperlink)
+            }
+            //call every other in pool.query
+            
+            console.log('This is newExampleArray', newExampleArray)
+            pool.query(insertExamplesQuery, [newLangId, ...newExampleArray])
+                .then(result => {
+                    res.sendStatus(201)
+                })
+                .catch( error => {
+                    console.log('SECOND QUERY FOR POST', error);
+                    res.sendStatus(500);
+                }) //end second query
+
+            res.sendStatus(201);
+            console.log('POST New Language success');
+        })
+        .catch((err) => {
+            res.sendStatus(500);
+            console.log('ERROR in Language POST first query', err);
+        })
+}); //end POST
+
+//edit a language
 router.put('/:id', (req, res) => {
   const id = req.params.id;
   const updatedLanguage = req.body;
@@ -79,6 +124,8 @@ router.put('/:id', (req, res) => {
     })
 });
 
+
+//delete a language
 router.delete('/:id', (req, res) => {
   const languageID = req.params.id;
   const queryText = `
@@ -95,7 +142,7 @@ router.delete('/:id', (req, res) => {
       res.sendStatus(500);
       console.log('ERROR in DELETE Language', err);
     })
-});
+}); 
 
 
 
