@@ -93,7 +93,7 @@ router.delete('/admin/:id', rejectUnauthenticated, (req, res) => {
   WHERE "id" = $1
   `
   
-  pool.query(queryTextUserToDelete, userToDelete)
+  pool.query(queryTextUserToDelete, [userToDelete])
       .then(respond => {
         res.sendStatus(200);
       })
