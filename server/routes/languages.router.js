@@ -2,28 +2,28 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/languages', (req, res) => {
+router.get('/', (req, res) => {
   pool.query(`SELECT * FROM "languages";`)
-    .then(() => {
+    .then((response) => {
       res.send(response.rows);
       console.log('GET Languages success');
     })
     .catch((err) => {
       res.sendStatus(500);
-      console.log('ERROR in Languages GET');
+      console.log('ERROR in Languages GET', err);
     })
 });
 
-router.get(`/languages/${id}`, (req, res) => {
+router.get('/:id', (req, res) => {
   const languageID = req.params.id;
   const queryText = `
-  SELECT FROM "languages"
+  SELECT * FROM "languages"
   WHERE "id" = $1
   ;`;
 
   pool.query(queryText, [languageID])
-    .then(() => {
-      res.send(response.rows);
+    .then((result) => {
+      res.send(result.rows);
       console.log('GET Language by id success');
     })
     .catch((err) => {
@@ -32,8 +32,8 @@ router.get(`/languages/${id}`, (req, res) => {
     })
 });
 
-router.post('/languages', (req, res) => {
-  const newLanguage = req.body.language;
+router.post('/', (req, res) => {
+  const newLanguage = req.body;
   const queryText = `
   INSERT INTO "languages" (language, glottocode, description, endonym, global_speakers, sc_speakers, category_id)
   VALUES ($1, $2, $3, $4, $5, $6, $7)
@@ -47,22 +47,23 @@ router.post('/languages', (req, res) => {
     })
     .catch((err) => {
       res.sendStatus(500);
-      console.log('ERROR in Language POST');
+      console.log('ERROR in Language POST', err);
     })
 
 });
 
-router.put(`/languages/${id}`, (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
-  const updatedLanguage = req.body.language;
+  const updatedLanguage = req.body;
   const queryText = `
   UPDATE "languages"
   SET "language" = $2,
   "glottocode" = $3,
   "description" = $4,
-  "global_speakers" = $5,
-  "sc_speakers" = $6,
-  "category_id" = $7
+  "endonym" = $5,
+  "global_speakers" = $6,
+  "sc_speakers" = $7,
+  "category_id" = $8
   WHERE "id" = $1
   ;`;
 
@@ -74,11 +75,11 @@ router.put(`/languages/${id}`, (req, res) => {
     })
     .catch((err) => {
       res.sendStatus(500);
-      console.log('ERROR in Language PUT');
+      console.log('ERROR in Language PUT', err);
     })
 });
 
-router.delete(`/languages/${id}`, (req, res) => {
+router.delete('/:id', (req, res) => {
   const languageID = req.params.id;
   const queryText = `
   DELETE FROM "languages"
@@ -87,12 +88,12 @@ router.delete(`/languages/${id}`, (req, res) => {
 
   pool.query(queryText, [languageID])
     .then(() => {
-      res.send(response.rows);
+      res.sendStatus(204);
       console.log('DELETE Language success');
     })
     .catch((err) => {
       res.sendStatus(500);
-      console.log('ERROR in DELETE Language');
+      console.log('ERROR in DELETE Language', err);
     })
 });
 
