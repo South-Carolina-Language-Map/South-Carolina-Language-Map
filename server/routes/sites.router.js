@@ -1,22 +1,21 @@
+const axios = require('axios');
+
 const express = require('express');
 const pool = require('../modules/pool');
-const router = express.Router();
+const router = express.Router(); 
+
 
 
 
 //GET in maps.router***
 
-
-
-//******NICKs EYEBALLS HERE */
-//Add a site from the admin Side
-router.post('/', async function (req, res) {
+async function createGeoTag (req, res) {
     console.log('This is req.body in POST sites', req.body)
 
     //function to get geotag (lat/long) from address
-    const string = site.address.replace(/\s/g, '%20');
+    const string = req.body.address.replace(/\s/g, '%20');
 
-    const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${string}.json?access_token=${accessToken}`);
+    const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${string}.json?access_token=${'pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag'}`);
 
     let coords = response.data.features[0].center; // gives an array [lat, long];
 
@@ -38,7 +37,12 @@ router.post('/', async function (req, res) {
             console.log(error);
             res.sendStatus(500);
         })
-}); //end GET for map sites and hover
+};
+
+
+//******NICKs EYEBALLS HERE */
+//Add a site from the admin Side
+router.post('/', (req, res) => createGeoTag(req,res)); //end GET for map sites and hover
 
 
 //edit a site

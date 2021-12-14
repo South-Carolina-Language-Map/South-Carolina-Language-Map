@@ -23,17 +23,19 @@ router.get('/', (req, res) => {
 
 //get all for map language detail
 router.get('/:id', (req, res) => {
-    
+    const siteID = req.params.id
+
     //query for details on a specific detail and all the data associated with it
     let queryTextForLanguageDetails = `
     SELECT * FROM "sites"
     JOIN "regions" ON "regions".id = "sites".region_id
-    JOIN "languages" ON "languages".id = "sites".languages_id
-    JOIN "examples" ON "languages".id = "examples".languages_id
-    JOIN "catagories" ON "languages".category_id = "categories".id
-    `
+    JOIN "languages" ON "languages".id = "sites".language_id
+    JOIN "categories" ON "languages".category_id = "categories".id
+    LEFT JOIN "examples" ON "languages".id = "examples".language_id
+    WHERE "sites".id = $1;
+    `;
 
-    pool.query(queryTextForLanguageDetails)
+    pool.query(queryTextForLanguageDetails, [siteID])
     .then((result) => {
         res.send(result.rows)
     })
