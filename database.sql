@@ -2,9 +2,9 @@
 -- init tables
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
-	"username" serial NOT NULL,
+	"username" varchar(127) NOT NULL UNIQUE,
 	"fullName" varchar(256),
-	"pending" bool DEFAULT 'false',
+	"pending" bool DEFAULT 'TRUE',
 	"clearance_level" int DEFAULT '0',
 	"password" varchar(127),
 	"email" varchar(255) NOT NULL,
