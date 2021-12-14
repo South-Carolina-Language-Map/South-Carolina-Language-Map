@@ -9,6 +9,8 @@ require('dotenv');
 
 //GET in maps.router***
 
+
+//function to create geotags for post route - being called in POST
 async function createGeoTag (req, res) {
     console.log('This is req.body in POST sites', req.body)
 
@@ -56,7 +58,7 @@ router.put('/:id', (req, res) => {
     "longitude" = $3,
     "site_name" = $4,
     "region_id" = $5,
-    "language_id" = $6,
+    "language_id" = $6
     WHERE "id" = $7
     ;`;
     pool.query(updateSiteQueryText, [editedSite.address, editedSite.latitude, editedSite.longitude,
