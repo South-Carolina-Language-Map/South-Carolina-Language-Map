@@ -1,9 +1,8 @@
-const { response } = require('express');
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/regions', (req, res) => {
+router.get('/', (req, res) => {
   pool.query(`SELECT * FROM "regions";`)
   .then((response) => {
     res.send(response.rows);
@@ -11,7 +10,7 @@ router.get('/regions', (req, res) => {
   })
   .catch((err) => {
     res.sendStatus(500);
-    console.log('ERROR in Regions GET');
+    console.log('ERROR in Regions GET', err);
   })
 });
 
