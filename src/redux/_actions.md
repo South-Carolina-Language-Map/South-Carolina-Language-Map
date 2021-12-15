@@ -19,3 +19,4 @@ sites => 'SET_ADMIN_SITES'
 ## View
 
 filterSaga - 'SUBMIT_QUERY' => 'SET_SITES'
+    note: filterSaga handles parsing for sending over url
