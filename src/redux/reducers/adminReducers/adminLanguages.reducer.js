@@ -1,6 +1,6 @@
 const adminLanguagesReducer = (state = [], action) => {
     switch (action.type) {
-      case 'FETCH_LANGUAGES':
+      case 'SET_LANGUAGES':
         return [...action.payload];
       default:
         return state;
