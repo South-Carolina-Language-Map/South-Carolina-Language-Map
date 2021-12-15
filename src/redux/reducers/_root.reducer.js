@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
-import adminSiteReducer from './adminSite.reducer';
-import adminLanguagesReducer from './adminLanguages.reducer';
-import adminCategoriesReducer from './adminCategories.reducer';
-import adminApprovalsReducer from './adminApprovals.reducer';
-import adminEditReducer from './adminEdit.reducer';
+import adminSiteReducer from './admin.sites.reducer';
+import adminLanguagesReducer from './admin.languages.reducer';
+import adminCategoriesReducer from './admin.categories.reducer';
+import adminApprovalsReducer from './admin.approvals.reducer';
+import adminEditReducer from './admin.edit.reducer';
 
 
 import infoReducer from './view.info.reducer';
@@ -41,7 +41,6 @@ const viewReducer = combineReducers({
 const rootReducer = combineReducers({
   adminReducer, 
   viewReducer
-
 });
 
 export default rootReducer;

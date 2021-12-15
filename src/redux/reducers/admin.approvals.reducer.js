@@ -6,4 +6,5 @@ const adminApprovalsReducer = (state = [], action) => {
         return state;
     }
 };
-  export default adminApprovalsReducer;
+
+export default adminApprovalsReducer;
