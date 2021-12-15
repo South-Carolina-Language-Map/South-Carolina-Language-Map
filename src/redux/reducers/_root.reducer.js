@@ -1,23 +1,24 @@
 import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
-import adminSiteReducer from './adminSite.reducer';
-import adminLanguagesReducer from './adminLanguages.reducer';
-import adminCategoriesReducer from './adminCategories.reducer';
-import adminApprovalsReducer from './adminApprovals.reducer';
-import adminEditReducer from './adminEdit.reducer';
 
 
-import infoReducer from './view.info.reducer';
-import listReducer from './view.list.reducer';
-import listTypeReducer from './view.listType.reducer';
-import queriesReducer from './view.queries.reducer';
-import sitesReducer from './view.sites.reducer';
+import adminSiteReducer from './adminReducers/adminSite.reducer';
+import adminLanguagesReducer from './adminReducers/adminLanguages.reducer';
+import adminCategoriesReducer from './adminReducers/adminCategories.reducer';
+import adminApprovalsReducer from './adminReducers/adminApprovals.reducer';
+import adminEditReducer from './adminReducers/adminEdit.reducer';
+
+
+import infoReducer from './viewReducers/view.info.reducer';
+import listReducer from './viewReducers/view.list.reducer';
+import listTypeReducer from './viewReducers/view.listType.reducer';
+import queriesReducer from './viewReducers/view.queries.reducer';
+import sitesReducer from './viewReducers/view.sites.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
-
 
 const adminReducer = combineReducers({
   adminSiteReducer,
@@ -41,7 +42,6 @@ const viewReducer = combineReducers({
 const rootReducer = combineReducers({
   adminReducer, 
   viewReducer
-
 });
 
 export default rootReducer;
