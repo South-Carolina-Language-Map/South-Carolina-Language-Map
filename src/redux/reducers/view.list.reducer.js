@@ -1,3 +1,5 @@
+// [] of objs to populate explore lists
+
 const listReducer = (state=[], action) => {
     switch(action.type){
         case 'SET_LIST':

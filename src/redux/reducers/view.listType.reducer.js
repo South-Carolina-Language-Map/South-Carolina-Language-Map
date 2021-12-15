@@ -1,3 +1,5 @@
+// '' provide context for explore clicks
+
 const listTypeReducer = (state = '', action) => {
     switch(action.type){
         case 'SET_TYPE':

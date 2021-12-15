@@ -13,11 +13,11 @@ import sitesReducer from './view.sites.reducer';
 // This is imported in index.js as rootSaga
 
 const viewReducer = combineReducers({
-  infoReducer,
-  listReducer,
-  listTypeReducer,
-  queriesReducer,
-  sitesReducer,
+  infoReducer, // {} for info pane
+  listReducer, // [] of objs to populate explore lists
+  listTypeReducer, // '' provide context for explore clicks
+  queriesReducer, // [] holds previous queries
+  sitesReducer, // [] holds current list of sites to map
 })
 
 // Lets make a bigger object for our store, with the objects from our reducers.
