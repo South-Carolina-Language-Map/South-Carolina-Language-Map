@@ -1,0 +1,5 @@
+list => 'SET_LIST'
+listType => 'SET_TYPE'
+queries => 'NEW_QUERY'
+info => 'SET_INFO'
+sites => 'SET_SITES'
