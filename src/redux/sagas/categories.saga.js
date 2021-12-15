@@ -7,7 +7,7 @@ function* fetchCategories() {
   // GET ALL ITEMS
   try {
     //GET request sent to languages.router
-    const response = yield axios.get("/api/languages");
+    const response = yield axios.get("/api/categories");
 
     yield console.log('response', response);
     //sets response to view.sites.reducer
@@ -16,7 +16,6 @@ function* fetchCategories() {
     yield put({ type: "FETCH_CATEGORIES_ERROR" });
     console.log("Error in fetchCategories", err);
   }
-
 }
 
 //CATEGORIES POST ROUTE

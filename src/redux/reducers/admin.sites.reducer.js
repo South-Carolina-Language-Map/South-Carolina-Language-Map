@@ -1,6 +1,6 @@
 const adminSiteReducer = (state = [], action) => {
     switch (action.type) {
-      case 'FETCH_SITES':
+      case 'SET_SITES':
         return [...action.payload];
       default:
         return state;
