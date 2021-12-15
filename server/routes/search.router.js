@@ -25,7 +25,7 @@ async function search(req, res) {
         let value = req.query[key]
         //add on new search param with each loop
         queryString += `${key}=${value}`;
-        console.log('===this is the Query String====>', queryString)
+        console.log('this is queryString====>', queryString)
     }
 
  
