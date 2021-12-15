@@ -1,3 +1,4 @@
+### Reducers
 ## View
 
 list => 'SET_LIST'
@@ -13,3 +14,9 @@ Categories => 'SET_CATEGORIES'
 Edit => 'SET_EDIT_SITE'
 Languages => 'SET_LANGUAGES'
 sites => 'SET_ADMIN_SITES'
+
+### Sagas
+## View
+
+filterSaga - 'SUBMIT_QUERY' => 'SET_SITES'
+    note: filterSaga handles parsing for sending over url
