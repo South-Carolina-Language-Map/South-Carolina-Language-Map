@@ -18,7 +18,7 @@ function* fetchAll() {
 }
 
 
-function* fetchMapLanguageDetail() {
+function* fetchLanguageDetail() {
   // Get all for map language detail 
   try {
     //GET request sent to map.router based on ID
@@ -28,8 +28,8 @@ function* fetchMapLanguageDetail() {
     //sets response to view.info.reducer
     yield put({ type: "SET_INFO", payload: response.data });
   } catch (err) {
-    yield put({ type: "FETCH_MAP_LANGUAGE_DETAIL_ERROR" });
-    console.log("Error in fetchMapLanguageDetail", err);
+    yield put({ type: "FETCH_LANGUAGE_DETAIL_ERROR" });
+    console.log("Error in fetchLanguageDetail", err);
   }
 
 }
@@ -38,7 +38,7 @@ function* fetchMapLanguageDetail() {
 function* mapSaga() {
   // watching for actions
   yield takeLatest("FETCH_ALL", fetchAll);
-  yield takeLatest("FETCH_MAP_LANGUAGE_DETAIL", fetchMapLanguageDetail);
+  yield takeLatest("FETCH_LANGUAGE_DETAIL", fetchLanguageDetail);
 }
 
 
