@@ -25,28 +25,33 @@ router.get('/', (req, res) => {
                 columns.push(`"site".site_name`)
                 break;
             default:
-                console.log('==switch error===', key)
+                console.log('===switch error===', key)
                 break;
         }
 
         values.push(`%${req.query[key]}%`)
     } //end loop
 
+    
     //loop here to change columns[0] into columns[i]
-    console.log(values);
+    for (let i = 0; i < columns.length; i++){
+
+    console.log('COLUMNS', columns)
+    console.log('VALUES', values);
     searchQueryText = `
     SELECT * FROM "sites"
     JOIN "regions" ON "regions".id = "sites".region_id
     JOIN "languages" ON "languages".id = "sites".language_id
     JOIN "categories" ON "languages".category_id = "categories".id
-    WHERE ${columns[0]} ILIKE $1 ORDER BY ${columns[0]} ASC;
-    `;
+    WHERE ${columns[i]} ILIKE $1 ORDER BY ${columns[i]} ASC
+    `
+    }
 
-    //loop for multiple search queries
+    //loop for multiple search queries in values array
     for (let i = 1; i < values.length; i++) {
-        searchQueryText += `, ($1, $${i + 2})`;
+        searchQueryText += `, ($${i + 1})`;
       }
-
+      console.log('-------', searchQueryText)
       //spread values to account for added interpolated data
     pool.query(searchQueryText, [...values])
         .then((result) => {
