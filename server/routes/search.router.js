@@ -11,27 +11,48 @@ require('dotenv');
 router.get('/', (req, res) => {
 
     console.log('this is req.query ==>', req.query);
+    values = [];
 
+    for (let key in req.query) {
+        switch (key) {
+            case 'category':
+                values.push(`"categories".name`)
+                break;
+            case 'region':
+                values.push(`"regions".name`)
+                break;
+            case 'language':
+                values.push(`"language"`)
+                break;
+            case 'site':
+                values.push(`"site".site_name`)
+                break;
+            default:
+                console.log('==switch error===', key)
+                break;
+        }
 
+        values.push(`%${req.query[key]}%`)
+    } //end loop
+
+    console.log(values);
     searchQueryText = `
     SELECT * FROM "sites"
     JOIN "regions" ON "regions".id = "sites".region_id
     JOIN "languages" ON "languages".id = "sites".language_id
     JOIN "categories" ON "languages".category_id = "categories".id
-    LEFT JOIN "examples" ON "languages".id = "examples".language_id
-    WHERE $1 ILIKE $2 ORDER BY "name" ASC;
+    WHERE $1 ILIKE $2 ORDER BY $1 ASC;
     `;
 
-    params = [searchQueryText, [`%${req.query.key}%`]];
 
-    pool.query(...params)
+    pool.query(searchQueryText, values)
         .then((result) => {
+            console.log('-------------', result, result.rows)
             res.send(result.rows);
         }).catch((error) => {
             console.log(error);
             res.sendStatus(500);
         });
-
 
 });
 
