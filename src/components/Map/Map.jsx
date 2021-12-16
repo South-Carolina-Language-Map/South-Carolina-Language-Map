@@ -14,7 +14,7 @@ function Map() {
     latitude: 33.6,
     longitude: -81,
     width: "100vw",
-    height: "80vh",
+    height: "98vh",
     zoom: 7.0
   });
   const sites = useSelector(store => store.viewReducer.sitesReducer);
@@ -45,7 +45,7 @@ function Map() {
     <div className="App">
 
       <header className="App-header">
-        <button onClick={toggleDark}>{darkMode ? 'Light' : 'Dark'}</button>
+        {/* <button onClick={toggleDark}>{darkMode ? 'Light' : 'Dark'}</button> */}
         <ReactMapGL
           {...viewport}
           mapStyle={`mapbox://styles/mapbox/${darkMode ? 'light' : 'dark'}-v10`}
