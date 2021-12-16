@@ -33,9 +33,7 @@ router.get('/', (req, res) => {
     } //end loop
 
     
-    //loop here to change columns[0] into columns[i]
-    for (let i = 0; i < columns.length; i++){
-
+    //flexible search query connected to all databases
     console.log('COLUMNS', columns)
     console.log('VALUES', values);
     searchQueryText = `
@@ -43,14 +41,17 @@ router.get('/', (req, res) => {
     JOIN "regions" ON "regions".id = "sites".region_id
     JOIN "languages" ON "languages".id = "sites".language_id
     JOIN "categories" ON "languages".category_id = "categories".id
-    WHERE ${columns[i]} ILIKE $1 ORDER BY ${columns[i]} ASC
+    WHERE ${columns[0]} ILIKE $1 
     `
-    }
 
     //loop for multiple search queries in values array
     for (let i = 1; i < values.length; i++) {
-        searchQueryText += `, ($${i + 1})`;
-      }
+        searchQueryText += `AND ${columns[i]} ILIKE $${i + 1}`;
+      } 
+
+      //add the the ORDER BY at the end
+      searchQueryText += ` ORDER BY ${columns[columns.length -1]} ASC;`
+
       console.log('-------', searchQueryText)
       //spread values to account for added interpolated data
     pool.query(searchQueryText, [...values])
