@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 
-import adminSiteReducer from './admin.sites.reducer';
-import adminLanguagesReducer from './admin.languages.reducer';
-import adminCategoriesReducer from './admin.categories.reducer';
-import adminApprovalsReducer from './admin.approvals.reducer';
-import adminEditReducer from './admin.edit.reducer';
+import adminSiteReducer from './adminReducers/admin.sites.reducer';
+import adminLanguagesReducer from './adminReducers/admin.languages.reducer';
+import adminCategoriesReducer from './adminReducers/admin.categories.reducer';
+import adminApprovalsReducer from './adminReducers/admin.approvals.reducer';
+import adminEditReducer from './adminReducers/admin.edit.reducer';
 
 import infoReducer from './viewReducers/view.info.reducer';
 import listReducer from './viewReducers/view.list.reducer';

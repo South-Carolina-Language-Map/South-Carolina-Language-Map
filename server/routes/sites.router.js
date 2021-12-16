@@ -15,7 +15,7 @@ async function createGeoTag (req, res) {
     console.log('This is req.body in POST sites', req.body)
 
     //function to get geotag (lat/long) from address
-    const string = req.body.address.replace(/\s/g, '%20');
+    const string = req.body.address.replace(/\s/g, '%20').replace(/'/g, '%27');
 
     const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${string}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`);
 

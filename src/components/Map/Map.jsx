@@ -19,11 +19,8 @@ function Map() {
   });
   const sites = useSelector(store => store.viewReducer.sitesReducer);
 
-  console.log('sites', sites);
-
   const [darkMode, setDarkMode] = useState(true);
   const toggleDark = () => { setDarkMode(!darkMode) };
-
 
   useEffect(()=>{
     dispatch({type:'FETCH_ALL'});
