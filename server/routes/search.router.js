@@ -1,12 +1,8 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-const axios = require('axios');
-
-require('dotenv');
 
 
-//req.query
 //GET for search function
 router.get('/', (req, res) => {
 
@@ -36,6 +32,7 @@ router.get('/', (req, res) => {
         values.push(`%${req.query[key]}%`)
     } //end loop
 
+    //loop here to change columns[0] into columns[i]
     console.log(values);
     searchQueryText = `
     SELECT * FROM "sites"
@@ -45,8 +42,13 @@ router.get('/', (req, res) => {
     WHERE ${columns[0]} ILIKE $1 ORDER BY ${columns[0]} ASC;
     `;
 
+    //loop for multiple search queries
+    for (let i = 1; i < values.length; i++) {
+        searchQueryText += `, ($1, $${i + 2})`;
+      }
 
-    pool.query(searchQueryText, values)
+      //spread values to account for added interpolated data
+    pool.query(searchQueryText, [...values])
         .then((result) => {
             console.log('-------------', result, result.rows)
             res.send(result.rows);
