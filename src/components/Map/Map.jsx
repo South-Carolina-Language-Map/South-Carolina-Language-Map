@@ -1,20 +1,33 @@
 import ReactMapGL, { Marker } from 'react-map-gl';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 // import sampleData from './sampleData';
 // import addresses from './rippedWithCoords';
+import { Dispatch } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import './Map.css';
 
 function Map() {
+  const dispatch = useDispatch();
   const [viewport, setViewport] = useState({
     latitude: 33.6,
     longitude: -81,
     width: "100vw",
     height: "80vh",
     zoom: 7.0
-  })
+  });
+  const sites = useSelector(store => store.viewReducer.sitesReducer);
+
+  console.log('sites', sites);
 
   const [darkMode, setDarkMode] = useState(true);
   const toggleDark = () => { setDarkMode(!darkMode) };
+
+
+  useEffect(()=>{
+    dispatch({type:'FETCH_ALL'});
+  },[])
 
   const assignClasses = (site) => {
     switch(site.category){
@@ -43,18 +56,18 @@ function Map() {
           onViewportChange={setViewport}
           mapboxApiAccessToken={"pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag"}
         >
-          {/* {addresses.map(site => {
+          {sites && sites.map(site => {
             return (
               <Marker
                 key={site.id}
-                latitude={site.latitude}
-                longitude={site.longitude}
+                latitude={Number(site.latitude)}
+                longitude={Number(site.longitude)}
               >
-                <div className={assignClasses(site)}
+                <div className="dot"
                 ></div>
               </Marker>
             )
-          })} */}
+          })}
         </ReactMapGL>
       </header>
     </div>
