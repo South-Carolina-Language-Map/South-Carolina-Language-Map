@@ -20,6 +20,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 
 import Search from '../Search/Search';
+import Sidebar from "../Sidebar/Sidebar";
 
 import './App.css';
 
@@ -46,17 +47,13 @@ function App() {
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
-          <Route
-            exact
-            path="/home"
-          >
-              <Search />
+          <Route exact path="/home">
+            <Sidebar />
+
           </Route>
 
-          <Route
-           exact
-           path="/admin">
-            <Admin/>
+          <Route exact path="/admin">
+            <Sidebar />
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}

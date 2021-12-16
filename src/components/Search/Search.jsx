@@ -16,16 +16,8 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-import BottomNavigation from "@mui/material/BottomNavigation";
-import BottomNavigationAction from "@mui/material/BottomNavigationAction";
-import ExploreIcon from "@mui/icons-material/Explore";
-import InfoIcon from "@mui/icons-material/Info";
-import * as React from "react";
-
 function Search() {
-    const [value, setValue] = React.useState(0);
   return (
-    <Stack direction="row">
       <Box
         sx={{
           textAlign: "center",
@@ -41,26 +33,15 @@ function Search() {
         <br />
 
         <FormControl sx={{ pr: 1, pl: 1 }}>
-          <TextField
-            id="search-with-sx"
-            label="Search"
-            variant="standard"
-            // sx={{ pr: 1, pl: 1 }}
-          />
+          <TextField id="search-with-sx" label="Search" variant="standard" />
 
           <br />
 
-          <Typography
-            variant="body2"
-            className="textLeft"
-            // sx={{ pr: 1, pl: 1 }}
-          >
+          <Typography variant="body2" className="textLeft">
             Search by:
           </Typography>
 
-          <RadioGroup
-          //   sx={{ pr: 1, pl: 1 }}
-          >
+          <RadioGroup>
             <Stack direction="row" spacing={2}>
               <FormControlLabel value="Site" label="Site" control={<Radio />} />
               <FormControlLabel
@@ -149,22 +130,7 @@ function Search() {
             </Grid>
           </Grid>
         </Paper>
-        <br />
-        <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-          sx={{ border: 1 }}
-        >
-          <BottomNavigationAction label="Search" icon={<SearchIcon />} />
-          <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
-          <BottomNavigationAction label="Info" icon={<InfoIcon />} />
-        </BottomNavigation>
       </Box>
-      <Map />
-    </Stack>
   );
 }
 
