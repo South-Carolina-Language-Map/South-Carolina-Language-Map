@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 }); //end GET for map sites and hover
 
 
-//get all for map language detail
+//GET all for map language detail
 router.get('/:id', (req, res) => {
     const siteID = req.params.id
 

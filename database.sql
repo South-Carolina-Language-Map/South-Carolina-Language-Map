@@ -124,7 +124,7 @@ VALUES('Cherokee','Cherokeee',2000,0,1,'','Current', 'Cher1273'),
 ('ASL','American Sign Language',500000,333,7,'','Current','Amer1248'),
 ('BASL','Black Sign Language',333,333,7,'','Current','Amer1248');
 
-INSERT INTO sites (address, region_id, site_name, language_id, latitude, longitude)
+INSERT INTO sites (address, region_id, site_name, language_id, longitude, latitude)
 VALUES('3688 Warrior Creek Church Road,Gray Court, SC 29645',4,'Warrior Creek Tribal Grounds',1,-82.031686,34.580612),
 ('996 Avenue of Nations',4,'Catawba Nation Cultural Center',2,-80.883596,34.904709),
 ('4542 Silver Bluff Rd, Jackson, SC 29831',2,'Audubon’s Silver Bluff Center and Sanctuary',3,-81.846087,33.324609),

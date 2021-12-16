@@ -2,6 +2,8 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+
+//GET all from category list
 router.get('/', (req, res) => {
   pool.query(`SELECT * FROM "categories";`)
     .then((response) => {
@@ -14,6 +16,8 @@ router.get('/', (req, res) => {
     })
 });
 
+
+//POST - add new category
 router.post('/', (req, res) => {
   const name = req.body.name;
   const queryText = `
@@ -32,6 +36,8 @@ router.post('/', (req, res) => {
     });
 });
 
+
+//PUT - edit a specific category
 router.put('/:id', (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
@@ -53,6 +59,8 @@ router.put('/:id', (req, res) => {
     })
 });
 
+
+//DELETE a specific category
 router.delete('/:id', (req, res) => {
   const categoryID = req.params.id;
   const queryText = `
