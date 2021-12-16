@@ -31,23 +31,26 @@ function Map() {
   const assignClasses = (site) => {
 
     for (let category of categories) {
+      console.log(category)
 
-      if (site.category_id == category.id + 1) {
-        return 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
+      if (Number(site.category_id) == category.id) {
+        let colorClass = 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
+        console.log('Match ', category.name, category.id, site.category_id);
+        return colorClass;
       }
     }
     //// JUST A TEMP SOLUTION TO COLOR DOTS
     //// WILL BE REPLACED WITH A REFERENCE TO CATEGORIES SAGA
-    const catEnum = {
-      1: 'lang-native-american',
-      2: 'lang-european',
-      3: 'lang-asian',
-      4: 'lang-middle-east',
-      5: 'lang-latino',
-      6: 'lang-varieties-of-english',
-      7: 'lang-sign-language'
-    }
-    return catEnum[Number(site.category_id)];
+    // const catEnum = {
+    //   1: 'lang-native-american',
+    //   2: 'lang-european',
+    //   3: 'lang-asian',
+    //   4: 'lang-middle-east',
+    //   5: 'lang-latino',
+    //   6: 'lang-varieties-of-english',
+    //   7: 'lang-sign-language'
+    // }
+    // return catEnum[Number(site.category_id)];
   }
 
   return (
@@ -71,7 +74,7 @@ function Map() {
               >
                 <div className={"dot" + ' ' + assignClasses(site)}
                 >
-                  <div className="dot-info">{site.endonym}</div>
+                  <div className="dot-info">{site.language}</div>
                 </div>
               </Marker>
             )
