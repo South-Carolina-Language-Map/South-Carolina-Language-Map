@@ -18,15 +18,24 @@ function Map() {
     zoom: 7.0
   });
   const sites = useSelector(store => store.viewReducer.sitesReducer);
+  const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
 
   const [darkMode, setDarkMode] = useState(true);
   const toggleDark = () => { setDarkMode(!darkMode) };
 
-  useEffect(()=>{
-    dispatch({type:'FETCH_ALL'});
-  },[])
+  useEffect(() => {
+    dispatch({ type: 'FETCH_ALL' });
+    dispatch({ type: 'FETCH_CATEGORIES' });
+  }, [])
 
   const assignClasses = (site) => {
+
+    for (let category of categories) {
+
+      if (site.category_id == category.id + 1) {
+        return 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
+      }
+    }
     //// JUST A TEMP SOLUTION TO COLOR DOTS
     //// WILL BE REPLACED WITH A REFERENCE TO CATEGORIES SAGA
     const catEnum = {
@@ -61,7 +70,9 @@ function Map() {
                 longitude={Number(site.longitude)}
               >
                 <div className={"dot" + ' ' + assignClasses(site)}
-                ></div>
+                >
+                  <div className="dot-info">{site.endonym}</div>
+                </div>
               </Marker>
             )
           })}
