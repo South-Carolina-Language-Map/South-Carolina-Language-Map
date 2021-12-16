@@ -7,6 +7,7 @@ import userSaga from './user.saga';
 import mapSaga from './map.saga';
 import regionsSaga from './regions.saga';
 import sitesSaga from './sites.saga';
+import filterSaga from './filter.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -25,5 +26,6 @@ export default function* rootSaga() {
     mapSaga(),
     regionsSaga(),
     sitesSaga(),
+    filterSaga(),
   ]);
 }

@@ -15,8 +15,15 @@ import {
   Grid,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useDispatch } from "react-redux";
+import encodeUrlStr from "../../utils/encodeUrlStr";
 
 function Search() {
+  const dispatch = useDispatch();
+
+  const submitSearch = () => {
+    dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr({region: 'upstate', language: 'Cherokee'})})
+  }
   return (
     <Box
       sx={{
@@ -66,6 +73,7 @@ function Search() {
           </Grid>
           {/* </Stack> */}
         </RadioGroup>
+        <button onClick={submitSearch}>Search</button>
         <br />
         <Button
           sx={{
