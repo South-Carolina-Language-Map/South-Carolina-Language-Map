@@ -11,21 +11,22 @@ require('dotenv');
 router.get('/', (req, res) => {
 
     console.log('this is req.query ==>', req.query);
-    values = [];
+    let values = [];
+    let columns = [];
 
     for (let key in req.query) {
         switch (key) {
             case 'category':
-                values.push(`"categories".name`)
+                columns.push(`"categories".name`)
                 break;
             case 'region':
-                values.push(`"regions".name`)
+                columns.push(`"regions".name`)
                 break;
             case 'language':
-                values.push(`"language"`)
+                columns.push(`"language"`)
                 break;
             case 'site':
-                values.push(`"site".site_name`)
+                columns.push(`"site".site_name`)
                 break;
             default:
                 console.log('==switch error===', key)
@@ -41,7 +42,7 @@ router.get('/', (req, res) => {
     JOIN "regions" ON "regions".id = "sites".region_id
     JOIN "languages" ON "languages".id = "sites".language_id
     JOIN "categories" ON "languages".category_id = "categories".id
-    WHERE $1 ILIKE $2 ORDER BY $1 ASC;
+    WHERE ${columns[0]} ILIKE $1 ORDER BY ${columns[0]} ASC;
     `;
 
 
