@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-//get all languages
+//GET all languages
 router.get('/', (req, res) => {
   pool.query(`SELECT * FROM "languages";`)
     .then((response) => {
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 });
 
 
-//get a specific language
+//GET a specific language
 router.get('/:id', (req, res) => {
   const languageID = req.params.id;
   const queryText = `
@@ -37,7 +37,6 @@ router.get('/:id', (req, res) => {
 });
 
 
-//*****NICKS EYEBALLS HERE */
 //POST new language(1st query) and its examples (2nd query)
 router.post('/', (req, res) => {
     const newLanguage = req.body;
@@ -96,7 +95,7 @@ router.post('/', (req, res) => {
         })
 }); //end POST
 
-//edit a language
+//PUT - edit a language
 router.put('/:id', (req, res) => {
   const id = req.params.id;
   const updatedLanguage = req.body;
@@ -125,7 +124,7 @@ router.put('/:id', (req, res) => {
 });
 
 
-//delete a language
+//DELETE a language
 router.delete('/:id', (req, res) => {
   const languageID = req.params.id;
   const queryText = `
