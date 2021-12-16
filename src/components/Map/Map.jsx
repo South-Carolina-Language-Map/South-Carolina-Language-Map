@@ -31,11 +31,9 @@ function Map() {
   const assignClasses = (site) => {
 
     for (let category of categories) {
-      console.log(category)
 
       if (Number(site.category_id) == category.id) {
         let colorClass = 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
-        console.log('Match ', category.name, category.id, site.category_id);
         return colorClass;
       }
     }
