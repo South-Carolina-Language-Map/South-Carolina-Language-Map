@@ -18,27 +18,39 @@ function Map() {
     zoom: 7.0
   });
   const sites = useSelector(store => store.viewReducer.sitesReducer);
+  const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
 
   const [darkMode, setDarkMode] = useState(true);
   const toggleDark = () => { setDarkMode(!darkMode) };
 
-  useEffect(()=>{
-    dispatch({type:'FETCH_ALL'});
-  },[])
+  useEffect(() => {
+    dispatch({ type: 'FETCH_ALL' });
+    dispatch({ type: 'FETCH_CATEGORIES' });
+  }, [])
 
   const assignClasses = (site) => {
-    switch(site.category){
-      case 'Native American':
-        return "dot lang-native-american";
-        break;
-      case 'Vernacular English':
-        return "dot lang-vernacular-english";
-        break;
-      default:
-        console.log('language category not found');
-        return "dot lang-none";
+
+    for (let category of categories) {
+      console.log(category)
+
+      if (Number(site.category_id) == category.id) {
+        let colorClass = 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
+        console.log('Match ', category.name, category.id, site.category_id);
+        return colorClass;
+      }
     }
-    return;
+    //// JUST A TEMP SOLUTION TO COLOR DOTS
+    //// WILL BE REPLACED WITH A REFERENCE TO CATEGORIES SAGA
+    // const catEnum = {
+    //   1: 'lang-native-american',
+    //   2: 'lang-european',
+    //   3: 'lang-asian',
+    //   4: 'lang-middle-east',
+    //   5: 'lang-latino',
+    //   6: 'lang-varieties-of-english',
+    //   7: 'lang-sign-language'
+    // }
+    // return catEnum[Number(site.category_id)];
   }
 
   return (
@@ -60,8 +72,10 @@ function Map() {
                 latitude={Number(site.latitude)}
                 longitude={Number(site.longitude)}
               >
-                <div className="dot"
-                ></div>
+                <div className={"dot" + ' ' + assignClasses(site)}
+                >
+                  <div className="dot-info">{site.language}</div>
+                </div>
               </Marker>
             )
           })}
