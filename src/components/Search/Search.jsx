@@ -20,16 +20,16 @@ function Search() {
   return (
       <Box
         sx={{
-          textAlign: "center",
-          width: 500,
+          textAlign: "center"
+          // width: 500,
         }}
       >
-        <Typography
+        {/* <Typography
           variant="h4"
           sx={{ backgroundColor: "primary.light", p: 2 }}
         >
           Search and Display Sites
-        </Typography>
+        </Typography> */}
         <br />
 
         <FormControl sx={{ pr: 1, pl: 1 }}>
