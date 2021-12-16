@@ -1,6 +1,6 @@
 const adminCategoriesReducer = (state = [], action) => {
     switch (action.type) {
-      case 'FETCH_CATEGORIES':
+      case 'SET_CATEGORIES':
         return [...action.payload];
       default:
         return state;

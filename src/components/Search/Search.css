@@ -1,0 +1,52 @@
+.textLeft{
+  text-align: left;
+}
+
+.lang-asian {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+}
+
+.lang-latino {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: orange;
+}
+
+.lang-european {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: yellow;
+}
+
+.lang-middle-east {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: green;
+}
+
+.lang-sign-language {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: blue;
+}
+
+.lang-native-american {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: indigo;
+}
+
+.lang-varieties-of-english {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: violet;
+}

@@ -1,9 +1,10 @@
 const adminApprovalsReducer = (state = [], action) => {
     switch (action.type) {
-      case 'FETCH_APPROVALS':
+      case 'SET_APPROVALS':
         return [...action.payload];
       default:
         return state;
     }
 };
-  export default adminApprovalsReducer;
+
+export default adminApprovalsReducer;
