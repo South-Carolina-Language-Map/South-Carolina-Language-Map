@@ -27,18 +27,18 @@ function Map() {
   },[])
 
   const assignClasses = (site) => {
-    switch(site.category){
-      case 'Native American':
-        return "dot lang-native-american";
-        break;
-      case 'Vernacular English':
-        return "dot lang-vernacular-english";
-        break;
-      default:
-        console.log('language category not found');
-        return "dot lang-none";
+    //// JUST A TEMP SOLUTION TO COLOR DOTS
+    //// WILL BE REPLACED WITH A REFERENCE TO CATEGORIES SAGA
+    const catEnum = {
+      1: 'lang-native-american',
+      2: 'lang-european',
+      3: 'lang-asian',
+      4: 'lang-middle-east',
+      5: 'lang-latino',
+      6: 'lang-varieties-of-english',
+      7: 'lang-sign-language'
     }
-    return;
+    return catEnum[Number(site.category_id)];
   }
 
   return (
@@ -60,7 +60,7 @@ function Map() {
                 latitude={Number(site.latitude)}
                 longitude={Number(site.longitude)}
               >
-                <div className="dot"
+                <div className={"dot" + ' ' + assignClasses(site)}
                 ></div>
               </Marker>
             )
