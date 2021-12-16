@@ -7,9 +7,8 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { useDispatch, useSelector } from "react-redux";
 
 function BottomNav() {
-  const dispatch = useDispatch();
-  //   const [value, setValue] = React.useState(0);
   let value = 0;
+  const dispatch = useDispatch();
   const sideBarView = useSelector((store) => store.sideBarView);
   switch (sideBarView) {
     case "search":
@@ -30,10 +29,11 @@ function BottomNav() {
     <BottomNavigation
       showLabels
       value={value}
-      //   onChange={(event, newValue) => {
-      //     setValue(newValue);
-      //   }}
-      sx={{ border: 1 }}
+      sx={{
+        bottom: 0,
+        width: 0.665 / 2,
+        position: "fixed",
+      }}
     >
       <BottomNavigationAction
         label="Search"

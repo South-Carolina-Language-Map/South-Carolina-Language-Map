@@ -44,7 +44,6 @@ function Search() {
         </Typography>
 
         <RadioGroup>
-          {/* <Stack direction="row" > */}
           <Grid container>
             <Grid item xs={6}>
               <FormControlLabel value="Site" label="Site" control={<Radio />} />
@@ -71,7 +70,6 @@ function Search() {
               />
             </Grid>
           </Grid>
-          {/* </Stack> */}
         </RadioGroup>
         <button onClick={submitSearch}>Search</button>
         <br />
@@ -88,7 +86,7 @@ function Search() {
         <br />
       </FormControl>
 
-      <Paper elevation={8} sx={{ textAlign: "center" }}>
+      <Paper elevation={8} sx={{ textAlign: "center", height:0.8/2 }}>
         <Typography variant="h5">Language Catagories</Typography>
 
         <br />
