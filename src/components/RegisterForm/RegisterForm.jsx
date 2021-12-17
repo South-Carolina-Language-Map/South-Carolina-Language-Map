@@ -12,6 +12,7 @@ import {
   Typography
 } from '@mui/material';
 
+//framework for registration object
 let userInfo = {
   username: '',
   password: '',
@@ -21,24 +22,21 @@ let userInfo = {
 
 
 function RegisterForm() {
-  const [user, setUser] = useState(userInfo);
+  //useState for registration object
+  const [newUser, setNewUser] = useState(userInfo);
 
+  //store & hooks
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
+  //send of registration user info for approval
   const registerUser = (event) => {
     event.preventDefault();
     console.log('in register user', )
     dispatch({
       type: 'REGISTER',
-      payload: {
-        username: username,
-        password: password,
-        fullName: fullName,
-        email: email
-      },
+      payload: newUser
     });
-
   }; // end registerUser
 
   return (
@@ -64,9 +62,9 @@ function RegisterForm() {
             variant="outlined"
             type="text"
             margin="normal"
-            value={username}
+            value={newUser.username}
             required
-            onChange={(event) => setUsername(event.target.value)}
+            onChange={(event) => setNewUser({...newUser, username: event.target.value})}
           />
         </Grid>
 
@@ -80,9 +78,9 @@ function RegisterForm() {
             margin="normal"
             type="password"
             name="password"
-            value={password}
+            value={newUser.password}
             required
-            onChange={(event) => setPassword(event.target.value)} />
+            onChange={(event) => setNewUser({...newUser, password: event.target.value})} />
         </Grid>
 
         <Grid item xs={12}>
@@ -95,9 +93,9 @@ function RegisterForm() {
             margin="normal"
             type="fullName"
             label="Full Name"
-            value={fullName}
+            value={newUser.fullName}
             required
-            onChange={(event) => setFullName(event.target.value)}
+            onChange={(event) => setNewUser({...newUser, fullName: event.target.value})}
           />
         </Grid>
 
@@ -111,9 +109,9 @@ function RegisterForm() {
             margin="normal"
             type="email"
             label="Email"
-            value={email}
+            value={newUser.email}
             required
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(event) => setNewUser({...newUser, email: event.target.value})}
           />
         </Grid>
 
