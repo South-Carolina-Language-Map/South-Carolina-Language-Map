@@ -1,21 +1,28 @@
 import "./Search.css";
+import { useState } from "react";
 import { Box } from "@mui/system";
 import Stack from "@mui/material/Stack";
+import TabPanel from "@mui/lab/TabPanel";
+import TabContext from "@mui/lab/TabContext";
+import SearchIcon from "@mui/icons-material/Search";
 import {
+  Tab,
+  Tabs,
+  Grid,
   Paper,
-  Radio,
   Button,
   Divider,
-  TextField,
-  RadioGroup,
+  InputBase,
   Typography,
-  FormControl,
-  FormControlLabel,
-  Grid,
+  IconButton,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 
 function Search() {
+  const [value, setValue] = useState("site");
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
     <Box
       sx={{
@@ -26,112 +33,162 @@ function Search() {
     >
       <br />
 
-      <FormControl sx={{ width: 2 / 2 }}>
-        <TextField id="search-with-sx" label="Search" variant="standard" />
+      <Grid container>
+        <Grid item xs={12}>
+          <Box>
+            <TabContext value={value}>
+              <Tabs value={value} onChange={handleChange}>
+                <Tab value="site" label="Site" />
+                <Tab value="region" label="Region" />
+                <Tab value="language" label="Language" />
+                <Tab value="category" label="Category" />
+              </Tabs>
 
-        <br />
+              <TabPanel value="site">
+                <Paper
+                  component="form"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <InputBase
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="Search Sites"
+                  />
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </Paper>
+              </TabPanel>
 
-        <Typography variant="body2" className="textLeft">
-          Search by:
-        </Typography>
+              <TabPanel value="region">
+                <Paper
+                  component="form"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <InputBase
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="Search Regions"
+                  />
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </Paper>
+              </TabPanel>
 
-        <RadioGroup>
-          <Grid container>
-            <Grid item xs={6}>
-              <FormControlLabel value="Site" label="Site" control={<Radio />} />
-            </Grid>
-            <Grid item xs={6}>
-              <FormControlLabel
-                value="Language"
-                label="Language"
-                control={<Radio />}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <FormControlLabel
-                value="Region"
-                label="Region"
-                control={<Radio />}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <FormControlLabel
-                value="Category"
-                label="Category"
-                control={<Radio />}
-              />
-            </Grid>
-          </Grid>
-        </RadioGroup>
-        <br />
-        <Button
-          sx={{
-            color: "primary.dark",
-          }}
-        >
-          Clear Search
-        </Button>
+              <TabPanel value="language">
+                <Paper
+                  component="form"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <InputBase
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="Search Languages"
+                  />
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </Paper>
+              </TabPanel>
+              <TabPanel value="category">
+                <Paper
+                  component="form"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <InputBase
+                    sx={{ ml: 1, flex: 1 }}
+                    placeholder="Search Categories"
+                  />
+                  <IconButton>
+                    <SearchIcon />
+                  </IconButton>
+                </Paper>
+              </TabPanel>
+            </TabContext>
 
-        <br />
-        <Divider orientation="horizontal" />
-        <br />
-      </FormControl>
+            <br />
+            <Button
+              sx={{
+                color: "primary.dark",
+              }}
+            >
+              Clear Search
+            </Button>
 
-      <Paper elevation={8} sx={{ textAlign: "center", height:0.8/2 }}>
-        <Typography variant="h5">Language Catagories</Typography>
-
-        <br />
-
-        <Grid container spacing={2} rowSpacing={4} sx={{ pr: 1, pl: 1 }}>
-          <Grid item xs={4}>
-            <Stack direction="row" spacing={1}>
-              <div className="lang-asian" />
-              <Typography>Asian</Typography>
-            </Stack>
-          </Grid>
-
-          <Grid item xs={4}>
-            <Stack direction="row" spacing={1}>
-              <div className="lang-latino" />
-              <Typography>Latino</Typography>
-            </Stack>
-          </Grid>
-
-          <Grid item xs={4}>
-            <Stack direction="row" spacing={1}>
-              <div className="lang-european" />
-              <Typography>European</Typography>
-            </Stack>
-          </Grid>
-          <Grid item xs={4}>
-            <Stack direction="row" spacing={1}>
-              <div className="lang-middle-east" />
-              <Typography>Middle East</Typography>
-            </Stack>
-          </Grid>
-          <Grid item xs={4}>
-            <Stack direction="row" spacing={1}>
-              <div className="lang-sign-language" />
-              <Typography>Sign Language</Typography>
-            </Stack>
-          </Grid>
-          <Grid item xs={4}>
-            <Stack direction="row">
-              <div className="lang-native-american" />{" "}
-              <Typography>Native American</Typography>
-            </Stack>
-          </Grid>
-          <Grid item xs={4} />
-          <Grid item xs={5}>
-            <Stack direction="row" spacing={1}>
-              <div className="lang-varieties-of-english" />
-              <Typography>
-                Varieties of <br /> English
-              </Typography>
-            </Stack>
-          </Grid>
+            <br />
+            <Divider orientation="horizontal" />
+            <br />
+          </Box>
         </Grid>
-      </Paper>
+
+        <Grid item xs={12}>
+          <Paper elevation={8} sx={{ textAlign: "center", height: 2 / 2 }}>
+            <Typography variant="h5">Language Catagories</Typography>
+
+            <br />
+
+            <Grid container spacing={2} rowSpacing={6} sx={{ pr: 1, pl: 1 }}>
+              <Grid item xs={4}>
+                <Stack direction="row" spacing={1}>
+                  <div className="lang-asian" />
+                  <Typography>Asian</Typography>
+                </Stack>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Stack direction="row" spacing={1}>
+                  <div className="lang-latino" />
+                  <Typography>Latino</Typography>
+                </Stack>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Stack direction="row" spacing={1}>
+                  <div className="lang-european" />
+                  <Typography>European</Typography>
+                </Stack>
+              </Grid>
+              <Grid item xs={4}>
+                <Stack direction="row" spacing={1}>
+                  <div className="lang-middle-east" />
+                  <Typography>Middle East</Typography>
+                </Stack>
+              </Grid>
+              <Grid item xs={4}>
+                <Stack direction="row" spacing={1}>
+                  <div className="lang-sign-language" />
+                  <Typography>Sign Language</Typography>
+                </Stack>
+              </Grid>
+              <Grid item xs={4}>
+                <Stack direction="row">
+                  <div className="lang-native-american" />{" "}
+                  <Typography>Native American</Typography>
+                </Stack>
+              </Grid>
+              <Grid item xs={4} />
+              <Grid item xs={4}>
+                <Stack direction="row" spacing={1}>
+                  <div className="lang-varieties-of-english" />
+                  <Typography>
+                    Varieties of <br /> English
+                  </Typography>
+                </Stack>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Grid>
+      </Grid>
     </Box>
   );
 }
