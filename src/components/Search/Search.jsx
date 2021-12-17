@@ -1,5 +1,4 @@
 import "./Search.css";
-import Map from "../Map/Map";
 import { Box } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import {
