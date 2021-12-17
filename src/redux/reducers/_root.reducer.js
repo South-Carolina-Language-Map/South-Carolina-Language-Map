@@ -14,6 +14,8 @@ import listTypeReducer from './viewReducers/view.listType.reducer';
 import queriesReducer from './viewReducers/view.queries.reducer';
 import sitesReducer from './viewReducers/view.sites.reducer';
 
+import sideBarView from './sideBarView.reducer';
+
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -38,7 +40,8 @@ const viewReducer = combineReducers({
 // Lets make a bigger object for our store, with the objects from our reducers.
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const rootReducer = combineReducers({
-  adminReducer, 
+  sideBarView,
+  adminReducer,
   viewReducer
 });
 

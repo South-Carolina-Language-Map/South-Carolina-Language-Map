@@ -7,7 +7,7 @@ const router = express.Router();
 require('dotenv');
 
 
-//GET in maps.router***
+//*** GET in maps.router***
 
 
 //function to create geotags for post route - being called in POST
@@ -42,12 +42,12 @@ async function createGeoTag (req, res) {
 };
 
 
-//******NICKs EYEBALLS HERE */
-//Add a site from the admin Side
+
+//POST - Add a site from the admin Side
 router.post('/', (req, res) => createGeoTag(req,res)); //end GET for map sites and hover
 
 
-//edit a site
+//PUT - edit a site
 router.put('/:id', (req, res) => {
     const siteID = req.params.id;
     const editedSite = req.body;
@@ -74,7 +74,7 @@ router.put('/:id', (req, res) => {
 }); //End Site PUT
 
 
-//delete a site
+//DELETE a site
 router.delete('/:id', (req, res) => {
     const siteID = req.params.id;
     const deleteSiteQueryText = `
