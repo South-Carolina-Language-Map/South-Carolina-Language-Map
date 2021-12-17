@@ -8,18 +8,24 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 
-import Nav from "../Nav/Nav";
-import Footer from "../Footer/Footer";
+
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import RegisterPage from '../RegisterPage/RegisterPage';
 import LoginPage from "../LoginPage/LoginPage";
 
-import Admin from "../Admin/Admin";
+// import Admin from "../Admin/Admin";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
+import Nav from '../Nav/Nav';
+import Footer from '../Footer/Footer';
+import AdminHome from '../AdminHome/AdminHome'
+import AdminLanguage from '../AdminLanguage/AdminLanguage';
+import AdminCategory from '../AdminCategory/AdminCategory';
+import AdminApprovals from '../AdminApprovals/AdminApprovals';
+import AdminAbout from '../AdminAbout/AdminAbout';
 
 import Search from "../Search/Search";
 import Sidebar from "../Sidebar/Sidebar";
@@ -62,7 +68,7 @@ function App() {
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
           <Route exact path="/login">
-          
+
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
@@ -74,7 +80,7 @@ function App() {
           </Route>
 
           <Route exact path="/registration">
-          
+
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
@@ -84,15 +90,35 @@ function App() {
               <RegisterPage />
             )}
           </Route>
-          
-          <Route
-          exact path="/admin">
-            <Admin/>
-          </Route>
 
-          {/* <Route exact path="/admin">
-            <Sidebar />
-          </Route> */}
+
+
+          {/* View for admins */}
+          {user.clearance_level >= 1 ?
+            <>
+              <Route
+                exact path="/admin">
+                {/* <Admin /> */}
+                <Nav />
+                <AdminHome />
+                <Footer />
+              </Route>
+
+              <Route
+                exact path="/admin/about">
+
+                <Nav />
+                <AdminAbout />
+                <Footer />
+              </Route>
+
+            </>
+            :
+            <Redirect to="/login" />
+          }
+
+
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

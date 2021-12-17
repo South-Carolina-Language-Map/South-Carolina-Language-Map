@@ -40,6 +40,10 @@ function Nav() {
               Approvals
             </Link>
 
+            <Link className="navLink" to="/admin/about">
+              About
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}
