@@ -12,19 +12,23 @@ import {
   Typography
 } from '@mui/material';
 
+let userInfo = {
+  username: '',
+  password: '',
+  fullName: '',
+  email: ''
+}
 
 
 function RegisterForm() {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
+  const [user, setUser] = useState(userInfo);
+
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
   const registerUser = (event) => {
     event.preventDefault();
-    console.log('in register user')
+    console.log('in register user', )
     dispatch({
       type: 'REGISTER',
       payload: {
@@ -34,11 +38,12 @@ function RegisterForm() {
         email: email
       },
     });
+
   }; // end registerUser
 
   return (
     <Grid container sx={{ display: 'flex', justifyContent: 'center' }}>
-      <FormControl onSubmit={registerUser}>
+      <form onSubmit={registerUser}>
         <Grid item>
           <h2>Register User</h2>
           {errors.registrationMessage && (
@@ -117,8 +122,8 @@ function RegisterForm() {
             Submit
           </Button>
         </Grid>
-        
-      </FormControl>
+
+      </form>
     </Grid>
   );
 }
