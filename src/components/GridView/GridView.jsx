@@ -1,8 +1,7 @@
 import Map from "../Map/Map.jsx";
 import { Grid } from "@mui/material";
 import Sidebar from "../Sidebar/Sidebar.jsx";
-
-
+import "./GridView.css";
 
 // I AM VERY IMPORTANT
 function GridView() {
@@ -12,7 +11,9 @@ function GridView() {
         <Map />
       </Grid>
       <Grid item xs={12} sm={4} md={4} lg={4} xl={4}>
-        <Sidebar />
+        <div className="sideBarContainer">
+          <Sidebar />
+        </div>
       </Grid>
     </Grid>
   );
