@@ -16,6 +16,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import LoginPage from "../LoginPage/LoginPage";
 
 import Admin from "../Admin/Admin";
+import AdminHome from "../AdminHome/AdminHome";
 import AboutPage from "../AboutPage/AboutPage";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
@@ -87,7 +88,7 @@ function App() {
 
           <Route
           exact path="/admin">
-            <Admin/>
+            <AdminHome/>
           </Route>
 
           {/* <Route exact path="/admin">
