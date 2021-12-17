@@ -22,7 +22,6 @@ import { useState } from "react";
 function Search() {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState('');
-  console.log(searchText);
 
   const submitSearch = () => {
     dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr({region: 'upstate', language: 'Cherokee'})})
