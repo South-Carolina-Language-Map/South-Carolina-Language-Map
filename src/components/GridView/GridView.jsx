@@ -2,6 +2,9 @@ import Map from "../Map/Map.jsx";
 import { Grid } from "@mui/material";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 
+
+
+// I AM VERY IMPORTANT
 function GridView() {
   return (
     <Grid container direction="row-reverse">
