@@ -43,8 +43,8 @@ const rootReducer = combineReducers({
   sideBarView,
   adminReducer,
   viewReducer,
-  user,
   errors,
+  user
 });
 
 export default rootReducer;
