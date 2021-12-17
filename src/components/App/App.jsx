@@ -84,7 +84,7 @@ function App() {
               <RegisterPage />
             )}
           </Route>
-
+          
           <Route
           exact path="/admin">
             <Admin/>

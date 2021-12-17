@@ -1,20 +1,11 @@
-// import React, { useEffect } from 'react';
-// import {
-//   HashRouter as Router,
-//   Redirect,
-//   Route,
-//   Switch,
-// } from 'react-router-dom';
+import React, { useEffect } from 'react';
 
-// import { useDispatch, useSelector } from 'react-redux';
 
-// import Nav from '../Nav/Nav';
-// import Footer from '../Footer/Footer';
+import { useDispatch, useSelector } from 'react-redux';
 
-// import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Nav from '../Nav/Nav';
+import Footer from '../Footer/Footer';
 
-// import LoginPage from '../LoginPage/LoginPage';
-// import RegisterPage from '../RegisterPage/RegisterPage';
 
 // import AdminHome from '../AdminHome/AdminHome';
 // import AdminLanguage from '../AdminLanguage/AdminLanguage';
@@ -22,14 +13,17 @@
 // import AdminApprovals from '../AdminApprovals/AdminApprovals';
 // import AdminAbout from '../AdminAbout/AdminAbout';
 
-// // This is one of our simplest components
-// // It doesn't have local state,
-// // It doesn't dispatch any redux actions or display any part of redux state
-// // or even care what the redux state is'
+
 
 function Admin() {
+
+
+  //admin components called from here
   return(
+    <>
+    <Nav />
   <p>I AM IN ADMIN</p>
+  </>
   )
 }
 
