@@ -31,29 +31,29 @@ function Sidebar() {
   }
 
   return (
-    <Grid container>
-      <Grid item xs={4}>
-        <Box label="componentsContainer">
-          <Box>
-            <Typography
-              variant="h4"
-              sx={{
-                p: 2,
-                textAlign: "center",
-                backgroundColor: "primary.light",
-              }}
-            >
-              {currentViewHeaderText}
-            </Typography>
-          </Box>
-          {currentView}
-          <BottomNav />
-        </Box>
-      </Grid>
-      <Grid item xs={8}>
-        <Map />
-      </Grid>
-    </Grid>
+    // <Grid container direction="row-reverse">
+    //   <Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
+    //     <Map />
+    //   </Grid>
+    //   <Grid item xs={12} sm={4} md={4} lg={4} xl={4} sx={{ height: 2 / 2 }}>
+    <Box sx={{ height: 2 / 2 }}>
+      <Box>
+        <Typography
+          variant="h4"
+          sx={{
+            p: 2,
+            textAlign: "center",
+            backgroundColor: "primary.light",
+          }}
+        >
+          {currentViewHeaderText}
+        </Typography>
+      </Box>
+      {currentView}
+      <BottomNav />
+    </Box>
+    //   </Grid>
+    // </Grid>
   );
 }
 

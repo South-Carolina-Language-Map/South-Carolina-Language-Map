@@ -1,31 +1,31 @@
-import React, { useEffect } from 'react';
+import React from "react";
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
-import Admin from '../Admin/Admin';
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
+import Admin from "../Admin/Admin";
+import AboutPage from "../AboutPage/AboutPage";
+import UserPage from "../UserPage/UserPage";
+import InfoPage from "../InfoPage/InfoPage";
+import LandingPage from "../LandingPage/LandingPage";
 
-import Search from '../Search/Search';
+import Search from "../Search/Search";
 import Sidebar from "../Sidebar/Sidebar";
 
-import './App.css';
+import "./App.css";
+import GridView from "../GridView/GridView";
 
 function App() {
-
   return (
     <Router>
       <div>
@@ -48,8 +48,7 @@ function App() {
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
           <Route exact path="/home">
-            <Sidebar />
-
+            <GridView/>
           </Route>
 
           <Route exact path="/admin">

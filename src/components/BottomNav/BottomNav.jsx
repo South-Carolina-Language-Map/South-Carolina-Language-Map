@@ -6,6 +6,8 @@ import BottomNavigation from "@mui/material/BottomNavigation";
 import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import { useDispatch, useSelector } from "react-redux";
 
+import './BottomNav.css';
+
 function BottomNav() {
   let value = 0;
   const dispatch = useDispatch();
@@ -29,10 +31,11 @@ function BottomNav() {
     <BottomNavigation
       showLabels
       value={value}
+      className='test'
       sx={{
         bottom: 0,
         width: 0.665 / 2,
-        position: "fixed",
+        position: "relative",
       }}
     >
       <BottomNavigationAction
