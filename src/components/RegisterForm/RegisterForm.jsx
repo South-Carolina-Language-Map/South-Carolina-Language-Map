@@ -152,15 +152,15 @@ function RegisterForm() {
     aria-describedby="alert-dialog-description"
 >
     <DialogTitle id="Thank You for Your Request">
-      {"Thank You"}
+      {"Thank You!"}
     </DialogTitle>
     <DialogContent>
       <DialogContentText id="alert-dialog-description">
-        Your submission has been put in queue for approval. Please notify the admins
+        Your submission has been put in queue for approval. Please notify the administrators for faster approval.
       </DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Button onClick={handleClose}>Navigate back to Login</Button>
+      <Button onClick={handleClose}>Back to Login</Button>
     </DialogActions>
   </Dialog>
     </>
