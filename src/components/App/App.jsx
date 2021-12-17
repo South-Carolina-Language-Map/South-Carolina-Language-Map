@@ -1,30 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
-} from 'react-router-dom';
+} from "react-router-dom";
 
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import RegisterPage from '../RegisterPage/RegisterPage';
+import LoginPage from "../LoginPage/LoginPage";
 
-import Admin from '../Admin/Admin';
-import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
-import InfoPage from '../InfoPage/InfoPage';
-import LandingPage from '../LandingPage/LandingPage';
+import Admin from "../Admin/Admin";
+import AboutPage from "../AboutPage/AboutPage";
+import UserPage from "../UserPage/UserPage";
+import InfoPage from "../InfoPage/InfoPage";
+import LandingPage from "../LandingPage/LandingPage";
 
-import Search from '../Search/Search';
+import Search from "../Search/Search";
 import Sidebar from "../Sidebar/Sidebar";
 
-import './App.css';
+import "./App.css";
 
 function App() {
+  const dispatch = useDispatch();
+
+  const user = useSelector(store => store.user);
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER' });
+  }, [dispatch]);
+  console.log("user", user);
 
   return (
     <Router>
@@ -42,19 +52,47 @@ function App() {
             <AboutPage />
           </Route>
 
+          <Route exact path="/home">
+            <Sidebar />
+          </Route>
+
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
-          <Route exact path="/home">
-            <Sidebar />
-
+          <Route exact path="/login">
+          
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect to the /user page
+              <Redirect to="/admin" />
+            ) : (
+              // Otherwise, show the login page
+              <LoginPage />
+            )}
           </Route>
 
-          <Route exact path="/admin">
-            <Sidebar />
+          <Route exact path="/registration">
+          
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <Redirect to="/admin" />
+            ) : (
+              // Otherwise, show the registration page
+              <RegisterPage />
+            )}
           </Route>
+
+          <Route
+          exact path="/admin">
+            <Admin/>
+          </Route>
+
+          {/* <Route exact path="/admin">
+            <Sidebar />
+          </Route> */}
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

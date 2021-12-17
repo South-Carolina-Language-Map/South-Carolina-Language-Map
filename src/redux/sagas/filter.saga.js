@@ -6,7 +6,8 @@ function* submitQuery(action){
     try{
         // takes a url query as payload ('?key=value')
         const response = yield axios.get(`/api/search${action.payload}`);
-        yield put({type: 'SET_SITES', payload: encodeUrlStr(response.rows)})
+        yield console.log(response);
+        yield put({type: 'SET_SITES', payload: response.data})
     }catch(err){
         yield put({type: 'SUBMIT_QUERY_ERR'});
         console.log('error in submitQuery', err);
