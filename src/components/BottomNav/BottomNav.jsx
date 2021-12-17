@@ -33,8 +33,9 @@ function BottomNav() {
       value={value}
       className='test'
       sx={{
+        // left: 0,
         bottom: 0,
-        width: 0.665 / 2,
+        // width: 0.665 / 2,
         position: "relative",
       }}
     >

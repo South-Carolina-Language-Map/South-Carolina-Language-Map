@@ -24,7 +24,7 @@ function NavInfo() {
       <Grid item xs={12}>
         <Box sx={{ p: 1 }}>
           <Typography variant="h4">Site usage guide:</Typography>
-          <Typography variant="body1">
+          {/* <Typography variant="body1"> */}
             <ul>
               <li>
                 Communication of thoughts and feelings through a system of
@@ -40,7 +40,7 @@ function NavInfo() {
                 community; often contrasted with dialect.
               </li>
             </ul>
-          </Typography>
+          {/* </Typography> */}
         </Box>
       </Grid>
     </Grid>

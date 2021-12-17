@@ -3,7 +3,9 @@ import { useState } from "react";
 import { Box } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import TabPanel from "@mui/lab/TabPanel";
+import { useDispatch } from "react-redux";
 import TabContext from "@mui/lab/TabContext";
+import encodeUrlStr from "../../utils/encodeUrlStr";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   Tab,
@@ -18,10 +20,22 @@ import {
 } from "@mui/material";
 
 function Search() {
+  const dispatch = useDispatch();
   const [value, setValue] = useState("site");
+  const [searchText, setSearchText] = useState("");
+  console.log(searchText);
+
+  const submitSearch = () => {
+    dispatch({
+      type: "SUBMIT_QUERY",
+      payload: encodeUrlStr({ region: "upstate", language: "Cherokee" }),
+    });
+  };
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
 
   return (
     <Box
@@ -56,7 +70,7 @@ function Search() {
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Sites"
                   />
-                  <IconButton>
+                  <IconButton onClick={submitSearch}>
                     <SearchIcon />
                   </IconButton>
                 </Paper>

@@ -1,10 +1,9 @@
-import Map from "../Map/Map";
 import { Box } from "@mui/system";
 import Search from "../Search/Search";
 import NavInfo from "../NavInfo/NavInfo";
 import { useSelector } from "react-redux";
+import { Typography } from "@mui/material";
 import BottomNav from "../BottomNav/BottomNav";
-import { Grid, Typography } from "@mui/material";
 import NavExplorer from "../NavExplorer/NavExplorer";
 
 function Sidebar() {
@@ -31,11 +30,6 @@ function Sidebar() {
   }
 
   return (
-    // <Grid container direction="row-reverse">
-    //   <Grid item xs={12} sm={8} md={8} lg={8} xl={8}>
-    //     <Map />
-    //   </Grid>
-    //   <Grid item xs={12} sm={4} md={4} lg={4} xl={4} sx={{ height: 2 / 2 }}>
     <Box sx={{ height: 2 / 2 }}>
       <Box>
         <Typography
@@ -52,8 +46,6 @@ function Sidebar() {
       {currentView}
       <BottomNav />
     </Box>
-    //   </Grid>
-    // </Grid>
   );
 }
 
