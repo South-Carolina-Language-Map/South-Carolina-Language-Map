@@ -17,9 +17,12 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import { useDispatch } from "react-redux";
 import encodeUrlStr from "../../utils/encodeUrlStr";
+import { useState } from "react";
 
 function Search() {
   const dispatch = useDispatch();
+  const [searchText, setSearchText] = useState('');
+  console.log(searchText);
 
   const submitSearch = () => {
     dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr({region: 'upstate', language: 'Cherokee'})})
@@ -35,8 +38,12 @@ function Search() {
       <br />
 
       <FormControl sx={{ width: 2 / 2 }}>
-        <TextField id="search-with-sx" label="Search" variant="standard" />
-
+        <TextField 
+          id="search-with-sx" 
+          label="Search" 
+          variant="standard" 
+          value={searchText}
+          onChange={(e)=>setSearchText(e.target.value)}/>
         <br />
 
         <Typography variant="body2" className="textLeft">
