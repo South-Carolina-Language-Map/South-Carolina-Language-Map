@@ -1,4 +1,4 @@
-import ReactMapGL, { Marker, FlyToInterpolator } from 'react-map-gl';
+import ReactMapGL, { Marker, FlyToInterpolator, LinearInterpolator } from 'react-map-gl';
 import { useEffect, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,7 +28,7 @@ function Map() {
       latitude: 40.7,
       zoom: 14,
       transitionDuration: 5000,
-      transitionInterpolator: new FlyToInterpolator(),
+      transitionInterpolator: new LinearInterpolator(),
       transitionEasing: easeCubic
     });
   };
