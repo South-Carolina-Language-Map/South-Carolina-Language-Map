@@ -1,4 +1,4 @@
-import ReactMapGL, { Marker, FlyToInterpolator, LinearInterpolator } from 'react-map-gl';
+import ReactMapGL, { Marker, FlyToInterpolator, LinearInterpolator, WebMercatorViewport } from 'react-map-gl';
 import { useEffect, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useSelector, useDispatch } from 'react-redux';
@@ -30,6 +30,23 @@ function Map() {
       transitionDuration: 5000,
       transitionInterpolator: new LinearInterpolator(),
       transitionEasing: easeCubic
+    });
+  };
+
+  const goToSF = () => {
+    const {longitude, latitude, zoom} = new WebMercatorViewport(viewport)
+        .fitBounds([[-122.4, 37.7], [-122.5, 37.8]], {
+          padding: 20,
+          offset: [0, -100]
+        });
+    setViewport({
+      ...viewport,
+      longitude,
+      latitude,
+      zoom,
+      transitionDuration: 5000,
+      transitionInterpolator: new FlyToInterpolator(),
+      transitionEasing: d3.easeCubic
     });
   };
 
