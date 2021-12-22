@@ -37,18 +37,6 @@ function Map() {
         return colorClass;
       }
     }
-    //// JUST A TEMP SOLUTION TO COLOR DOTS
-    //// WILL BE REPLACED WITH A REFERENCE TO CATEGORIES SAGA
-    // const catEnum = {
-    //   1: 'lang-native-american',
-    //   2: 'lang-european',
-    //   3: 'lang-asian',
-    //   4: 'lang-middle-east',
-    //   5: 'lang-latino',
-    //   6: 'lang-varieties-of-english',
-    //   7: 'lang-sign-language'
-    // }
-    // return catEnum[Number(site.category_id)];
   }
 
   return (
