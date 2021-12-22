@@ -33,11 +33,12 @@ function Map() {
     });
   };
 
-  const goToSF = () => {
+  const resetView = () => {
+    const bounds = getSiteBounds(sites);
     const {longitude, latitude, zoom} = new WebMercatorViewport(viewport)
-        .fitBounds([[-122.4, 37.7], [-122.5, 37.8]], {
+        .fitBounds([bounds[0], bounds[1]], {
           padding: 20,
-          offset: [0, -100]
+          offset: [0, 100]
         });
     setViewport({
       ...viewport,
@@ -45,10 +46,18 @@ function Map() {
       latitude,
       zoom,
       transitionDuration: 5000,
-      transitionInterpolator: new FlyToInterpolator(),
-      transitionEasing: d3.easeCubic
+      transitionInterpolator: new LinearInterpolator(),
+      transitionEasing: easeCubic
     });
   };
+
+  const getSiteBounds = (sitesArr) => {
+    let longs = sites.map(site => site.longitude);
+    let lats = sites.map(site => site.latitude);
+    const [latMin, longMin] = [Math.min(...lats), Math.min(...longs)];
+    const [latMax, longMax] = [Math.max(...lats), Math.max(...longs)];
+    return [[longMin, latMin], [longMax, latMax]];
+  }
 
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL' });
@@ -66,6 +75,7 @@ function Map() {
     }
   }
 
+  
   return (
     <div className="App">
 
@@ -78,7 +88,7 @@ function Map() {
           onViewportChange={setViewport}
           mapboxApiAccessToken={"pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag"}
         >
-          <button onClick={goToNYC}>Click me</button>
+          <button onClick={resetView}>Click me</button>
           {sites && sites.map(site => {
             return (
               <Marker
