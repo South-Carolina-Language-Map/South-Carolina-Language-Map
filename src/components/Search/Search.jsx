@@ -25,10 +25,10 @@ function Search() {
   const [checked, setChecked] = useState('language');
 
   const submitSearch = () => {
-    dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr({region: 'upstate', language: 'Cherokee'})})
+    let payload = {};
+    payload[checked] = searchText;
+    dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr(payload)})
   }
-
-  console.log(checked);
 
   return (
     <Box
