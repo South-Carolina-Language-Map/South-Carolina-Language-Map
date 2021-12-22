@@ -64,6 +64,12 @@ function Map() {
     dispatch({ type: 'FETCH_CATEGORIES' });
   }, [])
 
+  useEffect(() => {
+    if(sites.length > 0){
+      resetView();
+    }
+  }, [sites]);
+
   const assignClasses = (site) => {
 
     for (let category of categories) {
