@@ -22,11 +22,14 @@ import { useState } from "react";
 function Search() {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState('');
-  console.log(searchText);
+  const [checked, setChecked] = useState('language');
 
   const submitSearch = () => {
-    dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr({region: 'upstate', language: 'Cherokee'})})
+    let payload = {};
+    payload[checked] = searchText;
+    dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr(payload)})
   }
+
   return (
     <Box
       sx={{
@@ -50,28 +53,31 @@ function Search() {
           Search by:
         </Typography>
 
-        <RadioGroup>
+        <RadioGroup
+        aria-label="search category"
+        defaultValue="language"
+        onChange={(e) => setChecked(e.target.value)}>
           <Grid container>
-            <Grid item xs={6}>
-              <FormControlLabel value="Site" label="Site" control={<Radio />} />
-            </Grid>
-            <Grid item xs={6}>
+          <Grid item xs={6}>
               <FormControlLabel
-                value="Language"
+                value="language"
                 label="Language"
                 control={<Radio />}
               />
             </Grid>
             <Grid item xs={6}>
+              <FormControlLabel value="site" label="Site" control={<Radio />} />
+            </Grid>
+            <Grid item xs={6}>
               <FormControlLabel
-                value="Region"
+                value="region"
                 label="Region"
                 control={<Radio />}
               />
             </Grid>
             <Grid item xs={6}>
               <FormControlLabel
-                value="Category"
+                value="category"
                 label="Category"
                 control={<Radio />}
               />
