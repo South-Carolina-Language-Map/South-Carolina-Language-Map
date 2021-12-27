@@ -1,0 +1,34 @@
+.mapboxgl-canvas {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: blue;
+    transform: translate(-50%,-50%);
+    overflow: visible;
+}
+
+
+/* Target nested class for hover display */
+.dot > .dot-info {
+    opacity: 0;
+    position: relative;
+    top: -1.2em;
+    left: 0;
+    text-align: center;
+    transform: translate(-100%);
+    transition: opacity 1s ease;
+    overflow: visible;
+}
+
+.dot:hover > .dot-info {
+    opacity: 1;
+    transition: opacity 1s ease;
+}
