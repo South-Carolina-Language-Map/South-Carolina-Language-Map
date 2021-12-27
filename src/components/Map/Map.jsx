@@ -1,12 +1,10 @@
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, FlyToInterpolator, LinearInterpolator, WebMercatorViewport } from 'react-map-gl';
 import { useEffect, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
-// import sampleData from './sampleData';
-// import addresses from './rippedWithCoords';
-import { Dispatch } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {easeCubic} from 'd3-ease';
 import './Map.css';
+
 
 function Map() {
   const dispatch = useDispatch();
@@ -23,10 +21,54 @@ function Map() {
   const [darkMode, setDarkMode] = useState(true);
   const toggleDark = () => { setDarkMode(!darkMode) };
 
+  const goToNYC = () => {
+    setViewport({
+      ...viewport,
+      longitude: -74.1,
+      latitude: 40.7,
+      zoom: 14,
+      transitionDuration: 5000,
+      transitionInterpolator: new LinearInterpolator(),
+      transitionEasing: easeCubic
+    });
+  };
+
+  const resetView = () => {
+    const bounds = getSiteBounds(sites);
+    const {longitude, latitude, zoom} = new WebMercatorViewport(viewport)
+        .fitBounds([bounds[0], bounds[1]], {
+          padding: 20,
+          offset: [0, 100]
+        });
+    setViewport({
+      ...viewport,
+      longitude,
+      latitude,
+      zoom,
+      transitionDuration: 5000,
+      transitionInterpolator: new LinearInterpolator(),
+      transitionEasing: easeCubic
+    });
+  };
+
+  const getSiteBounds = (sitesArr) => {
+    let longs = sites.map(site => site.longitude);
+    let lats = sites.map(site => site.latitude);
+    const [latMin, longMin] = [Math.min(...lats), Math.min(...longs)];
+    const [latMax, longMax] = [Math.max(...lats), Math.max(...longs)];
+    return [[longMin, latMin], [longMax, latMax]];
+  }
+
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL' });
     dispatch({ type: 'FETCH_CATEGORIES' });
   }, [])
+
+  useEffect(() => {
+    if(sites.length > 0){
+      resetView();
+    }
+  }, [sites]);
 
   const assignClasses = (site) => {
 
@@ -37,20 +79,9 @@ function Map() {
         return colorClass;
       }
     }
-    //// JUST A TEMP SOLUTION TO COLOR DOTS
-    //// WILL BE REPLACED WITH A REFERENCE TO CATEGORIES SAGA
-    // const catEnum = {
-    //   1: 'lang-native-american',
-    //   2: 'lang-european',
-    //   3: 'lang-asian',
-    //   4: 'lang-middle-east',
-    //   5: 'lang-latino',
-    //   6: 'lang-varieties-of-english',
-    //   7: 'lang-sign-language'
-    // }
-    // return catEnum[Number(site.category_id)];
   }
 
+  
   return (
     <div className="App">
 
@@ -63,6 +94,7 @@ function Map() {
           onViewportChange={setViewport}
           mapboxApiAccessToken={"pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag"}
         >
+          <button onClick={resetView}>Click me</button>
           {sites && sites.map(site => {
             return (
               <Marker
