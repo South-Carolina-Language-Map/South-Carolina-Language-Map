@@ -20,18 +20,6 @@ function Map() {
   const [darkMode, setDarkMode] = useState(true);
   const toggleDark = () => { setDarkMode(!darkMode) };
 
-  const goToNYC = () => {
-    setViewport({
-      ...viewport,
-      longitude: -74.1,
-      latitude: 40.7,
-      zoom: 14,
-      transitionDuration: 5000,
-      transitionInterpolator: new LinearInterpolator(),
-      transitionEasing: easeCubic
-    });
-  };
-
   const resetView = () => {
     const bounds = getSiteBounds(sites);
     const { longitude, latitude, zoom } = new WebMercatorViewport(viewport)
@@ -109,7 +97,6 @@ function Map() {
           mapboxApiAccessToken={"pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag"}
         >
 
-          <button onClick={resetView}>Click me</button>
           {sites && sites.map(site => {
             return (
               <Marker
