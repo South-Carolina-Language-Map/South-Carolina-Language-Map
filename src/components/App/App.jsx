@@ -10,10 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginPage from "../LoginPage/LoginPage";
 import AboutPage from "../AboutPage/AboutPage";
 import GridView from "../GridView/GridView";
-import Nav from "../Nav/Nav";
 import Admin from "../Admin/Admin";
-import Footer from "../Footer/Footer";
-
 
 import "./App.css";
 
