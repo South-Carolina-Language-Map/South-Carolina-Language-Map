@@ -12,7 +12,7 @@ function Map() {
     longitude: -81,
     width: "fit",
     height: "100vh",
-    zoom: 7.0
+    zoom: 6.0
   });
   const sites = useSelector(store => store.viewReducer.sitesReducer);
   const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
