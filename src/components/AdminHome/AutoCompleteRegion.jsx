@@ -5,45 +5,45 @@ import { Autocomplete } from '@mui/material';
 import { useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import adminLanguagesReducer from '../../redux/reducers/adminReducers/admin.languages.reducer';
+import listTypeReducer from '../../redux/reducers/viewReducers/view.listType.reducer';
 
-
-function AutoCompleteLanguage() {
+function AutoCompleteRegion() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("in useEffect");
-    dispatch({ type: "FETCH_LANGUAGES"})
+    dispatch({ type: "FETCH_REGIONS"})
   }, []);
 
-  const languages = useSelector(store => store.adminReducer.adminLanguagesReducer)
+  const regions = useSelector(store => store.viewReducer.listTypeReducer);
 
-  console.log("The store for languages", languages);
+  console.log("The store for regions", regions);
 
   return (
     <Autocomplete
       id="country-select-demo"
       sx={{ width: 250 }}
-      options={languages}
+      options={regions}
       autoHighlight
-      getOptionLabel={(option) => option.language}
+      getOptionLabel={(option) => option.name}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-      {option.id}. {option.language}
+      {option.id}. {option.name} 
         </Box>
       )}
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Choose a language"
+          label="Choose a region"
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill
           }}
+          onChange={(event) => {setSite(event.target.value)}}
         />
       )}
     />
   );
 }
 
-export default AutoCompleteLanguage;
+export default AutoCompleteRegion;

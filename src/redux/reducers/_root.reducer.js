@@ -7,7 +7,6 @@ import adminLanguagesReducer from './adminReducers/admin.languages.reducer';
 import adminCategoriesReducer from './adminReducers/admin.categories.reducer';
 import adminApprovalsReducer from './adminReducers/admin.approvals.reducer';
 import adminEditReducer from './adminReducers/admin.edit.reducer';
-
 import infoReducer from './viewReducers/view.info.reducer';
 import listReducer from './viewReducers/view.list.reducer';
 import listTypeReducer from './viewReducers/view.listType.reducer';

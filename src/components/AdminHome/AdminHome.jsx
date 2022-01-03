@@ -2,6 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import AutoCompleteLanguage from "./AutoCompleteLanguage";
+import AutoCompleteRegion from "./AutoCompleteRegion";
 import Grid from "@mui/material/Grid";
 import PublishIcon from "@mui/icons-material/Publish";
 import Button from "@mui/material/Button";
@@ -16,9 +17,10 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 
 function AdminHome() {
   const dispatch = useDispatch();
@@ -34,6 +36,21 @@ function AdminHome() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
+  let base = {
+    site_name: '',
+    address: '',
+    language: '',
+    region: '',
+  }
+  let [newSite, setSite] = useState(base);
+
+  const handleInputChange = (event, property) => {
+    console.log("event happened");
+    //spreading initial object and assigning values to associated key
+    setRecipe({ ...newSite, [property]: event.target.value });
+  };
+
 
   useEffect(() => {
     dispatch({ type: "FETCH_ALL" });
@@ -62,7 +79,12 @@ function AdminHome() {
           />
         </Grid>
         <Grid item xs>
-          <AutoCompleteLanguage />
+          <AutoCompleteRegion
+          region={newSite.region}/>
+        </Grid>
+        <Grid item xs>
+          <AutoCompleteLanguage 
+          language={newSite.language}/>
           <Link>Don't see your language? Click here!</Link>
         </Grid>
         <Grid item xs>
