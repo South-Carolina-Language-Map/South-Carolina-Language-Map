@@ -34,6 +34,17 @@ function Search() {
     dispatch({ type: "SUBMIT_QUERY", payload: encodeUrlStr(payload) });
   };
 
+  const clearSearch = () => {
+    dispatch({ type: 'FETCH_ALL' });
+    setSearchText('');
+  }
+
+  //set active tab, and clear searchText when tab changes
+  const changeTab = (e, newValue) => {
+    setChecked(newValue);
+    setSearchText('');
+  }
+
   return (
     <Box
       sx={{
@@ -50,7 +61,7 @@ function Search() {
             <TabContext value={checked}>
               <Tabs
                 value={checked}
-                onChange={(e, newValue) => setChecked(newValue)}
+                onChange={changeTab}
               >
                 <Tab value="site" label="Site" />
                 <Tab value="region" label="Region" />
@@ -67,6 +78,7 @@ function Search() {
                   }}
                 >
                   <InputBase
+                    value={searchText}
                     onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Sites"
@@ -105,6 +117,7 @@ function Search() {
                   }}
                 >
                   <InputBase
+                    value={searchText}
                     onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Languages"
@@ -139,6 +152,7 @@ function Search() {
               sx={{
                 color: "primary.dark",
               }}
+              onClick={clearSearch}
             >
               Clear Search
             </Button>
