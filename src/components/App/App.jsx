@@ -69,7 +69,7 @@ function App() {
 
           <Route exact path="/login">
 
-            {user.id ? (
+            {user.clearance_level >= 1 ? (
               // If the user is already logged in,
               // redirect to the /user page
               <Redirect to="/admin" />
@@ -81,7 +81,7 @@ function App() {
 
           <Route exact path="/registration">
 
-            {user.id ? (
+            {user.clearance_level >= 1 ? (
               // If the user is already logged in,
               // redirect them to the /user page
               <Redirect to="/admin" />
@@ -98,19 +98,18 @@ function App() {
             <>
               <Route
                 exact path="/admin">
-                {/* <Admin /> */}
                 <Nav />
-                {/* <AdminHome />
-                <Footer /> */}
+                <AdminHome />
+                <Footer />
               </Route>
 
-              {/* <Route
+              <Route
                 exact path="/admin/about">
 
                 <Nav />
                 <AdminAbout />
                 <Footer />
-              </Route> */}
+              </Route>
 
             </>
             :
