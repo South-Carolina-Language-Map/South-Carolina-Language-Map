@@ -21,22 +21,14 @@ import {
 
 function Search() {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("site");
-  const [searchText, setSearchText] = useState("");
-  console.log(searchText);
+  const [searchText, setSearchText] = useState('');
+  const [checked, setChecked] = useState('language');
 
   const submitSearch = () => {
-    dispatch({
-      type: "SUBMIT_QUERY",
-      payload: encodeUrlStr({ region: "upstate", language: "Cherokee" }),
-    });
-  };
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-
+    let payload = {};
+    payload[checked] = searchText;
+    dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr(payload)});
+  }
   return (
     <Box
       sx={{
