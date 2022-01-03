@@ -9,7 +9,7 @@ function AdminAbout() {
   return (
     <div className="container">
       <div>
-        <p>This is the Admin Approvals tab!</p>
+        <p>This is the Admin About tab!</p>
       </div>
     </div>
   );
