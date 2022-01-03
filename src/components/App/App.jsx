@@ -10,7 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginPage from "../LoginPage/LoginPage";
 import AboutPage from "../AboutPage/AboutPage";
 import GridView from "../GridView/GridView";
+import Nav from "../Nav/Nav";
 import Admin from "../Admin/Admin";
+import Footer from "../Footer/Footer";
 
 
 import "./App.css";
@@ -91,18 +93,11 @@ function App() {
               <Route
                 exact path="/admin">
                 <Nav />
-                <AdminHome />
+                <Admin />
                 <Footer />
               </Route>
 
-              <Route
-                exact path="/admin/about">
-
-                <Nav />
-                <AdminAbout />
-                <Footer />
-              </Route>
-
+  
             </>
             :
             <Redirect to="/login" />
