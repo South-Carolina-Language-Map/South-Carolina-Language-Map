@@ -100,17 +100,17 @@ function App() {
                 exact path="/admin">
                 {/* <Admin /> */}
                 <Nav />
-                <AdminHome />
-                <Footer />
+                {/* <AdminHome />
+                <Footer /> */}
               </Route>
 
-              <Route
+              {/* <Route
                 exact path="/admin/about">
 
                 <Nav />
                 <AdminAbout />
                 <Footer />
-              </Route>
+              </Route> */}
 
             </>
             :
