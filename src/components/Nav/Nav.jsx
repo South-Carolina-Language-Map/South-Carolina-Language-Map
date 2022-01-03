@@ -26,11 +26,36 @@ function Nav() {
 
   return (
     <>
-     
+      {/* If no user is logged in, show these links */}
+      {user.id === null || user.clearance_level === 0 &&
+        // If there's no user, show login/registration links
+        <Box sx={{ flexGrow: 1 }}>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                South Carolina Language Map
+              </Typography>
+
+              <Button
+                color="inherit"
+                onClick={() => {
+                  dispatch({ type: "SET_ADMIN_VIEW", payload: "login" })
+                }}>Login</Button>
+
+              <Button
+                color="inherit"
+                onClick={() => {
+                  dispatch({ type: "SET_ADMIN_VIEW", payload: "register" })
+                }}>Register</Button>
+
+            </Toolbar>
+          </AppBar>
+        </Box>
+      }
 
 
 
-
+      {/* if user is approved and has admin clearance, see this navbar */}
       {user.clearance_level >= 1 && (
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
@@ -42,13 +67,13 @@ function Nav() {
               <Button
                 color="inherit"
                 onClick={() => {
-                  dispatch({type: "SET_ADMIN_VIEW", payload: "site"})
+                  dispatch({ type: "SET_ADMIN_VIEW", payload: "site" })
                 }}>Sites</Button>
 
               <Button
                 color="inherit"
                 onClick={() => {
-                  dispatch({type: "SET_ADMIN_VIEW", payload: "language"})
+                  dispatch({ type: "SET_ADMIN_VIEW", payload: "language" })
                 }}>Language</Button>
 
               <Button
@@ -72,7 +97,8 @@ function Nav() {
               <Button
                 color="inherit"
                 onClick={() => dispatch({ type: 'LOGOUT' })
-              }>Logout</Button>
+                }>Logout</Button>
+
             </Toolbar>
           </AppBar>
         </Box>
