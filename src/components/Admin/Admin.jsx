@@ -15,7 +15,9 @@ import UserPage from '../UserPage/UserPage';
 
 
 function Admin() {
-  let currentAdminView;
+
+
+  let currentAdminView 
   
 
   //stores
@@ -42,12 +44,6 @@ function Admin() {
     case "about":
       currentAdminView = <AdminAbout />
       break;
-    case "login":
-      currentAdminView = <LoginPage />
-      break;
-    case "register":
-      currentAdminView = <RegisterPage />
-      break;
 
     default:
       currentAdminView = <p>There was an error, please try again later</p>
@@ -55,7 +51,7 @@ function Admin() {
   }
 
 
-  console.log('this is the view', adminView);
+  console.log('this is the admin view', adminView);
   //admin components called from here
   return (
     <>
