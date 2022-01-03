@@ -10,8 +10,8 @@ function Map() {
   const [viewport, setViewport] = useState({
     latitude: 33.6,
     longitude: -81,
-    width: "100vw",
-    height: "98vh",
+    width: "fit",
+    height: "100vh",
     zoom: 7.0
   });
   const sites = useSelector(store => store.viewReducer.sitesReducer);

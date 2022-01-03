@@ -2,43 +2,35 @@ import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Redirect,
-  Route,
   Switch,
+  Route,
 } from "react-router-dom";
-
+import RegisterPage from "../RegisterPage/RegisterPage";
 import { useDispatch, useSelector } from "react-redux";
-
-
-
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import RegisterPage from '../RegisterPage/RegisterPage';
 import LoginPage from "../LoginPage/LoginPage";
-
-// import Admin from "../Admin/Admin";
 import AboutPage from "../AboutPage/AboutPage";
+import GridView from "../GridView/GridView";
+import Admin from "../Admin/Admin";
+
+
+import "./App.css";
+
+
+// Unsure of the need for these.....
+import Search from "../Search/Search";
+import Sidebar from "../Sidebar/Sidebar";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-import AdminHome from '../AdminHome/AdminHome'
-import AdminLanguage from '../AdminLanguage/AdminLanguage';
-import AdminCategory from '../AdminCategory/AdminCategory';
-import AdminApprovals from '../AdminApprovals/AdminApprovals';
-import AdminAbout from '../AdminAbout/AdminAbout';
-
-import Search from "../Search/Search";
-import Sidebar from "../Sidebar/Sidebar";
-
-import "./App.css";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
   console.log("user", user);
 
@@ -59,7 +51,7 @@ function App() {
           </Route>
 
           <Route exact path="/home">
-            <Sidebar />
+            <GridView />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
