@@ -10,11 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 import LoginPage from "../LoginPage/LoginPage";
 import AboutPage from "../AboutPage/AboutPage";
 import GridView from "../GridView/GridView";
-import Admin from "../Admin/Admin";
-
 
 import "./App.css";
 
+import Admin from "../Admin/Admin";
+import AdminHome from "../AdminHome/AdminHome";
 
 // Unsure of the need for these.....
 import Search from "../Search/Search";
@@ -81,8 +81,9 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/admin">
-            <Admin />
+          <Route
+          exact path="/admin">
+            <AdminHome/>
           </Route>
 
           {/* <Route exact path="/admin">
