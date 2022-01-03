@@ -92,9 +92,7 @@ function App() {
             <>
               <Route
                 exact path="/admin">
-                <Nav />
                 <Admin />
-                <Footer />
               </Route>
 
   
