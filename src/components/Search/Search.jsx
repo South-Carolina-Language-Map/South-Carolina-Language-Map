@@ -21,14 +21,19 @@ import {
 
 function Search() {
   const dispatch = useDispatch();
-  const [searchText, setSearchText] = useState('');
-  const [checked, setChecked] = useState('language');
+  const [searchText, setSearchText] = useState("");
+  const [checked, setChecked] = useState("language");
+
+  const handleChange = (e) => {
+    setSearchText(e.target.value);
+  };
 
   const submitSearch = () => {
     let payload = {};
     payload[checked] = searchText;
-    dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr(payload)});
-  }
+    dispatch({ type: "SUBMIT_QUERY", payload: encodeUrlStr(payload) });
+  };
+
   return (
     <Box
       sx={{
@@ -42,8 +47,11 @@ function Search() {
       <Grid container>
         <Grid item xs={12}>
           <Box>
-            <TabContext value={value}>
-              <Tabs value={value} onChange={handleChange}>
+            <TabContext value={checked}>
+              <Tabs
+                value={checked}
+                onChange={(e, newValue) => setChecked(newValue)}
+              >
                 <Tab value="site" label="Site" />
                 <Tab value="region" label="Region" />
                 <Tab value="language" label="Language" />
@@ -59,6 +67,7 @@ function Search() {
                   }}
                 >
                   <InputBase
+                    onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Sites"
                   />
@@ -77,10 +86,11 @@ function Search() {
                   }}
                 >
                   <InputBase
+                    onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Regions"
                   />
-                  <IconButton>
+                  <IconButton onClick={submitSearch}>
                     <SearchIcon />
                   </IconButton>
                 </Paper>
@@ -95,10 +105,11 @@ function Search() {
                   }}
                 >
                   <InputBase
+                    onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Languages"
                   />
-                  <IconButton>
+                  <IconButton onClick={submitSearch}>
                     <SearchIcon />
                   </IconButton>
                 </Paper>
@@ -112,10 +123,11 @@ function Search() {
                   }}
                 >
                   <InputBase
+                    onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Categories"
                   />
-                  <IconButton>
+                  <IconButton onClick={submitSearch}>
                     <SearchIcon />
                   </IconButton>
                 </Paper>
