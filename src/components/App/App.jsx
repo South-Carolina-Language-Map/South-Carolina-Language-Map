@@ -2,38 +2,35 @@ import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Redirect,
-  Route,
   Switch,
+  Route,
 } from "react-router-dom";
-
+import RegisterPage from "../RegisterPage/RegisterPage";
 import { useDispatch, useSelector } from "react-redux";
-
-import Nav from "../Nav/Nav";
-import Footer from "../Footer/Footer";
-
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-import RegisterPage from '../RegisterPage/RegisterPage';
 import LoginPage from "../LoginPage/LoginPage";
+import AboutPage from "../AboutPage/AboutPage";
+import GridView from "../GridView/GridView";
+
+import "./App.css";
 
 import Admin from "../Admin/Admin";
 import AdminHome from "../AdminHome/AdminHome";
-import AboutPage from "../AboutPage/AboutPage";
+
+// Unsure of the need for these.....
+import Search from "../Search/Search";
+import Sidebar from "../Sidebar/Sidebar";
 import UserPage from "../UserPage/UserPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../LandingPage/LandingPage";
-
-import Search from "../Search/Search";
-import Sidebar from "../Sidebar/Sidebar";
-
-import "./App.css";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
   console.log("user", user);
 
@@ -54,7 +51,7 @@ function App() {
           </Route>
 
           <Route exact path="/home">
-            <Sidebar />
+            <GridView />
           </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
@@ -63,7 +60,6 @@ function App() {
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
           <Route exact path="/login">
-          
             {user.id ? (
               // If the user is already logged in,
               // redirect to the /user page
@@ -75,7 +71,6 @@ function App() {
           </Route>
 
           <Route exact path="/registration">
-          
             {user.id ? (
               // If the user is already logged in,
               // redirect them to the /user page
