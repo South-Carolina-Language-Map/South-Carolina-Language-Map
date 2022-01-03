@@ -22,7 +22,7 @@ router.get('/', (req, res) => {
                 columns.push(`"language"`)
                 break;
             case 'site':
-                columns.push(`"site".site_name`)
+                columns.push(`"sites".site_name`)
                 break;
             default:
                 console.log('===switch error===', key)
