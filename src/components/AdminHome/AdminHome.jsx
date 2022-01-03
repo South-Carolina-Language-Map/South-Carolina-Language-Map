@@ -30,7 +30,8 @@ function AdminHome() {
 
   return (
     <>
-      <Grid container spacing={3}>
+    <p>Sites view</p>
+      {/* <Grid container spacing={3}>
         <Grid item xs>
           <TextField
             required
@@ -57,9 +58,9 @@ function AdminHome() {
             Submit
           </Button>
         </Grid>
-      </Grid>
+      </Grid> */}
 
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      {/* <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -111,7 +112,7 @@ function AdminHome() {
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
-      </Paper>
+      </Paper> */}
     </>
   );
 }

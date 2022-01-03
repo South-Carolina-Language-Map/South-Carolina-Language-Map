@@ -11,16 +11,20 @@ import AdminApprovals from '../AdminApprovals/AdminApprovals';
 import AdminAbout from '../AdminAbout/AdminAbout';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import UserPage from '../UserPage/UserPage';
 
 
 function Admin() {
   let currentAdminView;
+  
 
   //stores
   const adminView = useSelector((store) => store.adminView)
-
+  const user = useSelector(store => store.user)
   //switch statement to control which components
   //are being called in the view
+
+
 
   switch (adminView) {
     case "site":
@@ -56,7 +60,7 @@ function Admin() {
   return (
     <>
       <Nav />
-      <p>ADMIN COMPONENT</p>
+      {currentAdminView}
       <Footer />
     </>
   )
