@@ -1,16 +1,18 @@
+// React & CSS
 import "./Search.css";
 import { useState } from "react";
-import { Box } from "@mui/system";
-import Stack from "@mui/material/Stack";
-import TabPanel from "@mui/lab/TabPanel";
+
+// Functionality && Tools imports
 import { useDispatch } from "react-redux";
-import TabContext from "@mui/lab/TabContext";
 import encodeUrlStr from "../../utils/encodeUrlStr";
-import SearchIcon from "@mui/icons-material/Search";
+
+// MUI Imports
 import {
+  Box,
   Tab,
   Tabs,
   Grid,
+  Stack,
   Paper,
   Button,
   Divider,
@@ -18,6 +20,9 @@ import {
   Typography,
   IconButton,
 } from "@mui/material";
+import TabPanel from "@mui/lab/TabPanel";
+import TabContext from "@mui/lab/TabContext";
+import SearchIcon from "@mui/icons-material/Search";
 
 function Search() {
   const dispatch = useDispatch();
