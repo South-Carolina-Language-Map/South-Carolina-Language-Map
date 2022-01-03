@@ -37,7 +37,11 @@ router.get('/', (req, res) => {
     console.log('COLUMNS', columns)
     console.log('VALUES', values);
     searchQueryText = `
-    SELECT * FROM "sites"
+    SELECT 
+    sites.id, latitude, longitude, language_id, site_name, region_id, address,
+    language, glottocode, global_speakers, sc_speakers,
+    endonym, category_id, description, status
+    FROM "sites"
     JOIN "regions" ON "regions".id = "sites".region_id
     JOIN "languages" ON "languages".id = "sites".language_id
     JOIN "categories" ON "languages".category_id = "categories".id
