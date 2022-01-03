@@ -12,6 +12,7 @@
     "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0-rc.1",
+    "d3-ease": "^3.0.1",
     "dotenv": "^8.6.0",
     "express": "^4.17.1",
     "mapbox-gl": "^2.6.1",
