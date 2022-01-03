@@ -1,20 +1,22 @@
+// React & Tools
 import * as React from "react";
 import AutoCompleteLanguage from "./AutoCompleteLanguage";
+
+// MUI Imports
+import {
+  Grid,
+  Paper,
+  Table,
+  Button,
+  TableRow,
+  TextField,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableContainer,
+  TablePagination
+} from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
-
-
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
 
 function AdminHome() {
   const [page, setPage] = React.useState(0);
