@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
@@ -15,7 +17,16 @@ const Item = styled(Paper)(({ theme }) => ({
 const lightTheme = createTheme({ palette: { mode: 'light' } });
 
 
+
 function NavExplorer() {
+
+  const dispatch = useDispatch();
+  const skateSpot = useSelector((store) => store.userSkateReducer);
+
+  useEffect(() => {
+    dispatch({ type: 'SET_LIST' });
+  }, []);
+  
   return (
     <>
       <Grid container spacing={2}>
@@ -31,7 +42,7 @@ function NavExplorer() {
                   elevation: 3
                 }}
               >
-                 {/* this is where we would map  */}
+                {/* this is where we would map  */}
                 <Item> test </Item>
 
               </Box>
