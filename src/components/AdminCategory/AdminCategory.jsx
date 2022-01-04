@@ -21,7 +21,7 @@ function AdminCategory() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
-  // Grabbing the Languages data to parse through
+  // Grabbing the Catagories data to parse through
   const catagories = useSelector(
     (store) => store.adminReducer.adminCategoriesReducer
   );

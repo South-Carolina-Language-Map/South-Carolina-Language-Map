@@ -1,15 +1,15 @@
-import { Button, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
+import { useEffect, useState } from "react";
+import { styled } from "@mui/material/styles";
+import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
-import { styled } from "@mui/material/styles";
-import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import TableContainer from "@mui/material/TableContainer";
+import TablePagination from "@mui/material/TablePagination";
 
 function AdminTable() {
   const dispatch = useDispatch();
@@ -19,18 +19,15 @@ function AdminTable() {
   const catagories = useSelector(
     (store) => store.adminReducer.adminCategoriesReducer
   );
-
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
   const columns = [
     { id: "name", label: "Name", minWidth: 170 },
     { id: "code", label: "ISO\u00a0Code", minWidth: 100 },
@@ -56,19 +53,15 @@ function AdminTable() {
       format: (value) => value.toFixed(2),
     },
   ];
-
   useEffect(() => {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
-
   const handleEdit = () => {
     console.log("Edit");
   };
-
   const handleDelete = () => {
     console.log("Delete");
   };
-
   return (
     <>
       <Grid container sx={{ pt: 3 }}>

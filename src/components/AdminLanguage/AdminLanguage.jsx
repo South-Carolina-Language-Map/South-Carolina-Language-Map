@@ -25,7 +25,6 @@ function AdminLanguage() {
   const languages = useSelector(
     (store) => store.adminReducer.adminLanguagesReducer
   );
-  const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
 
   // Defining what to do when edit or delete are pressed:
   const handleEdit = () => {
