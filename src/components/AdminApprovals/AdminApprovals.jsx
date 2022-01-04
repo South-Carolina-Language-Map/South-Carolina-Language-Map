@@ -1,17 +1,78 @@
-import React from 'react';
+// React Imports
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
+// MUI Imports
+import {
+  Grid,
+  Table,
+  Button,
+  TableRow,
+  TableBody,
+  TableCell,
+  TableHead,
+} from "@mui/material";
 
 function AdminApprovals() {
+  const dispatch = useDispatch();
+  const approvals = useSelector(
+    (store) => store.adminReducer.adminApprovalsReducer
+  );
+  const handleApproval = () => {
+    console.log("Edit");
+  };
+  const handleRejection = () => {
+    console.log("Delete");
+  };
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_UNAPPROVED" });
+  }, []);
+
   return (
-    <div className="container">
-      <div>
-        <p>This is the Admin Approvals tab!</p>
-      </div>
-    </div>
+    <Grid container sx={{ pt: 3 }}>
+      <Grid item xs={1} />
+      <Grid item xs={10}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Full Name</TableCell>
+              <TableCell align="center">Username</TableCell>
+              <TableCell align="center">Email</TableCell>
+              <TableCell align="center">Approve/Decline</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {approvals?.map((user) => (
+              <TableRow>
+                <TableCell component="th" scope="row" align="center">
+                  {user.fullName}
+                </TableCell>
+                <TableCell component="th" scope="row" align="center">
+                  {user.username}
+                </TableCell>
+                <TableCell component="th" scope="row" align="center">
+                  {user.email}
+                </TableCell>
+                <TableCell align="center">
+                  <Button
+                    sx={{ mr: 1 }}
+                    variant="contained"
+                    onClick={handleApproval}
+                  >
+                    Approve
+                  </Button>
+                  <Button variant="contained" onClick={handleRejection}>
+                    Decline
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </Grid>
+      <Grid item xs={1} />
+    </Grid>
   );
 }
 

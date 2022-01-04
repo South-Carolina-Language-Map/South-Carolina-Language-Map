@@ -1,4 +1,6 @@
 function encodeUrlStr(obj){
+    // take an obj and encode it as a url-safe querystring
+    // ex: '?region=upstate&category=native%20american'
     let string = '?'
 
     for(let key in obj){

@@ -1,12 +1,28 @@
-import ReactMapGL, { Marker, FlyToInterpolator, LinearInterpolator, WebMercatorViewport } from 'react-map-gl';
 import { useEffect, useState } from 'react';
-import 'mapbox-gl/dist/mapbox-gl.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { easeCubic } from 'd3-ease';
 import './Map.css';
+
+// Mapbox resources
+import ReactMapGL, {
+  Marker,
+  LinearInterpolator,
+  WebMercatorViewport
+} from 'react-map-gl';
+import { easeCubic } from 'd3-ease';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
   const dispatch = useDispatch();
+
+  //get lists of (un)filtered sites and all categories in db
+  const sites = useSelector(store => store.viewReducer.sitesReducer);
+  const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
+
+  //state to track dark mode (not currently utilized)
+  const [darkMode, setDarkMode] = useState(true);
+  const toggleDark = () => { setDarkMode(!darkMode) };
+
+  //set initial viewport
   const [viewport, setViewport] = useState({
     latitude: 33.6,
     longitude: -81,
@@ -14,11 +30,6 @@ function Map() {
     height: "100vh",
     zoom: 6.0
   });
-  const sites = useSelector(store => store.viewReducer.sitesReducer);
-  const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
-
-  const [darkMode, setDarkMode] = useState(true);
-  const toggleDark = () => { setDarkMode(!darkMode) };
 
   const resetView = () => {
     const bounds = getSiteBounds(sites);
@@ -49,10 +60,10 @@ function Map() {
     //get the bounds of both lat and long
     let [latMin, longMin] = [Math.min(...lats), Math.min(...longs)];
     let [latMax, longMax] = [Math.max(...lats), Math.max(...longs)];
-    
+
     //if the bounds are a single point, expand them
-    if(latMax - latMin < minBounds * 2 ||
-      longMax - longMin < minBounds * 2){
+    if (latMax - latMin < minBounds * 2 ||
+      longMax - longMin < minBounds * 2) {
       latMin -= minBounds;
       longMin -= minBounds;
       latMax += minBounds;
@@ -60,6 +71,16 @@ function Map() {
     }
     return [[longMin, latMin], [longMax, latMax]];
   }
+
+    //Assign css classes to color the map icons
+    const assignClasses = (site) => {
+      for (let category of categories) {
+        if (Number(site.category_id) == category.id) {
+          let colorClass = 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
+          return colorClass;
+        }
+      }
+    }
 
   // On Load, fetch necessary sites and categories
   useEffect(() => {
@@ -74,38 +95,28 @@ function Map() {
     }
   }, [sites]);
 
-  //Assign css classes to color the map icons
-  const assignClasses = (site) => {
-    for (let category of categories) {
-      if (Number(site.category_id) == category.id) {
-        let colorClass = 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
-        return colorClass;
-      }
-    }
-  }
-
   return (
     <div className="App">
 
       <header className="App-header">
         {/* <button onClick={toggleDark}>{darkMode ? 'Light' : 'Dark'}</button> */}
+
+        {/* Configure and mount map canvas */}
         <ReactMapGL
           {...viewport}
           mapStyle={`mapbox://styles/mapbox/${darkMode ? 'light' : 'dark'}-v10`}
-          // mapStyle={'mapbox://styles/blingusblongus/ckx3xmvv8172m14mzjaoz7yqp'}
           onViewportChange={setViewport}
           mapboxApiAccessToken={"pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag"}
         >
 
+          {/* Render each site as a mapbox marker consisting of a rounded div */}
           {sites && sites.map(site => {
             return (
               <Marker
                 key={site.id}
                 latitude={Number(site.latitude)}
-                longitude={Number(site.longitude)}
-              >
-                <div className={"dot" + ' ' + assignClasses(site)}
-                >
+                longitude={Number(site.longitude)}>
+                <div className={"dot" + ' ' + assignClasses(site)}>
                   <div className="dot-info">{site.language}</div>
                 </div>
               </Marker>
