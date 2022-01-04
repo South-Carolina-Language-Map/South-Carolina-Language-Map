@@ -1,5 +1,7 @@
-// React Imports
-import React, { useEffect } from "react";
+// React-related Imports
+import * as React from "react";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
@@ -8,19 +10,27 @@ import {
   Table,
   Button,
   TableRow,
+  TextField,
   TableBody,
   TableCell,
   TableHead,
+  Typography,
+  TableContainer,
+  TablePagination,
 } from "@mui/material";
 
 function AdminLanguage() {
   const dispatch = useDispatch();
-  
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   // Grabbing the Languages data to parse through
   const languages = useSelector(
     (store) => store.adminReducer.adminLanguagesReducer
   );
+  const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
 
+  // Defining what to do when edit or delete are pressed:
   const handleEdit = () => {
     console.log("Edit");
   };
@@ -28,66 +38,132 @@ function AdminLanguage() {
     console.log("Delete");
   };
 
+  // The below 2 functions allow there to be multiple pages on the table.
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
   useEffect(() => {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
-  
+
   return (
     <Grid container sx={{ pt: 3 }}>
       <Grid item xs={1} />
       <Grid item xs={10}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Glottocode</TableCell>
-              <TableCell align="center">Global Speakers</TableCell>
-              <TableCell align="center">SC Speakers</TableCell>
-              <TableCell align="center">Endonym</TableCell>
-              <TableCell align="center">Edit/Delete</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {languages.map((row) => (
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
               <TableRow>
-                <TableCell component="th" scope="row" align="center">
-                  {row.language}
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
-                  {row.glottocode}
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
-                  {row.global_speakers}
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
-                  {row.sc_speakers}
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
-                  {row.endonym}
-                </TableCell>
-                <TableCell align="center">
-                  <Button
-                    sx={{ mr: 1, mb: 1 }}
-                    variant="contained"
-                    onClick={handleEdit}
-                  >
-                    Edit
-                  </Button>
-                  <Button
-                    sx={{ mb: 1 }}
-                    variant="contained"
-                    onClick={handleDelete}
-                  >
-                    Delete
-                  </Button>
-                </TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell >Glottocode</TableCell>
+                <TableCell >Global Speakers</TableCell>
+                <TableCell >SC Speakers</TableCell>
+                <TableCell >Endonym</TableCell>
+                <TableCell >Edit/Delete</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {languages
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((language) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1}>
+                      <TableCell>{language.language}</TableCell>
+                      <TableCell>{language.glottocode}</TableCell>
+                      <TableCell>{language.global_speakers}</TableCell>
+                      <TableCell>{language.sc_speakers}</TableCell>
+                      <TableCell>{language.endonym}</TableCell>
+                      <TableCell>
+                        <Button
+                          sx={{ mr: 1 }}
+                          variant="contained"
+                          onClick={handleEdit}
+                        >
+                          Edit
+                        </Button>
+                        <Button variant="contained" onClick={handleDelete}>
+                          Delete
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={sites.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Grid>
       <Grid item xs={1} />
     </Grid>
+    // <Grid container sx={{ pt: 3 }}>
+    //   <Grid item xs={1} />
+    //   <Grid item xs={10}>
+    //     <Table stickyHeader aria-label="sticky table">
+    //       <TableHead>
+    //         <TableRow>
+    //           <TableCell align="center">Name</TableCell>
+    //           <TableCell align="center">Glottocode</TableCell>
+    //           <TableCell align="center">Global Speakers</TableCell>
+    //           <TableCell align="center">SC Speakers</TableCell>
+    //           <TableCell align="center">Endonym</TableCell>
+    //           <TableCell align="center">Edit/Delete</TableCell>
+    //         </TableRow>
+    //       </TableHead>
+    //       <TableBody>
+    //         {languages.map((row) => (
+    //           <TableRow>
+    //             <TableCell component="th" scope="row" align="center">
+    //               {row.language}
+    //             </TableCell>
+    //             <TableCell component="th" scope="row" align="center">
+    //               {row.glottocode}
+    //             </TableCell>
+    //             <TableCell component="th" scope="row" align="center">
+    //               {row.global_speakers}
+    //             </TableCell>
+    //             <TableCell component="th" scope="row" align="center">
+    //               {row.sc_speakers}
+    //             </TableCell>
+    //             <TableCell component="th" scope="row" align="center">
+    //               {row.endonym}
+    //             </TableCell>
+    //             <TableCell align="center">
+    //               <Button
+    //                 sx={{ mr: 1, mb: 1 }}
+    //                 variant="contained"
+    //                 onClick={handleEdit}
+    //               >
+    //                 Edit
+    //               </Button>
+    //               <Button
+    //                 sx={{ mb: 1 }}
+    //                 variant="contained"
+    //                 onClick={handleDelete}
+    //               >
+    //                 Delete
+    //               </Button>
+    //             </TableCell>
+    //           </TableRow>
+    //         ))}
+    //       </TableBody>
+    //     </Table>
+    //   </Grid>
+    //   <Grid item xs={1} />
+    // </Grid>
   );
 }
 
