@@ -1,6 +1,5 @@
 // React-related Imports
 import * as React from "react";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,11 +9,9 @@ import {
   Table,
   Button,
   TableRow,
-  TextField,
   TableBody,
   TableCell,
   TableHead,
-  Typography,
   TableContainer,
   TablePagination,
 } from "@mui/material";
@@ -100,7 +97,7 @@ function AdminLanguage() {
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
-          count={sites.length}
+          count={languages.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}
