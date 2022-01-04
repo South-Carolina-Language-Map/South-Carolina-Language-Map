@@ -27,6 +27,9 @@ function NavExploreItem({listObj}){
                     case 'Regions':
                         dispatch({type: 'FETCH_REGIONS'})
                         break;
+                    case 'Sites':
+                        dispatch({type: 'FETCH_EXPLORE_SITES'});
+                        break;
                     default:
                         console.log('EXPLORE CLICK ERR: NOT FOUND');
                 }
