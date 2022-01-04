@@ -16,11 +16,13 @@ function NavExplorer() {
     dispatch({type: 'SET_LIST_DEFAULT'});
   },[]);
 
+  console.log(list);
+
   return (
     <>
       <Grid container spacing={2}>
-        {list && list.map((item, i) => {
-          return <NavExploreItem key={i} label={item}/>
+        {list && list.map((listObj, i) => {
+          return <NavExploreItem key={i} listObj={listObj}/>
         })}
       </Grid>
     </>

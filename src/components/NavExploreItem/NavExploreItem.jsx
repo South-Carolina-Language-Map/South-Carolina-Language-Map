@@ -4,7 +4,7 @@ import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import {useDispatch, useSelector} from 'react-redux';
 
-function NavExploreItem({label}){
+function NavExploreItem({listObj}){
     const listType = useSelector(store => store.viewReducer.listTypeReducer);
     const dispatch = useDispatch();
     const lightTheme = createTheme({ palette: { mode: 'light' } });
@@ -20,7 +20,7 @@ function NavExploreItem({label}){
     const handleClick = () => {
         switch(listType){
             case 'DEFAULT':
-                switch(label){
+                switch(listObj.name){
                     case 'Categories':
                         dispatch({type: 'FETCH_CATEGORIES'});
                         break;
@@ -38,6 +38,7 @@ function NavExploreItem({label}){
         dispatch({ type: "FETCH_CATEGORIES"})
     }
 
+    console.log(listObj);
     
     return <>
         {[lightTheme].map((theme, index) => (
@@ -53,7 +54,7 @@ function NavExploreItem({label}){
                 }}
               >
                 {/* this is where we would map  */}
-                <Item> {label} </Item>
+                <Item> {listObj?.name} </Item>
               </Box>
             </ThemeProvider>
           </Grid>
