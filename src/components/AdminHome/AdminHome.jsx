@@ -99,6 +99,7 @@ function AdminHome() {
                   <TableCell>Address</TableCell>
                   <TableCell>Region</TableCell>
                   <TableCell>Language</TableCell>
+                  <TableCell>Edit//Delete</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -117,6 +118,18 @@ function AdminHome() {
                               return region.name;
                             }
                           })}
+                        </TableCell>
+                        <TableCell align="center">
+                          <Button
+                            sx={{ mr: 1 }}
+                            variant="contained"
+                            onClick={handleEdit}
+                          >
+                            Edit
+                          </Button>
+                          <Button variant="contained" onClick={handleDelete}>
+                            Delete
+                          </Button>
                         </TableCell>
                       </TableRow>
                     );
