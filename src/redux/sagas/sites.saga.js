@@ -2,7 +2,7 @@ import axios from "axios";
 import { put, takeLatest } from "redux-saga/effects";
 
 //SITES POST ROUTE
-function* addSite() {
+function* addSite(action) {
     try {
       //POST request to sites router
       const response = yield axios.post(`/api/sites/`, action.payload);

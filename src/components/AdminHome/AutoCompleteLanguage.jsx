@@ -18,6 +18,10 @@ function AutoCompleteLanguage() {
 
   const languages = useSelector(store => store.adminReducer.adminLanguagesReducer)
 
+  const handleLanguageValue = (event, value) => {
+    dispatch({type: 'SET_NEW_LANGUAGE', payload: value.id})  
+    console.log(value);}
+
   console.log("The store for languages", languages);
 
   return (
@@ -27,6 +31,7 @@ function AutoCompleteLanguage() {
       options={languages}
       autoHighlight
       getOptionLabel={(option) => option.language}
+      onChange={handleLanguageValue}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
       {option.id}. {option.language}

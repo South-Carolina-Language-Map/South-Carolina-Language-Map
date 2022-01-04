@@ -25,6 +25,8 @@ import { Link } from "react-router-dom";
 function AdminHome() {
   const dispatch = useDispatch();
   const sites = useSelector((store) => store.viewReducer.sitesReducer);
+  const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
+
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -39,27 +41,36 @@ function AdminHome() {
 
   let base = {
     site_name: '',
-    address: '',
-    language: '',
-    region: '',
+    address: ''
   }
-  let [newSite, setSite] = useState(base);
+  let [newLocation, setLocation] = useState(base);
 
-  const handleInputChange = (event, property) => {
-    console.log("event happened");
-    //spreading initial object and assigning values to associated key
-    setRecipe({ ...newSite, [property]: event.target.value });
-  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //sends over new object to saga/server to process and send to DB
+    let newSite= {
+      site_name: newLocation.site_name,
+      address: newLocation.address,
+      language_id: dropDownValues.language_id,
+      region_id: dropDownValues.region_id,
+    }
+    console.log("newSite====================", newSite);
+    dispatch({type: "ADD_SITE", payload: newSite})
+  }
 
 
   useEffect(() => {
     dispatch({ type: "FETCH_ALL" });
   }, []);
 
+  console.log("Drop down values", dropDownValues);
+
   return (
     <>
       <Typography>Add New Site</Typography>
       <Grid container spacing={.5}>
+        <form
+        onSubmit={handleSubmit}>
         <Grid item xs>
           <TextField
             required
@@ -67,6 +78,7 @@ function AdminHome() {
             label="Site Name"
             variant="standard"
             helperText="ex. Raleigh"
+            onChange={(event) => setLocation({...newLocation, site_name: event.target.value})}
           />
         </Grid>
         <Grid item xs>
@@ -76,22 +88,22 @@ function AdminHome() {
             label="Address"
             variant="standard"
             helperText="Address"
+            onChange={(event) => setLocation({...newLocation, address: event.target.value})}
           />
         </Grid>
         <Grid item xs>
-          <AutoCompleteRegion
-          region={newSite.region}/>
+          <AutoCompleteRegion/>
         </Grid>
         <Grid item xs>
-          <AutoCompleteLanguage 
-          language={newSite.language}/>
+          <AutoCompleteLanguage />
           <Link>Don't see your language? Click here!</Link>
         </Grid>
         <Grid item xs>
-          <Button variant="contained" endIcon={<PublishIcon />}>
+          <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
             Submit
           </Button>
         </Grid>
+        </form>
       </Grid>
       
     {/* <Paper sx={{ width: '100%', overflow: 'hidden' }}>

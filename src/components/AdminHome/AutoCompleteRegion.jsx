@@ -17,6 +17,10 @@ function AutoCompleteRegion() {
 
   const regions = useSelector(store => store.viewReducer.listTypeReducer);
 
+  const handleRegionValue = (event, value) => {
+    dispatch({type: 'SET_NEW_SITE', payload: value.id})  
+    console.log(value);}
+
   console.log("The store for regions", regions);
 
   return (
@@ -26,6 +30,7 @@ function AutoCompleteRegion() {
       options={regions}
       autoHighlight
       getOptionLabel={(option) => option.name}
+      onChange={handleRegionValue}
       renderOption={(props, option) => (
         <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
       {option.id}. {option.name} 
@@ -39,7 +44,6 @@ function AutoCompleteRegion() {
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill
           }}
-          onChange={(event) => {setSite(event.target.value)}}
         />
       )}
     />
