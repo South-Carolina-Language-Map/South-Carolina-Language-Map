@@ -13,7 +13,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 function AdminTable() {
   const dispatch = useDispatch();
-  const sites = useSelector((store) => store.viewReducer.sitesReducer);
+  const regions = useSelector((store) => store.viewReducer.listReducer);
+  const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
+  // const sites = useSelector((store) => store.viewReducer.sitesReducer);
+  const catagories = useSelector(
+    (store) => store.adminReducer.adminCategoriesReducer
+  );
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const handleChangePage = (event, newPage) => {
@@ -25,23 +31,35 @@ function AdminTable() {
     setPage(0);
   };
 
-//   const StyledTableRow = styled(TableRow)(({ theme }) => ({
-//     "&:nth-of-type(odd)": {
-//       backgroundColor: theme.palette.action.hover,
-//     },
-//     // hide last border
-//     "&:last-child td, &:last-child th": {
-//       border: 0,
-//     },
-//   }));
+  const columns = [
+    { id: "name", label: "Name", minWidth: 170 },
+    { id: "code", label: "ISO\u00a0Code", minWidth: 100 },
+    {
+      id: "population",
+      label: "Population",
+      minWidth: 170,
+      align: "right",
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "size",
+      label: "Size\u00a0(km\u00b2)",
+      minWidth: 170,
+      align: "right",
+      format: (value) => value.toLocaleString("en-US"),
+    },
+    {
+      id: "density",
+      label: "Density",
+      minWidth: 170,
+      align: "right",
+      format: (value) => value.toFixed(2),
+    },
+  ];
 
   useEffect(() => {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
-
-  const catagories = useSelector(
-    (store) => store.adminReducer.adminCategoriesReducer
-  );
 
   const handleEdit = () => {
     console.log("Edit");
@@ -56,35 +74,48 @@ function AdminTable() {
       <Grid container sx={{ pt: 3 }}>
         <Grid item xs={1} />
         <Grid item xs={10}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Name</TableCell>
-                <TableCell align="center">Edit/Delete</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {catagories.map((row) => (
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
                 <TableRow>
-                  <TableCell component="th" scope="row" align="center">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="center">
-                    <Button
-                      sx={{ mr: 1 }}
-                      variant="contained"
-                      onClick={handleEdit}
-                    >
-                      Edit
-                    </Button>
-                    <Button variant="contained" onClick={handleDelete}>
-                      Delete
-                    </Button>
-                  </TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Address</TableCell>
+                  <TableCell>Region</TableCell>
+                  <TableCell>Language</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHead>
+              <TableBody>
+                {sites
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((site) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1}>
+                        <TableCell>{site.site_name}</TableCell>
+                        <TableCell>{site.address}</TableCell>
+                        <TableCell>{site.language}</TableCell>
+                        <TableCell component="th" scope="row" align="center">
+                          {/* Getting the name of a specific region from the sites included region id */}
+                          {regions?.map((region) => {
+                            if (region.id === site.region_id) {
+                              return region.name;
+                            }
+                          })}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={sites.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
         </Grid>
         <Grid item xs={1} />
       </Grid>

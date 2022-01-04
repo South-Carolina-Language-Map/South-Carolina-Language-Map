@@ -1,7 +1,7 @@
 // React-related Imports
 import * as React from "react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Local Files Import
@@ -18,21 +18,15 @@ import {
   TableCell,
   TableHead,
   Typography,
+  TableContainer,
+  TablePagination,
 } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
 
 function AdminHome() {
-  // const [page, setPage] = React.useState(0);
-  // const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage);
-  // };
-  // const handleChangeRowsPerPage = (event) => {
-  //   setRowsPerPage(+event.target.value);
-  //   setPage(0);
-  // };
-
   const dispatch = useDispatch();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // Grabbing needed data from the store:
   const regions = useSelector((store) => store.viewReducer.listReducer);
@@ -46,6 +40,17 @@ function AdminHome() {
     console.log("Delete");
   };
 
+  // The below 2 functions allow there to be multiple pages on the table.
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  // Updating the stores with the most up-to-date information
   useEffect(() => {
     dispatch({ type: "FETCH_ALL" });
     dispatch({ type: "FETCH_REGIONS" });
@@ -86,57 +91,48 @@ function AdminHome() {
       <Grid container sx={{ pt: 3 }}>
         <Grid item xs={1} />
         <Grid item xs={10}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Name</TableCell>
-                <TableCell align="center">Address</TableCell>
-                <TableCell align="center">Region</TableCell>
-                <TableCell align="center">Language</TableCell>
-                {/* <TableCell align="center">Description</TableCell> */}
-                <TableCell align="center">Edit/Delete</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {sites.map((site) => (
+          <TableContainer sx={{ maxHeight: 440 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
                 <TableRow>
-                  <TableCell component="th" scope="row" align="center">
-                    {site.site_name}
-                  </TableCell>
-                  <TableCell component="th" scope="row" align="center">
-                    {site.address}
-                  </TableCell>
-                  <TableCell component="th" scope="row" align="center">
-                    {/* Getting the name of a specific region from the sites included region id */}
-                    {regions?.map((region) => {
-                      if (region.id === site.region_id) {
-                        return region.name;
-                      }
-                    })}
-                  </TableCell>
-                  <TableCell component="th" scope="row" align="center">
-                    {site.language}
-                  </TableCell>
-                  <TableCell align="center">
-                    <Button
-                      sx={{ mr: 1, mb: 1 }}
-                      variant="contained"
-                      onClick={handleEdit}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      sx={{ mb: 1 }}
-                      variant="contained"
-                      onClick={handleDelete}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Address</TableCell>
+                  <TableCell>Region</TableCell>
+                  <TableCell>Language</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+              </TableHead>
+              <TableBody>
+                {sites
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((site) => {
+                    return (
+                      <TableRow hover role="checkbox" tabIndex={-1}>
+                        <TableCell>{site.site_name}</TableCell>
+                        <TableCell>{site.address}</TableCell>
+                        <TableCell>{site.language}</TableCell>
+                        <TableCell component="th" scope="row" align="center">
+                          {/* Getting the name of a specific region from the sites included region id */}
+                          {regions?.map((region) => {
+                            if (region.id === site.region_id) {
+                              return region.name;
+                            }
+                          })}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={sites.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onPageChange={handleChangePage}
+            onRowsPerPageChange={handleChangeRowsPerPage}
+          />
         </Grid>
         <Grid item xs={1} />
       </Grid>

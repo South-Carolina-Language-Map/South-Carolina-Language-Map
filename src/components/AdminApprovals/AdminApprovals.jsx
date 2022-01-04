@@ -15,20 +15,20 @@ import {
 
 function AdminApprovals() {
   const dispatch = useDispatch();
-  const catagories = useSelector(
-    (store) => store.adminReducer.adminCategoriesReducer
+  const approvals = useSelector(
+    (store) => store.adminReducer.adminApprovalsReducer
   );
-  const handleEdit = () => {
+  const handleApproval = () => {
     console.log("Edit");
   };
-  const handleDelete = () => {
+  const handleRejection = () => {
     console.log("Delete");
   };
 
   useEffect(() => {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
-  
+
   return (
     <Grid container sx={{ pt: 3 }}>
       <Grid item xs={1} />
@@ -36,12 +36,14 @@ function AdminApprovals() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              <TableCell align="center">Name</TableCell>
-              <TableCell align="center">Edit/Delete</TableCell>
+              <TableCell align="center">Full Name</TableCell>
+              <TableCell align="center">Username</TableCell>
+              <TableCell align="center">Email</TableCell>
+              <TableCell align="center">Approve/Decline</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {catagories.map((row) => (
+            {approvals?.map((row) => (
               <TableRow>
                 <TableCell component="th" scope="row" align="center">
                   {row.name}
@@ -50,12 +52,12 @@ function AdminApprovals() {
                   <Button
                     sx={{ mr: 1 }}
                     variant="contained"
-                    onClick={handleEdit}
+                    onClick={handleApproval}
                   >
-                    Edit
+                    Approve
                   </Button>
-                  <Button variant="contained" onClick={handleDelete}>
-                    Delete
+                  <Button variant="contained" onClick={handleRejection}>
+                    Decline
                   </Button>
                 </TableCell>
               </TableRow>
@@ -69,4 +71,3 @@ function AdminApprovals() {
 }
 
 export default AdminApprovals;
-
