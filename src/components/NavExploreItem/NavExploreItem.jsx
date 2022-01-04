@@ -34,7 +34,7 @@ function NavExploreItem({listObj, activeKey, setActiveKey}){
                         break;
                     case 'Languages':
                         setActiveKey('language');
-                        // dispatch({})
+                        dispatch({type: 'FETCH_LANGUAGES'});
                     default:
                         console.log('EXPLORE CLICK ERR: NOT FOUND');
                 }
