@@ -1,62 +1,93 @@
+import { Button, Grid } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import { styled } from "@mui/material/styles";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function AdminTable() {
+  const dispatch = useDispatch();
+  const sites = useSelector((store) => store.viewReducer.sitesReducer);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+//   const StyledTableRow = styled(TableRow)(({ theme }) => ({
+//     "&:nth-of-type(odd)": {
+//       backgroundColor: theme.palette.action.hover,
+//     },
+//     // hide last border
+//     "&:last-child td, &:last-child th": {
+//       border: 0,
+//     },
+//   }));
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_CATEGORIES" });
+  }, []);
+
+  const catagories = useSelector(
+    (store) => store.adminReducer.adminCategoriesReducer
+  );
+
+  const handleEdit = () => {
+    console.log("Edit");
+  };
+
+  const handleDelete = () => {
+    console.log("Delete");
+  };
+
   return (
     <>
-      <Paper sx={{ width: "100%", overflow: "hidden" }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+      <Grid container sx={{ pt: 3 }}>
+        <Grid item xs={1} />
+        <Grid item xs={10}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell align="left" style={{ minWidth: 170 }}>
-                  SiteName
-                </TableCell>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Edit/Delete</TableCell>
               </TableRow>
             </TableHead>
-            {/* <TableBody>
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
+            <TableBody>
+              {catagories.map((row) => (
+                <TableRow>
+                  <TableCell component="th" scope="row" align="center">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="center">
+                    <Button
+                      sx={{ mr: 1 }}
+                      variant="contained"
+                      onClick={handleEdit}
                     >
-                      {sites.map((site) => {
-                        const value = row[site.id];
-                        return (
-                          <TableCell key={site.id} align={site.align}>
-                            {site.format && typeof value === "number"
-                              ? site.format(value)
-                              : value}
-                          </TableCell>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-            </TableBody> */}
+                      Edit
+                    </Button>
+                    <Button variant="contained" onClick={handleDelete}>
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
           </Table>
-        </TableContainer>
-        {/* <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
-          component="div"
-          count={rows.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        /> */}
-      </Paper>
+        </Grid>
+        <Grid item xs={1} />
+      </Grid>
     </>
   );
 }

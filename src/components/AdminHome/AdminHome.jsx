@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import PublishIcon from "@mui/icons-material/Publish";
 import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography'
-
+import AdminCategory from "../AdminCategory/AdminCategory";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -46,7 +46,7 @@ function AdminHome() {
   return (
     <>
       <Typography>Add New Site</Typography>
-      <Grid container spacing={.5}>
+      <Grid container spacing={0.5}>
         <Grid item xs>
           <TextField
             required
@@ -76,8 +76,8 @@ function AdminHome() {
         </Grid>
       </Grid>
 
-      <AdminTable />
-      </>
+      <AdminCategory />
+    </>
   );
 }
 
