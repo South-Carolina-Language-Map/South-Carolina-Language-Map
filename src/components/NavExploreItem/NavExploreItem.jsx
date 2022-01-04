@@ -3,12 +3,13 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import {useDispatch, useSelector} from 'react-redux';
+import { useState } from 'react';
 
-function NavExploreItem({listObj}){
+function NavExploreItem({listObj, activeKey, setActiveKey}){
     const listType = useSelector(store => store.viewReducer.listTypeReducer);
     const dispatch = useDispatch();
     const lightTheme = createTheme({ palette: { mode: 'light' } });
-
+    
     const Item = styled(Paper)(({theme}) => ({
         ...theme.typography.body2,
         textAlign: 'center',
@@ -20,7 +21,7 @@ function NavExploreItem({listObj}){
     const handleClick = () => {
         switch(listType){
             case 'DEFAULT':
-                switch(listObj.name){
+                switch(listObj[activeKey]){
                     case 'Categories':
                         dispatch({type: 'FETCH_CATEGORIES'});
                         break;
@@ -28,8 +29,12 @@ function NavExploreItem({listObj}){
                         dispatch({type: 'FETCH_REGIONS'})
                         break;
                     case 'Sites':
+                        setActiveKey('site_name');
                         dispatch({type: 'FETCH_EXPLORE_SITES'});
                         break;
+                    case 'Languages':
+                        setActiveKey('language');
+                        // dispatch({})
                     default:
                         console.log('EXPLORE CLICK ERR: NOT FOUND');
                 }
@@ -61,7 +66,7 @@ function NavExploreItem({listObj}){
                 }}
               >
                 {/* this is where we would map  */}
-                <Item> {listObj?.name} </Item>
+                <Item> {listObj[activeKey]} </Item>
               </Box>
             </ThemeProvider>
           </Grid>

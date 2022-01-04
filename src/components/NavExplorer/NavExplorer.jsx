@@ -5,12 +5,13 @@ import Box from '@mui/material/Box';
 
 import { useDispatch, useSelector } from 'react-redux';
 import NavExploreItem from '../NavExploreItem/NavExploreItem';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function NavExplorer() {
   const list = useSelector(store => store.viewReducer.listReducer);
   const dispatch = useDispatch();
+  const [activeKey, setActiveKey] = useState('name');
 
   useEffect(() => {
     dispatch({type: 'SET_LIST_DEFAULT'});
@@ -22,7 +23,9 @@ function NavExplorer() {
     <>
       <Grid container spacing={2}>
         {list && list.map((listObj, i) => {
-          return <NavExploreItem key={i} listObj={listObj}/>
+          return <NavExploreItem key={i} listObj={listObj} 
+          activeKey={activeKey}
+          setActiveKey={setActiveKey}/>
         })}
       </Grid>
     </>
