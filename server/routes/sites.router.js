@@ -44,7 +44,9 @@ async function createGeoTag (req, res) {
 
 
 //POST - Add a site from the admin Side
-router.post('/', (req, res) => createGeoTag(req,res)); //end GET for map sites and hover
+router.post('/', (req, res) => 
+console.log('==========================This is req.body in POST sites========================', req.body));
+// createGeoTag(req,res)); //end GET for map sites and hover
 
 
 //PUT - edit a site
