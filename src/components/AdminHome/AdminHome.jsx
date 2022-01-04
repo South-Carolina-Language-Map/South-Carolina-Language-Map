@@ -1,47 +1,54 @@
+// React-related Imports
 import * as React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import AutoCompleteLanguage from "./AutoCompleteLanguage";
-import Grid from "@mui/material/Grid";
-import PublishIcon from "@mui/icons-material/Publish";
-import Button from "@mui/material/Button";
-import Typography from '@mui/material/Typography'
-import AdminCategory from "../AdminCategory/AdminCategory";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
-import TableRow from "@mui/material/TableRow";
-
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
+// Local Files Import
+import AutoCompleteLanguage from "./AutoCompleteLanguage";
 
-import AdminTable from "../AdminTable/AdminTable";
-import AdminLanguage from "../AdminLanguage/AdminLanguage";
-
+// MUI Imports
+import {
+  Grid,
+  Table,
+  Button,
+  TableRow,
+  TextField,
+  TableBody,
+  TableCell,
+  TableHead,
+  Typography,
+} from "@mui/material";
+import PublishIcon from "@mui/icons-material/Publish";
 
 function AdminHome() {
+  // const [page, setPage] = React.useState(0);
+  // const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage);
+  // };
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value);
+  //   setPage(0);
+  // };
+
   const dispatch = useDispatch();
-  const sites = useSelector((store) => store.viewReducer.sitesReducer);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
+  // Grabbing needed data from the store:
+  const regions = useSelector((store) => store.viewReducer.listReducer);
+  const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
+
+  // Defining what to do when edit or delete are pressed:
+  const handleEdit = () => {
+    console.log("Edit");
   };
-
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
+  const handleDelete = () => {
+    console.log("Delete");
   };
 
   useEffect(() => {
     dispatch({ type: "FETCH_ALL" });
+    dispatch({ type: "FETCH_REGIONS" });
   }, []);
 
   return (
@@ -76,11 +83,65 @@ function AdminHome() {
           </Button>
         </Grid>
       </Grid>
-
-      <AdminLanguage />
+      <Grid container sx={{ pt: 3 }}>
+        <Grid item xs={1} />
+        <Grid item xs={10}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Name</TableCell>
+                <TableCell align="center">Address</TableCell>
+                <TableCell align="center">Region</TableCell>
+                <TableCell align="center">Language</TableCell>
+                {/* <TableCell align="center">Description</TableCell> */}
+                <TableCell align="center">Edit/Delete</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sites.map((site) => (
+                <TableRow>
+                  <TableCell component="th" scope="row" align="center">
+                    {site.site_name}
+                  </TableCell>
+                  <TableCell component="th" scope="row" align="center">
+                    {site.address}
+                  </TableCell>
+                  <TableCell component="th" scope="row" align="center">
+                    {/* Getting the name of a specific region from the sites included region id */}
+                    {regions?.map((region) => {
+                      if (region.id === site.region_id) {
+                        return region.name;
+                      }
+                    })}
+                  </TableCell>
+                  <TableCell component="th" scope="row" align="center">
+                    {site.language}
+                  </TableCell>
+                  <TableCell align="center">
+                    <Button
+                      sx={{ mr: 1, mb: 1 }}
+                      variant="contained"
+                      onClick={handleEdit}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      sx={{ mb: 1 }}
+                      variant="contained"
+                      onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </Grid>
+        <Grid item xs={1} />
+      </Grid>
     </>
   );
 }
 
 export default AdminHome;
-
