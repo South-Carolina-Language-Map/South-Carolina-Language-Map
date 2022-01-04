@@ -17,6 +17,7 @@ const listReducer = (state = [
                 { name: 'Regions' },
             ];
         case 'SET_CATEGORIES':
+        case 'SET_REGIONS':
             return [...action.payload];
         default:
             return state;
