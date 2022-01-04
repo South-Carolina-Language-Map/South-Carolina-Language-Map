@@ -22,6 +22,7 @@ import { Link } from "react-router-dom";
 
 
 import AdminTable from "../AdminTable/AdminTable";
+import AdminLanguage from "../AdminLanguage/AdminLanguage";
 
 
 function AdminHome() {
@@ -76,7 +77,7 @@ function AdminHome() {
         </Grid>
       </Grid>
 
-      <AdminCategory />
+      <AdminLanguage />
     </>
   );
 }

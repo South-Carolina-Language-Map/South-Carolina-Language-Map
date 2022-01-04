@@ -18,7 +18,9 @@ import {
 import { styled } from "@mui/material/styles";
 
 function AdminCategory() {
+  
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
