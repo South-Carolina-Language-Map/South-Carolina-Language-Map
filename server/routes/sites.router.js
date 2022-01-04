@@ -12,7 +12,7 @@ require('dotenv');
 
 //function to create geotags for post route - being called in POST
 async function createGeoTag (req, res) {
-    console.log('This is req.body in POST sites', req.body)
+    console.log('==========================This is req.body in POST sites========================', req.body)
 
     //function to get geotag (lat/long) from address
     const string = req.body.address.replace(/\s/g, '%20').replace(/'/g, '%27');
