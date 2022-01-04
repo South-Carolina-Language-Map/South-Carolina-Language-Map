@@ -24,8 +24,19 @@ function* fetchUser() {
   }
 }
 
+// Get all pending Admins from the server
+function* fetchAllUsers() {
+  try {
+    const response = yield axios.get('/api/user/admin/pending');
+    yield put({ type: 'SET_APPROVALS', payload: response.data });
+  } catch (error) {
+    console.log('User get request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_UNAPPROVED', fetchAllUsers);
 }
 
 export default userSaga;
