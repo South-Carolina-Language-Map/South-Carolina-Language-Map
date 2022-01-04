@@ -42,7 +42,8 @@ function NavExploreItem({listObj}){
     
     return <>
         {[lightTheme].map((theme, index) => (
-          <Grid item xs={12} key={index}>
+          <Grid item xs={12} key={index}
+          onClick={handleClick}>
             <ThemeProvider theme={theme}>
               <Box
                 sx={{
