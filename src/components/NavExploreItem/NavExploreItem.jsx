@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import {useDispatch, useSelector} from 'react-redux';
 import { useState } from 'react';
+import encodeUrlStr from '../../utils/encodeUrlStr';
 
 function NavExploreItem({listObj, activeKey, setActiveKey}){
     const listType = useSelector(store => store.viewReducer.listTypeReducer);
@@ -35,13 +36,20 @@ function NavExploreItem({listObj, activeKey, setActiveKey}){
                     case 'Languages':
                         setActiveKey('language');
                         dispatch({type: 'FETCH_LANGUAGES'});
+                        dispatch({type: 'SET_TYPE', payload: 'LANGUAGES'})
                     default:
                         console.log('EXPLORE CLICK ERR: NOT FOUND');
                 }
+                break;
+            case 'LANGUAGES':
+                let queryObj = {language: listObj.language}
+                dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr(queryObj)});
+                break;
             default:
                 console.log('EXPLORE CLICK ERR: NO LISTTYPE');
         }
         console.log('clicked');
+        console.log('listObj', listObj);
     }
 
     const setList = () => {
