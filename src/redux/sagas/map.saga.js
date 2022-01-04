@@ -10,6 +10,7 @@ function* fetchAll() {
     yield console.log('response', response);
     //sets response to view.sites.reducer
     yield put({ type: "SET_SITES", payload: response.data });
+    yield put({ type: "SET_ADMIN_SITES", payload: response.data });
   } catch (err) {
     yield put({ type: "FETCH_ALL_ERROR" });
     console.log("Error in fetchAll", err);
