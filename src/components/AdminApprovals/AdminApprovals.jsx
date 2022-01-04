@@ -26,7 +26,7 @@ function AdminApprovals() {
   };
 
   useEffect(() => {
-    dispatch({ type: "FETCH_CATEGORIES" });
+    dispatch({ type: "FETCH_UNAPPROVED" });
   }, []);
 
   return (
@@ -43,10 +43,16 @@ function AdminApprovals() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {approvals?.map((row) => (
+            {approvals?.map((user) => (
               <TableRow>
                 <TableCell component="th" scope="row" align="center">
-                  {row.name}
+                  {user.fullName}
+                </TableCell>
+                <TableCell component="th" scope="row" align="center">
+                  {user.username}
+                </TableCell>
+                <TableCell component="th" scope="row" align="center">
+                  {user.email}
                 </TableCell>
                 <TableCell align="center">
                   <Button
