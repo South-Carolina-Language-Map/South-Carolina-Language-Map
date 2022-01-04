@@ -1,41 +1,34 @@
 // React Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
 import {
   Grid,
-  Paper,
   Table,
   Button,
   TableRow,
   TableBody,
   TableCell,
   TableHead,
-  TableContainer,
-  TablePagination,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
 
 function AdminCategory() {
-  
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch({ type: "FETCH_CATEGORIES" });
-  }, []);
-
   const catagories = useSelector(
     (store) => store.adminReducer.adminCategoriesReducer
   );
-
   const handleEdit = () => {
     console.log("Edit");
   };
-
   const handleDelete = () => {
     console.log("Delete");
   };
+
+  useEffect(() => {
+    dispatch({ type: "FETCH_CATEGORIES" });
+  }, []);
+  
   return (
     <Grid container sx={{ pt: 3 }}>
       <Grid item xs={1} />
