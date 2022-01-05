@@ -53,6 +53,21 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+// GET ALL PENDING ADMINS and their info, save for passwords for obvious reasons.
+router.get('/admin/pending', (req, res) => {
+  pool.query(`
+  SELECT "id", "username", "fullName", "pending", "clearance_level", "email" FROM "user" WHERE "pending" = TRUE;
+`)
+    .then((response) => {
+      res.send(response.rows);
+      console.log('Pending Admins GET successful');
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      console.log('ERROR in Pending Admins GET', err);
+    })
+})
+
 //ADMIN clearance_level set to 1 for approval
 router.put('/admin/:id', rejectUnauthenticated, (req, res) => {
   //this is the id of user to approve
