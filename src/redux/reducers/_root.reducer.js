@@ -7,12 +7,12 @@ import adminLanguagesReducer from './adminReducers/admin.languages.reducer';
 import adminCategoriesReducer from './adminReducers/admin.categories.reducer';
 import adminApprovalsReducer from './adminReducers/admin.approvals.reducer';
 import adminEditReducer from './adminReducers/admin.edit.reducer';
-
 import infoReducer from './viewReducers/view.info.reducer';
 import listReducer from './viewReducers/view.list.reducer';
 import listTypeReducer from './viewReducers/view.listType.reducer';
 import queriesReducer from './viewReducers/view.queries.reducer';
 import sitesReducer from './viewReducers/view.sites.reducer';
+import newSiteReducer from './adminReducers/admin.newSite.reducer';
 
 import sideBarView from './sideBarView.reducer';
 import adminView from './adminView.reducer';
@@ -26,7 +26,8 @@ const adminReducer = combineReducers({
   adminLanguagesReducer,
   adminCategoriesReducer,
   adminApprovalsReducer,
-  adminEditReducer
+  adminEditReducer,
+  newSiteReducer
 })
 
 const viewReducer = combineReducers({

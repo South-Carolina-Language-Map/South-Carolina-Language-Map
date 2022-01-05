@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// Local Files Import
-import AutoCompleteLanguage from "./AutoCompleteLanguage";
+import AdminHomeForm from "./AdminHomeForm";
 
 // MUI Imports
 import {
@@ -22,6 +21,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
+
 
 function AdminHome() {
   const dispatch = useDispatch();
@@ -50,7 +50,6 @@ function AdminHome() {
     setPage(0);
   };
 
-  // Updating the stores with the most up-to-date information
   useEffect(() => {
     dispatch({ type: "FETCH_ALL" });
     dispatch({ type: "FETCH_REGIONS" });
@@ -59,33 +58,9 @@ function AdminHome() {
   return (
     <>
       <Typography>Add New Site</Typography>
-      <Grid container spacing={0.5}>
-        <Grid item xs>
-          <TextField
-            required
-            id="filled-required"
-            label="Site Name"
-            variant="standard"
-            helperText="ex. Raleigh"
-          />
-        </Grid>
-        <Grid item xs>
-          <TextField
-            required
-            id="filled-required"
-            label="Address"
-            variant="standard"
-            helperText="Address"
-          />
-        </Grid>
-        <Grid item xs>
-          <AutoCompleteLanguage />
-          <Link>Don't see your language? Click here!</Link>
-        </Grid>
-        <Grid item xs>
-          <Button variant="contained" endIcon={<PublishIcon />}>
-            Submit
-          </Button>
+      <Grid container spacing={.5}>
+        <Grid item>
+          <AdminHomeForm/>
         </Grid>
       </Grid>
       <Grid container sx={{ pt: 3 }}>
