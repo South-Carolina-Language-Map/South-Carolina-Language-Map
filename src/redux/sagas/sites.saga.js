@@ -35,6 +35,16 @@ function* addSite(action) {
       }
     
     }
+
+  function* fetchSites() {
+    try{
+      //Get All sites for populating explore page
+      const response = yield axios.get('api/sites');
+      yield put({type: 'SET_LIST', payload: response.data});
+    }catch(err){
+      yield put({type: 'FETCH_SITES_ERR'})
+    }
+  }
   
   //SITES DELETE ROUTE
   function* deleteSite() {
@@ -57,6 +67,7 @@ function* sitesSaga() {
     yield takeLatest("ADD_SITE", addSite);
     yield takeLatest("UPDATE_SITE", updateSite);
     yield takeLatest("DELETE_SITE", deleteSite);
+    yield takeLatest("FETCH_EXPLORE_SITES", fetchSites);
   }
   
 export default sitesSaga;

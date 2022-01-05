@@ -12,6 +12,7 @@ function* fetchLanguages() {
     yield console.log('response', response);
     //sets response to view.sites.reducer
     yield put({ type: "SET_LANGUAGES", payload: response.data });
+    yield put({type: "SET_LIST", payload: response.data });
   } catch (err) {
     yield put({ type: "FETCH_LANGUAGES_ERROR" });
     console.log("Error in fetchLanguages", err);
