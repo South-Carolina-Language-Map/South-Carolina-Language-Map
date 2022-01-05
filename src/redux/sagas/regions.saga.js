@@ -9,7 +9,6 @@ function* fetchRegions() {
 
     yield console.log('response', response);
     //sets response to view.listType.reducer
-    yield put({ type: "SET_TYPE", payload: response.data });
     yield put({ type: "SET_REGIONS", payload: response.data });
     yield put({ type: "SET_LIST", payload: response.data });
   } catch (err) {
