@@ -16,11 +16,12 @@ import PublishIcon from "@mui/icons-material/Publish";
 
 function AdminHomeForm() {
   const dispatch = useDispatch();
-  const dropDownValues = useSelector(
-    (store) => store.adminReducer.newSiteReducer
-  );
+  //Reducer set up for NewSite values for language and region ids
+  const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
+  //Reducer set up for error catching
   const mapBoxMessage = useSelector((store) => store.errors.mapBoxMessage);
 
+//default values for site_name and addresses - set to empty strings
   let base = {
     site_name: "",
     address: "",
@@ -34,10 +35,11 @@ function AdminHomeForm() {
       language_id: dropDownValues.language_id,
       region_id: dropDownValues.region_id,
     };
-    console.log("newSite====================", newSite);
+    //sends action to saga with newSite object to create a new GeoTag
     dispatch({ type: "ADD_SITE", payload: newSite });
   };
 
+  //local state to store site name and address
   let [newLocation, setLocation] = useState(base);
 
   return (

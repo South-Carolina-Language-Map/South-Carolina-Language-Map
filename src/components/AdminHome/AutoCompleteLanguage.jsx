@@ -1,28 +1,30 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Autocomplete } from '@mui/material';
-import { useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { Autocomplete } from "@mui/material";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import adminLanguagesReducer from '../../redux/reducers/adminReducers/admin.languages.reducer';
-
+import adminLanguagesReducer from "../../redux/reducers/adminReducers/admin.languages.reducer";
 
 function AutoCompleteLanguage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("in useEffect");
-    dispatch({ type: "FETCH_LANGUAGES"})
+    dispatch({ type: "FETCH_LANGUAGES" });
   }, []);
 
-  const languages = useSelector(store => store.adminReducer.adminLanguagesReducer)
+  //Bring in reducer that stores all available languages
+  const languages = useSelector(
+    (store) => store.adminReducer.adminLanguagesReducer
+  );
 
+  //handle language input and store the associated ID to reducer
   const handleLanguageValue = (event, value) => {
-    dispatch({type: 'SET_NEW_LANGUAGE', payload: value.id})  
-    console.log(value);}
-
-  console.log("The store for languages", languages);
+    dispatch({ type: "SET_NEW_LANGUAGE", payload: value.id });
+    console.log(value);
+  };
 
   return (
     <Autocomplete
@@ -30,11 +32,17 @@ function AutoCompleteLanguage() {
       sx={{ width: 250 }}
       options={languages}
       autoHighlight
+      // getOptionLabel is what is displayed on TextField when input is selected from dropdown
       getOptionLabel={(option) => option.language}
       onChange={handleLanguageValue}
       renderOption={(props, option) => (
-        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-      {option.id}. {option.language}
+        <Box
+          component="li"
+          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+          {...props}
+        >
+          {/* These two options are the displayed values IN the drop down */}
+          {option.id}. {option.language}
         </Box>
       )}
       renderInput={(params) => (
@@ -43,7 +51,7 @@ function AutoCompleteLanguage() {
           label="Choose a language"
           inputProps={{
             ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
+            autoComplete: "new-password", // disable autocomplete and autofill
           }}
         />
       )}

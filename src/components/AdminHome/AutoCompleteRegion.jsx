@@ -1,25 +1,27 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import { Autocomplete } from '@mui/material';
-import { useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { Autocomplete } from "@mui/material";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import listTypeReducer from '../../redux/reducers/viewReducers/view.listType.reducer';
+import listTypeReducer from "../../redux/reducers/viewReducers/view.listType.reducer";
 
 function AutoCompleteRegion() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("in useEffect");
-    dispatch({ type: "FETCH_REGIONS"})
+    dispatch({ type: "FETCH_REGIONS" });
   }, []);
 
-  const regions = useSelector(store => store.viewReducer.listTypeReducer);
-
+  //Bring in reducer that stores all available regions in SC
+  const regions = useSelector((store) => store.viewReducer.listTypeReducer);
+  //handle region input and store the associated ID to reducer
   const handleRegionValue = (event, value) => {
-    dispatch({type: 'SET_NEW_SITE', payload: value.id})  
-    console.log(value);}
+    dispatch({ type: "SET_NEW_SITE", payload: value.id });
+    console.log(value);
+  };
 
   console.log("The store for regions", regions);
 
@@ -29,11 +31,17 @@ function AutoCompleteRegion() {
       sx={{ width: 250 }}
       options={regions}
       autoHighlight
+      // getOptionLabel is what is displayed on TextField when input is selected from dropdown
       getOptionLabel={(option) => option.name}
       onChange={handleRegionValue}
       renderOption={(props, option) => (
-        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
-      {option.id}. {option.name} 
+        <Box
+          component="li"
+          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+          {...props}
+        >
+          {/* These two options are the displayed values IN the drop down */}
+          {option.id}. {option.name}
         </Box>
       )}
       renderInput={(params) => (
@@ -42,7 +50,7 @@ function AutoCompleteRegion() {
           label="Choose a region"
           inputProps={{
             ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
+            autoComplete: "new-password", // disable autocomplete and autofill
           }}
         />
       )}
