@@ -6,10 +6,10 @@ function* fetchRegions() {
   try {
     //GET request sent to regions.router
     const response = yield axios.get("/api/regions");
+    console.log("in fetchRegions");
 
     yield console.log('response', response);
     //sets response to view.listType.reducer
-    yield put({ type: "SET_TYPE", payload: response.data });
     yield put({ type: "SET_REGIONS", payload: response.data });
     yield put({ type: "SET_LIST", payload: response.data });
   } catch (err) {

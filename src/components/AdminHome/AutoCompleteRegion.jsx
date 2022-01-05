@@ -5,36 +5,35 @@ import { Autocomplete } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import adminLanguagesReducer from "../../redux/reducers/adminReducers/admin.languages.reducer";
+import listTypeReducer from "../../redux/reducers/viewReducers/view.listType.reducer";
 
-function AutoCompleteLanguage() {
+function AutoCompleteRegion() {
   const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("in useEffect");
-    dispatch({ type: "FETCH_LANGUAGES" });
+    dispatch({ type: "FETCH_REGIONS" });
   }, []);
 
-  //Bring in reducer that stores all available languages
-  const languages = useSelector(
-    (store) => store.adminReducer.adminLanguagesReducer
-  );
-
-  //handle language input and store the associated ID to reducer
-  const handleLanguageValue = (event, value) => {
-    dispatch({ type: "SET_NEW_LANGUAGE", payload: value.id });
+  //Bring in reducer that stores all available regions in SC
+  const regions = useSelector((store) => store.viewReducer.listTypeReducer);
+  //handle region input and store the associated ID to reducer
+  const handleRegionValue = (event, value) => {
+    dispatch({ type: "SET_NEW_SITE", payload: value.id });
     console.log(value);
   };
+
+  console.log("The store for regions", regions);
 
   return (
     <Autocomplete
       id="country-select-demo"
       sx={{ width: 250 }}
-      options={languages}
+      options={regions}
       autoHighlight
       // getOptionLabel is what is displayed on TextField when input is selected from dropdown
-      getOptionLabel={(option) => option.language}
-      onChange={handleLanguageValue}
+      getOptionLabel={(option) => option.name}
+      onChange={handleRegionValue}
       renderOption={(props, option) => (
         <Box
           component="li"
@@ -42,13 +41,13 @@ function AutoCompleteLanguage() {
           {...props}
         >
           {/* These two options are the displayed values IN the drop down */}
-          {option.id}. {option.language}
+          {option.id}. {option.name}
         </Box>
       )}
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Choose a language"
+          label="Choose a region"
           inputProps={{
             ...params.inputProps,
             autoComplete: "new-password", // disable autocomplete and autofill
@@ -59,4 +58,4 @@ function AutoCompleteLanguage() {
   );
 }
 
-export default AutoCompleteLanguage;
+export default AutoCompleteRegion;

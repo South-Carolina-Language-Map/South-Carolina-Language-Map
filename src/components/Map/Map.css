@@ -32,3 +32,11 @@
     opacity: 1;
     transition: opacity 1s ease;
 }
+
+.bottom-right {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 2em;
+    right: 1em;
+}

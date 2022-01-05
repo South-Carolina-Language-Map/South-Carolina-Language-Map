@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Map.css';
 
+import { Fab } from '@mui/material';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import ZoomOutIcon from '@mui/icons-material/ZoomOut';
+
 // Mapbox resources
 import ReactMapGL, {
   Marker,
@@ -30,6 +34,7 @@ function Map() {
     height: "100vh",
     zoom: 6.0
   });
+  const [targetZoom, setTargetZoom] = useState(viewport.zoom);
 
   const resetView = () => {
     const bounds = getSiteBounds(sites);
@@ -43,11 +48,17 @@ function Map() {
       longitude,
       latitude,
       zoom,
-      transitionDuration: 5000,
+      transitionDuration: 3000,
       transitionInterpolator: new LinearInterpolator(),
       transitionEasing: easeCubic
     });
   };
+
+  const adjustZoom = (direction) => {
+    const adjustment = direction === 'in' ? 1 : -1;
+    // setTargetZoom(targetZoom + adjustment);
+    setViewport({...viewport, zoom: viewport.zoom + adjustment});
+  }
 
   const getSiteBounds = (sitesArr) => {
     //set minimum length of boundary box;
@@ -61,26 +72,27 @@ function Map() {
     let [latMin, longMin] = [Math.min(...lats), Math.min(...longs)];
     let [latMax, longMax] = [Math.max(...lats), Math.max(...longs)];
 
-    //if the bounds are a single point, expand them
+    //if the bounds are a single point (or close together), expand them
     if (latMax - latMin < minBounds * 2 ||
       longMax - longMin < minBounds * 2) {
-      latMin -= minBounds;
-      longMin -= minBounds;
+      latMin = latMin - minBounds;
+      longMin = longMin - minBounds;
       latMax += minBounds;
-      latMax += minBounds;
+      longMax += minBounds;
     }
+
     return [[longMin, latMin], [longMax, latMax]];
   }
 
-    //Assign css classes to color the map icons
-    const assignClasses = (site) => {
-      for (let category of categories) {
-        if (Number(site.category_id) == category.id) {
-          let colorClass = 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
-          return colorClass;
-        }
+  //Assign css classes to color the map icons
+  const assignClasses = (site) => {
+    for (let category of categories) {
+      if (Number(site.category_id) == category.id) {
+        let colorClass = 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
+        return colorClass;
       }
     }
+  }
 
   // On Load, fetch necessary sites and categories
   useEffect(() => {
@@ -92,6 +104,7 @@ function Map() {
   useEffect(() => {
     if (sites.length > 0) {
       resetView();
+      setTargetZoom(viewport.zoom);
     }
   }, [sites]);
 
@@ -123,6 +136,19 @@ function Map() {
             )
           })}
         </ReactMapGL>
+
+        {/* Render Map Control Buttons */}
+        <div className='bottom-right'>
+          <Fab color="primary" aria-label="zoom in"
+          onClick={() => adjustZoom('in')}>
+            <ZoomInIcon />
+          </Fab>
+          <br/>
+          <Fab color="primary" aria-label="zoom out"
+          onClick={() => adjustZoom('out')}>
+            <ZoomOutIcon />
+          </Fab>
+        </div>
       </header>
     </div>
   );
