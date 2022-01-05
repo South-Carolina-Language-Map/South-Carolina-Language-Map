@@ -1,6 +1,6 @@
 import { Box } from "@mui/system";
-import { Button, Grid, Typography } from "@mui/material";
 import { useHistory } from "react-router-dom";
+import { Button, Grid, Typography } from "@mui/material";
 
 function NavInfo() {
   const history = useHistory();
@@ -26,7 +26,6 @@ function NavInfo() {
       <Grid item xs={12}>
         <Box sx={{ p: 1 }}>
           <Typography variant="h4">Site usage guide:</Typography>
-          {/* <Typography variant="body1"> */}
           <ul>
             <li>
               Communication of thoughts and feelings through a system of
@@ -42,13 +41,11 @@ function NavInfo() {
               community; often contrasted with dialect.
             </li>
           </ul>
-          {/* </Typography> */}
         </Box>
       </Grid>
-      {/* <Grid item xs={6}/> */}
       <Grid item xs={4}>
         <Button
-          xs={{ pl: 100 }}
+          // xs={{ pl: 100 }}
           variant="contained"
           onClick={() => history.push("/admin")}
         >
