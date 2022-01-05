@@ -61,14 +61,15 @@ function Map() {
     let [latMin, longMin] = [Math.min(...lats), Math.min(...longs)];
     let [latMax, longMax] = [Math.max(...lats), Math.max(...longs)];
 
-    //if the bounds are a single point, expand them
+    //if the bounds are a single point (or close together), expand them
     if (latMax - latMin < minBounds * 2 ||
       longMax - longMin < minBounds * 2) {
-      latMin -= minBounds;
-      longMin -= minBounds;
+      latMin = latMin - minBounds;
+      longMin = longMin - minBounds;
       latMax += minBounds;
-      latMax += minBounds;
+      longMax += minBounds;
     }
+
     return [[longMin, latMin], [longMax, latMax]];
   }
 
