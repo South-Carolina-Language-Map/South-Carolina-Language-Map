@@ -7,14 +7,12 @@ import {
   TextField,
   FormLabel,
   Button,
-  Stack,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
   Grid,
-  Typography
 } from '@mui/material';
 
 //framework for registration object

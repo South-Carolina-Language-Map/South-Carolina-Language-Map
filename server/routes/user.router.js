@@ -55,17 +55,27 @@ router.post('/logout', (req, res) => {
 
 // GET ALL PENDING ADMINS and their info, save for passwords for obvious reasons.
 router.get('/admin/pending', (req, res) => {
-  pool.query(`
+
+  //security - for admin use only
+  const clearanceLevel = req.user.clearance_level
+
+  if (clearanceLevel >= 1) {
+
+    pool.query(`
   SELECT "id", "username", "fullName", "pending", "clearance_level", "email" FROM "user" WHERE "pending" = TRUE;
 `)
-    .then((response) => {
-      res.send(response.rows);
-      console.log('Pending Admins GET successful');
-    })
-    .catch((err) => {
-      res.sendStatus(500);
-      console.log('ERROR in Pending Admins GET', err);
-    })
+      .then((response) => {
+        res.send(response.rows);
+        console.log('Pending Admins GET successful');
+      })
+      .catch((err) => {
+        res.sendStatus(500);
+        console.log('ERROR in Pending Admins GET', err);
+      });
+
+  } else {
+    res.sendStatus(403);
+  } //end if conditional
 })
 
 //ADMIN clearance_level set to 1 for approval
@@ -73,21 +83,29 @@ router.put('/admin/:id', rejectUnauthenticated, (req, res) => {
   //this is the id of user to approve
   const userToApprove = req.params.id;
 
-  //query to update clearance_level
-  let queryTextApproval = `
+  //security - for admin use only
+  const clearanceLevel = req.user.clearance_level
+
+  if (clearanceLevel >= 1) {
+
+    //query to update clearance_level
+    let queryTextApproval = `
   UPDATE "user"
   SET "clearance_level" = 1, "pending" = FALSE
   WHERE "id" = $1;
   `;
 
-  pool.query(queryTextApproval, [userToApprove])
-    .then(respond => {
-      res.sendStatus(200);
-    })
-    .catch(error => {
-      console.log('ERROR IN UPDATE', error);
-      res.sendStatus(500);
-    })
+    pool.query(queryTextApproval, [userToApprove])
+      .then(respond => {
+        res.sendStatus(200);
+      })
+      .catch(error => {
+        console.log('ERROR IN UPDATE', error);
+        res.sendStatus(500);
+      });
+  } else {
+    res.sendStatus(403);
+  } //end if conditional
 
 }) //end put 
 
@@ -96,6 +114,10 @@ router.put('/admin/:id', rejectUnauthenticated, (req, res) => {
 router.delete('/admin/:id', rejectUnauthenticated, (req, res) => {
   //this is the id of user to approve
   const userToDelete = req.params.id;
+  //security - for admin use only
+  const clearanceLevel = req.user.clearance_level
+
+  if (clearanceLevel >= 1) {
 
   //query to update clearance_level
   let queryTextUserToDelete = `
@@ -110,7 +132,11 @@ router.delete('/admin/:id', rejectUnauthenticated, (req, res) => {
     .catch(error => {
       console.log('ERROR IN DELETE', error);
       res.sendStatus(500);
-    })
-}) //end put 
+    });
+  } else {
+    res.sendStatus(403);
+  } //end if conditional
+
+}) //end DELETE 
 
 module.exports = router;

@@ -34,9 +34,27 @@ function* fetchAllUsers() {
   }
 }
 
+//ADMIN DELETE ROUTE
+function* deleteUser(action) {
+  try {
+    //DELETE request sent to user/admin route based on ID
+    const response = yield axios.delete(`/api/user/admin/${action.payload}`);
+
+    yield console.log('response', response);
+    //call GET request to repopulate category list
+    yield put({ type: "FETCH_UNAPPROVED" });
+  } catch (err) {
+    yield put({ type: "DELETE_ADMIN_ERROR" });
+    console.log("Error in deleteUser", err);
+  }
+
+}
+
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_UNAPPROVED', fetchAllUsers);
+  yield takeLatest('DELETE_UNAPPROVED', deleteUser);
 }
 
 export default userSaga;
