@@ -43,10 +43,14 @@ function Sidebar() {
           {currentViewHeaderText}
         </Typography>
       </Box>
-      {currentView}
+      <Box  style={{ maxHeight: 650, overflow: "auto" }}>
+        {currentView}
+      </Box>
       <BottomNav />
     </Box>
   );
 }
 
 export default Sidebar;
+
+// className="scroll"
