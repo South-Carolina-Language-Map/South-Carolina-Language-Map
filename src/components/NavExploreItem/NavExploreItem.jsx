@@ -6,6 +6,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import { useState } from 'react';
 import encodeUrlStr from '../../utils/encodeUrlStr';
 
+// Render a menu item based on the object being passed
+//  activeKey is used to target specifically named attributes (e.g. site_name instead of name)
+//  when the next list is rendered.
 function NavExploreItem({listObj, activeKey, setActiveKey}){
     const listType = useSelector(store => store.viewReducer.listTypeReducer);
     const dispatch = useDispatch();
@@ -19,8 +22,11 @@ function NavExploreItem({listObj, activeKey, setActiveKey}){
         lineHeight: '60px',
       }));
 
+    //Conditionally handle clicks depending on the context of
+    //  What kind of items are being mapped into the list
     const handleClick = () => {
         switch(listType){
+            // Handle clicks on the default submenu (categories, regions, sites, languages)
             case 'DEFAULT':
                 switch(listObj[activeKey]){
                     case 'Categories':
