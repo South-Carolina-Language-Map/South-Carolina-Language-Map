@@ -21,6 +21,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
+import AdminSiteRow from "./AdminSiteRow";
 
 
 function AdminHome() {
@@ -32,14 +33,7 @@ function AdminHome() {
   const regions = useSelector((store) => store.viewReducer.listReducer);
   const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
 
-  // Defining what to do when edit or delete are pressed:
-  const handleEdit = () => {
-    console.log("Edit");
-  };
-  const handleDelete = () => {
-    console.log("Delete");
-  };
-
+  
   // The below 2 functions allow there to be multiple pages on the table.
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -51,7 +45,7 @@ function AdminHome() {
   };
 
   useEffect(() => {
-    dispatch({ type: "FETCH_ALL" });
+    dispatch({ type: "FETCH_EXPLORE_SITES" });
     dispatch({ type: "FETCH_REGIONS" });
   }, []);
 
@@ -77,39 +71,18 @@ function AdminHome() {
                   <TableCell>Edit//Delete</TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+             
                 {sites
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((site) => {
                     return (
-                      <TableRow hover role="checkbox" tabIndex={-1}>
-                        <TableCell>{site.site_name}</TableCell>
-                        <TableCell>{site.address}</TableCell>
-                        <TableCell>{site.language}</TableCell>
-                        <TableCell component="th" scope="row" align="center">
-                          {/* Getting the name of a specific region from the sites included region id */}
-                          {regions?.map((region) => {
-                            if (region.id === site.region_id) {
-                              return region.name;
-                            }
-                          })}
-                        </TableCell>
-                        <TableCell align="center">
-                          <Button
-                            sx={{ mr: 1 }}
-                            variant="contained"
-                            onClick={handleEdit}
-                          >
-                            Edit
-                          </Button>
-                          <Button variant="contained" onClick={handleDelete}>
-                            Delete
-                          </Button>
-                        </TableCell>
-                      </TableRow>
+                      <TableBody key={site.id}>
+                      <AdminSiteRow
+                      site={site}
+                      regions={regions}/>
+                      </TableBody>
                     );
                   })}
-              </TableBody>
             </Table>
           </TableContainer>
           <TablePagination
