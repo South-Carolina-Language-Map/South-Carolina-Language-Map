@@ -1,14 +1,17 @@
+import { useDispatch, useSelector } from "react-redux";
+
+
+//mui styles
 import {
-    Grid,
-    Table,
     Button,
     TableRow,
-    TableBody,
     TableCell,
-    TableHead,
 } from "@mui/material";
 
 export default function AdminApprovalRow({ user }) {
+
+    //hooks
+    const dispatch = useDispatch();
 
     //edit clearance_level from 0 -> 1 creating admin clearance
     const handleApproval = () => {
@@ -17,7 +20,12 @@ export default function AdminApprovalRow({ user }) {
 
     //delete from user table
     const handleRejection = () => {
-        console.log("Delete");
+        console.log("Delete", user.id);
+        //need to do dialogue here******
+        dispatch({
+            type: 'DELETE_UNAPPROVED',
+            payload: user.id
+        })
     };
 
 
