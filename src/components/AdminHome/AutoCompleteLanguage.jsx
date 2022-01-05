@@ -16,9 +16,7 @@ function AutoCompleteLanguage() {
   }, []);
 
   //Bring in reducer that stores all available languages
-  const languages = useSelector(
-    (store) => store.adminReducer.adminLanguagesReducer
-  );
+  const languages = useSelector((store) => store.adminReducer.adminLanguagesReducer);
 
   //handle language input and store the associated ID to reducer
   const handleLanguageValue = (event, value) => {

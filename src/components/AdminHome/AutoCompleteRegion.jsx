@@ -5,7 +5,7 @@ import { Autocomplete } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import listTypeReducer from "../../redux/reducers/viewReducers/view.listType.reducer";
+import adminRegionReducer from "../../redux/reducers/adminReducers/admin.region.reducer";
 
 function AutoCompleteRegion() {
   const dispatch = useDispatch();
@@ -16,14 +16,13 @@ function AutoCompleteRegion() {
   }, []);
 
   //Bring in reducer that stores all available regions in SC
-  const regions = useSelector((store) => store.viewReducer.listTypeReducer);
+  const regions = useSelector((store) => store.adminReducer.adminRegionReducer);
+
   //handle region input and store the associated ID to reducer
   const handleRegionValue = (event, value) => {
     dispatch({ type: "SET_NEW_SITE", payload: value.id });
     console.log(value);
   };
-
-  console.log("The store for regions", regions);
 
   return (
     <Autocomplete
