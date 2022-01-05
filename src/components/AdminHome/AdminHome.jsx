@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import AdminHomeForm from "./AdminHomeForm";
+
 // MUI Imports
 import {
   Grid,
@@ -53,13 +55,13 @@ function AdminHome() {
     dispatch({ type: "FETCH_REGIONS" });
   }, []);
 
-  console.log("Drop down values", dropDownValues);
-
   return (
     <>
       <Typography>Add New Site</Typography>
       <Grid container spacing={.5}>
-
+        <Grid item>
+          <AdminHomeForm/>
+        </Grid>
       </Grid>
       <Grid container sx={{ pt: 3 }}>
         <Grid item xs={1} />
