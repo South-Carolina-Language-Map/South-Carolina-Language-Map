@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// Local Files Import
-import AutoCompleteLanguage from "./AutoCompleteLanguage";
-import AutoCompleteRegion from "./AutoCompleteRegion";
-
 // MUI Imports
 import {
   Grid,
@@ -33,8 +29,7 @@ function AdminHome() {
   // Grabbing needed data from the store:
   const regions = useSelector((store) => store.viewReducer.listReducer);
   const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
-  const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
-  const mapBoxMessage = useSelector((store) => store.errors.mapBoxMessage);
+
   // Defining what to do when edit or delete are pressed:
   const handleEdit = () => {
     console.log("Edit");
@@ -53,26 +48,6 @@ function AdminHome() {
     setPage(0);
   };
 
-  let base = {
-    site_name: '',
-    address: ''
-  }
-  let [newLocation, setLocation] = useState(base);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    //sends over new object to saga/server to process and send to DB
-    let newSite= {
-      site_name: newLocation.site_name,
-      address: newLocation.address,
-      language_id: dropDownValues.language_id,
-      region_id: dropDownValues.region_id,
-    }
-    console.log("newSite====================", newSite);
-    dispatch({type: "ADD_SITE", payload: newSite})
-  }
-
-
   useEffect(() => {
     dispatch({ type: "FETCH_ALL" });
     dispatch({ type: "FETCH_REGIONS" });
@@ -84,42 +59,7 @@ function AdminHome() {
     <>
       <Typography>Add New Site</Typography>
       <Grid container spacing={.5}>
-        <form
-        onSubmit={handleSubmit}>
-        <Grid item xs>
-          <TextField
-            required
-            id="filled-required"
-            label="Site Name"
-            variant="standard"
-            helperText="ex. Raleigh"
-            onChange={(event) => setLocation({...newLocation, site_name: event.target.value})}
-          />
-        </Grid>
-        <Grid item xs>
-          <TextField
-            required
-            id="filled-required"
-            label="Address"
-            variant="standard"
-            helperText="Address"
-            onChange={(event) => setLocation({...newLocation, address: event.target.value})}
-          />
-        </Grid>
-        <Grid item xs>
-          <AutoCompleteRegion/>
-        </Grid>
-        <Grid item xs>
-          <AutoCompleteLanguage />
-          <Link>Don't see your language? Click here!</Link>
-        </Grid>
-        <Grid item xs>
-          <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
-            Submit
-          </Button>
-            {mapBoxMessage.length > 0 && <Typography>{mapBoxMessage}</Typography>}        
-            </Grid>
-        </form>
+
       </Grid>
       <Grid container sx={{ pt: 3 }}>
         <Grid item xs={1} />
