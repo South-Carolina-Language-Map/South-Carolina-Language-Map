@@ -15,7 +15,11 @@ import {
   TableContainer,
   TablePagination,
 } from "@mui/material";
+
+//components
 import AdminCategoryRow from "./AdminCategoryRow";
+
+
 
 function AdminCategory() {
   const dispatch = useDispatch();
