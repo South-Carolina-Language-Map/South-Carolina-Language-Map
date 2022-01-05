@@ -1,6 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
 
 //mui styles
 import {
@@ -44,7 +43,8 @@ export default function AdminApprovalRow({ user }) {
         })
     };
 
-    //opens dialogue for approval confirmation button
+    //**needs to be fixed, do not delete */
+    //opens dialogue for approval confirmation button 
     // const handleApproval = () => {
     //     console.log("Approve user", user.id);
     //     //opens dialogue option 
