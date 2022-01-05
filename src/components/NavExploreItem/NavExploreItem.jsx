@@ -7,9 +7,9 @@ import { useState } from 'react';
 import encodeUrlStr from '../../utils/encodeUrlStr';
 
 // Render a menu item based on the object being passed
-//  activeKey is used to target specifically named attributes (e.g. site_name instead of name)
+//  activeKey is used to target specifically named attributes (e.g. site_name instead of name
 //  when the next list is rendered.
-function NavExploreItem({listObj, activeKey, setActiveKey}){
+function NavExploreItem({listObj, activeKey, setActiveKey, setPrevState}){
     const listType = useSelector(store => store.viewReducer.listTypeReducer);
     const dispatch = useDispatch();
     const lightTheme = createTheme({ palette: { mode: 'light' } });
@@ -38,7 +38,7 @@ function NavExploreItem({listObj, activeKey, setActiveKey}){
                     case 'Sites':
                         setActiveKey('site_name');
                         dispatch({type: 'FETCH_EXPLORE_SITES'});
-                        break;π
+                        break;
                     case 'Languages':
                         setActiveKey('language');
                         dispatch({type: 'FETCH_LANGUAGES'});

@@ -11,9 +11,13 @@ import { useEffect, useState } from 'react';
 
 function NavExplorer() {
   const list = useSelector(store => store.viewReducer.listReducer);
+  const listType = useSelector(store => store.viewReducer.listTypeReducer);
   const dispatch = useDispatch();
   const [activeKey, setActiveKey] = useState('name');
-  const [prevState, setPrevState] = useState([]);
+  const [prevState, setPrevState] = useState([{
+    list: list,
+    listType: listType || 'DEFAULT',
+  }]);
 
   useEffect(() => {
     dispatch({type: 'SET_LIST_DEFAULT'});
@@ -23,7 +27,7 @@ function NavExplorer() {
 
   return (
     <>
-      {prevState.length > 0 && <Button>Back</Button>}
+      {/* {prevState[0].listType !== 'DEFAULT' && <Button>Back</Button>} */}
       <Grid container spacing={2}>
         {list && list.map((listObj, i) => {
           return <NavExploreItem key={i} listObj={listObj} 
