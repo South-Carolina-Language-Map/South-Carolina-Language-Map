@@ -21,7 +21,7 @@ function* addSite(action) {
   }
   
   //SITES PUT ROUTE
-  function* updateSite() {
+  function* updateSite(action) {
       try {
         //UPDATE request sent to sites.router based on ID
         const response = yield axios.put(`/api/sites/${action.payload}`);
@@ -40,21 +40,21 @@ function* addSite(action) {
     try{
       //Get All sites for populating explore page
       const response = yield axios.get('api/sites');
-      yield put({type: 'SET_LIST', payload: response.data});
+      yield put({type: 'SET_ADMIN_SITES', payload: response.data});
     }catch(err){
       yield put({type: 'FETCH_SITES_ERR'})
     }
   }
   
   //SITES DELETE ROUTE
-  function* deleteSite() {
+  function* deleteSite(action) {
       try {
         //DELETE request sent to sites.router based on ID
         const response = yield axios.delete(`/api/sites/${action.payload}`);
     
         yield console.log('response', response);
         //call GET request to repopulate sites list
-        yield put({ type: "FETCH_SITES" });
+        yield put({ type: "FETCH_EXPLORE_SITES" });
       } catch (err) {
         yield put({ type: "DELETE_SITE_ERROR" });
         console.log("Error in deleteSite", err);
