@@ -34,6 +34,7 @@ function Map() {
     height: "100vh",
     zoom: 6.0
   });
+  const [targetZoom, setTargetZoom] = useState(viewport.zoom);
 
   const resetView = () => {
     const bounds = getSiteBounds(sites);
@@ -52,6 +53,12 @@ function Map() {
       transitionEasing: easeCubic
     });
   };
+
+  const adjustZoom = (direction) => {
+    const adjustment = direction === 'in' ? 1 : -1;
+    // setTargetZoom(targetZoom + adjustment);
+    setViewport({...viewport, zoom: viewport.zoom + adjustment});
+  }
 
   const getSiteBounds = (sitesArr) => {
     //set minimum length of boundary box;
@@ -97,6 +104,7 @@ function Map() {
   useEffect(() => {
     if (sites.length > 0) {
       resetView();
+      setTargetZoom(viewport.zoom);
     }
   }, [sites]);
 
@@ -131,11 +139,13 @@ function Map() {
 
         {/* Render Map Control Buttons */}
         <div className='bottom-right'>
-          <Fab color="primary" aria-label="zoom in">
+          <Fab color="primary" aria-label="zoom in"
+          onClick={() => adjustZoom('in')}>
             <ZoomInIcon />
           </Fab>
           <br/>
-          <Fab color="primary" aria-label="zoom out">
+          <Fab color="primary" aria-label="zoom out"
+          onClick={() => adjustZoom('out')}>
             <ZoomOutIcon />
           </Fab>
         </div>
