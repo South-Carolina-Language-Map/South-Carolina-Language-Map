@@ -25,6 +25,7 @@ function NavExploreItem({listObj, activeKey, setActiveKey, setPrevState}){
     //Conditionally handle clicks depending on the context of
     //  What kind of items are being mapped into the list
     const handleClick = () => {
+      let queryObj;
         switch(listType){
             // Handle clicks on the default submenu (categories, regions, sites, languages)
             case 'DEFAULT':
@@ -38,6 +39,7 @@ function NavExploreItem({listObj, activeKey, setActiveKey, setPrevState}){
                     case 'Sites':
                         setActiveKey('site_name');
                         dispatch({type: 'FETCH_EXPLORE_SITES'});
+                        dispatch({type: 'SET_TYPE', payload: 'SITES'});
                         break;
                     case 'Languages':
                         setActiveKey('language');
@@ -48,9 +50,13 @@ function NavExploreItem({listObj, activeKey, setActiveKey, setPrevState}){
                 }
                 break;
             case 'LANGUAGES':
-                let queryObj = {language: listObj.language}
+                queryObj = {language: listObj.language}
                 dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr(queryObj)});
                 break;
+            case 'SITES':
+              queryObj = {site: listObj.site_name}
+              dispatch({type: 'SUBMIT_QUERY', payload: encodeUrlStr(queryObj)});
+              break;
             default:
                 console.log('EXPLORE CLICK ERR: NO LISTTYPE');
         }
