@@ -1,12 +1,11 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
-import { Button } from '@mui/material';
-
-import { useDispatch, useSelector } from 'react-redux';
 import NavExploreItem from '../NavExploreItem/NavExploreItem';
-import { useEffect, useState } from 'react';
+
 
 
 function NavExplorer() {
@@ -27,7 +26,7 @@ function NavExplorer() {
 
   return (
     <>
-      {/* {prevState[0].listType !== 'DEFAULT' && <Button>Back</Button>} */}
+      
       <Grid container spacing={2}>
         {list && list.map((listObj, i) => {
           return <NavExploreItem key={i} listObj={listObj} 
