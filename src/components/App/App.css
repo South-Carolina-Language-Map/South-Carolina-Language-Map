@@ -110,3 +110,8 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+.scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}

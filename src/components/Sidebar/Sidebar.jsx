@@ -43,7 +43,7 @@ function Sidebar() {
           {currentViewHeaderText}
         </Typography>
       </Box>
-      {currentView}
+      <div className="scroll">{currentView}</div>
       <BottomNav />
     </Box>
   );
