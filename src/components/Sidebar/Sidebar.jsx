@@ -6,8 +6,6 @@ import { Typography } from "@mui/material";
 import BottomNav from "../BottomNav/BottomNav";
 import NavExplorer from "../NavExplorer/NavExplorer";
 
-import NavLang from "../NavLang/NavLang";
-
 function Sidebar() {
   let currentView;
   let currentViewHeaderText = "Info Page";
@@ -45,8 +43,7 @@ function Sidebar() {
           {currentViewHeaderText}
         </Typography>
       </Box>
-      {/* {currentView} */}
-      <NavLang />
+      {currentView}
       <BottomNav />
     </Box>
   );
