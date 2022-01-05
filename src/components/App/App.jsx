@@ -12,7 +12,6 @@ import AboutPage from "../AboutPage/AboutPage";
 import GridView from "../GridView/GridView";
 import Admin from "../Admin/Admin";
 
-
 import "./App.css";
 
 
@@ -60,7 +59,8 @@ function App() {
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
 
           <Route exact path="/login">
-            {user.id ? (
+
+            {user.clearance_level >= 1 ? (
               // If the user is already logged in,
               // redirect to the /user page
               <Redirect to="/admin" />
@@ -71,7 +71,8 @@ function App() {
           </Route>
 
           <Route exact path="/registration">
-            {user.id ? (
+
+            {user.clearance_level >= 1 ? (
               // If the user is already logged in,
               // redirect them to the /user page
               <Redirect to="/admin" />
@@ -81,13 +82,24 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/admin">
-            <Admin />
-          </Route>
 
-          {/* <Route exact path="/admin">
-            <Sidebar />
-          </Route> */}
+
+          {/* View for admins */}
+          {user.clearance_level >= 1 ?
+            <>
+              <Route
+                exact path="/admin">
+                <Admin />
+              </Route>
+
+  
+            </>
+            :
+            <Redirect to="/login" />
+          }
+
+
+
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

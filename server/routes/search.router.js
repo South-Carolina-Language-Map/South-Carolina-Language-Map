@@ -10,7 +10,9 @@ router.get('/', (req, res) => {
     let values = [];
     let columns = [];
 
+    //Loop through req.query and separate keys and values into parallel arrays
     for (let key in req.query) {
+        //push appropriate SQL reference for current key into columns
         switch (key) {
             case 'category':
                 columns.push(`"categories".name`)
@@ -29,6 +31,7 @@ router.get('/', (req, res) => {
                 break;
         }
 
+        //push corresponding value into values (at same position);
         values.push(`%${req.query[key]}%`)
     } //end loop
 
@@ -53,10 +56,10 @@ router.get('/', (req, res) => {
         searchQueryText += `AND ${columns[i]} ILIKE $${i + 1}`;
       } 
 
-      //add the the ORDER BY at the end
+      //add the the ORDER BY at the end (arbitrarily ordered by the last column)
       searchQueryText += ` ORDER BY ${columns[columns.length -1]} ASC;`
+      console.log('-------', searchQueryText);
 
-      console.log('-------', searchQueryText)
       //spread values to account for added interpolated data
     pool.query(searchQueryText, [...values])
         .then((result) => {
