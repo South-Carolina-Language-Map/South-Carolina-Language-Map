@@ -21,7 +21,7 @@ function* fetchLanguages() {
 }
 
 //LANGUAGES GET ROUTE BY ID
-function* fetchLanguage() {
+function* fetchLanguage(action) {
   try {
     //GET request sent to languages.router
     const response = yield axios.get(`/api/languages/${action.payload}`);
@@ -37,7 +37,7 @@ function* fetchLanguage() {
 }
 
 //LANGUAGE POST ROUTE
-function* addLanguage() {
+function* addLanguage(action) {
   try {
     //POST request to languages router
     const response = yield axios.post(`/api/languages/`, action.payload);
@@ -53,7 +53,7 @@ function* addLanguage() {
 }
 
 //LANGUAGE PUT ROUTE
-function* updateLanguage() {
+function* updateLanguage(action) {
     try {
       //UPDATE request sent to languages.router based on ID
       const response = yield axios.put(`/api/languages/${action.payload}`);
@@ -69,7 +69,7 @@ function* updateLanguage() {
   }
 
 //LANGUAGE DELETE ROUTE
-function* deleteLanguage() {
+function* deleteLanguage(action) {
     try {
       //DELETE request sent to languages.router based on ID
       const response = yield axios.delete(`/api/languages/${action.payload}`);

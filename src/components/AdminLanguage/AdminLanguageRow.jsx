@@ -11,6 +11,10 @@ import {
 
 export default function AdminLanguageRow({ language }) {
 
+    //hooks
+    const dispatch = useDispatch();
+
+
     // function handles edit for this ID
     const handleEdit = () => {
         console.log("Edit", language.id);
@@ -19,6 +23,10 @@ export default function AdminLanguageRow({ language }) {
     //function deletes this id
     const handleDelete = () => {
         console.log("Delete", language.id);
+        dispatch({
+            type: 'DELETE_LANGUAGE',
+            payload: language.id
+        })
     };
 
 
