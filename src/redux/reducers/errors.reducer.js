@@ -32,10 +32,20 @@ const registrationMessage = (state = '', action) => {
   }
 };
 
+const mapBoxMessage = (state = '', action) => {
+  switch(action.type){
+    case 'NO_COORDS':
+      return 'Unable to get coordinates for address provided';
+    default: 
+      return state; 
+  }
+}
+
 // make one object that has keys loginMessage, registrationMessage
 // these will be on the redux state at:
 // state.errors.loginMessage and state.errors.registrationMessage
 export default combineReducers({
   loginMessage,
   registrationMessage,
+  mapBoxMessage
 });

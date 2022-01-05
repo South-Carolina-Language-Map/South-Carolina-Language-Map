@@ -34,6 +34,7 @@ function AdminHome() {
   const regions = useSelector((store) => store.viewReducer.listReducer);
   const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
   const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
+  const mapBoxMessage = useSelector((store) => store.errors.mapBoxMessage);
   // Defining what to do when edit or delete are pressed:
   const handleEdit = () => {
     console.log("Edit");
@@ -116,7 +117,8 @@ function AdminHome() {
           <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
             Submit
           </Button>
-        </Grid>
+            {mapBoxMessage.length > 0 && <Typography>{mapBoxMessage}</Typography>}        
+            </Grid>
         </form>
       </Grid>
       <Grid container sx={{ pt: 3 }}>

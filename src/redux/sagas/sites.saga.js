@@ -6,14 +6,16 @@ function* addSite(action) {
   console.log('=============================================');
     try {
       //POST request to sites router
-      const response = yield axios.post(`/api/sites/`, action.payload);
-  
+      const response = yield axios.post(`/api/sites/`, action.payload).catch(err => "err");
+      if(response === "err"){
+        yield put({type: "NO_COORDS" })
+      }
       yield console.log('response', response);
       //call GET request to repopulate sites list
       yield put({ type: "FETCH_SITES"});
     } catch (err) {
-      yield put({ type: "ADD_SITE_ERROR" });
       console.log("Error in addSite", err);
+      yield put({ type: "ADD_SITE_ERROR" });
     }
   
   }
