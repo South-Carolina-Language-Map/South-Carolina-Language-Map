@@ -51,7 +51,7 @@ function* addSite(action) {
     
         yield console.log('response', response);
         //call GET request to repopulate sites list
-        yield put({ type: "FETCH_SITES" });
+        yield put({ type: "FETCH_EXPLORE_SITES" });
       } catch (err) {
         yield put({ type: "DELETE_SITE_ERROR" });
         console.log("Error in deleteSite", err);
