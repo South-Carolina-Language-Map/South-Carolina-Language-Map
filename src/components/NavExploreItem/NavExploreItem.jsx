@@ -32,6 +32,7 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
         switch (listObj[activeKey]) {
           case 'Categories':
             dispatch({ type: 'FETCH_CATEGORIES' });
+            dispatch({ type: 'SET_TYPE', payload: 'CATEGORIES' });
             break;
           case 'Regions':
             dispatch({ type: 'FETCH_REGIONS' })
@@ -50,6 +51,8 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
             console.log('EXPLORE CLICK ERR: NOT FOUND');
         }
         break;
+
+      //handle clicks on other listTypes
       case 'LANGUAGES':
         queryObj = { language: listObj.language }
         dispatch({ type: 'SUBMIT_QUERY', payload: encodeUrlStr(queryObj) });
@@ -60,6 +63,10 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
         break;
       case 'REGIONS':
         queryObj = { region: listObj.name }
+        dispatch({ type: 'SUBMIT_QUERY', payload: encodeUrlStr(queryObj) });
+        break;
+      case 'CATEGORIES':
+        queryObj = { category: listObj.name }
         dispatch({ type: 'SUBMIT_QUERY', payload: encodeUrlStr(queryObj) });
         break;
       default:
