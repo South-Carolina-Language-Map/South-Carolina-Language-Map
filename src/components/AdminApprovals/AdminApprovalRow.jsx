@@ -1,3 +1,4 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -41,21 +42,22 @@ export default function AdminApprovalRow({ user }) {
             type: 'DELETE_UNAPPROVED',
             payload: user.id
         })
-    }
+    };
 
     //opens dialogue for approval confirmation button
-    const handleApproval = () => {
-        console.log("Approve user", user.id);
-        //opens dialogue option 
-        setOpenConfirm(true);
-    };
+    // const handleApproval = () => {
+    //     console.log("Approve user", user.id);
+    //     //opens dialogue option 
+    //     setOpenConfirm(true);
+    // };
 
     //Approve user for admin clearance
     const handleConfirm = () => {
+        console.log(user.id, "to be confirmed")
         // dispatch({
         //   //approval dispatch is here
         // })
-    }
+    };
 
     //onClose of the all dialogues
     const handleClose = () => {
@@ -105,7 +107,7 @@ export default function AdminApprovalRow({ user }) {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleDelete}>Yes</Button>
-                    <Button></Button>
+                    <Button onClick={handleClose}>No</Button>
                 </DialogActions>
             </Dialog>
 
@@ -116,20 +118,18 @@ export default function AdminApprovalRow({ user }) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="Delete user">
-                    {"Are you sure?"}
+                <DialogTitle id="Approve user">
+                    {"Please Confirm"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        Clicking "yes" will delete this request from the database
+                        Clicking "approve" will confirm this user for admin clearance
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handle}>Yes</Button>
+                    <Button onClick={handleConfirm}>Yes</Button>
                 </DialogActions>
             </Dialog>
-
-
         </>
     )
 } //end AdminApprovalRow
