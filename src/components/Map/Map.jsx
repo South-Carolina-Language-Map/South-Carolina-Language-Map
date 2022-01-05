@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Map.css';
 
+import { Fab } from '@mui/material';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import ZoomOutIcon from '@mui/icons-material/ZoomOut';
+
 // Mapbox resources
 import ReactMapGL, {
   Marker,
@@ -73,15 +77,15 @@ function Map() {
     return [[longMin, latMin], [longMax, latMax]];
   }
 
-    //Assign css classes to color the map icons
-    const assignClasses = (site) => {
-      for (let category of categories) {
-        if (Number(site.category_id) == category.id) {
-          let colorClass = 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
-          return colorClass;
-        }
+  //Assign css classes to color the map icons
+  const assignClasses = (site) => {
+    for (let category of categories) {
+      if (Number(site.category_id) == category.id) {
+        let colorClass = 'lang-' + category.name.toLowerCase().replace(/\s/g, '-');
+        return colorClass;
       }
     }
+  }
 
   // On Load, fetch necessary sites and categories
   useEffect(() => {
@@ -124,6 +128,17 @@ function Map() {
             )
           })}
         </ReactMapGL>
+
+        {/* Render Map Control Buttons */}
+        <div className='bottom-right'>
+          <Fab color="primary" aria-label="zoom in">
+            <ZoomInIcon />
+          </Fab>
+          <br/>
+          <Fab color="primary" aria-label="zoom out">
+            <ZoomOutIcon />
+          </Fab>
+        </div>
       </header>
     </div>
   );
