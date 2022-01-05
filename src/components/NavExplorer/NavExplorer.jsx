@@ -19,7 +19,7 @@ function NavExplorer() {
     dispatch({type: 'SET_LIST_DEFAULT'});
   },[]);
 
-  console.log('prevState:' prevState)
+  console.log('prevState:', prevState)
 
   return (
     <>
