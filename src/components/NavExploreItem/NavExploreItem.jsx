@@ -72,16 +72,8 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
       default:
         console.log('EXPLORE CLICK ERR: NO LISTTYPE');
     }
-    console.log('clicked');
-    console.log('listObj', listObj);
   }
 
-  const setList = () => {
-    let action = {};
-    dispatch({ type: "FETCH_CATEGORIES" })
-  }
-
-  console.log(listObj);
 
   return <>
     {[lightTheme].map((theme, index) => (
@@ -97,7 +89,7 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
               elevation: 3
             }}
           >
-            {/* this is where we would map  */}
+            {/* map through whatever's in the explore menu */}
             <Item> {listObj[activeKey]} </Item>
           </Box>
         </ThemeProvider>
