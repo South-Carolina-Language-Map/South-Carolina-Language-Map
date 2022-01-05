@@ -48,7 +48,7 @@ function Map() {
       longitude,
       latitude,
       zoom,
-      transitionDuration: 5000,
+      transitionDuration: 3000,
       transitionInterpolator: new LinearInterpolator(),
       transitionEasing: easeCubic
     });
