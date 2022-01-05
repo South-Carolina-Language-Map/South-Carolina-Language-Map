@@ -12,14 +12,11 @@ require('dotenv');
 
 //function to create geotags for post route - being called in POST
 async function createGeoTag (req, res) {
-    console.log('==========================This is req.body in POST sites========================', req.body)
     try {
     //function to get geotag (lat/long) from address
     const string = req.body.address.replace(/\s/g, '%20').replace(/'/g, '%27');
 
     const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${string}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`);
-
-    console.log("============Response.data", response.data);
     let coords = response.data.features[0].center; // gives an array [lat, long];
 
     //query to insert new site into database
@@ -51,7 +48,6 @@ async function createGeoTag (req, res) {
 
 //POST - Add a site from the admin Side
 router.post('/', (req, res) => 
-// console.log('==========================This is req.body in POST sites========================', req.body));
 createGeoTag(req,res)); //end GET for map sites and hover
 
 

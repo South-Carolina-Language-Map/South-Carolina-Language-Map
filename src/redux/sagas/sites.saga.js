@@ -3,7 +3,7 @@ import { put, takeLatest } from "redux-saga/effects";
 
 //SITES POST ROUTE
 function* addSite(action) {
-  console.log('=============================================');
+  console.log
     try {
       //POST request to sites router
       const response = yield axios.post(`/api/sites/`, action.payload).catch(err => "err");
