@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
   console.log(req.user)
   const name = req.body.name;
 
-  //security
+  //security - for admin use only
   const clearanceLevel = req.user.clearance_level
 
   if (clearanceLevel >= 1) {
