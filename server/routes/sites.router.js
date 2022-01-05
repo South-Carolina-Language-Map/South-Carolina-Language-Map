@@ -41,7 +41,17 @@ async function createGeoTag (req, res) {
         })
 };
 
+// GET - GET all sites
+router.get('/', (req, res) => {
+    let queryText = `SELECT * FROM sites`;
 
+    pool.query(queryText)
+        .then((result) => {
+            res.send(result.rows);
+        }).catch((err) => {
+            console.log(err);
+        })
+})
 
 //POST - Add a site from the admin Side
 router.post('/', (req, res) => createGeoTag(req,res)); //end GET for map sites and hover
