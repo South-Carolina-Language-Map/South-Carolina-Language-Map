@@ -14,6 +14,7 @@ const sitesRouter = require('./routes/sites.router');
 const regionsRouter = require('./routes/regions.router');
 const languagesRouter = require('./routes/languages.router');
 const categoriesRouter = require('./routes/categories.router');
+const searchRouter = require('./routes/search.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -33,6 +34,7 @@ app.use('/api/sites', sitesRouter);
 app.use('/api/regions', regionsRouter);
 app.use('/api/languages', languagesRouter);
 app.use('/api/categories', categoriesRouter);
+app.use('/api/search', searchRouter);
 
 // Serve static files
 app.use(express.static('build'));

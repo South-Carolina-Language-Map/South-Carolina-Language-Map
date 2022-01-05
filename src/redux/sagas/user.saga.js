@@ -13,7 +13,7 @@ function* fetchUser() {
     // allow the server session to recognize the user
     // If a user is logged in, this will return their information
     // from the server session (req.user)
-    const response = yield axios.get('/api/user', config);
+    const response = yield axios.get('/api/user/admin', config);
 
     // now that the session has given us a user object
     // with an id and username set the client-side user object to let
@@ -24,8 +24,19 @@ function* fetchUser() {
   }
 }
 
+// Get all pending Admins from the server
+function* fetchAllUsers() {
+  try {
+    const response = yield axios.get('/api/user/admin/pending');
+    yield put({ type: 'SET_APPROVALS', payload: response.data });
+  } catch (error) {
+    console.log('User get request failed', error);
+  }
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
+  yield takeLatest('FETCH_UNAPPROVED', fetchAllUsers);
 }
 
 export default userSaga;

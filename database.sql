@@ -81,7 +81,7 @@ VALUES('Native American'),
 ('Middle East'),
 ('Latino'),
 ('Varieties of English'),
-('Sign Lanugage');
+('Sign Language');
 
 --Fill Regions Table
 INSERT INTO regions ("name")

@@ -1,131 +1,65 @@
 import React, { useEffect } from 'react';
-import {
-  HashRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
 
-import Nav from '../Nav/Nav';
-import Footer from '../Footer/Footer';
-
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
-import LoginPage from '../LoginPage/LoginPage';
-import RegisterPage from '../RegisterPage/RegisterPage';
-
+//components
+import Nav from "../Nav/Nav";
+import Footer from "../Footer/Footer";
 import AdminHome from '../AdminHome/AdminHome';
 import AdminLanguage from '../AdminLanguage/AdminLanguage';
 import AdminCategory from '../AdminCategory/AdminCategory';
 import AdminApprovals from '../AdminApprovals/AdminApprovals';
 import AdminAbout from '../AdminAbout/AdminAbout';
+import LoginPage from '../LoginPage/LoginPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+import UserPage from '../UserPage/UserPage';
 
-// This is one of our simplest components
-// It doesn't have local state,
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is'
 
 function Admin() {
 
-  const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  let currentAdminView 
+  
 
-  useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
-  }, [dispatch]);
+  //stores
+  const adminView = useSelector((store) => store.adminView)
+  const user = useSelector(store => store.user)
+  //switch statement to control which components
+  //are being called in the view
 
+
+
+  switch (adminView) {
+    case "site":
+      currentAdminView = <AdminHome />
+      break;
+    case "language":
+      currentAdminView = <AdminLanguage />
+      break;
+    case "category":
+      currentAdminView = <AdminCategory />
+      break;
+    case "approval":
+      currentAdminView = <AdminApprovals />
+      break;
+    case "about":
+      currentAdminView = <AdminAbout />
+      break;
+
+    default:
+      currentAdminView = <p>There was an error, please try again later</p>
+      break;
+  }
+
+
+  console.log('this is the admin view', adminView);
+  //admin components called from here
   return (
-    <Router>
-      <div>
-        <Nav/>
-      <Switch>
-          //ADMIN HOME/SITE
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/admin"
-          >
-            <AdminHome/>
-          </ProtectedRoute>
-
-          //ADMIN LANGUAGE
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/admin/language"
-          >
-            <AdminLanguage />
-          </ProtectedRoute>
-
-          //ADMIN CATEGORY
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/admin/category"
-          >
-            <AdminCategory />
-          </ProtectedRoute>
-
-          //APPROVALS PAGE
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/admin/approvals"
-          >
-            <AdminApprovals />
-          </ProtectedRoute>
-
-          //ADMIN ABOUT
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/admin/info"
-          >
-            <AdminAbout />
-          </ProtectedRoute>
-
-
-          <Route
-            exact
-            path="/login"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/admin" />
-              :
-              // Otherwise, show the login page
-              <LoginPage  />
-            }
-          </Route>
-
-          <Route
-            exact
-            path="/registration"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <Redirect to="/admin" />
-              :
-              // Otherwise, show the registration page
-              <RegisterPage />
-            }
-          </Route>
-
-          <Route>
-            <h1>404</h1>
-          </Route>
-
-      </Switch>
-      </div>
-    </Router>
-    
+    <>
+      <Nav />
+      {currentAdminView}
+      <Footer />
+    </>
   )
-
 }
 
 export default Admin;

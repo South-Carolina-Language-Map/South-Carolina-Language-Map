@@ -2,17 +2,20 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 
-import adminSiteReducer from './admin.sites.reducer';
-import adminLanguagesReducer from './admin.languages.reducer';
-import adminCategoriesReducer from './admin.categories.reducer';
-import adminApprovalsReducer from './admin.approvals.reducer';
-import adminEditReducer from './admin.edit.reducer';
+import adminSiteReducer from './adminReducers/admin.sites.reducer';
+import adminLanguagesReducer from './adminReducers/admin.languages.reducer';
+import adminCategoriesReducer from './adminReducers/admin.categories.reducer';
+import adminApprovalsReducer from './adminReducers/admin.approvals.reducer';
+import adminEditReducer from './adminReducers/admin.edit.reducer';
 
 import infoReducer from './viewReducers/view.info.reducer';
 import listReducer from './viewReducers/view.list.reducer';
 import listTypeReducer from './viewReducers/view.listType.reducer';
 import queriesReducer from './viewReducers/view.queries.reducer';
 import sitesReducer from './viewReducers/view.sites.reducer';
+
+import sideBarView from './sideBarView.reducer';
+import adminView from './adminView.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -38,8 +41,12 @@ const viewReducer = combineReducers({
 // Lets make a bigger object for our store, with the objects from our reducers.
 // This is what we get when we use 'state' inside of 'mapStateToProps'
 const rootReducer = combineReducers({
-  adminReducer, 
-  viewReducer
+  sideBarView,
+  adminView,
+  adminReducer,
+  viewReducer,
+  errors,
+  user
 });
 
 export default rootReducer;
