@@ -1,4 +1,5 @@
-import { Grid, Paper, Stack, Typography, Divider } from "@mui/material";
+// MUI Imports
+import { Grid, Paper, Typography } from "@mui/material";
 
 function NavLang({ language }) {
   // let currentLanguage = language;
