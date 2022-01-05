@@ -1,4 +1,4 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Paper, Stack, Typography, Divider } from "@mui/material";
 
 function NavLang({ language }) {
   // let currentLanguage = language;
@@ -16,13 +16,35 @@ function NavLang({ language }) {
 
   return (
     <Grid container>
-      <Grid item>
+      <Grid item xs={12}>
+        <Paper elevation={4}>
+          <Typography variant="h3" sx={{ pt: 2, textAlign: "center" }}>
+            {currentLanguage.language}
+          </Typography>
+          <Typography variant="body1" sx={{ textAlign: "center" }}>
+            Endonym: {currentLanguage.endonym}
+          </Typography>
+        </Paper>
+      </Grid>
+      <Grid item xs={12} sx={{ textAlign: "center" }}>
+        <Stack
+          direction="row"
+          spacing={2}
+          divider={<Divider orientation="vertical" fullWidth />}
+        >
+          <Typography>
+            Global Speakers: {currentLanguage.global_speakers}
+          </Typography>
+          <Typography>SC Speakers: {currentLanguage.sc_speakers}</Typography>
+        </Stack>
+      </Grid>
+
+      <Grid item xs={12}>
+        <p></p>
+      </Grid>
+      <Grid item xs={12}>
         <Typography>Glottocode: {currentLanguage.glottocode}</Typography>
-        <Typography>Language Name: {currentLanguage.language}</Typography>
-        <Typography>Endonym: {currentLanguage.endonym}</Typography>
         <Typography>Description: {currentLanguage.description}</Typography>
-        <Typography>Global Speakers: {currentLanguage.global_speakers}</Typography>
-        <Typography>SC Speakers: {currentLanguage.sc_speakers}</Typography>
         <Typography>Status: {currentLanguage.status}</Typography>
       </Grid>
     </Grid>
