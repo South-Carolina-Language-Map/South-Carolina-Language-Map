@@ -18,15 +18,15 @@ function Sidebar() {
   switch (sideBarView) {
     case "search":
       currentView = <Search />;
-      currentViewHeaderText = "Search";
+      currentViewHeaderText = "SEARCH";
       break;
     case "explore":
       currentView = <NavExplorer />;
-      currentViewHeaderText = "Explore";
+      currentViewHeaderText = "EXPLORE";
       break;
     case "info":
       currentView = <NavInfo />;
-      currentViewHeaderText = "About";
+      currentViewHeaderText = "ABOUT";
       break;
     default:
       currentView = <p>There was an Error, please try again later</p>;

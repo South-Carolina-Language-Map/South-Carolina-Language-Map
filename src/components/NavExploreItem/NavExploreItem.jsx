@@ -1,5 +1,5 @@
 // MUI Imports
-import { Box, Grid, Paper } from "@mui/material";
+import { Box, Grid, Paper, Button, Typography } from "@mui/material";
 import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
 
 // Local File Imports
@@ -78,24 +78,52 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
   return (
     <>
       {[lightTheme].map((theme, index) => (
-        <Grid item xs={12} key={index} onClick={handleClick}>
-          <ThemeProvider theme={theme}>
+        // map through whatever's in the explore menu
+        <ThemeProvider theme={theme}>
+          {/*  */}
+          <Grid item xs={12} key={index} onClick={handleClick}>
+            {/*  */}
+
             <Box
+              component="button"
+              borderRadius={4}
               sx={{
                 p: 4,
-                gap: 2,
-                elevation: 3,
-                bgcolor: "background.default",
+                mt: 2,
+                width: 2 / 2,
+                boxShadow: 3,
+                backgroundColor: "#FFFFFF",
+                "&:hover": {
+                  // opacity: [2],
+                  color: "secondary.temp",
+                  backgroundColor: "primary.light",
+                },
+                border: 1,
               }}
             >
-              {/* map through whatever's in the explore menu */}
-              <Item> {listObj[activeKey]} </Item>
+              <Typography variant="h6">{listObj[activeKey]}</Typography>
             </Box>
-          </ThemeProvider>
-        </Grid>
+            {/*  */}
+          </Grid>
+          {/*  */}
+        </ThemeProvider>
+        //
       ))}
     </>
   );
 }
 
 export default NavExploreItem;
+
+// <Box
+//   sx={{
+//     p: 4,
+//     gap: 2,
+//     elevation: 3,
+//     bgcolor: "background.default",
+//   }}
+// >
+// <Item>
+//  </Item>
+//  </Box>
+// <Grid item xs={12} key={index} onClick={handleClick}>

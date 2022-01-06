@@ -1,5 +1,5 @@
 // MUI Imports
-import { Grid, Button } from "@mui/material";
+import { Grid, Button, Typography } from "@mui/material";
 
 // React Imports
 import { useEffect, useState } from "react";
@@ -27,23 +27,24 @@ function NavExplorer() {
   console.log("prevState:", prevState);
 
   return (
-    <>
-      {/* {prevState[0].listType !== 'DEFAULT' && <Button>Back</Button>} */}
-      <Grid container spacing={2}>
-        {list &&
-          list.map((listObj, i) => {
-            return (
-              <NavExploreItem
-                key={i}
-                listObj={listObj}
-                activeKey={activeKey}
-                setActiveKey={setActiveKey}
-                setPrevState={setPrevState}
-              />
-            );
-          })}
+    // {prevState[0].listType !== 'DEFAULT' && <Button>Back</Button>}
+    <Grid container spacing={2} sx={{ p: 1 }}>
+      <Grid item xs={12}>
+        <Typography variant="h5">Explore By:</Typography>
       </Grid>
-    </>
+      {list &&
+        list.map((listObj, i) => {
+          return (
+            <NavExploreItem
+              key={i}
+              listObj={listObj}
+              activeKey={activeKey}
+              setActiveKey={setActiveKey}
+              setPrevState={setPrevState}
+            />
+          );
+        })}
+    </Grid>
   );
 }
 
