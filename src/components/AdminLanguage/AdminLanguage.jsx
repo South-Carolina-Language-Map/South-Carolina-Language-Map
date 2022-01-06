@@ -18,6 +18,7 @@ import {
 
 //components
 import AdminLanguageRow from "./AdminLanguageRow";
+import LanguageForm from "./LanguageForm";
 
 
 function AdminLanguage() {
