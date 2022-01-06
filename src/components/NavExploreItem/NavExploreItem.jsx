@@ -40,7 +40,7 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
             break;
           case 'Sites':
             setActiveKey('site_name');
-            dispatch({ type: 'FETCH_EXPLORE_SITES' });
+            dispatch({ type: 'FETCH_SITES' });
             dispatch({ type: 'SET_TYPE', payload: 'SITES' });
             break;
           case 'Languages':
