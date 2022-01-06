@@ -8,20 +8,24 @@ import PublishIcon from "@mui/icons-material/Publish";
 
 function CategoryForm() {
   const dispatch = useDispatch();
-
+  //initialize the value of the input 
+  const [newCategory, setCategory] = useState('');
+  console.log("newCategory", newCategory);
   return (
-    <form>
+    <form onSubmit={()=> dispatch({type: "ADD_CATEGORY", payload: newCategory})}>
       <TextField
         required
         id="filled-required"
-        label="Site Name"
+        label="Category Name"
         variant="standard"
-        helperText="ex. Raleigh"
-        //Will assign the value of input to the useState associated key
-        onChange={(event) =>
-          setLocation({ ...newLocation, site_name: event.target.value })
-        }
+        helperText="ex. Native American"
+        onChange={(event) => setCategory({name: event.target.value})}
       />
+      <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
+        Submit
+      </Button>
     </form>
   );
 }
+
+export default CategoryForm;
