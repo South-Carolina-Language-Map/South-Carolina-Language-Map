@@ -1,6 +1,4 @@
 // Local Files Import
-import AutoCompleteLanguage from "./AutoCompleteLanguage";
-import AutoCompleteRegion from "./AutoCompleteRegion";
 import AutoComplete from "../AutoComplete/AutoComplete";
 
 //Imported necessary libraries 
@@ -80,7 +78,7 @@ function AdminHomeForm() {
       </Grid>
       <Grid item xs>
           {/* Drop down autofill input for languages provided by university */}
-        <AutoCompleteLanguage />
+        <AutoComplete table="language"/>
         {/* Link will redirect you to ADD NEW LANGUAGE form  */}
         <Link>{`Don't see your language? Click here!`}</Link>
       </Grid>

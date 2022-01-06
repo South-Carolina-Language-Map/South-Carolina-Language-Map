@@ -16,7 +16,7 @@ function AutoComplete({ table }) {
       properties = {
         fetch: "FETCH_REGIONS",
         set: "SET_NEW_REGION",
-        reducer: "adminRegionReducer",
+        reducer: "adminRegionsReducer",
         option: "name",
         label: "region",
         newSite: true,
@@ -25,8 +25,8 @@ function AutoComplete({ table }) {
     case "language":
       properties = {
         fetch: "FETCH_LANGUAGES",
-        set: "SET_NEW_LANGUAGES",
-        reducer: "adminLanguageReducer",
+        set: "SET_NEW_LANGUAGE",
+        reducer: "adminLanguagesReducer",
         option: "language",
         label: "language",
         newSite: true,
@@ -35,8 +35,8 @@ function AutoComplete({ table }) {
     case "category":
       properties = {
         fetch: "FETCH_CATEGORIES",
-        set: "SET_NEW_R",
-        reducer: "adminRegionReducer",
+        set: "SET_NEW_CATEGORY",
+        reducer: "adminCategoriesReducer",
         option: "name",
         label: "region",
         newSite: false,
