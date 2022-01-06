@@ -75,7 +75,8 @@ function AdminHomeForm() {
       </Grid>
       <Grid item xs>
           {/* Drop down autofill input for Regions of South Carolina */}
-        <AutoCompleteRegion/>
+        <AutoComplete
+        table="region"/>
       </Grid>
       <Grid item xs>
           {/* Drop down autofill input for languages provided by university */}
