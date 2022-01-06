@@ -22,11 +22,6 @@ export default function AdminApprovalRow({ user }) {
     //hooks
     const dispatch = useDispatch();
 
-    //edit clearance_level from 0 -> 1 creating admin clearance
-    const handleApproval = () => {
-        console.log("Edit");
-    };
-
 
     //opens dialogue for delete confirmation button
     const handleRejection = () => {
@@ -45,18 +40,19 @@ export default function AdminApprovalRow({ user }) {
 
     //**needs to be fixed, do not delete */
     //opens dialogue for approval confirmation button 
-    // const handleApproval = () => {
-    //     console.log("Approve user", user.id);
-    //     //opens dialogue option 
-    //     setOpenConfirm(true);
-    // };
+    const handleApproval = () => {
+        console.log("Approve user", user.id);
+        //opens dialogue option 
+        setOpenConfirm(true);
+    };
 
     //Approve user for admin clearance
     const handleConfirm = () => {
         console.log(user.id, "to be confirmed")
-        // dispatch({
-        //   //approval dispatch is here
-        // })
+        dispatch({
+        type: 'APPROVE_ADMIN',
+        payload: user.id
+        })
     };
 
     //onClose of the all dialogues
@@ -127,7 +123,8 @@ export default function AdminApprovalRow({ user }) {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleConfirm}>Yes</Button>
+                    <Button onClick={handleConfirm}>Approve</Button>
+                    <Button onClick={handleClose}>cancel</Button>
                 </DialogActions>
             </Dialog>
         </>
