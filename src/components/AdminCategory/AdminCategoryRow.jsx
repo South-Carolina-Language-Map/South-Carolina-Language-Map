@@ -15,22 +15,30 @@ export default function AdminCategoryRow({ row }) {
     //hooks
     const dispatch = useDispatch();
 
-    //useStates
+    //useStates for edit mode
     const [handleEditMode, setHandleEditMode] = useState(false);
+    const [edit, setEdit] = useState(row || '')
 
+    //toggles to input view
     const CallEditMode = () => {
         console.log("CallEditMode", row.id);
         setHandleEditMode(true)
     }
 
 
-    // function to edit this category
+    // function dispatch new edit to database
     const handleEdit = () => {
-        console.log("HandleEdit", row.id);
+        console.log("HandleEdit", edit);
+        dispatch({
+            type: 'UPDATE_CATEGORY',
+            payload: edit
+        })
+        //close edit mode
+        setHandleEditMode(false);
     };
 
 
-    //function to delete this row assocaited with ID
+    //function to delete this row associated with ID
     const handleDelete = () => {
         console.log("Delete", row.id);
         dispatch({
@@ -66,7 +74,10 @@ export default function AdminCategoryRow({ row }) {
                             id="standard-basic"
                             label="Standard"
                             variant="standard"
-                            value={row.name} />
+                            value={edit.name} 
+                            onChange={(event)=> 
+                                setEdit({...edit, name: event.target.value}) }
+                            />
                     </TableCell>
                     <TableCell align="center">
                         <Button
