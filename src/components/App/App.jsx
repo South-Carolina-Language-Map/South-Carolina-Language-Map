@@ -31,6 +31,7 @@ function App() {
       },
       secondary: {
         main: "#000000",
+        temp: "#841A2B",
       },
     },
   });
