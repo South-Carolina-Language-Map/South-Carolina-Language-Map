@@ -7,20 +7,58 @@ import { useDispatch, useSelector } from "react-redux";
 
 import adminRegionReducer from "../../redux/reducers/adminReducers/admin.region.reducer";
 
-function AutoCompleteRegion() {
+function AutoComplete({ table }) {
   const dispatch = useDispatch();
+  let properties;
+
+  switch (table) {
+    case "region":
+      properties = {
+        fetch: "FETCH_REGIONS",
+        set: "SET_NEW_REGION",
+        reducer: "adminRegionsReducer",
+        option: "name",
+        label: "region",
+        newSite: true,
+      };
+      break;
+    case "language":
+      properties = {
+        fetch: "FETCH_LANGUAGES",
+        set: "SET_NEW_LANGUAGE",
+        reducer: "adminLanguagesReducer",
+        option: "language",
+        label: "language",
+        newSite: true,
+      };
+      break;
+    case "category":
+      properties = {
+        fetch: "FETCH_CATEGORIES",
+        set: "SET_NEW_CATEGORY",
+        reducer: "adminCategoriesReducer",
+        option: "name",
+        label: "region",
+        newSite: false,
+      };
+      break;
+  }
 
   useEffect(() => {
-    console.log("in useEffect");
-    dispatch({ type: "FETCH_REGIONS" });
+    dispatch({ type: properties.fetch });
   }, []);
 
   //Bring in reducer that stores all available regions in SC
-  const regions = useSelector((store) => store.adminReducer.adminRegionReducer);
+  const regions = useSelector(
+    (store) => store.adminReducer[properties.reducer]
+  );
 
   //handle region input and store the associated ID to reducer
-  const handleRegionValue = (event, value) => {
-    dispatch({ type: "SET_NEW_SITE", payload: value.id });
+
+  const handleStoreId = (event, value) => {
+    if (properties.newSite) {
+      dispatch({ type: properties.set, payload: value.id });
+    }
     console.log(value);
   };
 
@@ -31,8 +69,8 @@ function AutoCompleteRegion() {
       options={regions}
       autoHighlight
       // getOptionLabel is what is displayed on TextField when input is selected from dropdown
-      getOptionLabel={(option) => option.name}
-      onChange={handleRegionValue}
+      getOptionLabel={(option) => option[properties.option]}
+      onChange={handleStoreId}
       renderOption={(props, option) => (
         <Box
           component="li"
@@ -40,13 +78,13 @@ function AutoCompleteRegion() {
           {...props}
         >
           {/* These two options are the displayed values IN the drop down */}
-          {option.id}. {option.name}
+          {option.id}. {option[properties.option]}
         </Box>
       )}
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Choose a region"
+          label={`Choose a ${properties.label}`}
           inputProps={{
             ...params.inputProps,
             autoComplete: "new-password", // disable autocomplete and autofill
@@ -57,4 +95,4 @@ function AutoCompleteRegion() {
   );
 }
 
-export default AutoCompleteRegion;
+export default AutoComplete;

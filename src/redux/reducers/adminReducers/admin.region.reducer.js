@@ -1,4 +1,4 @@
-const adminRegionReducer = (state = [], action) => {
+const adminRegionsReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_REGIONS':
         return [...action.payload];
@@ -6,4 +6,4 @@ const adminRegionReducer = (state = [], action) => {
         return state;
     }
   };
-  export default adminRegionReducer;
+  export default adminRegionsReducer;
