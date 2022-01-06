@@ -53,107 +53,133 @@ function Search() {
   return (
     <Box
       sx={{
-        pr: 1,
-        pl: 1,
+        p: 1,
         textAlign: "center",
+        backgroundColor: "background.main",
       }}
     >
-      <br />
-
       <Grid container>
         <Grid item xs={12}>
           <Box>
             <TabContext value={checked}>
-              <Tabs value={checked} onChange={changeTab}>
-                <Tab value="site" label="Site" />
-                <Tab value="region" label="Region" />
-                <Tab value="language" label="Language" />
-                <Tab value="category" label="Category" />
-              </Tabs>
+              <Grid container>
+                <Grid item xs={12}>
+                  <TabPanel value="site">
+                    <Paper
+                      component="form"
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <InputBase
+                        value={searchText}
+                        onChange={handleChange}
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="Search Sites"
+                      />
+                      <IconButton onClick={submitSearch}>
+                        <SearchIcon color="primary" />
+                      </IconButton>
+                    </Paper>
+                  </TabPanel>
 
-              <TabPanel value="site">
-                <Paper
-                  component="form"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <InputBase
-                    value={searchText}
-                    onChange={handleChange}
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search Sites"
-                  />
-                  <IconButton onClick={submitSearch}>
-                    <SearchIcon color="primary" />
-                  </IconButton>
-                </Paper>
-              </TabPanel>
+                  <TabPanel value="region">
+                    <Paper
+                      component="form"
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <InputBase
+                        onChange={handleChange}
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="Search Regions"
+                      />
+                      <IconButton onClick={submitSearch}>
+                        <SearchIcon color="primary" />
+                      </IconButton>
+                    </Paper>
+                  </TabPanel>
 
-              <TabPanel value="region">
-                <Paper
-                  component="form"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <InputBase
-                    onChange={handleChange}
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search Regions"
-                  />
-                  <IconButton onClick={submitSearch}>
-                    <SearchIcon color="primary" />
-                  </IconButton>
-                </Paper>
-              </TabPanel>
-
-              <TabPanel value="language">
-                <Paper
-                  component="form"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <InputBase
-                    value={searchText}
-                    onChange={handleChange}
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search Languages"
-                  />
-                  <IconButton onClick={submitSearch}>
-                    <SearchIcon color="primary" />
-                  </IconButton>
-                </Paper>
-              </TabPanel>
-              <TabPanel value="category">
-                <Paper
-                  component="form"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  <InputBase
-                    onChange={handleChange}
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search Categories"
-                  />
-                  <IconButton onClick={submitSearch}>
-                    <SearchIcon color="primary" />
-                  </IconButton>
-                </Paper>
-              </TabPanel>
+                  <TabPanel value="language">
+                    <Paper
+                      component="form"
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <InputBase
+                        value={searchText}
+                        onChange={handleChange}
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="Search Languages"
+                      />
+                      <IconButton onClick={submitSearch}>
+                        <SearchIcon color="primary" />
+                      </IconButton>
+                    </Paper>
+                  </TabPanel>
+                  <TabPanel value="category">
+                    <Paper
+                      component="form"
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      <InputBase
+                        onChange={handleChange}
+                        sx={{ ml: 1, flex: 1 }}
+                        placeholder="Search Categories"
+                      />
+                      <IconButton onClick={submitSearch}>
+                        <SearchIcon color="primary" />
+                      </IconButton>
+                    </Paper>
+                  </TabPanel>
+                </Grid>
+                <Grid item xs={12} textAlign="left" sx={{ pl: 3 }}>
+                  <Typography>Search By:</Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Tabs
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                    value={checked}
+                    onChange={changeTab}
+                    variant="scrollable"
+                    orientation="vertical"
+                  >
+                    <Tab value="site" label="Site" sx={{ fontSize: 12 }} />
+                    <Tab value="region" label="Region" sx={{ fontSize: 12 }} />
+                    <Tab
+                      value="language"
+                      label="Language"
+                      sx={{ fontSize: 12 }}
+                    />
+                    <Tab
+                      value="category"
+                      label="Category"
+                      sx={{ fontSize: 12 }}
+                    />
+                  </Tabs>
+                </Grid>
+              </Grid>
             </TabContext>
 
             <br />
             <Button
               sx={{
+                p: 1,
+                mb: 2,
                 color: "primary.dark",
               }}
+              variant="outlined"
               onClick={clearSearch}
             >
               Clear Search
@@ -166,7 +192,15 @@ function Search() {
         </Grid>
 
         <Grid item xs={12}>
-          <Paper elevation={8} sx={{ textAlign: "center", height: 2 / 2 }}>
+          <Paper
+            elevation={8}
+            backgroundColor="background.main"
+            sx={{
+              pt: 2,
+              height: 2 / 2,
+              textAlign: "center",
+            }}
+          >
             <Typography variant="h5">Language Catagories</Typography>
 
             <br />
@@ -214,11 +248,10 @@ function Search() {
               <Grid item xs={4}>
                 <Stack direction="row" spacing={1}>
                   <div className="lang-varieties-of-english" />
-                  <Typography>
-                    Varieties of <br /> English
-                  </Typography>
+                  <Typography>Varieties of English</Typography>
                 </Stack>
               </Grid>
+              <Grid item xs={4} />
             </Grid>
           </Paper>
         </Grid>

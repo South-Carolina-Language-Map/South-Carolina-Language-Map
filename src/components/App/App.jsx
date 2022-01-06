@@ -24,10 +24,13 @@ function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#1E4692",
+        main: "#4b6ba6",
+      },
+      background: {
+        main: "#f4f1eb",
       },
       secondary: {
-        main: "#edf2ff",
+        main: "#000000",
       },
     },
   });
