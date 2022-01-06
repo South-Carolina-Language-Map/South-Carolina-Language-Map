@@ -1,6 +1,7 @@
 // Local Files Import
 import AutoCompleteLanguage from "./AutoCompleteLanguage";
 import AutoCompleteRegion from "./AutoCompleteRegion";
+import AutoComplete from "../AutoComplete/AutoComplete";
 
 //Imported necessary libraries 
 import * as React from "react";
@@ -8,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { 
+    Typography,
     Grid,
     TextField,
     Button,
@@ -73,13 +75,13 @@ function AdminHomeForm() {
       </Grid>
       <Grid item xs>
           {/* Drop down autofill input for Regions of South Carolina */}
-        <AutoCompleteRegion />
+        <AutoCompleteRegion/>
       </Grid>
       <Grid item xs>
           {/* Drop down autofill input for languages provided by university */}
         <AutoCompleteLanguage />
         {/* Link will redirect you to ADD NEW LANGUAGE form  */}
-        <Link>Don't see your language? Click here!</Link>
+        <Link>{`Don't see your language? Click here!`}</Link>
       </Grid>
       <Grid item xs>
         <Button type="submit" variant="contained" endIcon={<PublishIcon />}>

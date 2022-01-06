@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import adminRegionReducer from "../../redux/reducers/adminReducers/admin.region.reducer";
 
-function AutoComplete() {
+function AutoComplete({ table }) {
   const dispatch = useDispatch();
   let properties;
 
@@ -54,12 +54,13 @@ function AutoComplete() {
   );
 
   //handle region input and store the associated ID to reducer
-  if (newSite) {
-    const handleRegionValue = (event, value) => {
+
+  const handleStoreId = (event, value) => {
+    if (properties.newSite) {
       dispatch({ type: properties.set, payload: value.id });
-      console.log(value);
-    };
-  }
+    }
+    console.log(value);
+  };
 
   return (
     <Autocomplete
@@ -69,7 +70,7 @@ function AutoComplete() {
       autoHighlight
       // getOptionLabel is what is displayed on TextField when input is selected from dropdown
       getOptionLabel={(option) => option[properties.option]}
-      onChange={handleRegionValue}
+      onChange={handleStoreId}
       renderOption={(props, option) => (
         <Box
           component="li"
