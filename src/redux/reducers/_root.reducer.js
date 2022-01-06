@@ -13,7 +13,7 @@ import listTypeReducer from './viewReducers/view.listType.reducer';
 import queriesReducer from './viewReducers/view.queries.reducer';
 import sitesReducer from './viewReducers/view.sites.reducer';
 import newSiteReducer from './adminReducers/admin.newSite.reducer';
-import adminRegionReducer from './adminReducers/admin.region.reducer';
+import adminRegionsReducer from './adminReducers/admin.region.reducer';
 
 import sideBarView from './sideBarView.reducer';
 import adminView from './adminView.reducer';
@@ -29,7 +29,7 @@ const adminReducer = combineReducers({
   adminApprovalsReducer,
   adminEditReducer,
   newSiteReducer,
-  adminRegionReducer
+  adminRegionsReducer
 })
 
 const viewReducer = combineReducers({
