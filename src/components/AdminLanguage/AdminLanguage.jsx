@@ -46,8 +46,24 @@ function AdminLanguage() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Grid container sx={{ pt: 3 }}>
+      <Grid>
+      <Button variant="outlined" onClick={() => handleClickOpen}>
+        Open form dialog
+      </Button>
+      <LanguageForm/>
+      </Grid>
       <Grid item xs={1} />
       <Grid item xs={10}>
         <TableContainer sx={{ maxHeight: 440 }}>
