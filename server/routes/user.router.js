@@ -80,6 +80,7 @@ router.get('/admin/pending', (req, res) => {
 
 //ADMIN clearance_level set to 1 for approval
 router.put('/admin/:id', rejectUnauthenticated, (req, res) => {
+  console.log('===================', req.params)
   //this is the id of user to approve
   const userToApprove = req.params.id;
 

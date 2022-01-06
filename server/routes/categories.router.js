@@ -49,6 +49,7 @@ router.post('/', (req, res) => {
 
 //PUT - edit a specific category
 router.put('/:id', (req, res) => {
+  console.log('=================', req.params, req.body)
   const id = req.params.id;
   const name = req.body.name;
 
