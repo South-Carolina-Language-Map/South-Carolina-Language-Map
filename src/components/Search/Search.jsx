@@ -40,15 +40,15 @@ function Search() {
   };
 
   const clearSearch = () => {
-    dispatch({ type: 'FETCH_ALL' });
-    setSearchText('');
-  }
+    dispatch({ type: "FETCH_ALL" });
+    setSearchText("");
+  };
 
   //set active tab, and clear searchText when tab changes
   const changeTab = (e, newValue) => {
     setChecked(newValue);
-    setSearchText('');
-  }
+    setSearchText("");
+  };
 
   return (
     <Box
@@ -64,10 +64,7 @@ function Search() {
         <Grid item xs={12}>
           <Box>
             <TabContext value={checked}>
-              <Tabs
-                value={checked}
-                onChange={changeTab}
-              >
+              <Tabs value={checked} onChange={changeTab}>
                 <Tab value="site" label="Site" />
                 <Tab value="region" label="Region" />
                 <Tab value="language" label="Language" />
@@ -89,7 +86,7 @@ function Search() {
                     placeholder="Search Sites"
                   />
                   <IconButton onClick={submitSearch}>
-                    <SearchIcon />
+                    <SearchIcon color="primary" />
                   </IconButton>
                 </Paper>
               </TabPanel>
@@ -108,7 +105,7 @@ function Search() {
                     placeholder="Search Regions"
                   />
                   <IconButton onClick={submitSearch}>
-                    <SearchIcon />
+                    <SearchIcon color="primary" />
                   </IconButton>
                 </Paper>
               </TabPanel>
@@ -128,7 +125,7 @@ function Search() {
                     placeholder="Search Languages"
                   />
                   <IconButton onClick={submitSearch}>
-                    <SearchIcon />
+                    <SearchIcon color="primary" />
                   </IconButton>
                 </Paper>
               </TabPanel>
@@ -146,7 +143,7 @@ function Search() {
                     placeholder="Search Categories"
                   />
                   <IconButton onClick={submitSearch}>
-                    <SearchIcon />
+                    <SearchIcon color="primary" />
                   </IconButton>
                 </Paper>
               </TabPanel>
