@@ -7,11 +7,12 @@ import { Grid, TextField, Button, Typography } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
 
 function CategoryForm() {
+    //initialize dispatch 
   const dispatch = useDispatch();
-  //initialize the value of the input
+  //local state stores the value for category input
   const [newCategory, setCategory] = useState("");
-  console.log("newCategory", newCategory);
   return (
+    //form sends object with one key value pair containing new category name    
     <form
       onSubmit={() => dispatch({ type: "ADD_CATEGORY", payload: newCategory })}
     >
