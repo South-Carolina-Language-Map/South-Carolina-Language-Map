@@ -19,8 +19,6 @@ import {
 //components
 import AdminCategoryRow from "./AdminCategoryRow";
 
-
-
 function AdminCategory() {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
@@ -30,8 +28,6 @@ function AdminCategory() {
   const catagories = useSelector(
     (store) => store.adminReducer.adminCategoriesReducer
   );
-
-  
 
   // The below 2 functions allow there to be multiple pages on the table.
   const handleChangePage = (event, newPage) => {
@@ -59,15 +55,15 @@ function AdminCategory() {
                 <TableCell align="center">Edit/Delete</TableCell>
               </TableRow>
             </TableHead>
-           
-              {catagories
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <TableBody key={row.id}>
+
+            {catagories
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <TableBody key={row.id}>
                   <AdminCategoryRow row={row} />
-                  </TableBody>
-                ))}
-           
+                </TableBody>
+              ))}
+
           </Table>
         </TableContainer>
         <TablePagination

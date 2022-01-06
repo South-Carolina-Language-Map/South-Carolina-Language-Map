@@ -11,17 +11,7 @@ import LoginPage from "../LoginPage/LoginPage";
 import AboutPage from "../AboutPage/AboutPage";
 import GridView from "../GridView/GridView";
 import Admin from "../Admin/Admin";
-
 import "./App.css";
-
-
-// Unsure of the need for these.....
-import Search from "../Search/Search";
-import Sidebar from "../Sidebar/Sidebar";
-import UserPage from "../UserPage/UserPage";
-import InfoPage from "../InfoPage/InfoPage";
-import LandingPage from "../LandingPage/LandingPage";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const dispatch = useDispatch();
@@ -82,8 +72,6 @@ function App() {
             )}
           </Route>
 
-
-
           {/* View for admins */}
           {user.clearance_level >= 1 ?
             <>
@@ -91,22 +79,16 @@ function App() {
                 exact path="/admin">
                 <Admin />
               </Route>
-
-  
             </>
             :
             <Redirect to="/login" />
           }
-
-
-
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
           </Route>
         </Switch>
-        {/* <Footer /> */}
       </div>
     </Router>
   );

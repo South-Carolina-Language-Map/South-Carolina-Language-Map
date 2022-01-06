@@ -1,9 +1,7 @@
 // React-related Imports
 import * as React from "react";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import AdminHomeForm from "./AdminHomeForm";
 
 // MUI Imports
@@ -23,7 +21,6 @@ import {
 import PublishIcon from "@mui/icons-material/Publish";
 import AdminSiteRow from "./AdminSiteRow";
 
-
 function AdminHome() {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
@@ -33,7 +30,6 @@ function AdminHome() {
   const regions = useSelector((store) => store.viewReducer.listReducer);
   const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
 
-  
   // The below 2 functions allow there to be multiple pages on the table.
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

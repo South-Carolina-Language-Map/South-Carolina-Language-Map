@@ -78,8 +78,8 @@ router.post('/', (req, res) => {
           newExampleArray.push(example.link_text)
           newExampleArray.push(example.hyperlink)
         }
-        //call every other in pool.query
 
+        //call every other in pool.query
         console.log('This is newExampleArray', newExampleArray)
         pool.query(insertExamplesQuery, [newLangId, ...newExampleArray])
           .then(result => {
@@ -174,7 +174,5 @@ router.delete('/:id', (req, res) => {
   } //end if conditional
 
 });
-
-
 
 module.exports = router;

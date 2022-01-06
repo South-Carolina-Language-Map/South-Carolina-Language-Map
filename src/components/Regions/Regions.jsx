@@ -47,9 +47,7 @@ function Regions() {
     const darkTheme = createTheme({ palette: { mode: 'dark' } });
     // const lightTheme = createTheme({ palette: { mode: 'light' } });
 
-
     return (<>
-
 
         <Grid container spacing={2}>
             {[darkTheme].map((theme, index) => (
@@ -64,23 +62,11 @@ function Regions() {
                                 gap: 4,
                             }}
                         >
-                            {[80,chaBra].map((elevation) => (
+                            {[80, chaBra].map((elevation) => (
                                 <Item key={elevation} elevation={elevation}>
                                     {`elevation=${elevation}`}
                                 </Item>
                             ))}
-                            {/* {chaBra.map((item) => (
-
-                                <div>
-
-                                    <h3>Address</h3>
-                                    <h4>{item.id}</h4>
-                                  
-                                    <h4>{item.name}</h4>
-                                   
-
-                                </div>
-                            ))} */}
                         </Box>
                     </ThemeProvider>
                 </Grid>
@@ -88,7 +74,6 @@ function Regions() {
         </Grid>
     </>
     );
-
 }
 
 export default Regions

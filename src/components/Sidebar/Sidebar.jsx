@@ -53,4 +53,3 @@ function Sidebar() {
 
 export default Sidebar;
 
-// className="scroll"

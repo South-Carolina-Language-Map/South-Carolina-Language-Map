@@ -4,7 +4,6 @@ import TextField from "@mui/material/TextField";
 import { Autocomplete } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import adminRegionReducer from "../../redux/reducers/adminReducers/admin.region.reducer";
 
 function AutoCompleteRegion() {
@@ -21,7 +20,6 @@ function AutoCompleteRegion() {
   //handle region input and store the associated ID to reducer
   const handleRegionValue = (event, value) => {
     dispatch({ type: "SET_NEW_SITE", payload: value.id });
-    console.log(value);
   };
 
   return (

@@ -3,7 +3,6 @@ import { Grid } from "@mui/material";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import "./GridView.css";
 
-// I AM VERY IMPORTANT
 function GridView() {
   return (
     <Grid container direction="row-reverse">

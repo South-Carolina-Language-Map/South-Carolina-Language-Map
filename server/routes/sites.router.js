@@ -1,5 +1,4 @@
 const axios = require('axios');
-
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
@@ -132,8 +131,6 @@ router.delete('/:id', (req, res) => {
     } //end if conditional 
 
 }); //End Site DELETE
-
-
 
 
 module.exports = router;

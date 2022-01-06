@@ -23,7 +23,6 @@ let userInfo = {
   email: ''
 }
 
-
 function RegisterForm() {
   //useState for registration object
   const [newUser, setNewUser] = useState(userInfo);
@@ -38,7 +37,6 @@ function RegisterForm() {
   //send of registration user info for approval
   const registerUser = (event) => {
     event.preventDefault();
-    console.log('in register user',)
     dispatch({
       type: 'REGISTER',
       payload: newUser

@@ -3,7 +3,6 @@ import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
 import encodeUrlStr from '../../utils/encodeUrlStr';
 
 // Render a menu item based on the object being passed
@@ -73,7 +72,6 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
         console.log('EXPLORE CLICK ERR: NO LISTTYPE');
     }
   }
-
 
   return <>
     {[lightTheme].map((theme, index) => (

@@ -2,10 +2,7 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
 import NavExploreItem from '../NavExploreItem/NavExploreItem';
-
 
 
 function NavExplorer() {
@@ -19,20 +16,19 @@ function NavExplorer() {
   }]);
 
   useEffect(() => {
-    dispatch({type: 'SET_LIST_DEFAULT'});
-  },[]);
+    dispatch({ type: 'SET_LIST_DEFAULT' });
+  }, []);
 
   console.log('prevState:', prevState)
 
   return (
     <>
-      
       <Grid container spacing={2}>
         {list && list.map((listObj, i) => {
-          return <NavExploreItem key={i} listObj={listObj} 
-          activeKey={activeKey}
-          setActiveKey={setActiveKey}
-          setPrevState={setPrevState}/>
+          return <NavExploreItem key={i} listObj={listObj}
+            activeKey={activeKey}
+            setActiveKey={setActiveKey}
+            setPrevState={setPrevState} />
         })}
       </Grid>
     </>

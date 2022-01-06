@@ -5,7 +5,6 @@ const {
 const encryptLib = require('../modules/encryption');
 const pool = require('../modules/pool');
 const userStrategy = require('../strategies/user.strategy');
-
 const router = express.Router();
 
 //GET ALL ADMINS
@@ -119,20 +118,20 @@ router.delete('/admin/:id', rejectUnauthenticated, (req, res) => {
 
   if (clearanceLevel >= 1) {
 
-  //query to update clearance_level
-  let queryTextUserToDelete = `
+    //query to update clearance_level
+    let queryTextUserToDelete = `
   DELETE FROM "user"
   WHERE "id" = $1
   `
 
-  pool.query(queryTextUserToDelete, [userToDelete])
-    .then(respond => {
-      res.sendStatus(200);
-    })
-    .catch(error => {
-      console.log('ERROR IN DELETE', error);
-      res.sendStatus(500);
-    });
+    pool.query(queryTextUserToDelete, [userToDelete])
+      .then(respond => {
+        res.sendStatus(200);
+      })
+      .catch(error => {
+        console.log('ERROR IN DELETE', error);
+        res.sendStatus(500);
+      });
   } else {
     res.sendStatus(403);
   } //end if conditional

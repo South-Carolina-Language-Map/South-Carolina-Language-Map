@@ -43,7 +43,6 @@ function NavInfo() {
       </Grid>
       <Grid item xs={4}>
         <Button
-          // xs={{ pl: 100 }}
           variant="contained"
           onClick={() => history.push("/admin")}
         >

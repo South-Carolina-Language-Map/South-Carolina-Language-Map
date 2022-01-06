@@ -17,15 +17,14 @@ import UserPage from '../UserPage/UserPage';
 function Admin() {
 
 
-  let currentAdminView 
-  
+  let currentAdminView
+
 
   //stores
   const adminView = useSelector((store) => store.adminView)
   const user = useSelector(store => store.user)
   //switch statement to control which components
   //are being called in the view
-
 
 
   switch (adminView) {

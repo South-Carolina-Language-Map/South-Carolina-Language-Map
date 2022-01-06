@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 // MUI Imports
@@ -56,9 +56,6 @@ export default function AdminSiteRow({ regions, site }) {
                     </Button>
                 </TableCell>
             </TableRow>
-
-
-
         </>
     )
 } //end AdminSiteRow
