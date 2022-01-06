@@ -30,7 +30,9 @@ function NavExplorer() {
     // {prevState[0].listType !== 'DEFAULT' && <Button>Back</Button>}
     <Grid container spacing={2} sx={{ p: 1 }}>
       <Grid item xs={12}>
-        <Typography variant="h5">Explore By:</Typography>
+        <Typography variant="h5" sx={{ p: 0.5 }}>
+          Explore By:
+        </Typography>
       </Grid>
       {list &&
         list.map((listObj, i) => {
