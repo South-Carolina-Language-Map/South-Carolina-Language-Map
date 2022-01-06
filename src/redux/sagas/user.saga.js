@@ -40,9 +40,9 @@ function* updateAdminApproval(action) {
   try {
     //UPDATE request sent to user.router based on ID to change clearance level
     const response = yield axios.put(`/api/user/admin/${action.payload}`);
-    yield console.log('response', response);
+
     //call GET request to repopulate approvals list
-    yield put({ type: 'SET_APPROVALS' });
+    yield put({ type: 'FETCH_UNAPPROVED' });
   } catch (err) {
     yield put({ type: "UPDATE_ADMIN_APPROVAL_ERROR" });
     console.log("Error in updateAdmin", err);
