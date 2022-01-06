@@ -17,6 +17,7 @@ import {
 } from "@mui/material";
 
 //components
+import CategoryForm from "./CategoryForm";
 import AdminCategoryRow from "./AdminCategoryRow";
 
 
@@ -49,6 +50,9 @@ function AdminCategory() {
 
   return (
     <Grid container sx={{ pt: 3 }}>
+      <Grid>
+      <CategoryForm/>
+      </Grid>
       <Grid item xs={1} />
       <Grid item xs={10}>
         <TableContainer sx={{ maxHeight: 440 }}>
