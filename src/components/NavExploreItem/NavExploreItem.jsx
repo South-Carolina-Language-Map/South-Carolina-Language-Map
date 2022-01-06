@@ -94,9 +94,7 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
                 boxShadow: 3,
                 backgroundColor: "#FFFFFF",
                 "&:hover": {
-                  // opacity: [2],
-                  color: "secondary.temp",
-                  backgroundColor: "primary.light",
+                  backgroundColor: "#c9d2e3",
                 },
                 border: 1,
               }}
