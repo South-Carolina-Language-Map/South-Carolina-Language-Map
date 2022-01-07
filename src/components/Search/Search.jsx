@@ -144,6 +144,7 @@ function Search() {
                     >
                       <InputBase
                         onChange={handleChange}
+                        value={searchText}
                         sx={{ ml: 1, flex: 1 }}
                         onKeyPress={onEnterPress}
                         placeholder="Search Regions"
@@ -184,6 +185,7 @@ function Search() {
                     >
                       <InputBase
                         onChange={handleChange}
+                        value={searchText}
                         sx={{ ml: 1, flex: 1 }}
                         onKeyPress={onEnterPress}
                         placeholder="Search Categories"

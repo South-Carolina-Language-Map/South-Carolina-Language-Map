@@ -1,4 +1,7 @@
 const express = require('express');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
@@ -19,7 +22,7 @@ router.get('/', (req, res) => {
 
 
 //POST - add new category
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log(req.user)
   const name = req.body.name;
 
@@ -48,7 +51,7 @@ router.post('/', (req, res) => {
 
 
 //PUT - edit a specific category
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
   console.log('=================', req.params, req.body)
   const id = req.params.id;
   const name = req.body.name;
@@ -80,7 +83,7 @@ router.put('/:id', (req, res) => {
 
 
 //DELETE a specific category
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const categoryID = req.params.id;
 
   //security - for admin use only
