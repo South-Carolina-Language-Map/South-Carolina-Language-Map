@@ -1,14 +1,28 @@
 const axios = require('axios');
-
 const express = require('express');
+const {
+    rejectUnauthenticated,
+  } = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
 require('dotenv');
 
 
-//*** GET in maps.router***
+// GET - GET all sites
+router.get('/', (req, res) => {
+    let queryText = `SELECT * FROM sites`;
 
+    pool.query(queryText)
+        .then((result) => {
+            res.send(result.rows);
+        }).catch((err) => {
+            console.log(err);
+        });
+})
+
+//POST - Add a site from the admin Side
+router.post('/', rejectUnauthenticated, (req, res) => createGeoTag(req, res)); //end POST for languages (SEE BELOW FOR COMPLETE fx)
 
 //function to create geotags for POST route - being called in POST
 async function createGeoTag(req, res) {
@@ -52,28 +66,23 @@ async function createGeoTag(req, res) {
 
 };
 
-// GET - GET all sites
-router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM sites`;
-
-    pool.query(queryText)
-        .then((result) => {
-            res.send(result.rows);
-        }).catch((err) => {
-            console.log(err);
-        });
-})
-
-//POST - Add a site from the admin Side
-router.post('/', (req, res) => createGeoTag(req, res)); //end GET for map sites and hover
-
 
 //PUT - edit a site
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => createGeoTagPUT(req, res)); //end PUT for languages (SEE BELOW FOR COMPLETE fx)
+
+//function to create geotags for PUT route - being called in PUT
+async function createGeoTagPUT(req, res) {
     console.log('IN SITES PUT ================>', req.body, req.params.id)
     const siteID = req.params.id;
     const editedSite = req.body;
 
+
+     //function to get geotag (lat/long) from address
+     const string = req.body.address.replace(/\s/g, '%20').replace(/'/g, '%27');
+
+     const response = await axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${string}.json?access_token=${process.env.REACT_APP_MAPBOX_ACCESS_TOKEN}`);
+
+     let coords = response.data.features[0].center; // gives an array [lat, long];
     //security - for admin use only
     const clearanceLevel = req.user.clearance_level
 
@@ -82,14 +91,14 @@ router.put('/:id', (req, res) => {
         const updateSiteQueryText = `
     UPDATE "sites"
     SET "address" = $1,
-    "latitude" = $2,
-    "longitude" = $3,
+    "longitude" = $2,
+    "latitude" = $3,
     "site_name" = $4,
     "region_id" = $5,
     "language_id" = $6
     WHERE "id" = $7
     ;`;
-        pool.query(updateSiteQueryText, [editedSite.address, editedSite.latitude, editedSite.longitude,
+        pool.query(updateSiteQueryText, [editedSite.address, coords[0], coords[1],
         editedSite.site_name, editedSite.region_id, editedSite.language_id, siteID])
             .then(() => {
                 res.sendStatus(200);
@@ -102,12 +111,12 @@ router.put('/:id', (req, res) => {
     } else {
         res.sendStatus(403);
     } //end if conditional 
+}; //End GEOTAG async function for PUT
 
-}); //End Site PUT
 
 
 //DELETE a site
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     const siteID = req.params.id;
 
     //security - for admin use only

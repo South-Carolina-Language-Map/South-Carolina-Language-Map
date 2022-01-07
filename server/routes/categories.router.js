@@ -1,4 +1,7 @@
 const express = require('express');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
@@ -19,7 +22,7 @@ router.get('/', (req, res) => {
 
 
 //POST - add new category
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   console.log(req.user)
   const name = req.body.name;
 
