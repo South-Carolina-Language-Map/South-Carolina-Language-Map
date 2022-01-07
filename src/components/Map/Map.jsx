@@ -12,7 +12,7 @@ import ReactMapGL, {
   LinearInterpolator,
   WebMercatorViewport
 } from 'react-map-gl';
-import { easeCubic } from 'd3-ease';
+import { easeCubic, easeSinIn, easeSinOut } from 'd3-ease';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map() {
@@ -25,6 +25,8 @@ function Map() {
   //state to track dark mode (not currently utilized)
   const [darkMode, setDarkMode] = useState(true);
   const toggleDark = () => { setDarkMode(!darkMode) };
+  const flyDuration = 3000;
+  const zoomDuration = 500;
 
   //set initial viewport
   const [viewport, setViewport] = useState({
@@ -32,9 +34,11 @@ function Map() {
     longitude: -81,
     width: "fit",
     height: "100vh",
-    zoom: 6.0
+    zoom: 6.0,
+    transitionDuration: flyDuration,
+    transitionInterpolator: new LinearInterpolator(),
+    transitionEasing: easeCubic
   });
-  const [targetZoom, setTargetZoom] = useState(viewport.zoom);
 
   const resetView = () => {
     const bounds = getSiteBounds(sites);
@@ -48,7 +52,7 @@ function Map() {
       longitude,
       latitude,
       zoom,
-      transitionDuration: 3000,
+      transitionDuration: flyDuration,
       transitionInterpolator: new LinearInterpolator(),
       transitionEasing: easeCubic
     });
@@ -56,8 +60,17 @@ function Map() {
 
   const adjustZoom = (direction) => {
     const adjustment = direction === 'in' ? 1 : -1;
-    // setTargetZoom(targetZoom + adjustment);
-    setViewport({...viewport, zoom: viewport.zoom + adjustment});
+    let newZoom = viewport.zoom + adjustment;
+    if (newZoom > 24) {
+      newZoom = 24;
+    } else if (newZoom < 0) {
+      newZoom = 0;
+    }
+    setViewport({ ...viewport, 
+      transitionEasing: easeSinOut, 
+      zoom: newZoom,
+      transitionDuration: zoomDuration,
+    });
   }
 
   const getSiteBounds = (sitesArr) => {
@@ -104,7 +117,6 @@ function Map() {
   useEffect(() => {
     if (sites.length > 0) {
       resetView();
-      setTargetZoom(viewport.zoom);
     }
   }, [sites]);
 
@@ -140,12 +152,12 @@ function Map() {
         {/* Render Map Control Buttons */}
         <div className='bottom-right'>
           <Fab color="primary" aria-label="zoom in"
-          onClick={() => adjustZoom('in')}>
+            onClick={() => adjustZoom('in')}>
             <ZoomInIcon />
           </Fab>
-          <br/>
+          <br />
           <Fab color="primary" aria-label="zoom out"
-          onClick={() => adjustZoom('out')}>
+            onClick={() => adjustZoom('out')}>
             <ZoomOutIcon />
           </Fab>
         </div>
