@@ -9,11 +9,10 @@ import { Grid, Typography } from "@mui/material";
 import NavLang from "../NavLang/NavLang.jsx";
 import NavExploreItem from "../NavExploreItem/NavExploreItem";
 
-// Local Imports
-// import NavExploreItem from "../NavExploreItem/NavExploreItem";
-
 function NavExplorer() {
+  let displayLangInfo;
   const list = useSelector((store) => store.viewReducer.listReducer);
+  const sites = useSelector((store) => store.viewReducer.sitesReducer);
   const listType = useSelector((store) => store.viewReducer.listTypeReducer);
   const dispatch = useDispatch();
   const [activeKey, setActiveKey] = useState("name");
@@ -24,8 +23,6 @@ function NavExplorer() {
     },
   ]);
 
-  const sites = useSelector((store) => store.viewReducer.sitesReducer);
-  let displayLangInfo;
   // Check if all visible sites are the same language
   if (
     sites.length === 1 ||
