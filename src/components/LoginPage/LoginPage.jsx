@@ -1,50 +1,83 @@
 // React Imports
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 // Local Imports
 import LoginForm from "../LoginForm/LoginForm";
 
 // MUI Imports
-import {
-  Box,
-  Grid,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 
 function LoginPage() {
   const history = useHistory();
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const errors = useSelector((store) => store.errors);
+
+  const login = (event) => {
+    event.preventDefault();
+
+    if (username && password) {
+      dispatch({
+        type: "LOGIN",
+        payload: {
+          username: username,
+          password: password,
+        },
+      });
+    } else {
+      dispatch({ type: "LOGIN_INPUT_ERROR" });
+    }
+  }; // end login
 
   return (
-      <Box>
-        <Grid container sx={{ m: 2, alignContent: "center" }}>
+    <center>
+      <Typography variant="h4" sx={{ mt: 2 }}>
+        South Carolina Language Map
+      </Typography>
+      <Paper elevation={5} sx={{ m: 5 }}>
+        <Grid container sx={{ p: 2, alignContent: "center" }}>
           {/*  */}
-          <Grid item xs={12} sx={{ textAlign: "center" }}>
-            <Typography variant="h5">LOG IN</Typography>
-            <Typography variant="h6">to continue to the Admin side.</Typography>
-          </Grid>
-          {/*  */}
-          <Grid item xs={12}>
-            <LoginForm />
+          <Grid item xs={12} sx={{ mb: 2, textAlign: "center" }}>
+            <Typography variant="h5" sx={{color:"#00000"}}>
+              <strong>LOG IN</strong>
+            </Typography>
+            <Typography variant="h6">To continue to Admin</Typography>
           </Grid>
           {/*  */}
           <Grid item xs={12}>
             <Typography>Username:</Typography>
-            <TextField label="Required" variant="filled" required />
-          </Grid>
-          {/*  */}
-          <Grid item xs={12} sx={{ mt: 4, mb: 5 }}>
-            <Typography>Password:</Typography>
             <TextField
+              required
               label="Required"
               variant="filled"
-              type="password"
+              value={username}
+              onChange={(event) => setUsername(event.target.value)}
+            />
+          </Grid>
+          {/*  */}
+          <Grid item xs={12} sx={{ mt: 4, mb: 4 }}>
+            <Typography>Password:</Typography>
+            <TextField
               required
+              type="password"
+              label="Required"
+              variant="filled"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
           </Grid>
           <Grid item xs={12}>
-            <input className="btn" type="submit" name="submit" value="Log In" />
+            <Button
+              size="large"
+              sx={{ mb: 2 }}
+              onClick={login}
+              variant="contained"
+            >
+              Log In
+            </Button>
           </Grid>
           {/*  */}
           <Grid item xs={12}>
@@ -59,7 +92,8 @@ function LoginPage() {
             </button>
           </Grid>
         </Grid>
-      </Box>
+      </Paper>
+    </center>
   );
 }
 

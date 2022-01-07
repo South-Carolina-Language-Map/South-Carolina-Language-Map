@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
 import { Box, Grid, Typography } from "@mui/material";
-import NavExploreItem from "../NavExploreItem/NavExploreItem";
 
 // Local Imports
 import NavExploreItem from "../NavExploreItem/NavExploreItem";
