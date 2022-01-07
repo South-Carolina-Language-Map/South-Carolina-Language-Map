@@ -10,9 +10,7 @@ import AdminHomeForm from "./AdminHomeForm";
 import {
   Grid,
   Table,
-  Button,
   TableRow,
-  TextField,
   TableBody,
   TableCell,
   TableHead,
@@ -31,7 +29,7 @@ function AdminHome() {
  
 
   // Grabbing needed data from the store:
-  const regions = useSelector((store) => store.viewReducer.listReducer);
+  const regions = useSelector((store) => store.adminReducer.adminRegionsReducer);
   const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
   const languages = useSelector((store) => store.adminReducer.adminLanguagesReducer);
 
