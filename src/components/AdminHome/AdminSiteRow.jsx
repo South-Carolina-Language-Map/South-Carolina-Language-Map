@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
 import {
@@ -11,8 +11,13 @@ import {
     TextField
 } from "@mui/material";
 
+//local files
+import AutoComplete from "../AutoComplete/AutoComplete";
+
 
 export default function AdminSiteRow({ regions, site, languages }) {
+   //Reducer set up for NewSite values for language and region ids
+  const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
 
     //local state
     const [handleEditMode, setHandleEditMode] = useState(false)
@@ -29,6 +34,7 @@ export default function AdminSiteRow({ regions, site, languages }) {
     // activates PUT for this site ID
     const handleEdit = () => {
         console.log('New Edited thing', edit)
+        console.log(dropDownValues)
     }
 
 
@@ -45,15 +51,14 @@ export default function AdminSiteRow({ regions, site, languages }) {
     return (
         <>
             {!handleEditMode ?
+            //non-edit view
                 <TableRow hover role="checkbox" tabIndex={-1}>
                     <TableCell>{site.site_name}</TableCell>
                     <TableCell>{site.address}</TableCell>
                     <TableCell>
                         {/* Getting the name of a specific region from the sites included region id */}
                         {regions?.map((region) => {
-                            console.log('==========>', region)
                             if (region.id === site.region_id) {
-                                console.log('==================>', region.name)
                                 return region.name;
                             }
                         })}
@@ -62,7 +67,6 @@ export default function AdminSiteRow({ regions, site, languages }) {
                         {/* Getting the name of a specific region from the sites included region id */}
                         {languages?.map((language) => {
                             if (language.id === site.language_id) {
-                                console.log('==================>', language.language)
                                 return language.language;
                             }
                         })}
@@ -84,35 +88,40 @@ export default function AdminSiteRow({ regions, site, languages }) {
                 </TableRow>
 
                 :
+                // edit view
                 <TableRow hover role="checkbox" tabIndex={-1}>
                     <TableCell>
                         <TextField
                             id="standard-basic"
                             label="Standard"
                             variant="standard"
-                            value={site.site_name}
+                            value={edit.site_name}
                             onChange={(event) =>
                                 setEdit({ ...edit, site_name: event.target.value })}>
-
                         </TextField>
                     </TableCell>
+
                     <TableCell>
-                          <TextField
+                        <TextField
                             id="standard-basic"
                             label="Standard"
                             variant="standard"
-                            value={site.address}
+                            value={edit.address}
                             onChange={(event) =>
                                 setEdit({ ...edit, address: event.target.value })}>
-
                         </TextField>
                     </TableCell>
+
                     <TableCell>
-                        placeholder
+                        <AutoComplete
+                            table="region" />
                     </TableCell>
+
                     <TableCell>
-                        placeholder
+                        <AutoComplete
+                            table="language" />
                     </TableCell>
+
                     <TableCell>
                         <Stack direction="row" spacing={1}>
                             <Button
