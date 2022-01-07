@@ -36,7 +36,11 @@ function AdminHomeForm() {
       region_id: dropDownValues.region_id,
     };
     //sends action to saga with newSite object to create a new GeoTag
-    dispatch({ type: "ADD_SITE", payload: newSite });
+    dispatch({ type: 'ADD_SITE', payload: newSite });
+    
+    //still need to empty auto completes
+
+    //empty inputs
     setLocation(base);
   };
 
