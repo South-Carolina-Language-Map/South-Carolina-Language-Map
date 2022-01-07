@@ -46,6 +46,15 @@ export default function AdminCategoryRow({ row }) {
             payload: row.id
         })
     };
+    //Mui Snackbar
+    const [open, setOpen] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     return (
         <>
@@ -74,10 +83,10 @@ export default function AdminCategoryRow({ row }) {
                             id="standard-basic"
                             label="Standard"
                             variant="standard"
-                            value={edit.name} 
-                            onChange={(event)=> 
-                                setEdit({...edit, name: event.target.value}) }
-                            />
+                            value={edit.name}
+                            onChange={(event) =>
+                                setEdit({ ...edit, name: event.target.value })}
+                        />
                     </TableCell>
                     <TableCell align="center">
                         <Button
@@ -87,11 +96,11 @@ export default function AdminCategoryRow({ row }) {
                         >
                             Submit
                         </Button>
-                        <Button variant="contained" onClick={() =>setHandleEditMode(false)}>
+                        <Button variant="contained" onClick={() => setHandleEditMode(false)}>
                             Cancel
                         </Button>
                     </TableCell>
-                </TableRow> }
+                </TableRow>}
         </>
     )
 }//end adminCategoryRow
