@@ -21,19 +21,20 @@ import {
 import PublishIcon from "@mui/icons-material/Publish";
 import AdminSiteRow from "./AdminSiteRow";
 
-
 function AdminHome() {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
- 
 
   // Grabbing needed data from the store:
-  const regions = useSelector((store) => store.adminReducer.adminRegionsReducer);
+  const regions = useSelector(
+    (store) => store.adminReducer.adminRegionsReducer
+  );
   const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
-  const languages = useSelector((store) => store.adminReducer.adminLanguagesReducer);
+  const languages = useSelector(
+    (store) => store.adminReducer.adminLanguagesReducer
+  );
 
-  
   // The below 2 functions allow there to be multiple pages on the table.
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -47,16 +48,16 @@ function AdminHome() {
   useEffect(() => {
     dispatch({ type: "FETCH_SITES" });
     dispatch({ type: "FETCH_REGIONS" });
-    dispatch({ type: "FETCH_LANGUAGES"});
+    dispatch({ type: "FETCH_LANGUAGES" });
   }, []);
 
-  console.log(sites)
+  console.log(sites);
   return (
     <>
       <Typography>Add New Site</Typography>
-      <Grid container spacing={.5}>
+      <Grid container spacing={0.5}>
         <Grid item>
-          <AdminHomeForm/>
+          <AdminHomeForm />
         </Grid>
       </Grid>
       <Grid container sx={{ pt: 3 }}>
@@ -73,19 +74,20 @@ function AdminHome() {
                   <TableCell>Edit//Delete</TableCell>
                 </TableRow>
               </TableHead>
-             
-                {sites
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((site) => {
-                    return (
-                      <TableBody key={site.id}>
+
+              {sites
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((site) => {
+                  return (
+                    <TableBody key={site.id}>
                       <AdminSiteRow
-                      site={site}
-                      regions={regions}
-                      languages={languages}/>
-                      </TableBody>
-                    );
-                  })}
+                        site={site}
+                        regions={regions}
+                        languages={languages}
+                      />
+                    </TableBody>
+                  );
+                })}
             </Table>
           </TableContainer>
           <TablePagination

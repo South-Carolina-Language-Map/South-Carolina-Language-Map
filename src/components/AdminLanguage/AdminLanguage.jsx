@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Grid,
   Table,
-  Button,
   TableRow,
   TableBody,
   TableCell,
@@ -19,7 +18,6 @@ import {
 //components
 import AdminLanguageRow from "./AdminLanguageRow";
 
-
 function AdminLanguage() {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
@@ -29,7 +27,6 @@ function AdminLanguage() {
   const languages = useSelector(
     (store) => store.adminReducer.adminLanguagesReducer
   );
-
 
   // The below 2 functions allow there to be multiple pages on the table.
   const handleChangePage = (event, newPage) => {
@@ -54,31 +51,32 @@ function AdminLanguage() {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
-                <TableCell >Glottocode</TableCell>
-                <TableCell >Global Speakers</TableCell>
-                <TableCell >SC Speakers</TableCell>
-                <TableCell >Endonym</TableCell>
-                <TableCell >Edit/Delete</TableCell>
+                <TableCell>Glottocode</TableCell>
+                <TableCell>Global Speakers</TableCell>
+                <TableCell>SC Speakers</TableCell>
+                <TableCell>Endonym</TableCell>
+                <TableCell>Edit/Delete</TableCell>
               </TableRow>
             </TableHead>
-            
-              {languages
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((language) => {
-                  return (
-                    <TableBody key={language.id}>
+
+            {languages
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((language) => {
+                return (
+                  <TableBody key={language.id}>
                     <AdminLanguageRow language={language} />
-                    </TableBody>
-                  );})}
+                  </TableBody>
+                );
+              })}
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
+          page={page}
           component="div"
           count={languages.length}
           rowsPerPage={rowsPerPage}
-          page={page}
           onPageChange={handleChangePage}
+          rowsPerPageOptions={[10, 25, 100]}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Grid>

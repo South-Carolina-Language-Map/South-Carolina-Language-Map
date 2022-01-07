@@ -6,14 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Grid,
   Table,
-  Button,
   TableRow,
   TableBody,
   TableCell,
   TableHead,
 } from "@mui/material";
 
-//components 
+//components
 import AdminApprovalRow from "./AdminApprovalRow";
 
 function AdminApprovals() {
@@ -21,7 +20,6 @@ function AdminApprovals() {
   const approvals = useSelector(
     (store) => store.adminReducer.adminApprovalsReducer
   );
-  
 
   useEffect(() => {
     dispatch({ type: "FETCH_UNAPPROVED" });
@@ -40,35 +38,11 @@ function AdminApprovals() {
               <TableCell align="center">Approve/Decline</TableCell>
             </TableRow>
           </TableHead>
-            {approvals?.map((user) => (
-              <TableBody key ={user.id}>
-                <AdminApprovalRow user={user}/>
-              {/* <TableRow>
-                <TableCell component="th" scope="row" align="center">
-                  {user.fullName}
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
-                  {user.username}
-                </TableCell>
-                <TableCell component="th" scope="row" align="center">
-                  {user.email}
-                </TableCell>
-                <TableCell align="center">
-                  <Button
-                    sx={{ mr: 1 }}
-                    variant="contained"
-                    onClick={handleApproval}
-                  >
-                    Approve
-                  </Button>
-                  <Button variant="contained" onClick={handleRejection}>
-                    Decline
-                  </Button>
-                </TableCell>
-              </TableRow> */}
-              </TableBody>
-            ))}
-        
+          {approvals?.map((user) => (
+            <TableBody key={user.id}>
+              <AdminApprovalRow user={user} />
+            </TableBody>
+          ))}
         </Table>
       </Grid>
       <Grid item xs={1} />
