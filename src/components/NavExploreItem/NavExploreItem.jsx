@@ -75,6 +75,8 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
     }
   };
 
+  console.log(listObj);
+
   return (
     <Grid item xs={12} onClick={handleClick}>
       <Box
