@@ -161,9 +161,10 @@ function Map() {
                   TransitionComponent={Zoom}
                   placement="top"
                   arrow>
-                  <div className={"dot" + ' ' + assignClasses(site)}>
-                    {/* <div className="dot-info">{site.language}</div> */}
-                  </div>
+                  <div 
+                  className={"dot" + ' ' + assignClasses(site)}
+                  // onClick={selectSite}
+                  ></div>
                 </Tooltip>
               </Marker>
             )
