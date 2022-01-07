@@ -120,8 +120,6 @@ function Map() {
     }
   }, [sites]);
 
-  console.log(viewport.transitionEasing)
-
   return (
     <div className="App">
 
