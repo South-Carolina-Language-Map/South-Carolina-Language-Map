@@ -1,9 +1,10 @@
 // React-related Imports
 import * as React from "react";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+// Local Imports
+import AdminSiteRow from "./AdminSiteRow";
 import AdminHomeForm from "./AdminHomeForm";
 
 // MUI Imports
@@ -19,7 +20,6 @@ import {
   TablePagination,
 } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
-import AdminSiteRow from "./AdminSiteRow";
 
 function AdminHome() {
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ function AdminHome() {
       <Grid container sx={{ pt: 3 }}>
         <Grid item xs={1} />
         <Grid item xs={10}>
-          <TableContainer sx={{ maxHeight: 440 }}>
+          <TableContainer sx={{ maxHeight: 550 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>

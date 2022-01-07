@@ -46,7 +46,7 @@ function AdminLanguage() {
     <Grid container sx={{ pt: 3 }}>
       <Grid item xs={1} />
       <Grid item xs={10}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <TableContainer sx={{ maxHeight: 675 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
