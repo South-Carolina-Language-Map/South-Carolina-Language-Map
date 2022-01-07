@@ -3,7 +3,7 @@ import "./Search.css";
 import { useState } from "react";
 
 // Functionality && Tools imports
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import encodeUrlStr from "../../utils/encodeUrlStr";
 
 // MUI Imports
@@ -23,11 +23,24 @@ import {
 import TabPanel from "@mui/lab/TabPanel";
 import TabContext from "@mui/lab/TabContext";
 import SearchIcon from "@mui/icons-material/Search";
+import NavLang from "../NavLang/NavLang";
+import { display } from "@mui/system";
 
 function Search() {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
   const [checked, setChecked] = useState("language");
+  let displayLangInfo = false;
+
+  const sites = useSelector(store => store.viewReducer.sitesReducer);
+
+  // Check if all visible sites are the same language
+  if (sites.length === 1
+    || sites.filter(site =>
+      sites[0].language === site.language).length === sites.length
+  ) {
+    displayLangInfo = true;
+  }
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
@@ -169,6 +182,7 @@ function Search() {
         </Grid>
 
         <Grid item xs={12}>
+          {displayLangInfo && <NavLang language={sites[0].language}></NavLang>}
           <Paper elevation={8} sx={{ textAlign: "center", height: 2 / 2 }}>
             <Typography variant="h5">Language Catagories</Typography>
 
