@@ -15,6 +15,7 @@ import {
   TableHead,
   TableContainer,
   TablePagination,
+  Typography,
 } from "@mui/material";
 
 //components
@@ -46,13 +47,26 @@ function AdminLanguage() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
-  //functions for dialog
+  //state and functions for form toggle view
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
 
 
   return (
     <Grid container sx={{ pt: 3 }}>
       <Grid item>
-      <LanguageForm/>
+      <Switch
+        checked={checked}
+        onChange={handleChange}
+        inputProps={{ 'aria-label': 'controlled'}}
+        />
+      {checked === true ? 
+      <LanguageForm/> 
+      :
+      <Typography>ADD A NEW LANGUAGE </Typography>}
       </Grid>
       <Grid item xs={1} />
       <Grid item xs={10}>
