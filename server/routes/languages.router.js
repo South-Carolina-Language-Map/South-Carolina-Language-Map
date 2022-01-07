@@ -1,4 +1,7 @@
 const express = require('express');
+const {
+  rejectUnauthenticated,
+} = require('../modules/authentication-middleware');
 const pool = require('../modules/pool');
 const router = express.Router();
 
@@ -38,7 +41,7 @@ router.get('/:id', (req, res) => {
 
 
 //POST new language(1st query) and its examples (2nd query)
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
   const newLanguage = req.body;
   const examples = req.body.examples
 
@@ -105,7 +108,7 @@ router.post('/', (req, res) => {
 }); //end POST
 
 //PUT - edit a language
-router.put('/:id', (req, res) => {
+router.put('/:id', rejectUnauthenticated, (req, res) => {
   const id = req.params.id;
   const updatedLanguage = req.body;
 
@@ -146,7 +149,7 @@ router.put('/:id', (req, res) => {
 
 
 //DELETE a language
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
   const languageID = req.params.id;
 
   //security - for admin use only

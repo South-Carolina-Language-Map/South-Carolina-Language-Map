@@ -40,6 +40,7 @@ function AutoComplete({ table }) {
         newSite: false,
       };
       break;
+  
   }
 
   useEffect(() => {

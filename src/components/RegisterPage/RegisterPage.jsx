@@ -1,32 +1,30 @@
-import React from 'react';
+// React Imports
+import React from "react";
 
-import { useHistory } from 'react-router-dom';
-import RegisterForm from '../RegisterForm/RegisterForm';
+// Local Imports
+import RegisterForm from "../RegisterForm/RegisterForm";
 
-//mui style
-import {
-  Stack,
-  Container,
-  Box
-} from '@mui/material';
+//MUI Imports
+import { Grid, Paper, Typography } from "@mui/material";
 
 function RegisterPage() {
-  const history = useHistory();
-
   return (
-    <Container sx={{ display: 'flex', justifyContent: 'center' }}>
-    <Stack spacing={2}>
-      <RegisterForm />
-      <Box>
-        <button
-          type="button"
-          className="btn btn_asLink"
-          onClick={() => {
-            history.push('/login');
-          }}> Login</button>
-      </Box>
-    </Stack>
-  </Container>
+    <center>
+      <Typography variant="h4" sx={{ mt: 2 }}>
+        South Carolina Language Map
+      </Typography>
+      <Paper elevation={5} sx={{ m: 5 }}>
+        <Grid container sx={{ p: 2, alignContent: "center" }}>
+          <Grid item xs={12} sx={{ mb: 2, textAlign: "center" }}>
+            <Typography variant="h5">
+              <strong>REGISTER</strong>
+            </Typography>
+            <Typography variant="h6">To become an Admin</Typography>
+          </Grid>
+          <RegisterForm />
+        </Grid>
+      </Paper>
+    </center>
   );
 }
 
