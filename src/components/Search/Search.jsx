@@ -182,7 +182,7 @@ function Search() {
         </Grid>
 
         <Grid item xs={12}>
-          {displayLangInfo && <NavLang language={sites[0].language}></NavLang>}
+          {displayLangInfo && <NavLang site={sites[0]}></NavLang>}
           <Paper elevation={8} sx={{ textAlign: "center", height: 2 / 2 }}>
             <Typography variant="h5">Language Catagories</Typography>
 

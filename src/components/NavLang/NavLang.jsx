@@ -1,19 +1,20 @@
 // MUI Imports
 import { Grid, Paper, Typography } from "@mui/material";
 
-function NavLang({ language }) {
-  // let currentLanguage = language;
-  let currentLanguage = {
-    category_id: 1,
-    description: "",
-    endonym: "Yamasee",
-    global_speakers: 10,
-    glottocode: "NA",
-    id: 4,
-    language: "Yamasee",
-    sc_speakers: 20,
-    status: "Historic",
-  };
+function NavLang({ site }) {
+  
+  // let currentLanguage = {
+  //   category_id: 1,
+  //   description: "",
+  //   endonym: "Yamasee",
+  //   global_speakers: 10,
+  //   glottocode: "NA",
+  //   id: 4,
+  //   language: "Yamasee",
+  //   sc_speakers: 20,
+  //   status: "Historic",
+  // };
+  let currentLanguage = site;
 
   return (
     <Grid container>
