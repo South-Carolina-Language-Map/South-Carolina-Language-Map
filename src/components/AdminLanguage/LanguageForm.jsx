@@ -17,7 +17,7 @@ function LanguageForm() {
       global_speakers:"",
       sc_speakers: "",
       category_id: "",
-      examples: [link_text: "", hyperlink: ""]
+      examples: {link_text: "", hyperlink: ""}
   }
   //local state stores the value for category input
   const [newLanguage, setLanguage] = useState(base);
@@ -83,6 +83,20 @@ function LanguageForm() {
         helperText="ex. 2,700,000"
         onChange={(event) => setLanguage({...newLanguage, category_id: event.target.value })}
       /> */}
+      <TextField
+        required
+        id="filled-required"
+        label="Link Title"
+        variant="standard"
+        onChange={(event) => setLanguage({...newLanguage, newLanguage.examples.link_text: event.target.value })}
+      />
+      <TextField
+        required
+        id="filled-required"
+        label="Hyperlink"
+        variant="standard"
+        onChange={(event) => setLanguage({...newLanguage, newLanguage.examples.link_text: event.target.value })}
+      />
       <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
         Submit
       </Button>
