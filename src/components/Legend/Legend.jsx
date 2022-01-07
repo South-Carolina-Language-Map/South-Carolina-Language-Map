@@ -8,7 +8,7 @@ import {
 function Legend(){
     return (
         <Paper elevation={8} sx={{ textAlign: "center", height: 2 / 2 }}>
-              <Typography variant="h5">Language Catagories</Typography>
+              <Typography variant="h5">Language Categories</Typography>
 
               <br />
 
