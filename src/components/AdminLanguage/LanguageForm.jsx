@@ -3,12 +3,19 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Grid, TextField, Button, Typography } from "@mui/material";
+import { Grid, TextField, Button, Typography, Autocomplete } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
+
+import AutoComplete from "../AutoComplete/AutoComplete";
 
 function LanguageForm() {
     //initialize dispatch 
   const dispatch = useDispatch();
+
+  //bring in category ID stored in reducer
+  const category = useSelector((store) => store.adminReducer.newLanguageCategoryIDReducer);
+
+  //create empty object to store the values of the form
   const base = {
       language: "",
       glottocode: "",
@@ -16,13 +23,13 @@ function LanguageForm() {
       endonym: "",
       global_speakers:"",
       sc_speakers: "",
-      category_id: "",
+      category_id: category.category_id,
       examples: {link_text: "", hyperlink: ""}
   }
   //local state stores the value for category input
   const [newLanguage, setLanguage] = useState(base);
   return (
-    //form sends object with one key value pair containing new category name    
+    //form sends object with multiple values containing new language and associated values in DB   
     <form
       onSubmit={() => dispatch({ type: "ADD_LANGUAGE", payload: newLanguage })}
     >
@@ -71,31 +78,23 @@ function LanguageForm() {
         id="filled-required"
         label="SC Speakers"
         variant="standard"
-        helperText="ex. 2,700,000"
+        helperText="ex. 3,772"
         onChange={(event) => setLanguage({...newLanguage, sc_speakers: event.target.value })}
       />
-      {/* AutoComplete FEATURE */}
-      {/* <TextField
-        required
-        id="filled-required"
-        label="Category"
-        variant="standard"
-        helperText="ex. 2,700,000"
-        onChange={(event) => setLanguage({...newLanguage, category_id: event.target.value })}
-      /> */}
+     <AutoComplete table="category"/>
       <TextField
         required
         id="filled-required"
         label="Link Title"
         variant="standard"
-        onChange={(event) => setLanguage({...newLanguage, newLanguage.examples.link_text: event.target.value })}
+        onChange={(event) => setLanguage({...newLanguage, examples.link_text: event.target.value })}
       />
       <TextField
         required
         id="filled-required"
         label="Hyperlink"
         variant="standard"
-        onChange={(event) => setLanguage({...newLanguage, newLanguage.examples.link_text: event.target.value })}
+        onChange={(event) => setLanguage({...newLanguage, examples.link_text: event.target.value })}
       />
       <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
         Submit

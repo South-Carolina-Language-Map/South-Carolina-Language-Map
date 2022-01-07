@@ -5,8 +5,6 @@ import { Autocomplete } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import adminRegionReducer from "../../redux/reducers/adminReducers/admin.region.reducer";
-
 function AutoComplete({ table }) {
   const dispatch = useDispatch();
   let properties;
@@ -38,7 +36,7 @@ function AutoComplete({ table }) {
         set: "SET_NEW_CATEGORY",
         reducer: "adminCategoriesReducer",
         option: "name",
-        label: "region",
+        label: "category",
         newSite: false,
       };
       break;
@@ -54,7 +52,6 @@ function AutoComplete({ table }) {
   );
 
   //handle region input and store the associated ID to reducer
-
   const handleStoreId = (event, value) => {
     if (properties.newSite) {
       dispatch({ type: properties.set, payload: value.id });

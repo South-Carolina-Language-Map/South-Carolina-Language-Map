@@ -14,6 +14,7 @@ import queriesReducer from './viewReducers/view.queries.reducer';
 import sitesReducer from './viewReducers/view.sites.reducer';
 import newSiteReducer from './adminReducers/admin.newSite.reducer';
 import adminRegionsReducer from './adminReducers/admin.region.reducer';
+import newLanguageCategoryIDReducer from './adminReducers/admin.newLanguageCategoryID.reducer';
 
 import sideBarView from './sideBarView.reducer';
 import adminView from './adminView.reducer';
@@ -28,6 +29,7 @@ const adminReducer = combineReducers({
   adminCategoriesReducer,
   adminApprovalsReducer,
   adminEditReducer,
+  newLanguageCategoryIDReducer,
   newSiteReducer,
   adminRegionsReducer
 })
