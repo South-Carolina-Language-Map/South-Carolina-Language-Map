@@ -8,6 +8,7 @@ import {
   Grid,
   Table,
   Button,
+  Switch,
   TableRow,
   TableBody,
   TableCell,
@@ -19,6 +20,7 @@ import {
 //components
 import AdminLanguageRow from "./AdminLanguageRow";
 import LanguageDialog from "./LanguageDialog";
+import LanguageForm from "./LanguageForm";
 
 
 function AdminLanguage() {
@@ -30,8 +32,6 @@ function AdminLanguage() {
   const languages = useSelector(
     (store) => store.adminReducer.adminLanguagesReducer
   );
-
-
   // The below 2 functions allow there to be multiple pages on the table.
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -47,21 +47,12 @@ function AdminLanguage() {
   }, []);
 
   //functions for dialog
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {setOpen(true);};
-  const handleClose = () => {setOpen(false);};
+
 
   return (
     <Grid container sx={{ pt: 3 }}>
-      <Grid>
-      {/* <Button variant="outlined" onClick={() => setOpen(true)}>
-        Open form dialog
-      </Button> */}
-      <LanguageDialog
-      handleClose={handleClose}
-      handleClickOpen={handleClickOpen}
-      setOpen={setOpen}
-      />
+      <Grid item>
+      <LanguageForm/>
       </Grid>
       <Grid item xs={1} />
       <Grid item xs={10}>
