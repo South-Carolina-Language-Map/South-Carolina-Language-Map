@@ -47,16 +47,16 @@ function AdminLanguage() {
   }, []);
 
   //functions for dialog
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleClickOpen = () => {setOpen(true);};
   const handleClose = () => {setOpen(false);};
 
   return (
     <Grid container sx={{ pt: 3 }}>
       <Grid>
-      <Button variant="outlined" onClick={() => handleClickOpen}>
+      {/* <Button variant="outlined" onClick={() => setOpen(true)}>
         Open form dialog
-      </Button>
+      </Button> */}
       <LanguageDialog
       handleClose={handleClose}
       handleClickOpen={handleClickOpen}

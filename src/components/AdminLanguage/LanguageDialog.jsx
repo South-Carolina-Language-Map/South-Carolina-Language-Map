@@ -12,7 +12,7 @@ function LanguageDialog(props) {
   //   setOpen(false);
   // };
 
-  const {handleClose, setOpen}
+  const {handleClose, setOpen} = props;
 //   const [open, setOpen] = React.useState(false);
 
   return (
