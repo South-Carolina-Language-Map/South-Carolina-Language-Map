@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useEffect} from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 // MUI Imports
@@ -12,13 +12,18 @@ import {
 
 export default function AdminSiteRow({ regions, site }) {
 
+    //local state
+    const [handleEditMode, setHandleEditMode] = useState(false)
+    const [edit, setEdit] = useState(site)
+
     //hooks
     const dispatch = useDispatch();
 
     // PUT for this site ID
     const handleEdit = () => {
-        console.log("Edit", site);
+        console.log("Edit", site, regions);
     };
+
 
     //DELETE for this site ID
     const handleDelete = () => {
@@ -39,6 +44,7 @@ export default function AdminSiteRow({ regions, site }) {
                     {/* Getting the name of a specific region from the sites included region id */}
                     {regions?.map((region) => {
                         if (region.id === site.region_id) {
+                            console.log('==================>',region.name)
                             return region.name;
                         }
                     })}

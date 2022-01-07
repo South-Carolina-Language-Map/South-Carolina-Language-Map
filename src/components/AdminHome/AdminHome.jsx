@@ -28,10 +28,12 @@ function AdminHome() {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
+ 
 
   // Grabbing needed data from the store:
   const regions = useSelector((store) => store.viewReducer.listReducer);
   const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
+  const languages = useSelector((store) => store.adminReducer.adminLanguagesReducer);
 
   
   // The below 2 functions allow there to be multiple pages on the table.
@@ -47,6 +49,7 @@ function AdminHome() {
   useEffect(() => {
     dispatch({ type: "FETCH_EXPLORE_SITES" });
     dispatch({ type: "FETCH_REGIONS" });
+    dispatch({ type: "FETCH_LANGUAGES"});
   }, []);
 
   return (
@@ -79,7 +82,8 @@ function AdminHome() {
                       <TableBody key={site.id}>
                       <AdminSiteRow
                       site={site}
-                      regions={regions}/>
+                      regions={regions}
+                      languages={languages}/>
                       </TableBody>
                     );
                   })}
