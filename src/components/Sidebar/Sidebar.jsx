@@ -11,6 +11,8 @@ function Sidebar() {
   let currentViewHeaderText = "Info Page";
   const sideBarView = useSelector((store) => store.sideBarView);
 
+
+  // Render the sidebar contents based on selected lower nav tab
   switch (sideBarView) {
     case "search":
       currentView = <Search />;
@@ -43,7 +45,7 @@ function Sidebar() {
           {currentViewHeaderText}
         </Typography>
       </Box>
-      <Box  style={{ maxHeight: 650, overflow: "auto" }}>
+      <Box  style={{ maxHeight: window.innerHeight - 130, overflow: "auto" }}>
         {currentView}
       </Box>
       <BottomNav />

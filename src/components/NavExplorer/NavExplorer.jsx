@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import NavExploreItem from '../NavExploreItem/NavExploreItem';
-
+import NavLang from '../NavLang/NavLang.jsx';
 
 
 function NavExplorer() {
@@ -18,6 +18,17 @@ function NavExplorer() {
     listType: listType || 'DEFAULT',
   }]);
 
+  const sites = useSelector(store => store.viewReducer.sitesReducer);
+  let displayLangInfo;
+  // Check if all visible sites are the same language
+  if (sites.length === 1
+    || (sites.length > 0 && 
+      sites.filter(site =>
+      sites[0].language === site.language).length === sites.length)
+  ) {
+    displayLangInfo = true;
+  }
+
   useEffect(() => {
     dispatch({type: 'SET_LIST_DEFAULT'});
   },[]);
@@ -26,7 +37,9 @@ function NavExplorer() {
 
   return (
     <>
-      
+      {displayLangInfo &&
+        <NavLang site={sites[0]}></NavLang>
+      }
       <Grid container spacing={2}>
         {list && list.map((listObj, i) => {
           return <NavExploreItem key={i} listObj={listObj} 
