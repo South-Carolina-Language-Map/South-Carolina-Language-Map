@@ -3,9 +3,6 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-// Local Imports
-import LoginForm from "../LoginForm/LoginForm";
-
 // MUI Imports
 import { Box, Button, Grid, Paper, TextField, Typography } from "@mui/material";
 
@@ -41,17 +38,17 @@ function LoginPage() {
         <Grid container sx={{ p: 2, alignContent: "center" }}>
           {/*  */}
           <Grid item xs={12} sx={{ mb: 2, textAlign: "center" }}>
-            <Typography variant="h5" sx={{ color: "#00000" }}>
+            <Typography variant="h5">
               <strong>LOG IN</strong>
             </Typography>
             <Typography variant="h6">To continue to Admin</Typography>
           </Grid>
           {/*  */}
           <Grid item xs={12}>
-            <Typography>Username:</Typography>
+            <Typography>Username</Typography>
             <TextField
               required
-              label="Required"
+              label="required"
               variant="filled"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
@@ -59,11 +56,11 @@ function LoginPage() {
           </Grid>
           {/*  */}
           <Grid item xs={12} sx={{ mt: 4, mb: 4 }}>
-            <Typography>Password:</Typography>
+            <Typography>Password</Typography>
             <TextField
               required
               type="password"
-              label="Required"
+              label="required"
               variant="filled"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
