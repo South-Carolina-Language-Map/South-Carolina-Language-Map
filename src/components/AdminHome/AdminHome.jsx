@@ -45,7 +45,7 @@ function AdminHome() {
   };
 
   useEffect(() => {
-    dispatch({ type: "FETCH_EXPLORE_SITES" });
+    dispatch({ type: "FETCH_SITES" });
     dispatch({ type: "FETCH_REGIONS" });
     dispatch({ type: "FETCH_LANGUAGES"});
   }, []);

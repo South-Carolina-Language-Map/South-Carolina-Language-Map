@@ -5,16 +5,36 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, TextField, Button, Typography } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 function CategoryForm() {
     //initialize dispatch 
   const dispatch = useDispatch();
   //local state stores the value for category input
   const [newCategory, setCategory] = useState("");
+
+   //Mui Snackbar
+   const [open, setOpen] = useState(false);
+
+   const handleClose = (event, reason) => {
+       if (reason === 'clickaway') {
+           return;
+       }
+       setOpen(false);
+   };
+
+   const handleSubmit = () => {dispatch({ type: "ADD_CATEGORY", 
+   payload: newCategory })
+   setOpen(true);
+  }
+
   return (
     //form sends object with one key value pair containing new category name    
+  <>
     <form
-      onSubmit={() => dispatch({ type: "ADD_CATEGORY", payload: newCategory })}
+  
+      onSubmit={(handleSubmit)}
     >
       <Typography>Add a new category!</Typography>
       <TextField
@@ -29,6 +49,13 @@ function CategoryForm() {
         Submit
       </Button>
     </form>
+    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Category has been added.
+                </Alert>
+            </Snackbar>
+   </>
+    
   );
 }
 

@@ -7,7 +7,9 @@ import {
     Button,
     TableRow,
     TableCell,
-    TextField
+    TextField,
+    Snackbar,
+    Alert
 } from "@mui/material";
 
 export default function AdminCategoryRow({ row }) {
@@ -33,6 +35,7 @@ export default function AdminCategoryRow({ row }) {
             type: 'UPDATE_CATEGORY',
             payload: edit
         })
+        setOpen(true);
         //close edit mode
         setHandleEditMode(false);
     };
@@ -45,6 +48,15 @@ export default function AdminCategoryRow({ row }) {
             type: 'DELETE_CATEGORY',
             payload: row.id
         })
+    };
+    //Mui Snackbar
+    const [open, setOpen] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
     };
 
     return (
@@ -74,10 +86,10 @@ export default function AdminCategoryRow({ row }) {
                             id="standard-basic"
                             label="Standard"
                             variant="standard"
-                            value={edit.name} 
-                            onChange={(event)=> 
-                                setEdit({...edit, name: event.target.value}) }
-                            />
+                            value={edit.name}
+                            onChange={(event) =>
+                                setEdit({ ...edit, name: event.target.value })}
+                        />
                     </TableCell>
                     <TableCell align="center">
                         <Button
@@ -87,11 +99,17 @@ export default function AdminCategoryRow({ row }) {
                         >
                             Submit
                         </Button>
-                        <Button variant="contained" onClick={() =>setHandleEditMode(false)}>
+                        <Button variant="contained" onClick={() => setHandleEditMode(false)}>
                             Cancel
                         </Button>
                     </TableCell>
-                </TableRow> }
+                </TableRow>}
+
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                    Information has been updated.
+                </Alert>
+            </Snackbar>
         </>
     )
 }//end adminCategoryRow
