@@ -7,10 +7,11 @@ import {
     Button,
     TableRow,
     TableCell,
+    Stack
 } from "@mui/material";
 
 
-export default function AdminSiteRow({ regions, site }) {
+export default function AdminSiteRow({ regions, site, languages }) {
 
     //local state
     const [handleEditMode, setHandleEditMode] = useState(false)
@@ -39,17 +40,26 @@ export default function AdminSiteRow({ regions, site }) {
             <TableRow hover role="checkbox" tabIndex={-1}>
                 <TableCell>{site.site_name}</TableCell>
                 <TableCell>{site.address}</TableCell>
-                <TableCell>{site.language}</TableCell>
-                <TableCell component="th" scope="row" align="center">
+                <TableCell>
                     {/* Getting the name of a specific region from the sites included region id */}
                     {regions?.map((region) => {
                         if (region.id === site.region_id) {
-                            console.log('==================>',region.name)
+                            console.log('==================>', region.name)
                             return region.name;
                         }
                     })}
                 </TableCell>
-                <TableCell align="center">
+                <TableCell>
+                    {/* Getting the name of a specific region from the sites included region id */}
+                    {languages?.map((language) => {
+                        if (language.id === site.language_id) {
+                            console.log('==================>', language.language)
+                            return language.language;
+                        }
+                    })}
+                </TableCell>
+                <TableCell>
+                    <Stack direction="row" spacing={1}>
                     <Button
                         sx={{ mr: 1 }}
                         variant="contained"
@@ -60,6 +70,7 @@ export default function AdminSiteRow({ regions, site }) {
                     <Button variant="contained" onClick={handleDelete}>
                         Delete
                     </Button>
+                    </Stack>
                 </TableCell>
             </TableRow>
 
