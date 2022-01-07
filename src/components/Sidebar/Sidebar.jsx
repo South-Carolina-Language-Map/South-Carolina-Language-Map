@@ -1,8 +1,12 @@
-import { Box } from "@mui/system";
+// React imports
+import { useSelector } from "react-redux";
+
+// MUI Imports
+import { Box, Typography } from "@mui/material";
+
+// Local imports
 import Search from "../Search/Search";
 import NavInfo from "../NavInfo/NavInfo";
-import { useSelector } from "react-redux";
-import { Typography } from "@mui/material";
 import BottomNav from "../BottomNav/BottomNav";
 import NavExplorer from "../NavExplorer/NavExplorer";
 
@@ -16,15 +20,15 @@ function Sidebar() {
   switch (sideBarView) {
     case "search":
       currentView = <Search />;
-      currentViewHeaderText = "Search";
+      currentViewHeaderText = "SEARCH";
       break;
     case "explore":
       currentView = <NavExplorer />;
-      currentViewHeaderText = "Explore";
+      currentViewHeaderText = "EXPLORE";
       break;
     case "info":
       currentView = <NavInfo />;
-      currentViewHeaderText = "About";
+      currentViewHeaderText = "ABOUT";
       break;
     default:
       currentView = <p>There was an Error, please try again later</p>;
@@ -32,20 +36,21 @@ function Sidebar() {
   }
 
   return (
-    <Box sx={{ height: 2 / 2 }}>
+    <Box sx={{ height: 2 / 2, backgroundColor: "background.main" }}>
       <Box>
         <Typography
           variant="h4"
           sx={{
             p: 2,
             textAlign: "center",
-            backgroundColor: "primary.light",
+            color: "background.main",
+            backgroundColor: "primary.main",
           }}
         >
           {currentViewHeaderText}
         </Typography>
       </Box>
-      <Box  style={{ maxHeight: window.innerHeight - 130, overflow: "auto" }}>
+      <Box  style={{ maxHeight: window.innerHeight - 100, overflow: "auto", p:0}}>
         {currentView}
       </Box>
       <BottomNav />
@@ -54,5 +59,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
-// className="scroll"
