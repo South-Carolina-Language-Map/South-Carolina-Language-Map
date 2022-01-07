@@ -41,7 +41,7 @@ function LoginPage() {
         <Grid container sx={{ p: 2, alignContent: "center" }}>
           {/*  */}
           <Grid item xs={12} sx={{ mb: 2, textAlign: "center" }}>
-            <Typography variant="h5" sx={{color:"#00000"}}>
+            <Typography variant="h5" sx={{ color: "#00000" }}>
               <strong>LOG IN</strong>
             </Typography>
             <Typography variant="h6">To continue to Admin</Typography>
@@ -69,6 +69,7 @@ function LoginPage() {
               onChange={(event) => setPassword(event.target.value)}
             />
           </Grid>
+          {/*  */}
           <Grid item xs={12}>
             <Button
               size="large"
