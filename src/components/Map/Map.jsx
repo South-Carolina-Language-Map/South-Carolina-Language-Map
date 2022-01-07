@@ -107,6 +107,10 @@ function Map() {
     }
   }
 
+  const handleResize = () => {
+    console.log('resized');
+  }
+
   // On Load, fetch necessary sites and categories
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL' });
@@ -119,6 +123,8 @@ function Map() {
       resetView();
     }
   }, [sites]);
+
+  window.addEventListener('resize', handleResize);
 
   return (
     <div className="App">
