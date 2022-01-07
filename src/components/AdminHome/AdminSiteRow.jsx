@@ -35,6 +35,17 @@ export default function AdminSiteRow({ regions, site, languages }) {
     const handleEdit = () => {
         console.log('New Edited thing', edit)
         console.log(dropDownValues)
+        dispatch({
+            type: 'UPDATE_SITE',
+            payload: {
+                id: edit.id,
+                address: edit.address,
+                site_name: edit.site_name,
+                region_id: dropDownValues.region_id || edit.regions_id,
+                language_id: dropDownValues.language_id || edit.language_id
+            }
+        })
+        setHandleEditMode(!handleEditMode);
     }
 
 

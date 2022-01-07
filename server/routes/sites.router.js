@@ -70,6 +70,7 @@ router.post('/', (req, res) => createGeoTag(req, res)); //end GET for map sites 
 
 //PUT - edit a site
 router.put('/:id', (req, res) => {
+    console.log('IN SITES PUT ================>', req.body, req.params.id)
     const siteID = req.params.id;
     const editedSite = req.body;
 
