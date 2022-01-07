@@ -44,7 +44,7 @@ function LoginPage() {
             <Typography variant="h6">To continue to Admin</Typography>
           </Grid>
           {/*  */}
-          <form onSubmit={login}>
+          {/* <form onSubmit={login}> */}
             <Grid item xs={12}>
               <Typography>Username</Typography>
               <TextField
@@ -78,7 +78,7 @@ function LoginPage() {
                 Log In
               </Button>
             </Grid>
-          </form>
+          {/* </form> */}
           {/*  */}
           <Grid item xs={12}>
             <button
