@@ -183,7 +183,10 @@ function Search() {
         </Grid>
 
         <Grid item xs={12}>
-          {displayLangInfo ?
+          {/* Replace Legend with single language info if 
+            sites all share the same language
+          */
+          displayLangInfo ?
             <NavLang site={sites[0]}></NavLang>
             :
             <Paper elevation={8} sx={{ textAlign: "center", height: 2 / 2 }}>
