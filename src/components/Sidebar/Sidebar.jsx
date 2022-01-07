@@ -11,6 +11,8 @@ function Sidebar() {
   let currentViewHeaderText = "Info Page";
   const sideBarView = useSelector((store) => store.sideBarView);
 
+
+  // Render the sidebar contents based on selected lower nav tab
   switch (sideBarView) {
     case "search":
       currentView = <Search />;
