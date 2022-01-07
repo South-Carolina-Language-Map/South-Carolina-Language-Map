@@ -18,7 +18,7 @@ import {
 
 //components
 import AdminLanguageRow from "./AdminLanguageRow";
-import LanguageForm from "./LanguageForm";
+import LanguageDialog from "./LanguageDialog";
 
 
 function AdminLanguage() {
@@ -46,15 +46,10 @@ function AdminLanguage() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
+  //functions for dialog
   const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const handleClickOpen = () => {setOpen(true);};
+  const handleClose = () => {setOpen(false);};
 
   return (
     <Grid container sx={{ pt: 3 }}>
@@ -62,7 +57,11 @@ function AdminLanguage() {
       <Button variant="outlined" onClick={() => handleClickOpen}>
         Open form dialog
       </Button>
-      <LanguageForm/>
+      <LanguageDialog
+      handleClose={handleClose}
+      handleClickOpen={handleClickOpen}
+      setOpen={setOpen}
+      />
       </Grid>
       <Grid item xs={1} />
       <Grid item xs={10}>

@@ -7,11 +7,12 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
-function LanguageForm() {
-  const handleClose = () => {
-    setOpen(false);
-  };
+function LanguageDialog(props) {
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
+  const {handleClose, setOpen}
 //   const [open, setOpen] = React.useState(false);
 
   return (
@@ -42,4 +43,4 @@ function LanguageForm() {
   );
 }
 
-export default LanguageForm;
+export default LanguageDialog;
