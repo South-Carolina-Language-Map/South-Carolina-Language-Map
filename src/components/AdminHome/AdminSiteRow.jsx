@@ -33,8 +33,6 @@ export default function AdminSiteRow({ regions, site, languages }) {
 
     // activates PUT for this site ID
     const handleEdit = () => {
-        console.log('New Edited thing', edit)
-        console.log(dropDownValues)
         dispatch({
             type: 'UPDATE_SITE',
             payload: {
@@ -58,7 +56,7 @@ export default function AdminSiteRow({ regions, site, languages }) {
         })
     };
 
-
+console.log(site)
     return (
         <>
             {!handleEditMode ?

@@ -50,6 +50,7 @@ function AdminHome() {
     dispatch({ type: "FETCH_LANGUAGES"});
   }, []);
 
+  console.log(sites)
   return (
     <>
       <Typography>Add New Site</Typography>
