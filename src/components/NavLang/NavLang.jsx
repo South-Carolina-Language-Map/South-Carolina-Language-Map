@@ -2,7 +2,7 @@
 import { Grid, Paper, Typography } from "@mui/material";
 
 function NavLang({ site }) {
-  
+
   // let currentLanguage = {
   //   category_id: 1,
   //   description: "",
@@ -52,9 +52,10 @@ function NavLang({ site }) {
       {/* End of Grid item #1 */}
       <Grid item xs={12} sx={{ mt: 2 }}>
         <Paper elevation={2}>
-          <Typography sx={{ p: 1 }}>
-            Description: {currentLanguage.description}
-          </Typography>
+          {currentLanguage.description &&
+            <Typography sx={{ p: 1 }}>
+              Description: {currentLanguage.description}
+            </Typography>}
           <br />
           <Grid container sx={{ p: 1 }}>
             {/* Start of nested Grid #2 */}
