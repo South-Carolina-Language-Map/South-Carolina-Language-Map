@@ -16,8 +16,8 @@ import AutoComplete from "../AutoComplete/AutoComplete";
 
 
 export default function AdminSiteRow({ regions, site, languages }) {
-   //Reducer set up for NewSite values for language and region ids
-  const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
+    //Reducer set up for NewSite values for language and region ids
+    const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
 
     //local state
     const [handleEditMode, setHandleEditMode] = useState(false)
@@ -62,7 +62,7 @@ export default function AdminSiteRow({ regions, site, languages }) {
     return (
         <>
             {!handleEditMode ?
-            //non-edit view
+                //non-edit view
                 <TableRow hover role="checkbox" tabIndex={-1}>
                     <TableCell>{site.site_name}</TableCell>
                     <TableCell>{site.address}</TableCell>
@@ -101,14 +101,17 @@ export default function AdminSiteRow({ regions, site, languages }) {
                 :
                 // edit view
                 <TableRow hover role="checkbox" tabIndex={-1}>
-                    <TableCell>
+                    <TableCell >
                         <TextField
                             id="standard-basic"
                             label="Standard"
                             variant="standard"
                             value={edit.site_name}
                             onChange={(event) =>
-                                setEdit({ ...edit, site_name: event.target.value })}>
+                                setEdit({ ...edit, site_name: event.target.value })}
+                            sx={{
+                                width: 200
+                            }}>
                         </TextField>
                     </TableCell>
 
@@ -119,7 +122,11 @@ export default function AdminSiteRow({ regions, site, languages }) {
                             variant="standard"
                             value={edit.address}
                             onChange={(event) =>
-                                setEdit({ ...edit, address: event.target.value })}>
+                                setEdit({ ...edit, address: event.target.value })}
+                            sx={{
+                                width: 200
+                            }}
+                        >
                         </TextField>
                     </TableCell>
 
