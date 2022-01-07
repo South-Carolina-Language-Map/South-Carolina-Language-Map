@@ -60,7 +60,6 @@ function AutoComplete({ table }) {
     if (properties.newSite) {
       dispatch({ type: properties.set, payload: value.id });
     }
-    console.log(value);
   };
 
   return (
