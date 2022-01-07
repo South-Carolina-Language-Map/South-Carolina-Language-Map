@@ -44,39 +44,41 @@ function LoginPage() {
             <Typography variant="h6">To continue to Admin</Typography>
           </Grid>
           {/*  */}
-          <Grid item xs={12}>
-            <Typography>Username</Typography>
-            <TextField
-              required
-              label="required"
-              variant="filled"
-              value={username}
-              onChange={(event) => setUsername(event.target.value)}
-            />
-          </Grid>
-          {/*  */}
-          <Grid item xs={12} sx={{ mt: 4, mb: 4 }}>
-            <Typography>Password</Typography>
-            <TextField
-              required
-              type="password"
-              label="required"
-              variant="filled"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </Grid>
-          {/*  */}
-          <Grid item xs={12}>
-            <Button
-              size="large"
-              sx={{ mb: 2 }}
-              onClick={login}
-              variant="contained"
-            >
-              Log In
-            </Button>
-          </Grid>
+          <form onSubmit={login}>
+            <Grid item xs={12}>
+              <Typography>Username</Typography>
+              <TextField
+                required
+                label="required"
+                variant="filled"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+              />
+            </Grid>
+            {/*  */}
+            <Grid item xs={12} sx={{ mt: 4, mb: 4 }}>
+              <Typography>Password</Typography>
+              <TextField
+                required
+                type="password"
+                label="required"
+                variant="filled"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </Grid>
+            {/*  */}
+            <Grid item xs={12}>
+              <Button
+                size="large"
+                sx={{ mb: 2 }}
+                onClick={login}
+                variant="contained"
+              >
+                Log In
+              </Button>
+            </Grid>
+          </form>
           {/*  */}
           <Grid item xs={12}>
             <button
