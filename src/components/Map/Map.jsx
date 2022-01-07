@@ -21,6 +21,7 @@ function Map() {
   //get lists of (un)filtered sites and all categories in db
   const sites = useSelector(store => store.viewReducer.sitesReducer);
   const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
+  const [dimensions, setDimensions] = useState({})
 
   //state to track dark mode (not currently utilized)
   const [darkMode, setDarkMode] = useState(true);
@@ -66,8 +67,9 @@ function Map() {
     } else if (newZoom < 0) {
       newZoom = 0;
     }
-    setViewport({ ...viewport, 
-      transitionEasing: easeSinOut, 
+    setViewport({
+      ...viewport,
+      transitionEasing: easeSinOut,
       zoom: newZoom,
       transitionDuration: zoomDuration,
     });
@@ -107,6 +109,8 @@ function Map() {
     }
   }
 
+
+
   // On Load, fetch necessary sites and categories
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL' });
@@ -119,6 +123,17 @@ function Map() {
       resetView();
     }
   }, [sites]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      console.log('rendered at', window.innerHeight, window.innerWidth);
+      setViewport({...viewport, height: '100vh', width: '100%'});
+    }
+    window.addEventListener('resize', handleResize);
+    return _ => {
+      window.removeEventListener('resize', handleResize);
+    }
+  })
 
   return (
     <div className="App">
@@ -141,14 +156,14 @@ function Map() {
                 key={site.id}
                 latitude={Number(site.latitude)}
                 longitude={Number(site.longitude)}>
-                  <Tooltip 
-                  title={site.language} 
+                <Tooltip
+                  title={site.language}
                   TransitionComponent={Zoom}
                   placement="top"
                   arrow>
-                <div className={"dot" + ' ' + assignClasses(site)}>
-                  {/* <div className="dot-info">{site.language}</div> */}
-                </div>
+                  <div className={"dot" + ' ' + assignClasses(site)}>
+                    {/* <div className="dot-info">{site.language}</div> */}
+                  </div>
                 </Tooltip>
               </Marker>
             )
