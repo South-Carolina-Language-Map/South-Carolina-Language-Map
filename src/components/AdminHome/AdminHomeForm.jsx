@@ -36,6 +36,7 @@ function AdminHomeForm() {
       region_id: dropDownValues.region_id,
     };
     //sends action to saga with newSite object to create a new GeoTag
+    console.log(newSite, '====================')
     dispatch({ type: "ADD_SITE", payload: newSite });
   };
 
