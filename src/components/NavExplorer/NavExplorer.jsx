@@ -1,9 +1,10 @@
-// MUI Imports
-import { Grid, Button, Typography } from "@mui/material";
-
 // React Imports
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+// MUI Imports
+import { Box, Grid, Typography } from "@mui/material";
+import NavExploreItem from "../NavExploreItem/NavExploreItem";
 
 // Local Imports
 import NavExploreItem from "../NavExploreItem/NavExploreItem";

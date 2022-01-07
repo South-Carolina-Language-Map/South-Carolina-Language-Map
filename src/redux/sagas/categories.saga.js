@@ -37,9 +37,10 @@ function* addCategory(action) {
 
 //CATEGORIES PUT ROUTE
 function* updateCategory(action) {
+  console.log('THIS IS UPDATECATAGORIES========', action.payload)
     try {
       //UPDATE request sent to categories.router based on ID
-      const response = yield axios.put(`/api/categories/${action.payload}`);
+      const response = yield axios.put(`/api/categories/${action.payload.id}`, action.payload);
   
       yield console.log('response', response);
     //call GET request to repopulate languages list

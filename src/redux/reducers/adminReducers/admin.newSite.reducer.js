@@ -1,6 +1,6 @@
 const newSiteReducer = (state = {region_id: '', language_id: ''}, action) => {
     switch (action.type) {
-    case 'SET_NEW_SITE':
+    case 'SET_NEW_REGION':
         console.log("newSiteReducer action.payload", action.payload);
         return {...state, region_id: action.payload};
     case 'SET_NEW_LANGUAGE':

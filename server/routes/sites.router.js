@@ -29,7 +29,7 @@ async function createGeoTag(req, res) {
 
         //query to insert new site into database
         let queryTextForPost = `
-         INSERT INTO "sites" ("latitude", "longitude", "language_id", "site_name", "region_id", "address")
+         INSERT INTO "sites" ("longitude", "latitude", "language_id", "site_name", "region_id", "address")
          VALUES($1, $2, $3, $4, $5, $6);
          `;
 
