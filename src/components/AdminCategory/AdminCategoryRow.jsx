@@ -33,6 +33,7 @@ export default function AdminCategoryRow({ row }) {
             type: 'UPDATE_CATEGORY',
             payload: edit
         })
+        setOpen(true);
         //close edit mode
         setHandleEditMode(false);
     };
