@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
-import { Grid, Typography } from "@mui/material";
+import { Grid, Button, Typography } from "@mui/material";
 
 // Local Imports
 import NavLang from "../NavLang/NavLang.jsx";
@@ -42,10 +42,21 @@ function NavExplorer() {
   return (
     // {prevState[0].listType !== 'DEFAULT' && <Button>Back</Button>}
     <Grid container sx={{ p: 1 }}>
-      <Grid item xs={12}>
+      <Grid item xs={6}>
         <Typography variant="h5" sx={{ p: 0.5 }}>
           Explore By:
         </Typography>
+      </Grid>
+      <Grid
+        item
+        xs={6}
+        sx={{ p: 0.69 }}
+        textAlign="right"
+        onClick={() => dispatch({ type: "FETCH_ALL" })}
+      >
+        <Button color="error" size="small" variant="outlined">
+          Reset
+        </Button>
       </Grid>
       {displayLangInfo && <NavLang site={sites[0]}></NavLang>}
       <Grid container spacing={2}>
