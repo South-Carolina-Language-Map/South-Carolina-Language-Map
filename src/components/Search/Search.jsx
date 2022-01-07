@@ -25,7 +25,6 @@ import TabContext from "@mui/lab/TabContext";
 import SearchIcon from "@mui/icons-material/Search";
 import NavLang from "../NavLang/NavLang";
 import Legend from "../Legend/Legend.jsx";
-import { display } from "@mui/system";
 
 function Search() {
   const dispatch = useDispatch();
@@ -65,6 +64,12 @@ function Search() {
     setSearchText('');
   }
 
+  const onEnterPress = (e) => {
+    if(e.charCode === 13){
+      submitSearch();
+    }
+  }
+
   return (
     <Box
       sx={{
@@ -91,7 +96,6 @@ function Search() {
 
               <TabPanel value="site">
                 <Paper
-                  component="form"
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -102,6 +106,7 @@ function Search() {
                     onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Sites"
+                    onKeyPress={onEnterPress}
                   />
                   <IconButton onClick={submitSearch}>
                     <SearchIcon />
@@ -111,7 +116,6 @@ function Search() {
 
               <TabPanel value="region">
                 <Paper
-                  component="form"
                   sx={{
                     display: "flex",
                     alignItems: "center",
@@ -121,6 +125,7 @@ function Search() {
                     onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Regions"
+                    onKeyPress={onEnterPress}
                   />
                   <IconButton onClick={submitSearch}>
                     <SearchIcon />
@@ -141,6 +146,7 @@ function Search() {
                     onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Languages"
+                    onKeyPress={onEnterPress}
                   />
                   <IconButton onClick={submitSearch}>
                     <SearchIcon />
@@ -159,6 +165,7 @@ function Search() {
                     onChange={handleChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search Categories"
+                    onKeyPress={onEnterPress}
                   />
                   <IconButton onClick={submitSearch}>
                     <SearchIcon />
