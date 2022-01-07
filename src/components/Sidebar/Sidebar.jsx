@@ -45,7 +45,7 @@ function Sidebar() {
           {currentViewHeaderText}
         </Typography>
       </Box>
-      <Box  style={{ maxHeight: 650, overflow: "auto" }}>
+      <Box  style={{ maxHeight: window.innerHeight - 130, overflow: "auto" }}>
         {currentView}
       </Box>
       <BottomNav />
