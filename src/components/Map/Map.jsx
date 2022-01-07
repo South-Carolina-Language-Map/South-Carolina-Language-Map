@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Map.css';
 
-import { Fab } from '@mui/material';
+import { Fab, Tooltip, Zoom } from '@mui/material';
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 
@@ -141,9 +141,15 @@ function Map() {
                 key={site.id}
                 latitude={Number(site.latitude)}
                 longitude={Number(site.longitude)}>
+                  <Tooltip 
+                  title={site.language} 
+                  TransitionComponent={Zoom}
+                  placement="top"
+                  arrow>
                 <div className={"dot" + ' ' + assignClasses(site)}>
-                  <div className="dot-info">{site.language}</div>
+                  {/* <div className="dot-info">{site.language}</div> */}
                 </div>
+                </Tooltip>
               </Marker>
             )
           })}

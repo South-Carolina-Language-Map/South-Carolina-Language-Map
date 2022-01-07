@@ -39,10 +39,10 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
             dispatch({ type: "FETCH_REGIONS" });
             dispatch({ type: "SET_TYPE", payload: "REGIONS" });
             break;
-          case 'Sites':
-            setActiveKey('site_name');
-            dispatch({ type: 'FETCH_SITES' });
-            dispatch({ type: 'SET_TYPE', payload: 'SITES' });
+          case "Sites":
+            setActiveKey("site_name");
+            dispatch({ type: "FETCH_SITES" });
+            dispatch({ type: "SET_TYPE", payload: "SITES" });
             break;
           case "Languages":
             setActiveKey("language");
@@ -76,52 +76,26 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
   };
 
   return (
-    <>
-      {[lightTheme].map((theme, index) => (
-        // map through whatever's in the explore menu
-        <ThemeProvider theme={theme}>
-          {/*  */}
-          <Grid item xs={12} key={index} onClick={handleClick}>
-            {/*  */}
-
-            <Box
-              component="button"
-              borderRadius={4}
-              sx={{
-                p: 4,
-                mt: 2,
-                width: 2 / 2,
-                boxShadow: 3,
-                backgroundColor: "#FFFFFF",
-                "&:hover": {
-                  backgroundColor: "#c9d2e3",
-                },
-                border: 1,
-              }}
-            >
-              <Typography variant="h6">{listObj[activeKey]}</Typography>
-            </Box>
-            {/*  */}
-          </Grid>
-          {/*  */}
-        </ThemeProvider>
-        //
-      ))}
-    </>
+    <Grid item xs={12} onClick={handleClick}>
+      <Box
+        component="button"
+        borderRadius={4}
+        sx={{
+          p: 4,
+          mt: 2,
+          border: 1,
+          width: 2 / 2,
+          boxShadow: 3,
+          backgroundColor: "#FFFFFF",
+          "&:hover": {
+            backgroundColor: "#c9d2e3",
+          },
+        }}
+      >
+        <Typography variant="h6">{listObj[activeKey]}</Typography>
+      </Box>
+    </Grid>
   );
 }
 
 export default NavExploreItem;
-
-// <Box
-//   sx={{
-//     p: 4,
-//     gap: 2,
-//     elevation: 3,
-//     bgcolor: "background.default",
-//   }}
-// >
-// <Item>
-//  </Item>
-//  </Box>
-// <Grid item xs={12} key={index} onClick={handleClick}>

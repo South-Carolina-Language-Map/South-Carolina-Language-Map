@@ -1,10 +1,10 @@
-// React & CSS
+// React & CSS Imports
 import "./Search.css";
 import { useState } from "react";
 
-// Functionality && Tools imports
-import { useDispatch } from "react-redux";
+// Functionality && Tools Imports
 import encodeUrlStr from "../../utils/encodeUrlStr";
+import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
 import {
@@ -12,7 +12,6 @@ import {
   Tab,
   Tabs,
   Grid,
-  Stack,
   Paper,
   Button,
   Divider,
@@ -21,13 +20,28 @@ import {
   IconButton,
 } from "@mui/material";
 import TabPanel from "@mui/lab/TabPanel";
+import NavLang from "../NavLang/NavLang";
+import Legend from "../Legend/Legend.jsx";
 import TabContext from "@mui/lab/TabContext";
 import SearchIcon from "@mui/icons-material/Search";
 
 function Search() {
+  let displayLangInfo = false;
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
   const [checked, setChecked] = useState("language");
+
+  const sites = useSelector((store) => store.viewReducer.sitesReducer);
+
+  // Check if all visible sites are the same language
+  if (
+    sites.length === 1 ||
+    (sites.length > 0 &&
+      sites.filter((site) => sites[0].language === site.language).length ===
+        sites.length)
+  ) {
+    displayLangInfo = true;
+  }
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
@@ -50,10 +64,17 @@ function Search() {
     setSearchText("");
   };
 
+  const onEnterPress = (e) => {
+    if (e.charCode === 13) {
+      submitSearch();
+    }
+  };
+
   return (
     <Box
       sx={{
         p: 1,
+        height: 2 / 2,
         textAlign: "center",
         backgroundColor: "background.main",
       }}
@@ -94,7 +115,6 @@ function Search() {
                 <Grid item xs={8}>
                   <TabPanel value="site">
                     <Paper
-                      component="form"
                       sx={{
                         mt: 5,
                         display: "flex",
@@ -105,6 +125,7 @@ function Search() {
                         value={searchText}
                         onChange={handleChange}
                         sx={{ ml: 1, flex: 1 }}
+                        onKeyPress={onEnterPress}
                         placeholder="Search Sites"
                       />
                       <IconButton onClick={submitSearch}>
@@ -115,7 +136,6 @@ function Search() {
 
                   <TabPanel value="region">
                     <Paper
-                      component="form"
                       sx={{
                         mt: 5,
                         display: "flex",
@@ -125,6 +145,7 @@ function Search() {
                       <InputBase
                         onChange={handleChange}
                         sx={{ ml: 1, flex: 1 }}
+                        onKeyPress={onEnterPress}
                         placeholder="Search Regions"
                       />
                       <IconButton onClick={submitSearch}>
@@ -135,7 +156,6 @@ function Search() {
 
                   <TabPanel value="language">
                     <Paper
-                      component="form"
                       sx={{
                         mt: 5,
                         display: "flex",
@@ -146,6 +166,7 @@ function Search() {
                         value={searchText}
                         onChange={handleChange}
                         sx={{ ml: 1, flex: 1 }}
+                        onKeyPress={onEnterPress}
                         placeholder="Search Languages"
                       />
                       <IconButton onClick={submitSearch}>
@@ -155,7 +176,6 @@ function Search() {
                   </TabPanel>
                   <TabPanel value="category">
                     <Paper
-                      component="form"
                       sx={{
                         mt: 5,
                         display: "flex",
@@ -165,6 +185,7 @@ function Search() {
                       <InputBase
                         onChange={handleChange}
                         sx={{ ml: 1, flex: 1 }}
+                        onKeyPress={onEnterPress}
                         placeholder="Search Categories"
                       />
                       <IconButton onClick={submitSearch}>
@@ -194,68 +215,16 @@ function Search() {
         </Grid>
 
         <Grid item xs={12}>
-          <Paper
-            elevation={8}
-            backgroundcolor="background.main"
-            sx={{
-              pt: 2,
-              height: 2 / 2,
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="h5">Language Catagories</Typography>
-
-            <br />
-
-            <Grid container spacing={2} rowSpacing={6} sx={{ pr: 1, pl: 1 }}>
-              <Grid item xs={4}>
-                <Stack direction="row" spacing={1}>
-                  <div className="lang-asian" />
-                  <Typography>Asian</Typography>
-                </Stack>
-              </Grid>
-
-              <Grid item xs={4}>
-                <Stack direction="row" spacing={1}>
-                  <div className="lang-latino" />
-                  <Typography>Latino</Typography>
-                </Stack>
-              </Grid>
-
-              <Grid item xs={4}>
-                <Stack direction="row" spacing={1}>
-                  <div className="lang-european" />
-                  <Typography>European</Typography>
-                </Stack>
-              </Grid>
-              <Grid item xs={4}>
-                <Stack direction="row" spacing={1}>
-                  <div className="lang-middle-east" />
-                  <Typography>Middle East</Typography>
-                </Stack>
-              </Grid>
-              <Grid item xs={4}>
-                <Stack direction="row" spacing={1}>
-                  <div className="lang-sign-language" />
-                  <Typography>Sign Language</Typography>
-                </Stack>
-              </Grid>
-              <Grid item xs={4}>
-                <Stack direction="row">
-                  <div className="lang-native-american" />{" "}
-                  <Typography>Native American</Typography>
-                </Stack>
-              </Grid>
-              <Grid item xs={4} />
-              <Grid item xs={4}>
-                <Stack direction="row" spacing={1}>
-                  <div className="lang-varieties-of-english" />
-                  <Typography>Varieties of English</Typography>
-                </Stack>
-              </Grid>
-              <Grid item xs={4} />
-            </Grid>
-          </Paper>
+          <br />
+          {
+            /* Replace Legend with single language info if 
+            sites all share the same language */
+            displayLangInfo ? (
+              <NavLang site={sites[0]}></NavLang>
+            ) : (
+              <Legend></Legend>
+            )
+          }
         </Grid>
       </Grid>
     </Box>

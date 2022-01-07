@@ -1,19 +1,8 @@
 // MUI Imports
 import { Grid, Paper, Typography } from "@mui/material";
 
-function NavLang({ language }) {
-  // let currentLanguage = language;
-  let currentLanguage = {
-    category_id: 1,
-    description: "",
-    endonym: "Yamasee",
-    global_speakers: 10,
-    glottocode: "NA",
-    id: 4,
-    language: "Yamasee",
-    sc_speakers: 20,
-    status: "Historic",
-  };
+function NavLang({ site }) {
+  let currentLanguage = site;
 
   return (
     <Grid container>
@@ -46,14 +35,11 @@ function NavLang({ language }) {
             {/* End of nested Grid item #3 */}
           </Grid>
           {/* End of nested Grid */}
-        </Paper>
-      </Grid>
-      {/* End of Grid item #1 */}
-      <Grid item xs={12} sx={{ mt: 2 }}>
-        <Paper elevation={2}>
-          <Typography sx={{ p: 1 }}>
-            Description: {currentLanguage.description}
-          </Typography>
+          {currentLanguage.description && (
+            <Typography sx={{ p: 1 }}>
+              Description: {currentLanguage.description}
+            </Typography>
+          )}
           <br />
           <Grid container sx={{ p: 1 }}>
             {/* Start of nested Grid #2 */}
@@ -69,7 +55,7 @@ function NavLang({ language }) {
           {/* End of nested Grid #2 */}
         </Paper>
       </Grid>
-      {/* End of Grid item #2 */}
+      {/* End of Grid item #1 */}
     </Grid>
   );
 }
