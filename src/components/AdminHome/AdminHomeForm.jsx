@@ -36,12 +36,13 @@ function AdminHomeForm() {
       region_id: dropDownValues.region_id,
     };
     //sends action to saga with newSite object to create a new GeoTag
-    console.log(newSite, '====================')
     dispatch({ type: "ADD_SITE", payload: newSite });
+    setLocation(base);
   };
 
   //local state to store site name and address
   let [newLocation, setLocation] = useState(base);
+ 
 
   return (
     <form onSubmit={handleSubmit}>
@@ -53,6 +54,7 @@ function AdminHomeForm() {
           label="Site Name"
           variant="standard"
           helperText="ex. Raleigh"
+          value={newLocation.site_name}
           //Will assign the value of input to the useState associated key
           onChange={(event) =>
             setLocation({ ...newLocation, site_name: event.target.value })
@@ -66,6 +68,7 @@ function AdminHomeForm() {
           label="Address"
           variant="standard"
           helperText="Address"
+          value={newLocation.address}
           //Will assign the value of input to the useState associated key
           onChange={(event) =>
             setLocation({ ...newLocation, address: event.target.value })
