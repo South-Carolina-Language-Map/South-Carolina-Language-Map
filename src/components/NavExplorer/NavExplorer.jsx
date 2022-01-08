@@ -15,6 +15,8 @@ function NavExplorer() {
   const sites = useSelector((store) => store.viewReducer.sitesReducer);
   const listType = useSelector((store) => store.viewReducer.listTypeReducer);
   const dispatch = useDispatch();
+  
+  
   const [activeKey, setActiveKey] = useState("name");
   const [prevState, setPrevState] = useState([
     {
