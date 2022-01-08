@@ -64,13 +64,12 @@ function LanguageForm() {
         }
       >
         <Grid item>
-          <Typography>Add a new language!</Typography>
           <Grid item>
             <TextField
               required
+              variant="standard"
               id="filled-required"
               label="Language Name"
-              variant="standard"
               helperText="ex. Hmong"
               onChange={(event) =>
                 setLanguage({ ...newLanguage, language: event.target.value })
@@ -151,7 +150,15 @@ function LanguageForm() {
                 variant="standard"
                 onChange={(event) =>
                   setLanguage({
-                    ...newLanguage, examples: [{...newLanguage.examples[0], link_text: event.target.value}]})}
+                    ...newLanguage,
+                    examples: [
+                      {
+                        ...newLanguage.examples[0],
+                        link_text: event.target.value,
+                      },
+                    ],
+                  })
+                }
               />
             </Grid>
             <Grid item>
@@ -162,8 +169,12 @@ function LanguageForm() {
                 onChange={(event) =>
                   setLanguage({
                     ...newLanguage,
-                    examples: [{...newLanguage.examples[0], hyperlink: event.target.value}]
-                    
+                    examples: [
+                      {
+                        ...newLanguage.examples[0],
+                        hyperlink: event.target.value,
+                      },
+                    ],
                   })
                 }
               />

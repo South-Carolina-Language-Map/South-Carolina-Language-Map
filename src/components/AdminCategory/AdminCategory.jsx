@@ -14,6 +14,7 @@ import {
   TableHead,
   TableContainer,
   TablePagination,
+  Typography,
 } from "@mui/material";
 
 //components
@@ -46,11 +47,14 @@ function AdminCategory() {
 
   return (
     <Grid container sx={{ pt: 3 }}>
-      <Grid>
+      <Grid item xs={12} textAlign="center">
         <CategoryForm />
       </Grid>
       <Grid item xs={1} />
       <Grid item xs={10}>
+        <Typography variant="h3" textAlign="center" sx={{ mt: 4 }}>
+          All Categories
+        </Typography>
         <TableContainer sx={{ maxHeight: 650 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>

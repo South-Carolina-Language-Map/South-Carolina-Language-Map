@@ -55,18 +55,20 @@ function AdminLanguage() {
 
   return (
     <Grid container sx={{ m: 3 }}>
-      <Grid item >
-      <Switch
-        checked={checked}
-        onChange={handleChange}
-        inputProps={{ 'aria-label': 'controlled'}}
+      <Grid item>
+        <Switch
+          checked={checked}
+          onChange={handleChange}
+          inputProps={{ "aria-label": "controlled" }}
         />
-      {checked === true ? 
-      <LanguageForm/> 
-      :
-      <Typography>ADD A NEW LANGUAGE </Typography>}
+        {checked === true ? (
+          <LanguageForm />
+        ) : (
+          <Typography variant="h4" textAlign="center" sx={{ p: 2 }}>
+            ADD A NEW LANGUAGE
+          </Typography>
+        )}
       </Grid>
-      <Grid item xs={1} />
       <Grid item xs={10}>
         <TableContainer sx={{ maxHeight: 675 }}>
           <Table stickyHeader aria-label="sticky table">
