@@ -50,52 +50,59 @@ function AdminHomeForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid item xs>
+      <Grid container >
+        {/*  */}
+        <Grid item xs={3}>
           {/* Text field used for Site Name input */}
-        <TextField
-          required
-          id="filled-required"
-          label="Site Name"
-          variant="standard"
-          helperText="ex. Raleigh"
-          value={newLocation.site_name}
-          //Will assign the value of input to the useState associated key
-          onChange={(event) =>
-            setLocation({ ...newLocation, site_name: event.target.value })
-          }
-        />
-      </Grid>
-      <Grid item xs>
-        <TextField
-          required
-          id="filled-required"
-          label="Address"
-          variant="standard"
-          helperText="Address"
-          value={newLocation.address}
-          //Will assign the value of input to the useState associated key
-          onChange={(event) =>
-            setLocation({ ...newLocation, address: event.target.value })
-          }
-        />
-      </Grid>
-      <Grid item xs>
+          <TextField
+            required
+            label="Site Name"
+            variant="standard"
+            id="filled-required"
+            helperText="ex. Raleigh"
+            value={newLocation.site_name}
+            //Will assign the value of input to the useState associated key
+            onChange={(event) =>
+              setLocation({ ...newLocation, site_name: event.target.value })
+            }
+          />
+        </Grid>
+        {/*  */}
+        <Grid item xs={3}>
+          <TextField
+            required
+            label="Address"
+            variant="standard"
+            id="filled-required"
+            helperText="Address"
+            value={newLocation.address}
+            //Will assign the value of input to the useState associated key
+            onChange={(event) =>
+              setLocation({ ...newLocation, address: event.target.value })
+            }
+          />
+        </Grid>
+        {/*  */}
+        <Grid item xs={3}>
           {/* Drop down autofill input for Regions of South Carolina */}
-        <AutoComplete
-        table="region"/>
-      </Grid>
-      <Grid item xs>
+          <AutoComplete table="region" />
+        </Grid>
+        {/*  */}
+        <Grid item xs={3} >
           {/* Drop down autofill input for languages provided by university */}
-        <AutoComplete table="language"/>
-        {/* Link will redirect you to ADD NEW LANGUAGE form  */}
-        <Link>{`Don't see your language? Click here!`}</Link>
-      </Grid>
-      <Grid item xs>
-        <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
-          Submit
-        </Button>
-        {/* If the error exists, display the following message provided in reducer */}
-        {mapBoxMessage.length > 0 && <Typography>{mapBoxMessage}</Typography>}
+          <AutoComplete table="language" />
+          {/* Link will redirect you to ADD NEW LANGUAGE form  */}
+          <Link>{`Don't see your language? Click here!`}</Link>
+        </Grid>
+        {/*  */}
+        <Grid item xs={12} textAlign="center">
+          <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
+            Submit
+          </Button>
+          {/* If the error exists, display the following message provided in reducer */}
+          {mapBoxMessage.length > 0 && <Typography>{mapBoxMessage}</Typography>}
+        </Grid>
+        {/*  */}
       </Grid>
     </form>
   );

@@ -7,13 +7,14 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   Grid,
   Table,
+  Switch,
   TableRow,
   TableBody,
   TableCell,
   TableHead,
+  Typography,
   TableContainer,
   TablePagination,
-  Typography,
 } from "@mui/material";
 
 //components
@@ -53,8 +54,8 @@ function AdminLanguage() {
 
 
   return (
-    <Grid container sx={{ pt: 3 }}>
-      <Grid item>
+    <Grid container sx={{ m: 3 }}>
+      <Grid item >
       <Switch
         checked={checked}
         onChange={handleChange}

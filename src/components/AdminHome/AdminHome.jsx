@@ -52,56 +52,56 @@ function AdminHome() {
 
   console.log(sites);
   return (
-    <>
-      <Typography>Add New Site</Typography>
-      <Grid container spacing={0.5}>
-        <Grid item>
-          <AdminHomeForm />
-        </Grid>
+    <Grid container>
+      {/*  */}
+      <Grid item xs={12} sx={{ m: 4 }}>
+        <Typography variant="h4" textAlign="center" sx={{ p: 2 }}>
+          Add New Site
+        </Typography>
+        <AdminHomeForm />
       </Grid>
-      <Grid container sx={{ pt: 3 }}>
-        <Grid item xs={1} />
-        <Grid item xs={10}>
-          <TableContainer sx={{ maxHeight: 550 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Address</TableCell>
-                  <TableCell>Region</TableCell>
-                  <TableCell>Language</TableCell>
-                  <TableCell>Edit//Delete</TableCell>
-                </TableRow>
-              </TableHead>
-
-              {sites
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((site) => {
-                  return (
-                    <TableBody key={site.id}>
-                      <AdminSiteRow
-                        site={site}
-                        regions={regions}
-                        languages={languages}
-                      />
-                    </TableBody>
-                  );
-                })}
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={sites.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Grid>
-        <Grid item xs={1} />
+      {/*  */}
+      <Grid item xs={12} sx={{ m: 2 }}>
+        <Typography variant="h3" textAlign="center" sx={{ p: 2 }}>
+          All Sites
+        </Typography>
+        <TableContainer sx={{ maxHeight: 550 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Address</TableCell>
+                <TableCell>Region</TableCell>
+                <TableCell>Language</TableCell>
+                <TableCell>Edit//Delete</TableCell>
+              </TableRow>
+            </TableHead>
+            {sites
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((site) => {
+                return (
+                  <TableBody key={site.id}>
+                    <AdminSiteRow
+                      site={site}
+                      regions={regions}
+                      languages={languages}
+                    />
+                  </TableBody>
+                );
+              })}
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={sites.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Grid>
-    </>
+    </Grid>
   );
 }
 
