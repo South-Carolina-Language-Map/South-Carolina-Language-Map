@@ -25,6 +25,11 @@ function Map() {
 
   //state to track dark mode (not currently utilized)
   const [darkMode, setDarkMode] = useState(true);
+  const mapStyles = [
+    `mapbox://styles/blingusblongus/cky527chq3w1g14qj7ucfaq82`,
+    `mapbox://styles/mapbox/light-v10`,
+    `mapbox://styles/mapbox/dark-v10`,
+  ]
   const toggleDark = () => { setDarkMode(!darkMode) };
   const flyDuration = 3000;
   const zoomDuration = 500;
@@ -144,7 +149,7 @@ function Map() {
         {/* Configure and mount map canvas */}
         <ReactMapGL
           {...viewport}
-          mapStyle={`mapbox://styles/mapbox/${darkMode ? 'light' : 'dark'}-v10`}
+          mapStyle={mapStyles[0]}
           onViewportChange={setViewport}
           mapboxApiAccessToken={"pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag"}
         >
