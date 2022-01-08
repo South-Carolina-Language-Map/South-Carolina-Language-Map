@@ -56,7 +56,8 @@ function NavExplorer() {
         textAlign="right"
         onClick={() => {
           dispatch({ type: "FETCH_ALL" })
-          dispatch({ type: "SET_LIST_DEFAULT" })
+          // dispatch({ type: "SET_LIST_DEFAULT" });
+          dispatch({ type: "EXPLORE_TOGGLE" });
         }}
       >
         <Button color="error" size="small" variant="outlined">
