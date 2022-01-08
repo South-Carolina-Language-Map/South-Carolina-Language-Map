@@ -1,0 +1,8 @@
+.legend-dot {
+    margin-right: 1em;
+    margin-bottom: .05em;
+}
+
+.legend-container > * {
+    display: inline-block;
+}
