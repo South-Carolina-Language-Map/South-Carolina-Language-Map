@@ -47,7 +47,7 @@ function Map({flyDuration, zoomDuration}) {
     const bounds = getSiteBounds(sites);
     const { longitude, latitude, zoom } = new WebMercatorViewport(viewport)
       .fitBounds([bounds[0], bounds[1]], {
-        padding: 20,
+        padding: 50,
         offset: [0, 100]
       });
     setViewport({
