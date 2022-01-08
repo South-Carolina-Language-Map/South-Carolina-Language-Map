@@ -12,7 +12,7 @@ import ReactMapGL, {
   LinearInterpolator,
   WebMercatorViewport
 } from 'react-map-gl';
-import { easeCubic, easeSinIn, easeSinOut } from 'd3-ease';
+import { easeCubic, easeSinOut } from 'd3-ease';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map({flyDuration, zoomDuration}) {
@@ -111,8 +111,6 @@ function Map({flyDuration, zoomDuration}) {
     }
   }
 
-
-
   // On Load, fetch necessary sites and categories
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL' });
@@ -126,6 +124,7 @@ function Map({flyDuration, zoomDuration}) {
     }
   }, [sites]);
 
+  // attach event listener to handle window resize, then clean it up
   useEffect(() => {
     const handleResize = () => {
       console.log('rendered at', window.innerHeight, window.innerWidth);
@@ -173,7 +172,7 @@ function Map({flyDuration, zoomDuration}) {
           })}
         </ReactMapGL>
 
-        {/* Render Map Control Buttons */}
+        {/* Render Map Zoom Buttons */}
         <div className='bottom-right'>
           <Fab color="primary" aria-label="zoom in"
             onClick={() => adjustZoom('in')}>
