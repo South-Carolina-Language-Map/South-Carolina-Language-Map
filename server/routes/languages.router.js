@@ -92,8 +92,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             console.log('SECOND QUERY FOR POST', error);
             res.sendStatus(500);
           }) //end second query
-
-        res.sendStatus(201);
         console.log('POST New Language success');
       })
       .catch((err) => {
