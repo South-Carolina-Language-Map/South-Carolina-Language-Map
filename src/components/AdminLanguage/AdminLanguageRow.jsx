@@ -10,13 +10,15 @@ import {
 
 export default function AdminLanguageRow({ language }) {
 
+    //local state - toggle view for edit
+    const [toggleEdit, setToggleEdit] = useState(false)
+
     //hooks
     const dispatch = useDispatch();
 
-
     // function handles edit for this ID
     const handleEdit = () => {
-        console.log("Edit", language.id);
+        
     };
 
     //function deletes this id
@@ -31,6 +33,7 @@ export default function AdminLanguageRow({ language }) {
 
     return (
         <>
+        
             <TableRow hover role="checkbox" tabIndex={-1}>
                 <TableCell>{language.language}</TableCell>
                 <TableCell>{language.glottocode}</TableCell>

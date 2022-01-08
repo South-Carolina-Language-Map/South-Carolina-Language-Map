@@ -13,7 +13,7 @@ import PublishIcon from "@mui/icons-material/Publish";
 
 import AutoComplete from "../AutoComplete/AutoComplete";
 
-function LanguageForm() {
+export default function LanguageForm() {
   //initialize dispatch
   const dispatch = useDispatch();
 
@@ -40,16 +40,13 @@ function LanguageForm() {
     newLanguage
   );
 
-  useEffect(() => {
-      setLanguage({...newLanguage, category_id: category})
-  }, [category]);
 
   return (
     //form sends object with multiple values containing new language and associated values in DB
     <Grid container spacing={0.5}>
       <form
         onSubmit={() =>
-          dispatch({ type: "ADD_LANGUAGE", payload: newLanguage })
+          dispatch({ type: "EDIT_LANGUAGE", payload: newLanguage })
         }
       >
         <Grid item>
@@ -144,6 +141,10 @@ function LanguageForm() {
               />
             </Grid>
             <Grid item>
+            <AutoComplete
+                            table="language" />
+            </Grid>
+            <Grid item>
               <TextField
                 id="filled-required"
                 label="Hyperlink"
@@ -173,4 +174,4 @@ function LanguageForm() {
   );
 }
 
-export default LanguageForm;
+
