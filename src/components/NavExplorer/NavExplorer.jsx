@@ -16,7 +16,7 @@ function NavExplorer() {
   const listType = useSelector((store) => store.viewReducer.listTypeReducer);
   const dispatch = useDispatch();
   
-  
+  //shared amongst children to accurately retrieve list item info
   const [activeKey, setActiveKey] = useState("name");
   const [prevState, setPrevState] = useState([
     {
@@ -39,7 +39,7 @@ function NavExplorer() {
     dispatch({ type: "SET_LIST_DEFAULT" });
   }, []);
 
-  console.log("prevState:", prevState);
+  console.log(list);
 
   return (
     // {prevState[0].listType !== 'DEFAULT' && <Button>Back</Button>}
@@ -54,7 +54,10 @@ function NavExplorer() {
         xs={6}
         sx={{ p: 0.69 }}
         textAlign="right"
-        onClick={() => dispatch({ type: "FETCH_ALL" })}
+        onClick={() => {
+          dispatch({ type: "FETCH_ALL" })
+          dispatch({ type: "SET_LIST_DEFAULT" })
+        }}
       >
         <Button color="error" size="small" variant="outlined">
           Reset
