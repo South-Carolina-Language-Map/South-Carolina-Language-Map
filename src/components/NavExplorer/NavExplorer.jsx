@@ -16,6 +16,9 @@ function NavExplorer() {
   const list = useSelector((store) => store.viewReducer.listReducer);
   const sites = useSelector((store) => store.viewReducer.sitesReducer);
   const listType = useSelector((store) => store.viewReducer.listTypeReducer);
+  
+  //shared amongst children to accurately retrieve list item info
+  const [activeKey, setActiveKey] = useState("name");
   const [prevState, setPrevState] = useState([
     {
       list: list,
@@ -51,7 +54,11 @@ function NavExplorer() {
         xs={6}
         sx={{ p: 0.69 }}
         textAlign="right"
-        onClick={() => dispatch({ type: "FETCH_ALL" })}
+        onClick={() => {
+          dispatch({ type: "FETCH_ALL" })
+          // dispatch({ type: "SET_LIST_DEFAULT" });
+          dispatch({ type: "EXPLORE_TOGGLE" });
+        }}
       >
         <Button color="error" size="small" variant="outlined">
           Reset

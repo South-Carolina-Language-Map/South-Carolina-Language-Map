@@ -7,8 +7,6 @@ const listReducer = (state = [
     { name: 'Regions' },
 ], action) => {
     switch (action.type) {
-        case 'SET_LIST':
-            return [...action.payload];
         case 'SET_LIST_DEFAULT':
             return [
                 { name: 'Sites' },
@@ -16,6 +14,7 @@ const listReducer = (state = [
                 { name: 'Categories' },
                 { name: 'Regions' },
             ];
+        case 'SET_LIST':
         case 'SET_CATEGORIES':
         case 'SET_REGIONS':
             return [...action.payload];

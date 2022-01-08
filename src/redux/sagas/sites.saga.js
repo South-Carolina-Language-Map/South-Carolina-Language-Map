@@ -7,6 +7,7 @@ function* fetchSites() {
     //Get All sites for populating explore page
     const response = yield axios.get('api/sites');
     yield put({type: 'SET_ADMIN_SITES', payload: response.data});
+    yield put({type: 'SET_LIST', payload: response.data});
   }catch(err){
     yield put({type: 'FETCH_SITES_ERR'})
   }

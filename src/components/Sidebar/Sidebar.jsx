@@ -14,6 +14,7 @@ function Sidebar() {
   let currentView;
   let currentViewHeaderText = "Info Page";
   const sideBarView = useSelector((store) => store.sideBarView);
+  const exploreToggle = useSelector(store => store.viewReducer.exploreToggle);
 
 
   // Render the sidebar contents based on selected lower nav tab
@@ -23,7 +24,7 @@ function Sidebar() {
       currentViewHeaderText = "SEARCH";
       break;
     case "explore":
-      currentView = <NavExplorer />;
+      currentView = <NavExplorer key={exploreToggle ? 1 : 2} />;
       currentViewHeaderText = "EXPLORE";
       break;
     case "info":

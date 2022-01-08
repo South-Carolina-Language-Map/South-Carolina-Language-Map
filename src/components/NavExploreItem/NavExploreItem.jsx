@@ -65,7 +65,7 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, padding }) {
         console.log("EXPLORE CLICK ERR: NO LISTTYPE");
     }
   };
-
+  
   return (
     <Grid item xs={12} onClick={handleClick}>
       <Box
