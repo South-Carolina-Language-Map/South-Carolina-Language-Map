@@ -15,25 +15,9 @@ import ReactMapGL, {
 import { easeCubic, easeSinIn, easeSinOut } from 'd3-ease';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-function Map() {
+function Map({flyDuration, zoomDuration}) {
   const dispatch = useDispatch();
-
-  //get lists of (un)filtered sites and all categories in db
-  const sites = useSelector(store => store.viewReducer.sitesReducer);
-  const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
-  const [dimensions, setDimensions] = useState({})
-
-  //state to track dark mode (not currently utilized)
-  const [darkMode, setDarkMode] = useState(true);
-  const mapStyles = [
-    `mapbox://styles/blingusblongus/cky527chq3w1g14qj7ucfaq82`,
-    `mapbox://styles/mapbox/light-v10`,
-    `mapbox://styles/mapbox/dark-v10`,
-  ]
-  const toggleDark = () => { setDarkMode(!darkMode) };
-  const flyDuration = 3000;
-  const zoomDuration = 500;
-
+  
   //set initial viewport
   const [viewport, setViewport] = useState({
     latitude: 33.6,
@@ -45,6 +29,19 @@ function Map() {
     transitionInterpolator: new LinearInterpolator(),
     transitionEasing: easeCubic
   });
+
+  //get lists of (un)filtered sites and all categories in db
+  const sites = useSelector(store => store.viewReducer.sitesReducer);
+  const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
+
+
+  //state to track mapStyle
+  // const [mapStyle, setMapStyle] = useState(true);
+  const mapStyles = [
+    `mapbox://styles/blingusblongus/cky527chq3w1g14qj7ucfaq82`,
+    `mapbox://styles/mapbox/light-v10`,
+    `mapbox://styles/mapbox/dark-v10`,
+  ]
 
   const resetView = () => {
     const bounds = getSiteBounds(sites);
@@ -132,7 +129,7 @@ function Map() {
   useEffect(() => {
     const handleResize = () => {
       console.log('rendered at', window.innerHeight, window.innerWidth);
-      setViewport({...viewport, height: '100vh', width: '100%'});
+      setViewport({ ...viewport, height: '100vh', width: '100%' });
     }
     window.addEventListener('resize', handleResize);
     return _ => {
@@ -166,8 +163,8 @@ function Map() {
                   TransitionComponent={Zoom}
                   placement="top"
                   arrow>
-                  <div 
-                  className={"dot" + ' ' + assignClasses(site)}
+                  <div
+                    className={"dot" + ' ' + assignClasses(site)}
                   // onClick={selectSite}
                   ></div>
                 </Tooltip>
