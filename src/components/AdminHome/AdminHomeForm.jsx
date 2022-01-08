@@ -88,7 +88,7 @@ function AdminHomeForm() {
           {/* Drop down autofill input for languages provided by university */}
         <AutoComplete table="language"/>
         {/* Link will redirect you to ADD NEW LANGUAGE form  */}
-        <Link>{`Don't see your language? Click here!`}</Link>
+        <Link to="/admin">{`Don't see your language? Click here!`}</Link>
       </Grid>
       <Grid item xs>
         <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
