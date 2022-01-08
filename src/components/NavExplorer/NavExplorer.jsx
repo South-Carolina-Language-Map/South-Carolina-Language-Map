@@ -12,7 +12,6 @@ import NavExploreItem from "../NavExploreItem/NavExploreItem";
 function NavExplorer() {
   let displayLangInfo;
   const dispatch = useDispatch();
-  const [activeKey, setActiveKey] = useState("name");
   const list = useSelector((store) => store.viewReducer.listReducer);
   const sites = useSelector((store) => store.viewReducer.sitesReducer);
   const listType = useSelector((store) => store.viewReducer.listTypeReducer);
