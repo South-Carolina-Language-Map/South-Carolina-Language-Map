@@ -3,6 +3,11 @@ const newLanguageCategoryIDReducer = (state = -1, action) => {
     case 'SET_NEW_CATEGORY':
         console.log("newLanguageCategoryID action.payload", action.payload);
         return action.payload;
+    case 'EDIT_LANGUAGE_ONCHANGE':
+        return {
+          ...state,
+          [action.payload.property] : action.payload.value
+      }
       default:
         return state;
     }

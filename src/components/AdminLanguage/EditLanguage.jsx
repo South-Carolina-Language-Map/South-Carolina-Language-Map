@@ -3,33 +3,28 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    Grid,
     TextField,
-    Button,
-    Typography,
-    Autocomplete,
+    TableCell,
 } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
 
 import AutoComplete from "../AutoComplete/AutoComplete";
 
-export default function EditLanguage({ language }) {
+export default function EditLanguage(event, { language }) {
     //initialize dispatch
     const dispatch = useDispatch();
+    
+    dispatch({ 
+        type: 'EDIT_LANGUAGE_ONCHANGE', 
+        payload: { property: property, value: event.target.value }
+    });
 
-    //bring in category ID stored in reducer
-    const category = useSelector(
-        (store) => store.adminReducer.newLanguageCategoryIDReducer
-    );
-
+}
 
     //local state stores the value for category input
     const [editLanguage, setLanguage] = useState(language);
 
-    console.log(
-        "NEW LANGUAGE: Packaged language object sent to server",
-        newLanguage
-    );
+
 
 
     return (
@@ -44,7 +39,8 @@ export default function EditLanguage({ language }) {
                     helperText="ex. Hmong"
                     value={editLanguage.language}
                     onChange={(event) =>
-                        setLanguage({ ...editLanguage, language: event.target.value })
+                        // setLanguage({ ...editLanguage, language: event.target.value })
+                        setLanguage(event, 'language')
                     }
                 />
             </TableCell>
@@ -58,7 +54,8 @@ export default function EditLanguage({ language }) {
                     helperText="ex. Firs1234"
                     value={editLanguage.glottocode}
                     onChange={(event) =>
-                        setLanguage({ ...editLanguage, glottocode: event.target.value })
+                        // setLanguage({ ...editLanguage, glottocode: event.target.value })
+                        setLanguage(event, 'glottocode')
                     }
                 />
             </TableCell>
@@ -71,7 +68,8 @@ export default function EditLanguage({ language }) {
                     variant="standard"
                     value={editLanguage.description}
                     onChange={(event) =>
-                        setLanguage({ ...editLanguage, description: event.target.value })
+                        // setLanguage({ ...editLanguage, description: event.target.value })
+                        setLanguage(event, 'description')
                     }
                 />
             </TableCell>
@@ -83,113 +81,78 @@ export default function EditLanguage({ language }) {
                     label="Global Speakers"
                     variant="standard"
                     helperText="ex. 2,700,000"
-                    
+                    value={editLanguage.global_speakers}
                     onChange={(event) =>
-                        setLanguage({
-                            ...editLanguage, global_speakers: event.target.value,
-                        })}
+                        // setLanguage({
+                        //     ...editLanguage, global_speakers: event.target.value,
+                        // })}
+                        setLanguage(event, 'global_speakers')}
                 />
             </TableCell>
-            <TableCell>{language.endonym}</TableCell>
-            <Grid container spacing={0.5}>
-                <form
-                    onSubmit={() =>
-                        dispatch({ type: "EDIT_LANGUAGE", payload: newLanguage })
-                    }
-                >
-                    <Grid item>
-                        <Typography>Add a new language!</Typography>
-                        <
-                     
-                     
-                  
-                            <Grid item>
-                            <TextField
-                                required
-                                id="filled-required"
-                                label="Endonym"
-                                variant="standard"
-                                helperText="ex. Hmong"
-                                onChange={(event) =>
-                                    setLanguage({ ...newLanguage, endonym: event.target.value })
-                                }
-                            />
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                required
-                                id="filled-required"
-                                label="Global Speakers"
-                                variant="standard"
-                                helperText="ex. 2,700,000"
-                                onChange={(event) =>
-                                    setLanguage({
-                                        ...newLanguage,
-                                        global_speakers: event.target.value,
-                                    })
-                                }
-                            />
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                required
-                                id="filled-required"
-                                label="SC Speakers"
-                                variant="standard"
-                                helperText="ex. 3,772"
-                                onChange={(event) =>
-                                    setLanguage({
-                                        ...newLanguage,
-                                        sc_speakers: event.target.value,
-                                    })
-                                }
-                            />
-                        </Grid>
-                        <Grid item>
-                            <AutoComplete table="category" />
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                id="filled-required"
-                                label="Link Title"
-                                variant="standard"
-                                onChange={(event) =>
-                                    setLanguage({
-                                        ...newLanguage, examples: [{ ...newLanguage.examples[0], link_text: event.target.value }]
-                                    })}
-                            />
-                        </Grid>
-                        <Grid item>
-                            <AutoComplete
-                                table="language" />
-                        </Grid>
-                        <Grid item>
-                            <TextField
-                                id="filled-required"
-                                label="Hyperlink"
-                                variant="standard"
-                                onChange={(event) =>
-                                    setLanguage({
-                                        ...newLanguage,
-                                        examples: [{ ...newLanguage.examples[0], hyperlink: event.target.value }]
 
-                                    })
-                                }
-                            />
-                        </Grid>
-                        <Grid item>
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                endIcon={<PublishIcon />}
-                            >
-                                Submit
-                            </Button>
-                        </Grid>
-                    </Grid>
-            </Grid>
-        </form>
-            </Grid >
+            <TableCell>
+                <TextField
+                    required
+                    id="filled-required"
+                    label="SC Speakers"
+                    variant="standard"
+                    helperText="ex. 3,772"
+                    value={editLanguage.global_speakers}
+                    onChange={(event) =>
+                        // setLanguage({
+                        //     ...newLanguage, sc_speakers: event.target.value,
+                        // })}
+                        setLanguage(event, 'sc_speakers')}
+                />
+            </TableCell>
+
+            <TableCell>
+                <TextField
+                    required
+                    id="filled-required"
+                    label="Endonym"
+                    variant="standard"
+                    helperText="ex. Hmong"
+                    alue={editLanguage.endonym}
+                    onChange={(event) =>
+                        // setLanguage({ ...editLanguage, endonym: event.target.value })
+                        setLanguage(event, 'endonym')
+                    }
+                />
+            </TableCell>
+
+            <TableCell>
+                <AutoComplete table="category" />
+            </TableCell>
+
+            <TableCell>
+                <TextField
+                    id="filled-required"
+                    label="Link Title"
+                    variant="standard"
+                    onChange={(event) =>
+                        // setLanguage({
+                        //     ...editLanguage,
+                        //     examples: [{ ...editLanguage.examples[0], link_text: event.target.value }]
+                        // })}
+                        setLanguage(event, 'examples.link_text')}
+                />
+            </TableCell>
+
+            <TableCell>
+                <TextField
+                    id="filled-required"
+                    label="Hyperlink"
+                    variant="standard"
+                    onChange={(event) =>
+                        // setLanguage({
+                        //     ...editLanguage,
+                        //     examples: [{ ...editLanguage.examples[0], hyperlink: event.target.value }]
+
+                        // })}
+                        setLanguage(event, 'examples.hyperlink')}
+                />
+            </TableCell>
         </>
     );
 }
