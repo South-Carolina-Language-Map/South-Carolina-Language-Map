@@ -17,13 +17,19 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map({flyDuration, zoomDuration}) {
   const dispatch = useDispatch();
+
+  // set map height
+  const windowSmall = window.innerWidth < 600;
+  const mapWidth = windowSmall ? 
+    window.innerWidth : window.innerWidth * 2 / 3;
+  const mapHeight = windowSmall ? window.innerHeight / 2 : window.innerHeight;
   
   //set initial viewport
   const [viewport, setViewport] = useState({
     latitude: 33.6,
     longitude: -81,
-    width: "fit",
-    height: "100vh",
+    width: mapWidth,
+    height: mapHeight,
     zoom: 6.0,
     transitionDuration: flyDuration,
     transitionInterpolator: new LinearInterpolator(),
@@ -33,7 +39,6 @@ function Map({flyDuration, zoomDuration}) {
   //get lists of (un)filtered sites and all categories in db
   const sites = useSelector(store => store.viewReducer.sitesReducer);
   const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
-
 
   //state to track mapStyle
   // const [mapStyle, setMapStyle] = useState(true);
@@ -45,10 +50,12 @@ function Map({flyDuration, zoomDuration}) {
 
   const resetView = () => {
     const bounds = getSiteBounds(sites);
+
+    // WebmercatoreViewport requires number width 
     const { longitude, latitude, zoom } = new WebMercatorViewport(viewport)
       .fitBounds([bounds[0], bounds[1]], {
         padding: 50,
-        offset: [0, 100]
+        // offset: [0, 100]
       });
     setViewport({
       ...viewport,
