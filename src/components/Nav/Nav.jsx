@@ -26,8 +26,8 @@ function Nav() {
   const user = useSelector((store) => store.user);
 
   // Variables
-  const open = Boolean(anchorEl);
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -83,7 +83,6 @@ function Nav() {
               <Button
                 color="inherit"
                 onClick={() => {
-                  setApprovalColor(selected);
                   dispatch({ type: "SET_ADMIN_VIEW", payload: "approval" });
                 }}
               >

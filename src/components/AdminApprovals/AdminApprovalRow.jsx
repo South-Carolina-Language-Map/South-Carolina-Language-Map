@@ -75,7 +75,7 @@ export default function AdminApprovalRow({ user }) {
           <Button sx={{ mr: 1 }} variant="contained" onClick={handleApproval}>
             Approve
           </Button>
-          <Button variant="contained" color="error" onClick={handleRejection}>
+          <Button variant="outlined" color="error" onClick={handleRejection}>
             Decline
           </Button>
         </TableCell>

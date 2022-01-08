@@ -67,7 +67,7 @@ export default function AdminCategoryRow({ row }) {
             <Button sx={{ mr: 1 }} variant="contained" onClick={CallEditMode}>
               Edit
             </Button>
-            <Button variant="contained" color="error" onClick={handleDelete}>
+            <Button variant="outlined" color="error" onClick={handleDelete}>
               Delete
             </Button>
           </TableCell>

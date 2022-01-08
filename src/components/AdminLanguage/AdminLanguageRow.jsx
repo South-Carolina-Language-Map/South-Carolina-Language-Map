@@ -34,7 +34,7 @@ export default function AdminLanguageRow({ language }) {
           <Button sx={{ mr: 1 }} variant="contained" onClick={handleEdit}>
             Edit
           </Button>
-          <Button variant="contained" color="error" onClick={handleDelete}>
+          <Button variant="outlined" color="error" onClick={handleDelete}>
             Delete
           </Button>
         </TableCell>

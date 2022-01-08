@@ -81,7 +81,7 @@ export default function AdminSiteRow({ regions, site, languages }) {
               >
                 Edit
               </Button>
-              <Button variant="contained" color="error" onClick={handleDelete}>
+              <Button variant="outlined" color="error" onClick={handleDelete}>
                 Delete
               </Button>
             </Stack>
