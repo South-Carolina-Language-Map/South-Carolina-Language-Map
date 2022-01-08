@@ -54,6 +54,7 @@ function Search() {
   };
 
   const clearSearch = () => {
+    dispatch({ type: "SET_LIST_DEFAULT" })
     dispatch({ type: "FETCH_ALL" });
     setSearchText("");
   };
