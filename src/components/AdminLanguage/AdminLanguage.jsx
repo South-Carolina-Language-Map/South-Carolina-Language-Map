@@ -13,10 +13,13 @@ import {
   TableHead,
   TableContainer,
   TablePagination,
+  Typography,
 } from "@mui/material";
 
 //components
 import AdminLanguageRow from "./AdminLanguageRow";
+import LanguageDialog from "./LanguageDialog";
+import LanguageForm from "./LanguageForm";
 
 function AdminLanguage() {
   const dispatch = useDispatch();
@@ -27,7 +30,6 @@ function AdminLanguage() {
   const languages = useSelector(
     (store) => store.adminReducer.adminLanguagesReducer
   );
-
   // The below 2 functions allow there to be multiple pages on the table.
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -42,8 +44,27 @@ function AdminLanguage() {
     dispatch({ type: "FETCH_CATEGORIES" });
   }, []);
 
+  //state and functions for form toggle view
+  const [checked, setChecked] = React.useState(false);
+
+  const handleChange = (event) => {
+    setChecked(event.target.checked);
+  };
+
+
   return (
     <Grid container sx={{ pt: 3 }}>
+      <Grid item>
+      <Switch
+        checked={checked}
+        onChange={handleChange}
+        inputProps={{ 'aria-label': 'controlled'}}
+        />
+      {checked === true ? 
+      <LanguageForm/> 
+      :
+      <Typography>ADD A NEW LANGUAGE </Typography>}
+      </Grid>
       <Grid item xs={1} />
       <Grid item xs={10}>
         <TableContainer sx={{ maxHeight: 675 }}>
