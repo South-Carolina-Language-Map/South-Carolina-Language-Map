@@ -19,7 +19,7 @@ function* fetchCategories() {
 }
 
 //CATEGORIES POST ROUTE
-function* addCategory() {
+function* addCategory(action) {
   // Get all for map category detail 
   try {
     //POST request to categories router
@@ -36,10 +36,11 @@ function* addCategory() {
 }
 
 //CATEGORIES PUT ROUTE
-function* updateCategory() {
+function* updateCategory(action) {
+  console.log('THIS IS UPDATECATAGORIES========', action.payload)
     try {
       //UPDATE request sent to categories.router based on ID
-      const response = yield axios.put(`/api/categories/${action.payload}`);
+      const response = yield axios.put(`/api/categories/${action.payload.id}`, action.payload);
   
       yield console.log('response', response);
     //call GET request to repopulate languages list
@@ -52,7 +53,7 @@ function* updateCategory() {
   }
 
 //CATEGORIES DELETE ROUTE
-function* deleteCategory() {
+function* deleteCategory(action) {
     try {
       //DELETE request sent to categories.router based on ID
       const response = yield axios.delete(`/api/categories/${action.payload}`);

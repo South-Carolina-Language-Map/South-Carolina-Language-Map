@@ -16,6 +16,12 @@ import {
   TablePagination,
 } from "@mui/material";
 
+//components
+import CategoryForm from "./CategoryForm";
+import AdminCategoryRow from "./AdminCategoryRow";
+
+
+
 function AdminCategory() {
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
@@ -26,13 +32,7 @@ function AdminCategory() {
     (store) => store.adminReducer.adminCategoriesReducer
   );
 
-  // Defining what to do when edit or delete are pressed:
-  const handleEdit = () => {
-    console.log("Edit");
-  };
-  const handleDelete = () => {
-    console.log("Delete");
-  };
+  
 
   // The below 2 functions allow there to be multiple pages on the table.
   const handleChangePage = (event, newPage) => {
@@ -50,6 +50,9 @@ function AdminCategory() {
 
   return (
     <Grid container sx={{ pt: 3 }}>
+      <Grid>
+      <CategoryForm/>
+      </Grid>
       <Grid item xs={1} />
       <Grid item xs={10}>
         <TableContainer sx={{ maxHeight: 440 }}>
@@ -60,29 +63,15 @@ function AdminCategory() {
                 <TableCell align="center">Edit/Delete</TableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+           
               {catagories
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
-                  <TableRow>
-                    <TableCell component="th" scope="row" align="center">
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="center">
-                      <Button
-                        sx={{ mr: 1 }}
-                        variant="contained"
-                        onClick={handleEdit}
-                      >
-                        Edit
-                      </Button>
-                      <Button variant="contained" onClick={handleDelete}>
-                        Delete
-                      </Button>
-                    </TableCell>
-                  </TableRow>
+                  <TableBody key={row.id}>
+                  <AdminCategoryRow row={row} />
+                  </TableBody>
                 ))}
-            </TableBody>
+           
           </Table>
         </TableContainer>
         <TablePagination

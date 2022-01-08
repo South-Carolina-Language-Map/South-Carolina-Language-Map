@@ -13,17 +13,15 @@ import {
   TableHead,
 } from "@mui/material";
 
+//components 
+import AdminApprovalRow from "./AdminApprovalRow";
+
 function AdminApprovals() {
   const dispatch = useDispatch();
   const approvals = useSelector(
     (store) => store.adminReducer.adminApprovalsReducer
   );
-  const handleApproval = () => {
-    console.log("Edit");
-  };
-  const handleRejection = () => {
-    console.log("Delete");
-  };
+  
 
   useEffect(() => {
     dispatch({ type: "FETCH_UNAPPROVED" });
@@ -42,9 +40,10 @@ function AdminApprovals() {
               <TableCell align="center">Approve/Decline</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
             {approvals?.map((user) => (
-              <TableRow>
+              <TableBody key ={user.id}>
+                <AdminApprovalRow user={user}/>
+              {/* <TableRow>
                 <TableCell component="th" scope="row" align="center">
                   {user.fullName}
                 </TableCell>
@@ -66,9 +65,10 @@ function AdminApprovals() {
                     Decline
                   </Button>
                 </TableCell>
-              </TableRow>
+              </TableRow> */}
+              </TableBody>
             ))}
-          </TableBody>
+        
         </Table>
       </Grid>
       <Grid item xs={1} />

@@ -34,9 +34,45 @@ function* fetchAllUsers() {
   }
 }
 
+
+//ADMIN PUT APPROVAL ROUTE
+function* updateAdminApproval(action) {
+  try {
+    //UPDATE request sent to user.router based on ID to change clearance level
+    const response = yield axios.put(`/api/user/admin/${action.payload}`);
+
+    //call GET request to repopulate approvals list
+    yield put({ type: 'FETCH_UNAPPROVED' });
+  } catch (err) {
+    yield put({ type: "UPDATE_ADMIN_APPROVAL_ERROR" });
+    console.log("Error in updateAdmin", err);
+  }
+
+}
+
+
+//ADMIN DELETE ROUTE
+function* deleteUser(action) {
+  try {
+    //DELETE request sent to user/admin route based on ID
+    const response = yield axios.delete(`/api/user/admin/${action.payload}`);
+
+    yield console.log('response', response);
+    //call GET request to repopulate category list
+    yield put({ type: "FETCH_UNAPPROVED" });
+  } catch (err) {
+    yield put({ type: "DELETE_ADMIN_ERROR" });
+    console.log("Error in deleteUser", err);
+  }
+
+}
+
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_UNAPPROVED', fetchAllUsers);
+  yield takeLatest('DELETE_UNAPPROVED', deleteUser);
+  yield takeLatest('APPROVE_ADMIN', updateAdminApproval)
 }
 
 export default userSaga;
