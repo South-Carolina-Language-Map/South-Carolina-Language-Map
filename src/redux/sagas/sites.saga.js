@@ -7,6 +7,7 @@ function* fetchSites() {
     //Get All sites for populating explore page
     const response = yield axios.get('api/sites');
     yield put({type: 'SET_ADMIN_SITES', payload: response.data});
+    yield put({type: 'SET_LIST', payload: response.data});
   }catch(err){
     yield put({type: 'FETCH_SITES_ERR'})
   }
@@ -23,7 +24,7 @@ function* addSite(action) {
         yield put({type: "NO_COORDS" })
       }
       //call GET request to repopulate sites list
-      yield put({ type: "FETCH_EXPLORE_SITES"});
+      yield put({ type: "FETCH_SITES"});
     } catch (err) {
       console.log("Error in addSite", err);
       yield put({ type: "ADD_SITE_ERROR" });
@@ -39,7 +40,7 @@ function* addSite(action) {
     
         yield console.log('response', response);
       //call GET request to repopulate sites list
-        yield put({ type: "FETCH_EXPLORE_SITES" });
+        yield put({ type: "FETCH_SITES" });
       } catch (err) {
         yield put({ type: "UPDATE_SITE_ERROR" });
         console.log("Error in updateSite", err);

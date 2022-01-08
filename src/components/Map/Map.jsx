@@ -12,41 +12,50 @@ import ReactMapGL, {
   LinearInterpolator,
   WebMercatorViewport
 } from 'react-map-gl';
-import { easeCubic, easeSinIn, easeSinOut } from 'd3-ease';
+import { easeCubic, easeSinOut } from 'd3-ease';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-function Map() {
+function Map({flyDuration, zoomDuration}) {
   const dispatch = useDispatch();
 
-  //get lists of (un)filtered sites and all categories in db
-  const sites = useSelector(store => store.viewReducer.sitesReducer);
-  const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
-  const [dimensions, setDimensions] = useState({})
-
-  //state to track dark mode (not currently utilized)
-  const [darkMode, setDarkMode] = useState(true);
-  const toggleDark = () => { setDarkMode(!darkMode) };
-  const flyDuration = 3000;
-  const zoomDuration = 500;
-
+  // set map height
+  const windowSmall = window.innerWidth < 600;
+  const mapWidth = windowSmall ? 
+    window.innerWidth : window.innerWidth * 2 / 3;
+  const mapHeight = windowSmall ? window.innerHeight / 2 : window.innerHeight;
+  
   //set initial viewport
   const [viewport, setViewport] = useState({
     latitude: 33.6,
     longitude: -81,
-    width: "fit",
-    height: "100vh",
+    width: mapWidth,
+    height: mapHeight,
     zoom: 6.0,
     transitionDuration: flyDuration,
     transitionInterpolator: new LinearInterpolator(),
     transitionEasing: easeCubic
   });
 
+  //get lists of (un)filtered sites and all categories in db
+  const sites = useSelector(store => store.viewReducer.sitesReducer);
+  const categories = useSelector(store => store.adminReducer.adminCategoriesReducer);
+
+  //state to track mapStyle
+  // const [mapStyle, setMapStyle] = useState(true);
+  const mapStyles = [
+    `mapbox://styles/blingusblongus/cky527chq3w1g14qj7ucfaq82`,
+    `mapbox://styles/mapbox/light-v10`,
+    `mapbox://styles/mapbox/dark-v10`,
+  ]
+
   const resetView = () => {
     const bounds = getSiteBounds(sites);
+
+    // WebmercatoreViewport requires number width 
     const { longitude, latitude, zoom } = new WebMercatorViewport(viewport)
       .fitBounds([bounds[0], bounds[1]], {
-        padding: 20,
-        offset: [0, 100]
+        padding: 50,
+        // offset: [0, 100]
       });
     setViewport({
       ...viewport,
@@ -109,8 +118,6 @@ function Map() {
     }
   }
 
-
-
   // On Load, fetch necessary sites and categories
   useEffect(() => {
     dispatch({ type: 'FETCH_ALL' });
@@ -124,10 +131,11 @@ function Map() {
     }
   }, [sites]);
 
+  // attach event listener to handle window resize, then clean it up
   useEffect(() => {
     const handleResize = () => {
       console.log('rendered at', window.innerHeight, window.innerWidth);
-      setViewport({...viewport, height: '100vh', width: '100%'});
+      setViewport({ ...viewport, height: '100vh', width: '100%' });
     }
     window.addEventListener('resize', handleResize);
     return _ => {
@@ -144,7 +152,7 @@ function Map() {
         {/* Configure and mount map canvas */}
         <ReactMapGL
           {...viewport}
-          mapStyle={`mapbox://styles/mapbox/${darkMode ? 'light' : 'dark'}-v10`}
+          mapStyle={mapStyles[0]}
           onViewportChange={setViewport}
           mapboxApiAccessToken={"pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag"}
         >
@@ -161,8 +169,8 @@ function Map() {
                   TransitionComponent={Zoom}
                   placement="top"
                   arrow>
-                  <div 
-                  className={"dot" + ' ' + assignClasses(site)}
+                  <div
+                    className={"dot" + ' ' + assignClasses(site)}
                   // onClick={selectSite}
                   ></div>
                 </Tooltip>
@@ -171,7 +179,7 @@ function Map() {
           })}
         </ReactMapGL>
 
-        {/* Render Map Control Buttons */}
+        {/* Render Map Zoom Buttons */}
         <div className='bottom-right'>
           <Fab color="primary" aria-label="zoom in"
             onClick={() => adjustZoom('in')}>
