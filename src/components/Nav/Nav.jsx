@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 //components
 import LogOutButton from '../LogOutButton/LogOutButton';
@@ -22,7 +23,13 @@ function Nav() {
 
   //hooks
   const dispatch = useDispatch();
+  const history = useHistory();
 
+  const routeChange = () => {
+    console.log('click')
+    let path = `/home`;
+    history.push(path);
+  }
 
   return (
     <>
@@ -60,9 +67,11 @@ function Nav() {
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
             <Toolbar>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+
+              <Button onClick={routeChange} variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 South Carolina Language Map
-              </Typography>
+              </Button>
+
 
               <Button
                 color="inherit"
