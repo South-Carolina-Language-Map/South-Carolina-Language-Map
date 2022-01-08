@@ -49,14 +49,13 @@ export default function AdminSiteRow({ regions, site, languages }) {
 
     //DELETE for this site ID
     const handleDelete = () => {
-        console.log("Delete", site.id);
+
         dispatch({
             type: 'DELETE_SITE',
             payload: site.id
         })
     };
 
-console.log(site)
     return (
         <>
             {!handleEditMode ?
