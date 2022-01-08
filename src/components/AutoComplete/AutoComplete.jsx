@@ -62,7 +62,6 @@ function AutoComplete({ table }) {
 
   return (
     <Autocomplete
-      id="country-select-demo"
       sx={{ width: 250 }}
       options={regions}
       autoHighlight
@@ -85,7 +84,7 @@ function AutoComplete({ table }) {
           label={`Choose a ${properties.label}`}
           inputProps={{
             ...params.inputProps,
-            autoComplete: "new-password", // disable autocomplete and autofill
+            autoComplete: "dontFillMePlease", // disable autocomplete and autofill
           }}
         />
       )}
