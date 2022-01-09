@@ -47,8 +47,8 @@ function AutoComplete({ table }) {
     dispatch({ type: properties.fetch });
   }, []);
 
-  //Bring in reducer that stores all available regions in SC
-  const regions = useSelector(
+  //Bring in reducer that stores all available options in SC
+  const options = useSelector(
     (store) => store.adminReducer[properties.reducer]
   );
 
@@ -69,7 +69,7 @@ function AutoComplete({ table }) {
   return (
     <Autocomplete
       autoHighlight
-      options={regions}
+      options={options}
       sx={{ width: 2 / 2 }}
       onChange={handleStoreId}
       id="country-select-demo"
@@ -91,7 +91,8 @@ function AutoComplete({ table }) {
           label={`Choose a ${properties.label}`}
           inputProps={{
             ...params.inputProps,
-            autoComplete: "dont-fill-me-please", // disable autocomplete and autofill
+            id: 1, // This is necessary to prevent autocomplete
+            autoComplete: "new-password", // disable autocomplete and autofill
           }}
         />
       )}
