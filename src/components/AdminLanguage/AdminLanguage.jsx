@@ -15,6 +15,7 @@ import {
   Typography,
   TableContainer,
   TablePagination,
+  Button,
 } from "@mui/material";
 
 //components
@@ -52,24 +53,48 @@ function AdminLanguage() {
     setChecked(event.target.checked);
   };
 
-
   return (
-    <Grid container sx={{ m: 3 }}>
-      <Grid item>
-        <Switch
-          checked={checked}
-          onChange={handleChange}
-          inputProps={{ "aria-label": "controlled" }}
-        />
-        {checked === true ? (
+    <Grid container sx={{ p: 3 }}>
+      {/*  */}
+      {checked ? (
+        <Grid item xs={12} sx={{ pb: 2 }}>
           <LanguageForm />
-        ) : (
-          <Typography variant="h4" textAlign="center" sx={{ p: 2 }}>
-            ADD A NEW LANGUAGE
+        </Grid>
+      ) : (
+        <Grid item xs={8} sx={{ pb: 2 }}>
+          <Typography variant="h3" textAlign="right">
+            All Languages
           </Typography>
+        </Grid>
+      )}
+      {/*  */}
+      <Grid item xs={4} sx={{ textAlign: "right" }}>
+        {checked ? (
+          <Button
+            variant="outlined"
+            onClick={() => {
+              setChecked(!checked);
+            }}
+          >
+            Table View
+          </Button>
+        ) : (
+          <Button
+            variant="contained"
+            onClick={() => {
+              setChecked(!checked);
+            }}
+          >
+            Add Language
+          </Button>
         )}
       </Grid>
-      <Grid item xs={10}>
+      {/*  */}
+      <Grid item xs={12} textAlign="center">
+        {checked ? <Typography variant="h4">All Languages</Typography> : <></>}
+      </Grid>
+      {/*  */}
+      <Grid item xs={12}>
         <TableContainer sx={{ maxHeight: 675 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
@@ -82,7 +107,6 @@ function AdminLanguage() {
                 <TableCell>Edit/Delete</TableCell>
               </TableRow>
             </TableHead>
-
             {languages
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((language) => {
@@ -104,7 +128,7 @@ function AdminLanguage() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Grid>
-      <Grid item xs={1} />
+      {/*  */}
     </Grid>
   );
 }
