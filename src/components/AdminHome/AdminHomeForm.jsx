@@ -1,27 +1,25 @@
 // Local Files Import
 import AutoComplete from "../AutoComplete/AutoComplete";
 
-//Imported necessary libraries 
-import * as React from "react";
+// React imports
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { 
-    Typography,
-    Grid,
-    TextField,
-    Button,
-} from '@mui/material';
+
+//MUI Imports
 import PublishIcon from "@mui/icons-material/Publish";
+import { Typography, Grid, TextField, Button } from "@mui/material";
 
 function AdminHomeForm() {
   const dispatch = useDispatch();
   //Reducer set up for NewSite values for language and region ids
-  const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
+  const dropDownValues = useSelector(
+    (store) => store.adminReducer.newSiteReducer
+  );
   //Reducer set up for error catching
   const mapBoxMessage = useSelector((store) => store.errors.mapBoxMessage);
 
-//default values for site_name and addresses - set to empty strings
+  //default values for site_name and addresses - set to empty strings
   let base = {
     site_name: "",
     address: "",
@@ -36,8 +34,8 @@ function AdminHomeForm() {
       region_id: dropDownValues.region_id,
     };
     //sends action to saga with newSite object to create a new GeoTag
-    dispatch({ type: 'ADD_SITE', payload: newSite });
-    
+    dispatch({ type: "ADD_SITE", payload: newSite });
+
     //still need to empty auto completes
 
     //empty inputs
@@ -46,11 +44,10 @@ function AdminHomeForm() {
 
   //local state to store site name and address
   let [newLocation, setLocation] = useState(base);
- 
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container >
+      <Grid container>
         {/*  */}
         <Grid item xs={3}>
           {/* Text field used for Site Name input */}
@@ -88,7 +85,7 @@ function AdminHomeForm() {
           <AutoComplete table="region" />
         </Grid>
         {/*  */}
-        <Grid item xs={3} >
+        <Grid item xs={3}>
           {/* Drop down autofill input for languages provided by university */}
           <AutoComplete table="language" />
           {/* Link will redirect you to ADD NEW LANGUAGE form  */}

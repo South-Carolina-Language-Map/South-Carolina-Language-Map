@@ -1,9 +1,10 @@
+// React Imports
 import * as React from "react";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Autocomplete, Paper } from "@mui/material";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+// MUI Imports
+import { Box, TextField, Autocomplete } from "@mui/material";
 
 function AutoComplete({ table }) {
   const dispatch = useDispatch();
@@ -40,7 +41,6 @@ function AutoComplete({ table }) {
         newSite: true,
       };
       break;
-  
   }
 
   useEffect(() => {
@@ -61,35 +61,35 @@ function AutoComplete({ table }) {
   };
 
   return (
-      <Autocomplete
-        autoHighlight
-        id="country-select-demo"
-        sx={{ width: 2 / 2 }}
-        options={regions}
-        onChange={handleStoreId}
-        // getOptionLabel is what is displayed on TextField when input is selected from dropdown
-        getOptionLabel={(option) => option[properties.option]}
-        renderOption={(props, option) => (
-          <Box
-            component="li"
-            sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
-            {...props}
-          >
-            {/* These two options are the displayed values IN the drop down */}
-            {option.id}. {option[properties.option]}
-          </Box>
-        )}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label={`Choose a ${properties.label}`}
-            inputProps={{
-              ...params.inputProps,
-              autoComplete: "new-password", // disable autocomplete and autofill
-            }}
-          />
-        )}
-      />
+    <Autocomplete
+      autoHighlight
+      options={regions}
+      sx={{ width: 2 / 2 }}
+      onChange={handleStoreId}
+      id="country-select-demo"
+      // getOptionLabel is what is displayed on TextField when input is selected from dropdown
+      getOptionLabel={(option) => option[properties.option]}
+      renderOption={(props, option) => (
+        <Box
+          component="li"
+          sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+          {...props}
+        >
+          {/* These two options are the displayed values IN the drop down */}
+          {option.id}. {option[properties.option]}
+        </Box>
+      )}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label={`Choose a ${properties.label}`}
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: "new-password", // disable autocomplete and autofill
+          }}
+        />
+      )}
+    />
   );
 }
 

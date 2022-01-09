@@ -1,7 +1,14 @@
+<<<<<<< HEAD
 // React Imports
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+=======
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
+>>>>>>> development
 
 //components
 import "./Nav.css";
@@ -25,6 +32,7 @@ function Nav() {
   //stores
   const user = useSelector((store) => store.user);
 
+<<<<<<< HEAD
   // Variables
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -35,6 +43,17 @@ function Nav() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+=======
+  //hooks
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const routeChange = () => {
+    console.log('click')
+    let path = `/home`;
+    history.push(path);
+  }
+>>>>>>> development
 
   return (
     <>
@@ -76,9 +95,11 @@ function Nav() {
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
             <Toolbar>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+
+              <Button onClick={routeChange} variant="h6" component="div" sx={{ flexGrow: 1 }}>
                 South Carolina Language Map
-              </Typography>
+              </Button>
+
 
               <Button
                 color="inherit"
