@@ -50,7 +50,7 @@ function AdminHome() {
     dispatch({ type: "FETCH_LANGUAGES" });
   }, []);
 
-  console.log(sites);
+  
   return (
     <Grid container>
       {/*  */}

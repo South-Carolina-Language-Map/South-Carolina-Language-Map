@@ -34,7 +34,7 @@ export default function AdminSiteRow({ regions, site, languages }) {
         id: edit.id,
         address: edit.address,
         site_name: edit.site_name,
-        region_id: dropDownValues.region_id || edit.regions_id,
+        region_id: dropDownValues.region_id || edit.region_id,
         language_id: dropDownValues.language_id || edit.language_id,
       },
     });
@@ -135,7 +135,7 @@ export default function AdminSiteRow({ regions, site, languages }) {
               </Button>
               <Button
                 color="error"
-                variant="contained"
+                variant="outlined"
                 onClick={toggleEditMode}
               >
                 Cancel
