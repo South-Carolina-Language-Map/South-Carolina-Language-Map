@@ -1,23 +1,24 @@
 //Imported necessary libraries
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
     TextField,
     TableCell,
 } from "@mui/material";
-import PublishIcon from "@mui/icons-material/Publish";
 
 import AutoComplete from "../AutoComplete/AutoComplete";
 
-export default function EditLanguage(event, { language }) {
+export default function EditLanguage({ language }) {
     //initialize dispatch
     const dispatch = useDispatch();
     
+    function handleChange(event, property){
     dispatch({ 
         type: 'EDIT_LANGUAGE_ONCHANGE', 
         payload: { property: property, value: event.target.value }
     });
+}
 
 
 
@@ -37,10 +38,9 @@ export default function EditLanguage(event, { language }) {
                     variant="standard"
                     helperText="ex. Hmong"
                     value={editLanguage.language}
-                    onChange={(event) =>
-                        // setLanguage({ ...editLanguage, language: event.target.value })
-                        setLanguage(event, 'language')
-                    }
+                    onChange={(event) => handleChange(event, 'language')}
+                    // onChange={(event) =>
+                    //     // setLanguage({ ...editLanguage, language: event.target.value })
                 />
             </TableCell>
 
@@ -52,10 +52,11 @@ export default function EditLanguage(event, { language }) {
                     variant="standard"
                     helperText="ex. Firs1234"
                     value={editLanguage.glottocode}
-                    onChange={(event) =>
-                        // setLanguage({ ...editLanguage, glottocode: event.target.value })
-                        setLanguage(event, 'glottocode')
-                    }
+                    onChange={(event) => handleChange(event, 'glottocode')}
+                    // onChange={(event) =>
+                    //     // setLanguage({ ...editLanguage, glottocode: event.target.value })
+                    //     setLanguage(event, 'glottocode')
+                    
                 />
             </TableCell>
 
@@ -66,10 +67,11 @@ export default function EditLanguage(event, { language }) {
                     label="Description"
                     variant="standard"
                     value={editLanguage.description}
-                    onChange={(event) =>
-                        // setLanguage({ ...editLanguage, description: event.target.value })
-                        setLanguage(event, 'description')
-                    }
+                    onChange={(event) => handleChange(event, 'description')}
+                    // onChange={(event) =>
+                    //     // setLanguage({ ...editLanguage, description: event.target.value })
+                    //     setLanguage(event, 'description')
+                    
                 />
             </TableCell>
 
@@ -81,11 +83,12 @@ export default function EditLanguage(event, { language }) {
                     variant="standard"
                     helperText="ex. 2,700,000"
                     value={editLanguage.global_speakers}
-                    onChange={(event) =>
-                        // setLanguage({
-                        //     ...editLanguage, global_speakers: event.target.value,
-                        // })}
-                        setLanguage(event, 'global_speakers')}
+                    onChange={(event) => handleChange(event, 'global_speakers')}
+                    // onChange={(event) =>
+                    //     // setLanguage({
+                    //     //     ...editLanguage, global_speakers: event.target.value,
+                    //     // })}
+                    //     setLanguage(event, 'global_speakers')}
                 />
             </TableCell>
 
@@ -96,12 +99,13 @@ export default function EditLanguage(event, { language }) {
                     label="SC Speakers"
                     variant="standard"
                     helperText="ex. 3,772"
-                    value={editLanguage.global_speakers}
-                    onChange={(event) =>
-                        // setLanguage({
-                        //     ...newLanguage, sc_speakers: event.target.value,
-                        // })}
-                        setLanguage(event, 'sc_speakers')}
+                    value={editLanguage.sc_speakers}
+                    onChange={(event) => handleChange(event, 'sc_speakers')}
+                    // onChange={(event) =>
+                    //     // setLanguage({
+                    //     //     ...newLanguage, sc_speakers: event.target.value,
+                    //     // })}
+                    //     setLanguage(event, 'sc_speakers')}
                 />
             </TableCell>
 
@@ -112,11 +116,12 @@ export default function EditLanguage(event, { language }) {
                     label="Endonym"
                     variant="standard"
                     helperText="ex. Hmong"
-                    alue={editLanguage.endonym}
-                    onChange={(event) =>
-                        // setLanguage({ ...editLanguage, endonym: event.target.value })
-                        setLanguage(event, 'endonym')
-                    }
+                    value={editLanguage.endonym}
+                    onChange={(event) => handleChange(event, 'endonym')}
+                    // onChange={(event) =>
+                    //     // setLanguage({ ...editLanguage, endonym: event.target.value })
+                    //     setLanguage(event, 'endonym')
+                    // }
                 />
             </TableCell>
 
@@ -129,12 +134,13 @@ export default function EditLanguage(event, { language }) {
                     id="filled-required"
                     label="Link Title"
                     variant="standard"
-                    onChange={(event) =>
-                        // setLanguage({
-                        //     ...editLanguage,
-                        //     examples: [{ ...editLanguage.examples[0], link_text: event.target.value }]
-                        // })}
-                        setLanguage(event, 'examples.link_text')}
+                    onChange={(event) => handleChange(event, 'examples.link_text')}
+                    // onChange={(event) =>
+                    //     // setLanguage({
+                    //     //     ...editLanguage,
+                    //     //     examples: [{ ...editLanguage.examples[0], link_text: event.target.value }]
+                    //     // })}
+                    //     setLanguage(event, 'examples.link_text')}
                 />
             </TableCell>
 
@@ -143,13 +149,14 @@ export default function EditLanguage(event, { language }) {
                     id="filled-required"
                     label="Hyperlink"
                     variant="standard"
-                    onChange={(event) =>
-                        // setLanguage({
-                        //     ...editLanguage,
-                        //     examples: [{ ...editLanguage.examples[0], hyperlink: event.target.value }]
+                    onChange={(event) => handleChange(event, 'examples.hyperlink')}
+                    // onChange={(event) =>
+                    //     // setLanguage({
+                    //     //     ...editLanguage,
+                    //     //     examples: [{ ...editLanguage.examples[0], hyperlink: event.target.value }]
 
-                        // })}
-                        setLanguage(event, 'examples.hyperlink')}
+                    //     // })}
+                    //     setLanguage(event, 'examples.hyperlink')}
                 />
             </TableCell>
         </>

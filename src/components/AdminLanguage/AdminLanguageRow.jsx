@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
 import {
@@ -12,13 +13,21 @@ import {
 import EditLanguage from "./EditLanguage";
 
 
+
 export default function AdminLanguageRow({ language }) {
+
+    //stores
+    const editedLanguage = useSelector(store => store.adminReducer.adminEditReducer)
 
     //local state - toggle view for edit
     const [toggleEdit, setToggleEdit] = useState(false)
 
     //hooks
     const dispatch = useDispatch();
+
+    const handleEdit = () => {
+        console.log(editedLanguage);
+    }
 
     // function handles edit for this ID
     const handleEditView = () => {
