@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
 import { Button, TableRow, TableCell } from "@mui/material";
@@ -22,8 +22,10 @@ export default function AdminLanguageRow({ language }) {
     });
   };
 
-  // category_id: 4;
-  // description: "";
+  // Grabbing the categories data to parse through
+  const categories = useSelector(
+    (store) => store.adminReducer.adminCategoriesReducer
+  );
 
   return (
     <TableRow hover role="checkbox" tabIndex={-1}>
@@ -33,7 +35,13 @@ export default function AdminLanguageRow({ language }) {
       <TableCell>{language.sc_speakers}</TableCell>
       <TableCell>{language.endonym}</TableCell>
       <TableCell>{language.description}</TableCell>
-      <TableCell>{language.category_id}</TableCell>
+      <TableCell>
+        {categories.map((category) => {
+          if (language.category_id === category.id) {
+            return category.name;
+          }
+        })}
+      </TableCell>
       <TableCell>
         <Button sx={{ mr: 1 }} variant="contained" onClick={handleEdit}>
           Edit
