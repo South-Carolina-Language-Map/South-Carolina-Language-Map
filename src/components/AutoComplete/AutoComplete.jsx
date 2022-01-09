@@ -54,6 +54,7 @@ function AutoComplete({ table }) {
 
   //handle region input and store the associated ID to reducer
   const handleStoreId = (event, value) => {
+    console.log("event.target", event.target);
     console.log("Properties.newSite", properties.newSite, properties.set);
     if (properties.newSite) {
       dispatch({ type: properties.set, payload: value.id });

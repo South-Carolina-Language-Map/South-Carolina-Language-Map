@@ -1,18 +1,20 @@
-//Imported necessary libraries
+//React Imports
 import * as React from "react";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+// MUI Imports
 import {
   Paper,
   Grid,
-  TextField,
   Button,
+  TextField,
   Typography,
   Autocomplete,
 } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
 
+// Local Imports
 import AutoComplete from "../AutoComplete/AutoComplete";
 
 function LanguageForm() {
@@ -23,9 +25,14 @@ function LanguageForm() {
   const category = useSelector(
     (store) => store.adminReducer.newLanguageCategoryIDReducer
   );
+  let clearAutoComplete = useSelector(
+    (store) => store.adminReducer.clearAutoCompleteReducer
+  );
 
-  //create empty object to store the values of the form
-  //local state stores the value for category input
+  console.log("resetAuto", clearAutoComplete);
+
+  let autoKey = clearAutoComplete ? 1 : 2;
+
   const [newLanguage, setLanguage] = useState({
     language: "",
     glottocode: "",
@@ -147,9 +154,8 @@ function LanguageForm() {
                 }
               />
             </Grid>
-            {/*  */}
             <Grid item xs={3} sx={{ pr: 2 }}>
-              <AutoComplete table="category" />
+              <AutoComplete table="category" key={autoKey} />
             </Grid>
             {/*  */}
             <Grid item xs={3}>

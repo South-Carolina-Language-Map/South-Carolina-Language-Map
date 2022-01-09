@@ -19,6 +19,14 @@ function AdminHomeForm() {
   //Reducer set up for error catching
   const mapBoxMessage = useSelector((store) => store.errors.mapBoxMessage);
 
+  let clearAutoComplete = useSelector(
+    (store) => store.adminReducer.clearAutoCompleteReducer
+  );
+
+  console.log("resetAuto", clearAutoComplete);
+
+  let autoKey = clearAutoComplete ? 1 : 2;
+
   //default values for site_name and addresses - set to empty strings
   let base = {
     site_name: "",
@@ -40,10 +48,13 @@ function AdminHomeForm() {
 
     //empty inputs
     setLocation(base);
+    dispatch({ type: "RESET_AUTOCOMPLETE" });
   };
 
   //local state to store site name and address
   let [newLocation, setLocation] = useState(base);
+
+  console.log("Autokey", autoKey);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -82,16 +93,14 @@ function AdminHomeForm() {
         {/*  */}
         <Grid item xs={3}>
           {/* Drop down autofill input for Regions of South Carolina */}
-          <AutoComplete table="region" />
+          <AutoComplete table="region" key={autoKey} />
         </Grid>
-        {/*  */}
         <Grid item xs={3}>
           {/* Drop down autofill input for languages provided by university */}
-          <AutoComplete table="language" />
+          <AutoComplete table="language" key={autoKey} />
           {/* Link will redirect you to ADD NEW LANGUAGE form  */}
-          <Link>{`Don't see your language? Click here!`}</Link>
+          <div>{`Don't see your language? Click here!`}</div>
         </Grid>
-        {/*  */}
         <Grid item xs={12} textAlign="center">
           <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
             Submit
@@ -99,7 +108,6 @@ function AdminHomeForm() {
           {/* If the error exists, display the following message provided in reducer */}
           {mapBoxMessage.length > 0 && <Typography>{mapBoxMessage}</Typography>}
         </Grid>
-        {/*  */}
       </Grid>
     </form>
   );
