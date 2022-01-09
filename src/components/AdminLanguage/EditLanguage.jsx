@@ -111,10 +111,23 @@ export default function EditLanguage({ language }) {
 
             <TableCell>
                 <TextField
+                    required
+                    id="filled-required"
+                    label="Global Speakers"
+                    variant="standard"
+                    helperText="ex. 2,700,000"
+                    value={editLanguage.status}
+                    onChange={(event) => handleChange(event, 'status')}
+                />
+            </TableCell>
+
+            <TableCell>
+                <TextField
                     id="filled-required"
                     label="Link Title"
                     variant="standard"
-                    onChange={(event) => handleChange(event, 'examples.link_text')}
+                    value={editLanguage.link_text}
+                    onChange={(event) => handleChange(event, 'link_text')}
                 />
             </TableCell>
 
@@ -123,7 +136,8 @@ export default function EditLanguage({ language }) {
                     id="filled-required"
                     label="Hyperlink"
                     variant="standard"
-                    onChange={(event) => handleChange(event, 'examples.hyperlink')}
+                    value={editLanguage.hyperlink}
+                    onChange={(event) => handleChange(event, 'hyperlink')}
                 />
             </TableCell>
         </>
