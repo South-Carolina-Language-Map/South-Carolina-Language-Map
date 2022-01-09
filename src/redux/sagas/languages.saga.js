@@ -40,7 +40,7 @@ function* fetchLanguage(action) {
 function* addLanguage(action) {
   try {
     //POST request to languages router
-    const response = yield axios.post(`/api/languages/${action.payload}`, action.payload);
+    const response = yield axios.post(`/api/languages`, action.payload);
 
     yield console.log('response', response);
     //call GET request to repopulate languages list

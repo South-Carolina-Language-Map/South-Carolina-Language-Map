@@ -79,7 +79,6 @@ function LanguageForm() {
           {/*  */}
           <Grid item xs={2.4}>
             <TextField
-              required
               id="filled-required"
               label="Glottocode"
               variant="standard"
@@ -105,7 +104,6 @@ function LanguageForm() {
           {/*  */}
           <Grid item xs={2.4}>
             <TextField
-              required
               id="filled-required"
               label="Global Speakers"
               variant="standard"
@@ -121,7 +119,6 @@ function LanguageForm() {
           {/*  */}
           <Grid item xs={2.4}>
             <TextField
-              required
               id="filled-required"
               label="SC Speakers"
               variant="standard"
@@ -139,7 +136,6 @@ function LanguageForm() {
             {/*  */}
             <Grid item xs={3}>
               <TextField
-                required
                 multiline
                 minRows={3}
                 maxRows={10}
