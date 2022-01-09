@@ -1,165 +1,175 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from "react-router-dom";
+// React Imports
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 //components
-import LogOutButton from '../LogOutButton/LogOutButton';
-import './Nav.css';
+import "./Nav.css";
 
 //mui styles
 import {
-  AppBar,
   Box,
-  Toolbar,
-  Typography,
+  Menu,
+  AppBar,
   Button,
-} from '@mui/material';
-
+  Toolbar,
+  MenuItem,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 
 function Nav() {
+  //hooks
+  const history = useHistory();
+  const dispatch = useDispatch();
+
   //stores
   const user = useSelector((store) => store.user);
 
-  //hooks
-  const dispatch = useDispatch();
-  const history = useHistory();
+  // Variables
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  // Functions
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const routeChange = () => {
-    console.log('click')
+    console.log("click");
     let path = `/home`;
     history.push(path);
-  }
+  };
 
   return (
     <>
       {/* If no user is logged in, show these links */}
-      {user.id === null || user.clearance_level === 0 &&
-        // If there's no user, show login/registration links
-        <Box sx={{ flexGrow: 1 }}>
-          <AppBar position="static">
-            <Toolbar>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                South Carolina Language Map
-              </Typography>
+      {user.id === null ||
+        (user.clearance_level === 0 && (
+          // If there's no user, show login/registration links
+          <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+              <Toolbar>
+                <Typography variant="h6">
+                  South Carolina Language Map
+                </Typography>
 
-              <Button
-                color="inherit"
-                onClick={() => {
-                  dispatch({ type: "SET_ADMIN_VIEW", payload: "login" })
-                }}>Login</Button>
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    dispatch({ type: "SET_ADMIN_VIEW", payload: "login" });
+                  }}
+                >
+                  Login
+                </Button>
 
-              <Button
-                color="inherit"
-                onClick={() => {
-                  dispatch({ type: "SET_ADMIN_VIEW", payload: "register" })
-                }}>Register</Button>
-
-            </Toolbar>
-          </AppBar>
-        </Box>
-      }
-
-
+                <Button
+                  color="inherit"
+                  onClick={() => {
+                    dispatch({ type: "SET_ADMIN_VIEW", payload: "register" });
+                  }}
+                >
+                  Register
+                </Button>
+              </Toolbar>
+            </AppBar>
+          </Box>
+        ))}
 
       {/* if user is approved and has admin clearance, see this navbar */}
       {user.clearance_level >= 1 && (
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
             <Toolbar>
-
-              <Button onClick={routeChange} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Typography
+                variant="h6"
+                onClick={routeChange}
+                sx={{
+                  flexGrow: 1,
+                  "&:hover": {
+                    cursor: "pointer",
+                  },
+                }}
+              >
                 South Carolina Language Map
+              </Typography>
+              <Button
+                color="inherit"
+                onClick={() => {
+                  dispatch({ type: "SET_ADMIN_VIEW", payload: "approval" });
+                }}
+              >
+                Approvals
               </Button>
 
-
-              <Button
-                color="inherit"
-                onClick={() => {
-                  dispatch({ type: "SET_ADMIN_VIEW", payload: "site" })
-                }}>Sites</Button>
-
-              <Button
-                color="inherit"
-                onClick={() => {
-                  dispatch({ type: "SET_ADMIN_VIEW", payload: "language" })
-                }}>Language</Button>
-
-              <Button
-                color="inherit"
-                onClick={() => {
-                  dispatch({ type: "SET_ADMIN_VIEW", payload: "category" })
-                }}>Category</Button>
-
-              <Button
-                color="inherit"
-                onClick={() => {
-                  dispatch({ type: "SET_ADMIN_VIEW", payload: "approval" })
-                }}>Approvals</Button>
-
-              <Button
-                color="inherit"
-                onClick={() => {
-                  dispatch({ type: "SET_ADMIN_VIEW", payload: "about" })
-                }}>About</Button>
-
-              <Button
-                color="inherit"
-                onClick={() => dispatch({ type: 'LOGOUT' })
-                }>Logout</Button>
-
+              <IconButton
+                id="basic-button"
+                aria-haspopup="true"
+                onClick={handleClick}
+                aria-expanded={open ? "true" : undefined}
+                aria-controls={open ? "basic-menu" : undefined}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Menu
+                open={open}
+                id="basic-menu"
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem
+                  onClick={() => {
+                    handleClose;
+                    dispatch({ type: "SET_ADMIN_VIEW", payload: "site" });
+                  }}
+                >
+                  Sites
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose;
+                    dispatch({ type: "SET_ADMIN_VIEW", payload: "language" });
+                  }}
+                >
+                  Languages
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose;
+                    dispatch({ type: "SET_ADMIN_VIEW", payload: "category" });
+                  }}
+                >
+                  Categories
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose;
+                    dispatch({ type: "SET_ADMIN_VIEW", payload: "about" });
+                  }}
+                >
+                  About
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    handleClose;
+                    dispatch({ type: "LOGOUT" });
+                  }}
+                >
+                  <Typography color="error">Logout</Typography>
+                </MenuItem>
+              </Menu>
             </Toolbar>
           </AppBar>
         </Box>
       )}
     </>
-
-
-    /* // <div className="nav">
-    //   <Link to="/admin">
-    //     <h2 className="nav-title">South Carolina Language Map</h2>
-    //   </Link>
-    //   <div>
-    //     {/* If no user is logged in, show these links */
-    //     {user.id === null  || user.clearance_level === 0 &&
-    //       // If there's no user, show login/registration links
-    //       <Link className="navLink" to="/login">
-    //         Login / Register
-    //       </Link>
-    //     } */}
-
-    //     {/* If a user is logged in, show these links */}
-    //     {user.clearance_level >= 1 && (
-    //       <>
-    //         <Link className="navLink" to="/admin/site">
-    //           Site
-    //         </Link>
-
-    //         <Link className="navLink" to="/admin/language">
-    //           Language
-    //         </Link>
-
-    //         <Link className="navLink" to="/admin/category">
-    //           Category
-    //         </Link>
-
-    //         <Link className="navLink" to="/admin/approvals">
-    //           Approvals
-    //         </Link>
-
-    //         <Link className="navLink" to="/admin/about">
-    //           About
-    //         </Link>
-
-    //         <LogOutButton className="navLink" />
-    //       </>
-    //     )}
-
-    //     <Link className="navLink" to="/admin/about">
-    //       About
-    //     </Link>
-    //   </div>
-    // </div>
   );
 }
 

@@ -14,13 +14,12 @@ import {
   TableHead,
   TableContainer,
   TablePagination,
+  Typography,
 } from "@mui/material";
 
 //components
 import CategoryForm from "./CategoryForm";
 import AdminCategoryRow from "./AdminCategoryRow";
-
-
 
 function AdminCategory() {
   const dispatch = useDispatch();
@@ -31,8 +30,6 @@ function AdminCategory() {
   const catagories = useSelector(
     (store) => store.adminReducer.adminCategoriesReducer
   );
-
-  
 
   // The below 2 functions allow there to be multiple pages on the table.
   const handleChangePage = (event, newPage) => {
@@ -50,12 +47,15 @@ function AdminCategory() {
 
   return (
     <Grid container sx={{ pt: 3 }}>
-      <Grid>
-      <CategoryForm/>
+      <Grid item xs={12} textAlign="center">
+        <CategoryForm />
       </Grid>
       <Grid item xs={1} />
       <Grid item xs={10}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <Typography variant="h3" textAlign="center" sx={{ mt: 4 }}>
+          All Categories
+        </Typography>
+        <TableContainer sx={{ maxHeight: 650 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
@@ -63,15 +63,14 @@ function AdminCategory() {
                 <TableCell align="center">Edit/Delete</TableCell>
               </TableRow>
             </TableHead>
-           
-              {catagories
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <TableBody key={row.id}>
+
+            {catagories
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((row) => (
+                <TableBody key={row.id}>
                   <AdminCategoryRow row={row} />
-                  </TableBody>
-                ))}
-           
+                </TableBody>
+              ))}
           </Table>
         </TableContainer>
         <TablePagination

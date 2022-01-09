@@ -1,15 +1,17 @@
 import { Grid } from "@mui/material";
-import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
-import { useEffect, useState } from "react";
-import { styled } from "@mui/material/styles";
 import TableRow from "@mui/material/TableRow";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
-import { useDispatch, useSelector } from "react-redux";
 import TableContainer from "@mui/material/TableContainer";
 import TablePagination from "@mui/material/TablePagination";
+
+import Paper from "@mui/material/Paper";
+import { styled } from "@mui/material/styles";
+
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function AdminTable() {
   const dispatch = useDispatch();
@@ -63,56 +65,54 @@ function AdminTable() {
     console.log("Delete");
   };
   return (
-    <>
-      <Grid container sx={{ pt: 3 }}>
-        <Grid item xs={1} />
-        <Grid item xs={10}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Address</TableCell>
-                  <TableCell>Region</TableCell>
-                  <TableCell>Language</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {sites
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((site) => {
-                    return (
-                      <TableRow hover role="checkbox" tabIndex={-1}>
-                        <TableCell>{site.site_name}</TableCell>
-                        <TableCell>{site.address}</TableCell>
-                        <TableCell>{site.language}</TableCell>
-                        <TableCell component="th" scope="row" align="center">
-                          {/* Getting the name of a specific region from the sites included region id */}
-                          {regions?.map((region) => {
-                            if (region.id === site.region_id) {
-                              return region.name;
-                            }
-                          })}
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-            rowsPerPageOptions={[10, 25, 100]}
-            component="div"
-            count={sites.length}
-            rowsPerPage={rowsPerPage}
-            page={page}
-            onPageChange={handleChangePage}
-            onRowsPerPageChange={handleChangeRowsPerPage}
-          />
-        </Grid>
-        <Grid item xs={1} />
+    <Grid container sx={{ pt: 3 }}>
+      <Grid item xs={1} />
+      <Grid item xs={10}>
+        <TableContainer sx={{ maxHeight: 440 }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>Address</TableCell>
+                <TableCell>Region</TableCell>
+                <TableCell>Language</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {sites
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((site) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1}>
+                      <TableCell>{site.site_name}</TableCell>
+                      <TableCell>{site.address}</TableCell>
+                      <TableCell>{site.language}</TableCell>
+                      <TableCell component="th" scope="row" align="center">
+                        {/* Getting the name of a specific region from the sites included region id */}
+                        {regions?.map((region) => {
+                          if (region.id === site.region_id) {
+                            return region.name;
+                          }
+                        })}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          page={page}
+          component="div"
+          count={sites.length}
+          rowsPerPage={rowsPerPage}
+          onPageChange={handleChangePage}
+          rowsPerPageOptions={[10, 25, 100]}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Grid>
-    </>
+      <Grid item xs={1} />
+    </Grid>
   );
 }
 

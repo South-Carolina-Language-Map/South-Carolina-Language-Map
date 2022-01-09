@@ -1,9 +1,8 @@
-// MUI Imports
-import { Box, Grid, Paper, Button, Typography } from "@mui/material";
-import { createTheme, ThemeProvider, styled } from "@mui/material/styles";
-
 // Local File Imports
 import encodeUrlStr from "../../utils/encodeUrlStr";
+
+// MUI Imports
+import { Box, Grid, Typography } from "@mui/material";
 
 // React Imports
 import { useDispatch, useSelector } from "react-redux";
@@ -11,18 +10,10 @@ import { useDispatch, useSelector } from "react-redux";
 // Render a menu item based on the object being passed
 //  activeKey is used to target specifically named attributes (e.g. site_name instead of name
 //  when the next list is rendered.
-function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
-  const listType = useSelector((store) => store.viewReducer.listTypeReducer);
+function NavExploreItem({ listObj, activeKey, setActiveKey, padding }) {
   const dispatch = useDispatch();
-  const lightTheme = createTheme({ palette: { mode: "light" } });
-
-  const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    lineHeight: "60px",
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-
+  const listType = useSelector((store) => store.viewReducer.listTypeReducer);
+  let boxHeight = padding;
   //Conditionally handle clicks depending on the context of
   //  What kind of items are being mapped into the list
   const handleClick = () => {
@@ -78,17 +69,18 @@ function NavExploreItem({ listObj, activeKey, setActiveKey, setPrevState }) {
   return (
     <Grid item xs={12} onClick={handleClick}>
       <Box
-        component="button"
         borderRadius={4}
+        component="button"
         sx={{
-          p: 4,
           mt: 2,
           border: 1,
+          p: boxHeight,
           width: 2 / 2,
           boxShadow: 3,
           backgroundColor: "#FFFFFF",
           "&:hover": {
             backgroundColor: "#c9d2e3",
+            cursor: "pointer",
           },
         }}
       >
