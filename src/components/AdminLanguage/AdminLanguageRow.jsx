@@ -72,6 +72,7 @@ export default function AdminLanguageRow({ language }) {
     });
   };
 
+  console.log(language)
   return (
       <>
     { toggleEditView ?

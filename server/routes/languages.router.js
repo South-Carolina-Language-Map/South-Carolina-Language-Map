@@ -8,7 +8,19 @@ const router = express.Router();
 
 //GET all languages
 router.get('/', (req, res) => {
-  pool.query(`SELECT * FROM "languages";`)
+
+  //get everything except "examples".id so it doesn't overwrite "languages".id
+  const queryText = `
+  SELECT "languages".id, "languages".category_id, 
+  "languages".description, "languages".endonym, "languages".global_speakers, 
+  "languages".glottocode, "languages"."language", "languages".sc_speakers, 
+  "languages".status, "examples".language_id, "examples".hyperlink, "examples".link_text 
+  FROM "languages"
+  LEFT JOIN "examples" 
+  ON "languages".id = "examples".language_id 
+  ORDER BY "languages"."language" ASC;
+  `
+  pool.query(queryText)
     .then((response) => {
       res.send(response.rows);
       console.log('GET Languages success');
