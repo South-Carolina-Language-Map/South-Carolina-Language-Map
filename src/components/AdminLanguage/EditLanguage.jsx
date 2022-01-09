@@ -1,7 +1,7 @@
 //Imported necessary libraries
 import * as React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
     TextField,
     TableCell,
@@ -12,7 +12,11 @@ import AutoComplete from "../AutoComplete/AutoComplete";
 export default function EditLanguage({ language }) {
     //initialize dispatch
     const dispatch = useDispatch();
-    
+
+    //store to grab language
+    const editLanguage = useSelector((store) => store.adminReducer.adminEditReducer);
+
+
     function handleChange(event, property){
     dispatch({ 
         type: 'EDIT_LANGUAGE_ONCHANGE', 
@@ -23,7 +27,7 @@ export default function EditLanguage({ language }) {
 
 
     //local state stores the value for category input
-    const [editLanguage, setLanguage] = useState(language);
+    // const [editLanguage, setLanguage] = useState(language);
 
 
 
@@ -34,7 +38,7 @@ export default function EditLanguage({ language }) {
                 <TextField
                     required
                     id="filled-required"
-                    label="Language Name"
+                  
                     variant="standard"
                     helperText="ex. Hmong"
                     value={editLanguage.language}

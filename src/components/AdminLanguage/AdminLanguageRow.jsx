@@ -1,11 +1,13 @@
-import * as React from "react";
+import * as  React from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
-import { Button, TableRow, TableCell } from "@mui/material";
+import { Button, TableRow, TableCell, Stack } from "@mui/material";
 
 //local files
 import EditLanguage from "./EditLanguage";
+
 
 
 
@@ -13,10 +15,23 @@ export default function AdminLanguageRow({ language }) {
   //hooks
   const dispatch = useDispatch();
 
+  //local state
+  const [toggleEditView, setToggleEditView] = useState(false)
+
+  //toggles to edit view
+    const handleEditView = () => {
+        dispatch({
+            type: 'SET_EDIT_LANGUAGE',
+            payload: language
+        })
+        setToggleEditView(true)
+    }
+
   // function handles edit for this ID
   const handleEdit = () => {
     console.log("Edit", language.id);
   };
+
 
   //function deletes this id
   const handleDelete = () => {
@@ -33,6 +48,24 @@ export default function AdminLanguageRow({ language }) {
   );
 
   return (
+      <>
+    { toggleEditView ?
+        <TableRow hover role="checkbox" tabIndex={-1}>
+        <EditLanguage language={language}/>
+        <TableCell>
+        <Stack direction="row" spacing={1}>
+        <Button sx={{ mr: 1 }} variant="contained" onClick={handleEdit}>
+          Submit
+        </Button>
+        <Button variant="outlined" color="error" onClick={() => setToggleEditView(false)}>
+          Cancel
+        </Button>
+        </Stack>
+      </TableCell>
+        </TableRow>
+
+        :
+        
     <TableRow hover role="checkbox" tabIndex={-1}>
       <TableCell>{language.language}</TableCell>
       <TableCell>{language.glottocode}</TableCell>
@@ -47,14 +80,19 @@ export default function AdminLanguageRow({ language }) {
           }
         })}
       </TableCell>
+
       <TableCell>
-        <Button sx={{ mr: 1 }} variant="contained" onClick={handleEdit}>
+      <Stack direction="row" spacing={1}>
+        <Button sx={{ mr: 1 }} variant="contained" onClick={handleEditView}>
           Edit
         </Button>
         <Button variant="outlined" color="error" onClick={handleDelete}>
           Delete
         </Button>
+        </Stack>
       </TableCell>
-    </TableRow>
+      
+    </TableRow>}
+    </>
   );
 } //end AdminLanguageRow

@@ -7,6 +7,8 @@ const adminEditReducer = (state = {}, action) => {
         ...state,
         [action.payload.property]: action.payload.value
       }
+      case 'SET_EDIT_LANGUAGE':
+        return action.payload;
     default:
       return state;
   }
