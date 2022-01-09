@@ -91,8 +91,8 @@ function AutoComplete({ table }) {
           label={`Choose a ${properties.label}`}
           inputProps={{
             ...params.inputProps,
-            id: 1, // This is necessary to prevent autocomplete
-            autoComplete: "new-password", // disable autocomplete and autofill
+            id: 1, // This is necessary to prevent browser autocomplete
+            autoComplete: "new-password", // disable browser autocomplete and autofill
           }}
         />
       )}
