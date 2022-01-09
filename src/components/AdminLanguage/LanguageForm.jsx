@@ -22,19 +22,12 @@ function LanguageForm() {
   const category = useSelector(
     (store) => store.adminReducer.newLanguageCategoryIDReducer
   );
+  let clearAutoComplete = useSelector(store => store.adminReducer.clearAutoCompleteReducer);
 
-  //create empty object to store the values of the form
-  //   const base = {
-  //     language: "",
-  //     glottocode: "",
-  //     description: "",
-  //     endonym: "",
-  //     global_speakers: "",
-  //     sc_speakers: "",
-  //     category_id: category,
-  //     examples: { link_text: "", hyperlink: "" },
-  //   };
-  //local state stores the value for category input
+  console.log("resetAuto", clearAutoComplete);
+
+  let autoKey = clearAutoComplete ? 1:2;
+
   const [newLanguage, setLanguage] = useState({
     language: "",
     glottocode: "",
@@ -142,7 +135,7 @@ function LanguageForm() {
               />
             </Grid>
             <Grid item>
-              <AutoComplete table="category" />
+              <AutoComplete table="category" key={autoKey}/>
             </Grid>
             <Grid item>
               <TextField
