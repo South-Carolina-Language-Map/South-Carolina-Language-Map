@@ -106,6 +106,7 @@ export default function AdminLanguageRow({ language }) {
           }
         })}
       </TableCell>
+      <TableCell>{language.status}</TableCell>
       <TableCell>{language.link_text}</TableCell>
       <TableCell>{language.hyperlink}</TableCell>
 
