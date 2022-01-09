@@ -80,7 +80,9 @@ export default function AdminLanguageRow({ language }) {
           }
         })}
       </TableCell>
-
+      <TableCell>link_text</TableCell>
+      <TableCell>hyperlink</TableCell>
+      
       <TableCell>
       <Stack direction="row" spacing={1}>
         <Button sx={{ mr: 1 }} variant="contained" onClick={handleEditView}>

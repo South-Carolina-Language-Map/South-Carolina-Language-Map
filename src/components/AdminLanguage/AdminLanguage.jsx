@@ -111,6 +111,8 @@ function AdminLanguage() {
                 <TableCell>Endonym</TableCell>
                 <TableCell>Description</TableCell>
                 <TableCell>Category</TableCell>
+                <TableCell>Example Description</TableCell>
+                <TableCell>HyperLink to Example</TableCell>
                 <TableCell align="center">Edit/Delete</TableCell>
               </TableRow>
             </TableHead>

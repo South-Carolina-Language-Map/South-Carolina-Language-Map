@@ -64,20 +64,7 @@ export default function EditLanguage({ language }) {
                 />
             </TableCell>
 
-            <TableCell>
-                <TextField
-                    required
-                    id="filled-required"
-                    label="Description"
-                    variant="standard"
-                    value={editLanguage.description}
-                    onChange={(event) => handleChange(event, 'description')}
-                    // onChange={(event) =>
-                    //     // setLanguage({ ...editLanguage, description: event.target.value })
-                    //     setLanguage(event, 'description')
-                    
-                />
-            </TableCell>
+            
 
             <TableCell>
                 <TextField
@@ -122,10 +109,17 @@ export default function EditLanguage({ language }) {
                     helperText="ex. Hmong"
                     value={editLanguage.endonym}
                     onChange={(event) => handleChange(event, 'endonym')}
-                    // onChange={(event) =>
-                    //     // setLanguage({ ...editLanguage, endonym: event.target.value })
-                    //     setLanguage(event, 'endonym')
-                    // }
+                />
+            </TableCell>
+
+            <TableCell>
+                <TextField
+                    required
+                    id="filled-required"
+                    label="Description"
+                    variant="standard"
+                    value={editLanguage.description}
+                    onChange={(event) => handleChange(event, 'description')}
                 />
             </TableCell>
 
@@ -139,12 +133,6 @@ export default function EditLanguage({ language }) {
                     label="Link Title"
                     variant="standard"
                     onChange={(event) => handleChange(event, 'examples.link_text')}
-                    // onChange={(event) =>
-                    //     // setLanguage({
-                    //     //     ...editLanguage,
-                    //     //     examples: [{ ...editLanguage.examples[0], link_text: event.target.value }]
-                    //     // })}
-                    //     setLanguage(event, 'examples.link_text')}
                 />
             </TableCell>
 
@@ -154,13 +142,6 @@ export default function EditLanguage({ language }) {
                     label="Hyperlink"
                     variant="standard"
                     onChange={(event) => handleChange(event, 'examples.hyperlink')}
-                    // onChange={(event) =>
-                    //     // setLanguage({
-                    //     //     ...editLanguage,
-                    //     //     examples: [{ ...editLanguage.examples[0], hyperlink: event.target.value }]
-
-                    //     // })}
-                    //     setLanguage(event, 'examples.hyperlink')}
                 />
             </TableCell>
         </>
