@@ -39,7 +39,7 @@ export default function AdminLanguageRow({ language }) {
     endonym: editLanguage.endonym,
     global_speakers: Number(editLanguage.global_speakers),
     sc_speakers: Number(editLanguage.sc_speakers),
-    category_id: category || language.category_id,
+    category_id: category === -1 ? language.category_id : category,
     // examples: [{ link_text: "", hyperlink: "" }],
   };
 
@@ -55,7 +55,7 @@ export default function AdminLanguageRow({ language }) {
 
   // function handles edit for this ID
   const handleEdit = () => {
-    // console.log("SEND THIS Edit=====>", newLanguage);
+    console.log("SEND THIS Edit=====>", newLanguage);
     dispatch({
         type: 'UPDATE_LANGUAGE',
         payload: newLanguage
