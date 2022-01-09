@@ -54,10 +54,15 @@ function AutoComplete({ table }) {
 
   //handle region input and store the associated ID to reducer
   const handleStoreId = (event, value) => {
-    console.log("event.target", event.target);
-    console.log("Properties.newSite", properties.newSite, properties.set);
+    //if autocomplete set to empty, clear reducer
+    if(!value){
+      dispatch({type: properties.set, payload: ''});
+      return;
+    }
+
+    // Else if on site view, update reducer
     if (properties.newSite) {
-      dispatch({ type: properties.set, payload: value.id });
+      dispatch({ type: properties.set, payload: value.id});
     }
   };
 
@@ -86,7 +91,7 @@ function AutoComplete({ table }) {
           label={`Choose a ${properties.label}`}
           inputProps={{
             ...params.inputProps,
-            autoComplete: "new-password", // disable autocomplete and autofill
+            autoComplete: "dont-fill-me-please", // disable autocomplete and autofill
           }}
         />
       )}

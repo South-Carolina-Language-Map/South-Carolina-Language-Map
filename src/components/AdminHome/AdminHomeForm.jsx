@@ -99,7 +99,10 @@ function AdminHomeForm() {
           {/* Drop down autofill input for languages provided by university */}
           <AutoComplete table="language" key={autoKey} />
           {/* Link will redirect you to ADD NEW LANGUAGE form  */}
-          <div>{`Don't see your language? Click here!`}</div>
+          <a 
+          onClick={() => dispatch({type: 'SET_ADMIN_VIEW', payload: 'language'})}
+          href='javascript:;'
+          >{`Don't see your language? Click here!`}</a>
         </Grid>
         <Grid item xs={12} textAlign="center">
           <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
