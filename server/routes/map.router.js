@@ -4,12 +4,13 @@ const router = express.Router();
 
 //GET all data for plotting map sites and hover over sites
 router.get('/', (req, res) => {
- 
-//query to get geolocation and language variety +id for map view
-  let queryTextForMap = `
-  SELECT * FROM "sites"
-  JOIN "languages" ON "languages".id = "sites".language_id
-  `
+
+    //query to get geolocation and language variety +id for map view
+    let queryTextForMap = `
+    SELECT sites.id, latitude, longitude, language_id, language, category_id
+    FROM "sites"
+    JOIN "languages" ON "languages".id = "sites".language_id
+    `
     pool.query(queryTextForMap)
         .then((result) => {
             res.send(result.rows)
@@ -36,13 +37,13 @@ router.get('/:id', (req, res) => {
     `;
 
     pool.query(queryTextForLanguageDetails, [siteID])
-    .then((result) => {
-        res.send(result.rows)
-    })
-    .catch((error) => {
-        console.log(error);
-        res.sendStatus(500);
-    })
+        .then((result) => {
+            res.send(result.rows)
+        })
+        .catch((error) => {
+            console.log(error);
+            res.sendStatus(500);
+        })
 }); //end GET all for details
 
 
