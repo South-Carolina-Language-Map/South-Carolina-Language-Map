@@ -52,8 +52,11 @@ function LanguageForm() {
     <form
       onSubmit={() => dispatch({ type: "ADD_LANGUAGE", payload: newLanguage })}
     >
-      <Paper elevation={5}>
+      <Paper elevation={5} sx={{ p: 2 }}>
         <Grid container textAlign="center">
+          <Grid item xs={12}>
+            <Typography variant="h4">Add a New Language</Typography>
+          </Grid>
           <Grid item xs={2.4}>
             <TextField
               required
@@ -125,64 +128,71 @@ function LanguageForm() {
             />
           </Grid>
           {/*  */}
-          <Grid item xs={3}>
-            <TextField
-              required
-              multiline
-              minRows={3}
-              maxRows={10}
-              id="filled-required"
-              label="Description"
-              variant="standard"
-              onChange={(event) =>
-                setLanguage({ ...newLanguage, description: event.target.value })
-              }
-            />
+          <Grid container sx={{ mt: 5 }}>
+            {/*  */}
+            <Grid item xs={3}>
+              <TextField
+                required
+                multiline
+                minRows={3}
+                maxRows={10}
+                id="filled-required"
+                label="Description"
+                variant="standard"
+                onChange={(event) =>
+                  setLanguage({
+                    ...newLanguage,
+                    description: event.target.value,
+                  })
+                }
+              />
+            </Grid>
+            {/*  */}
+            <Grid item xs={3} sx={{ pr: 2 }}>
+              <AutoComplete table="category" />
+            </Grid>
+            {/*  */}
+            <Grid item xs={3}>
+              <TextField
+                id="filled-required"
+                label="Link Title"
+                variant="standard"
+                onChange={(event) =>
+                  setLanguage({
+                    ...newLanguage,
+                    examples: [
+                      {
+                        ...newLanguage.examples[0],
+                        link_text: event.target.value,
+                      },
+                    ],
+                  })
+                }
+              />
+            </Grid>
+            {/*  */}
+            <Grid item xs={3}>
+              <TextField
+                id="filled-required"
+                label="Hyperlink"
+                variant="standard"
+                onChange={(event) =>
+                  setLanguage({
+                    ...newLanguage,
+                    examples: [
+                      {
+                        ...newLanguage.examples[0],
+                        hyperlink: event.target.value,
+                      },
+                    ],
+                  })
+                }
+              />
+            </Grid>
+            {/*  */}
           </Grid>
           {/*  */}
-          <Grid item xs={2} sx={{ pr: 2 }}>
-            <AutoComplete table="category" />
-          </Grid>
-          {/*  */}
-          <Grid item xs={3}>
-            <TextField
-              id="filled-required"
-              label="Link Title"
-              variant="standard"
-              onChange={(event) =>
-                setLanguage({
-                  ...newLanguage,
-                  examples: [
-                    {
-                      ...newLanguage.examples[0],
-                      link_text: event.target.value,
-                    },
-                  ],
-                })
-              }
-            />
-          </Grid>
-          {/*  */}
-          <Grid item xs={3}>
-            <TextField
-              id="filled-required"
-              label="Hyperlink"
-              variant="standard"
-              onChange={(event) =>
-                setLanguage({
-                  ...newLanguage,
-                  examples: [
-                    {
-                      ...newLanguage.examples[0],
-                      hyperlink: event.target.value,
-                    },
-                  ],
-                })
-              }
-            />
-          </Grid>
-          {/*  */}
-          <Grid item xs={12} textAlign="center">
+          <Grid item xs={12} sx={{ mt: 3 }} textAlign="center">
             <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
               Submit
             </Button>

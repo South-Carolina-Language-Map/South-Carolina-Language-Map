@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
 import {
+  Box,
   Grid,
   Table,
   Switch,
@@ -58,6 +59,19 @@ function AdminLanguage() {
       {/*  */}
       {checked ? (
         <Grid item xs={12} sx={{ pb: 2 }}>
+          {checked && (
+            <Box textAlign="right">
+              <Button
+                sx={{ mb: 2 }}
+                variant="outlined"
+                onClick={() => {
+                  setChecked(!checked);
+                }}
+              >
+                Table View
+              </Button>
+            </Box>
+          )}
           <LanguageForm />
         </Grid>
       ) : (
@@ -69,16 +83,7 @@ function AdminLanguage() {
       )}
       {/*  */}
       <Grid item xs={4} sx={{ textAlign: "right" }}>
-        {checked ? (
-          <Button
-            variant="outlined"
-            onClick={() => {
-              setChecked(!checked);
-            }}
-          >
-            Table View
-          </Button>
-        ) : (
+        {!checked && (
           <Button
             variant="contained"
             onClick={() => {
@@ -91,7 +96,7 @@ function AdminLanguage() {
       </Grid>
       {/*  */}
       <Grid item xs={12} textAlign="center">
-        {checked ? <Typography variant="h4">All Languages</Typography> : <></>}
+        {checked ? <Typography variant="h3">All Languages</Typography> : <></>}
       </Grid>
       {/*  */}
       <Grid item xs={12}>
