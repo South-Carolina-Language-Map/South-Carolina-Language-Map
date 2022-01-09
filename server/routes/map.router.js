@@ -7,7 +7,8 @@ router.get('/', (req, res) => {
 
     //query to get geolocation and language variety +id for map view
     let queryTextForMap = `
-    SELECT sites.id, latitude, longitude, language_id, language, category_id
+    SELECT sites.id, latitude, longitude, language_id, language, category_id,
+    region_id, address
     FROM "sites"
     JOIN "languages" ON "languages".id = "sites".language_id
     `
