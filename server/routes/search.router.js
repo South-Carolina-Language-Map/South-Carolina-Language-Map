@@ -41,15 +41,16 @@ router.get('/', (req, res) => {
     console.log('VALUES', values);
     searchQueryText = `
     SELECT 
-    sites.id, latitude, longitude, language_id, site_name, region_id, address,
+    sites.id, latitude, longitude, sites.language_id, site_name, region_id, address,
     language, glottocode, global_speakers, sc_speakers,
-    endonym, category_id, description, status
+    endonym, category_id, description, status, link_text, hyperlink
     FROM "sites"
     JOIN "regions" ON "regions".id = "sites".region_id
     JOIN "languages" ON "languages".id = "sites".language_id
     JOIN "categories" ON "languages".category_id = "categories".id
-    WHERE ${columns[0]} ILIKE $1 
-    `
+    LEFT JOIN "examples" ON "languages".id = "examples".language_id
+    WHERE ${columns[0]} ILIKE $1
+    `;
 
     //loop for multiple search queries in values array
     for (let i = 1; i < values.length; i++) {

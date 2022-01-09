@@ -67,7 +67,7 @@ function AdminLanguage() {
                   setChecked(!checked);
                 }}
               >
-                Table View
+                Cancel
               </Button>
             </Box>
           )}

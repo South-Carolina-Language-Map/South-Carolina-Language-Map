@@ -134,7 +134,6 @@ function Map({flyDuration, zoomDuration}) {
   // attach event listener to handle window resize, then clean it up
   useEffect(() => {
     const handleResize = () => {
-      console.log('rendered at', window.innerHeight, window.innerWidth);
       setViewport({ ...viewport, height: '100vh', width: '100%' });
     }
     window.addEventListener('resize', handleResize);
@@ -145,10 +144,7 @@ function Map({flyDuration, zoomDuration}) {
 
   return (
     <div className="App">
-
       <header className="App-header">
-        {/* <button onClick={toggleDark}>{darkMode ? 'Light' : 'Dark'}</button> */}
-
         {/* Configure and mount map canvas */}
         <ReactMapGL
           {...viewport}
