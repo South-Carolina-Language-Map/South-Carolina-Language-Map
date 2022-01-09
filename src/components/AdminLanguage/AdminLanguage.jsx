@@ -5,24 +5,24 @@ import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
 import {
+  Box,
   Grid,
   Table,
-  Button,
   Switch,
   TableRow,
   TableBody,
   TableCell,
   TableHead,
+  Typography,
   TableContainer,
   TablePagination,
-  Typography,
+  Button,
 } from "@mui/material";
 
 //components
 import AdminLanguageRow from "./AdminLanguageRow";
 import LanguageDialog from "./LanguageDialog";
 import LanguageForm from "./LanguageForm";
-
 
 function AdminLanguage() {
   const dispatch = useDispatch();
@@ -54,56 +54,88 @@ function AdminLanguage() {
     setChecked(event.target.checked);
   };
 
-
   return (
-    <Grid container sx={{ pt: 3 }}>
-      <Grid item>
-      <Switch
-        checked={checked}
-        onChange={handleChange}
-        inputProps={{ 'aria-label': 'controlled'}}
-        />
-      {checked === true ? 
-      <LanguageForm/> 
-      :
-      <Typography>ADD A NEW LANGUAGE </Typography>}
+    <Grid container sx={{ p: 3 }}>
+      {/*  */}
+      {checked ? (
+        <Grid item xs={12} sx={{ pb: 2 }}>
+          {checked && (
+            <Box textAlign="right">
+              <Button
+                sx={{ mb: 2 }}
+                variant="outlined"
+                onClick={() => {
+                  setChecked(!checked);
+                }}
+              >
+                Table View
+              </Button>
+            </Box>
+          )}
+          <LanguageForm />
+        </Grid>
+      ) : (
+        <Grid item xs={7} sx={{ pb: 2 }}>
+          <Typography variant="h3" textAlign="right">
+            All Languages
+          </Typography>
+        </Grid>
+      )}
+      {/*  */}
+      <Grid item xs={5} sx={{ textAlign: "right" }}>
+        {!checked && (
+          <Button
+            variant="contained"
+            onClick={() => {
+              setChecked(!checked);
+            }}
+          >
+            Add Language
+          </Button>
+        )}
       </Grid>
-      <Grid item xs={1} />
-      <Grid item xs={10}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+      {/*  */}
+      <Grid item xs={12} textAlign="center">
+        {checked ? <Typography variant="h3">All Languages</Typography> : <></>}
+      </Grid>
+      {/*  */}
+      <Grid item xs={12}>
+        <TableContainer sx={{ maxHeight: 675 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
-                <TableCell >Glottocode</TableCell>
-                <TableCell >Global Speakers</TableCell>
-                <TableCell >SC Speakers</TableCell>
-                <TableCell >Endonym</TableCell>
-                <TableCell >Edit/Delete</TableCell>
+                <TableCell>Glottocode</TableCell>
+                <TableCell>Global Speakers</TableCell>
+                <TableCell>SC Speakers</TableCell>
+                <TableCell>Endonym</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Category</TableCell>
+                <TableCell align="center">Edit/Delete</TableCell>
               </TableRow>
             </TableHead>
-            
-              {languages
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((language) => {
-                  return (
-                    <TableBody key={language.id}>
+            {languages
+              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((language) => {
+                return (
+                  <TableBody key={language.id}>
                     <AdminLanguageRow language={language} />
-                    </TableBody>
-                  );})}
+                  </TableBody>
+                );
+              })}
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[10, 25, 100]}
+          page={page}
           component="div"
           count={languages.length}
           rowsPerPage={rowsPerPage}
-          page={page}
           onPageChange={handleChangePage}
+          rowsPerPageOptions={[10, 25, 100]}
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Grid>
-      <Grid item xs={1} />
+      {/*  */}
     </Grid>
   );
 }

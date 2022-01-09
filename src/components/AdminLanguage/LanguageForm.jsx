@@ -1,16 +1,20 @@
-//Imported necessary libraries
+//React Imports
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+// MUI Imports
 import {
+  Paper,
   Grid,
-  TextField,
   Button,
+  TextField,
   Typography,
   Autocomplete,
 } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
 
+// Local Imports
 import AutoComplete from "../AutoComplete/AutoComplete";
 
 function LanguageForm() {
@@ -21,9 +25,14 @@ function LanguageForm() {
   const category = useSelector(
     (store) => store.adminReducer.newLanguageCategoryIDReducer
   );
+  let clearAutoComplete = useSelector(
+    (store) => store.adminReducer.clearAutoCompleteReducer
+  );
 
-  
-  //local state stores the value for category input
+  console.log("resetAuto", clearAutoComplete);
+
+  let autoKey = clearAutoComplete ? 1 : 2;
+
   const [newLanguage, setLanguage] = useState({
     language: "",
     glottocode: "",
@@ -41,32 +50,34 @@ function LanguageForm() {
   );
 
   useEffect(() => {
-      setLanguage({...newLanguage, category_id: category})
+    setLanguage({ ...newLanguage, category_id: category });
   }, [category]);
 
   return (
     //form sends object with multiple values containing new language and associated values in DB
-    <Grid container spacing={0.5}>
-      <form
-        onSubmit={() =>
-          dispatch({ type: "ADD_LANGUAGE", payload: newLanguage })
-        }
-      >
-        <Grid item>
-          <Typography>Add a new language!</Typography>
-          <Grid item>
+    // <Grid container spacing={0.5}>
+    <form
+      onSubmit={() => dispatch({ type: "ADD_LANGUAGE", payload: newLanguage })}
+    >
+      <Paper elevation={5} sx={{ p: 2 }}>
+        <Grid container textAlign="center">
+          <Grid item xs={12}>
+            <Typography variant="h4" sx={{mb:2}}>Add a New Language</Typography>
+          </Grid>
+          <Grid item xs={2.4}>
             <TextField
               required
+              variant="standard"
               id="filled-required"
               label="Language Name"
-              variant="standard"
               helperText="ex. Hmong"
               onChange={(event) =>
                 setLanguage({ ...newLanguage, language: event.target.value })
               }
             />
           </Grid>
-          <Grid item>
+          {/*  */}
+          <Grid item xs={2.4}>
             <TextField
               required
               id="filled-required"
@@ -78,72 +89,95 @@ function LanguageForm() {
               }
             />
           </Grid>
-          <Grid item>
+          {/*  */}
+          <Grid item xs={2.4}>
             <TextField
               required
               id="filled-required"
-              label="Description"
+              label="Endonym"
               variant="standard"
+              helperText="ex. Hmong"
               onChange={(event) =>
-                setLanguage({ ...newLanguage, description: event.target.value })
+                setLanguage({ ...newLanguage, endonym: event.target.value })
               }
             />
-            <Grid item>
+          </Grid>
+          {/*  */}
+          <Grid item xs={2.4}>
+            <TextField
+              required
+              id="filled-required"
+              label="Global Speakers"
+              variant="standard"
+              helperText="ex. 2,700,000"
+              onChange={(event) =>
+                setLanguage({
+                  ...newLanguage,
+                  global_speakers: event.target.value,
+                })
+              }
+            />
+          </Grid>
+          {/*  */}
+          <Grid item xs={2.4}>
+            <TextField
+              required
+              id="filled-required"
+              label="SC Speakers"
+              variant="standard"
+              helperText="ex. 3,772"
+              onChange={(event) =>
+                setLanguage({
+                  ...newLanguage,
+                  sc_speakers: event.target.value,
+                })
+              }
+            />
+          </Grid>
+          {/*  */}
+          <Grid container sx={{ mt: 5 }}>
+            {/*  */}
+            <Grid item xs={3}>
               <TextField
                 required
+                multiline
+                minRows={3}
+                maxRows={10}
                 id="filled-required"
-                label="Endonym"
+                label="Description"
                 variant="standard"
-                helperText="ex. Hmong"
-                onChange={(event) =>
-                  setLanguage({ ...newLanguage, endonym: event.target.value })
-                }
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                required
-                id="filled-required"
-                label="Global Speakers"
-                variant="standard"
-                helperText="ex. 2,700,000"
                 onChange={(event) =>
                   setLanguage({
                     ...newLanguage,
-                    global_speakers: event.target.value,
+                    description: event.target.value,
                   })
                 }
               />
             </Grid>
-            <Grid item>
-              <TextField
-                required
-                id="filled-required"
-                label="SC Speakers"
-                variant="standard"
-                helperText="ex. 3,772"
-                onChange={(event) =>
-                  setLanguage({
-                    ...newLanguage,
-                    sc_speakers: event.target.value,
-                  })
-                }
-              />
+            <Grid item xs={3} sx={{ pr: 2 }}>
+              <AutoComplete table="category" key={autoKey} />
             </Grid>
-            <Grid item>
-              <AutoComplete table="category" />
-            </Grid>
-            <Grid item>
+            {/*  */}
+            <Grid item xs={3}>
               <TextField
                 id="filled-required"
                 label="Link Title"
                 variant="standard"
                 onChange={(event) =>
                   setLanguage({
-                    ...newLanguage, examples: [{...newLanguage.examples[0], link_text: event.target.value}]})}
+                    ...newLanguage,
+                    examples: [
+                      {
+                        ...newLanguage.examples[0],
+                        link_text: event.target.value,
+                      },
+                    ],
+                  })
+                }
               />
             </Grid>
-            <Grid item>
+            {/*  */}
+            <Grid item xs={3}>
               <TextField
                 id="filled-required"
                 label="Hyperlink"
@@ -151,25 +185,29 @@ function LanguageForm() {
                 onChange={(event) =>
                   setLanguage({
                     ...newLanguage,
-                    examples: [{...newLanguage.examples[0], hyperlink: event.target.value}]
-                    
+                    examples: [
+                      {
+                        ...newLanguage.examples[0],
+                        hyperlink: event.target.value,
+                      },
+                    ],
                   })
                 }
               />
             </Grid>
-            <Grid item>
-              <Button
-                type="submit"
-                variant="contained"
-                endIcon={<PublishIcon />}
-              >
-                Submit
-              </Button>
-            </Grid>
+            {/*  */}
           </Grid>
+          {/*  */}
+          <Grid item xs={12} sx={{ mt: 3 }} textAlign="center">
+            <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
+              Submit
+            </Button>
+          </Grid>
+          {/* </Grid> */}
         </Grid>
-      </form>
-    </Grid>
+      </Paper>
+    </form>
+    // </Grid>
   );
 }
 

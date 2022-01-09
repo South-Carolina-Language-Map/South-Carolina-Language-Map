@@ -30,32 +30,30 @@ function CategoryForm() {
   }
 
   return (
-    //form sends object with one key value pair containing new category name    
-  <>
-    <form
-  
-      onSubmit={(handleSubmit)}
-    >
-      <Typography>Add a new category!</Typography>
-      <TextField
-        required
-        id="filled-required"
-        label="Category Name"
-        variant="standard"
-        helperText="ex. Native American"
-        onChange={(event) => setCategory({ name: event.target.value })}
-      />
-      <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
-        Submit
-      </Button>
-    </form>
-    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                    Category has been added.
-                </Alert>
-            </Snackbar>
-   </>
-    
+    //form sends object with one key value pair containing new category name
+    <>
+      <form onSubmit={handleSubmit}>
+        <Typography variant="h4">Add a new category</Typography>
+        <TextField
+          required
+          sx={{mb:2}}
+          variant="standard"
+          id="filled-required"
+          label="Category Name"
+          helperText="ex. Native American"
+          onChange={(event) => setCategory({ name: event.target.value })}
+        />
+        <br />
+        <Button type="submit" variant="contained" endIcon={<PublishIcon />}>
+          Submit
+        </Button>
+      </form>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Category has been added.
+        </Alert>
+      </Snackbar>
+    </>
   );
 }
 
