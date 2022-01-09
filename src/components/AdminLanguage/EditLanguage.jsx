@@ -2,12 +2,16 @@
 import * as React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+//mui styles
 import {
     TextField,
     TableCell,
 } from "@mui/material";
 
+//local files
 import AutoComplete from "../AutoComplete/AutoComplete";
+
 
 export default function EditLanguage({ language }) {
     //initialize dispatch
@@ -16,19 +20,13 @@ export default function EditLanguage({ language }) {
     //store to grab language
     const editLanguage = useSelector((store) => store.adminReducer.adminEditReducer);
 
-
-    function handleChange(event, property){
-    dispatch({ 
-        type: 'EDIT_LANGUAGE_ONCHANGE', 
-        payload: { property: property, value: event.target.value }
-    });
-}
-
-
-
-    //local state stores the value for category input
-    // const [editLanguage, setLanguage] = useState(language);
-
+    //handle changing the language object in the reducer at every key stroke
+    function handleChange(event, property) {
+        dispatch({
+            type: 'EDIT_LANGUAGE_ONCHANGE',
+            payload: { property: property, value: event.target.value }
+        });
+    }
 
 
 
@@ -38,13 +36,11 @@ export default function EditLanguage({ language }) {
                 <TextField
                     required
                     id="filled-required"
-                  
+
                     variant="standard"
                     helperText="ex. Hmong"
                     value={editLanguage.language}
                     onChange={(event) => handleChange(event, 'language')}
-                    // onChange={(event) =>
-                    //     // setLanguage({ ...editLanguage, language: event.target.value })
                 />
             </TableCell>
 
@@ -57,14 +53,10 @@ export default function EditLanguage({ language }) {
                     helperText="ex. Firs1234"
                     value={editLanguage.glottocode}
                     onChange={(event) => handleChange(event, 'glottocode')}
-                    // onChange={(event) =>
-                    //     // setLanguage({ ...editLanguage, glottocode: event.target.value })
-                    //     setLanguage(event, 'glottocode')
-                    
                 />
             </TableCell>
 
-            
+
 
             <TableCell>
                 <TextField
@@ -75,11 +67,6 @@ export default function EditLanguage({ language }) {
                     helperText="ex. 2,700,000"
                     value={editLanguage.global_speakers}
                     onChange={(event) => handleChange(event, 'global_speakers')}
-                    // onChange={(event) =>
-                    //     // setLanguage({
-                    //     //     ...editLanguage, global_speakers: event.target.value,
-                    //     // })}
-                    //     setLanguage(event, 'global_speakers')}
                 />
             </TableCell>
 
@@ -92,11 +79,6 @@ export default function EditLanguage({ language }) {
                     helperText="ex. 3,772"
                     value={editLanguage.sc_speakers}
                     onChange={(event) => handleChange(event, 'sc_speakers')}
-                    // onChange={(event) =>
-                    //     // setLanguage({
-                    //     //     ...newLanguage, sc_speakers: event.target.value,
-                    //     // })}
-                    //     setLanguage(event, 'sc_speakers')}
                 />
             </TableCell>
 

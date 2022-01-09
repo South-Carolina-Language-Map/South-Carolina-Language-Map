@@ -15,8 +15,28 @@ export default function AdminLanguageRow({ language }) {
   //hooks
   const dispatch = useDispatch();
 
+  //store to grab edited language
+  const editLanguage = useSelector((store) => store.adminReducer.adminEditReducer);
+  //bring in category ID stored in reducer
+  const category = useSelector((store) => store.adminReducer.newLanguageCategoryIDReducer);
+  //will need to pull in example store *****
+
   //local state
   const [toggleEditView, setToggleEditView] = useState(false)
+  let newLanguage = {
+    language: editLanguage.language,
+    glottocode: editLanguage.glottocode,
+    description: editLanguage.description,
+    endonym: editLanguage.endonym,
+    global_speakers: editLanguage.global_speakers,
+    sc_speakers: editLanguage.sc_speakers,
+    category_id: category || language.category_id,
+    examples: [{ link_text: "", hyperlink: "" }],
+  };
+
+
+
+
 
   //toggles to edit view
     const handleEditView = () => {
@@ -29,8 +49,9 @@ export default function AdminLanguageRow({ language }) {
 
   // function handles edit for this ID
   const handleEdit = () => {
-    console.log("Edit", language.id);
-  };
+    console.log("Edit", editLanguage);
+
+  }
 
 
   //function deletes this id
@@ -82,7 +103,7 @@ export default function AdminLanguageRow({ language }) {
       </TableCell>
       <TableCell>link_text</TableCell>
       <TableCell>hyperlink</TableCell>
-      
+
       <TableCell>
       <Stack direction="row" spacing={1}>
         <Button sx={{ mr: 1 }} variant="contained" onClick={handleEditView}>
