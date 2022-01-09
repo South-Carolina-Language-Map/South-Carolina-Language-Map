@@ -75,14 +75,14 @@ function AdminLanguage() {
           <LanguageForm />
         </Grid>
       ) : (
-        <Grid item xs={8} sx={{ pb: 2 }}>
+        <Grid item xs={7} sx={{ pb: 2 }}>
           <Typography variant="h3" textAlign="right">
             All Languages
           </Typography>
         </Grid>
       )}
       {/*  */}
-      <Grid item xs={4} sx={{ textAlign: "right" }}>
+      <Grid item xs={5} sx={{ textAlign: "right" }}>
         {!checked && (
           <Button
             variant="contained"
@@ -109,7 +109,9 @@ function AdminLanguage() {
                 <TableCell>Global Speakers</TableCell>
                 <TableCell>SC Speakers</TableCell>
                 <TableCell>Endonym</TableCell>
-                <TableCell>Edit/Delete</TableCell>
+                <TableCell>Description</TableCell>
+                <TableCell>Category</TableCell>
+                <TableCell align="center">Edit/Delete</TableCell>
               </TableRow>
             </TableHead>
             {languages

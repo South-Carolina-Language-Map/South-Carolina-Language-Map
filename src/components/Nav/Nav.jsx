@@ -54,7 +54,7 @@ function Nav() {
           <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
               <Toolbar>
-                <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                <Typography variant="h6">
                   South Carolina Language Map
                 </Typography>
 
@@ -85,15 +85,18 @@ function Nav() {
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
             <Toolbar>
-              <Button
-                onClick={routeChange}
+              <Typography
                 variant="h6"
-                component="div"
-                sx={{ flexGrow: 1 }}
+                onClick={routeChange}
+                sx={{
+                  flexGrow: 1,
+                  "&:hover": {
+                    cursor: "pointer",
+                  },
+                }}
               >
                 South Carolina Language Map
-              </Button>
-
+              </Typography>
               <Button
                 color="inherit"
                 onClick={() => {

@@ -62,7 +62,7 @@ function LanguageForm() {
       <Paper elevation={5} sx={{ p: 2 }}>
         <Grid container textAlign="center">
           <Grid item xs={12}>
-            <Typography variant="h4">Add a New Language</Typography>
+            <Typography variant="h4" sx={{mb:2}}>Add a New Language</Typography>
           </Grid>
           <Grid item xs={2.4}>
             <TextField

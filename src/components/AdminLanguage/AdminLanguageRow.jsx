@@ -22,23 +22,26 @@ export default function AdminLanguageRow({ language }) {
     });
   };
 
+  // category_id: 4;
+  // description: "";
+
   return (
-    <>
-      <TableRow hover role="checkbox" tabIndex={-1}>
-        <TableCell>{language.language}</TableCell>
-        <TableCell>{language.glottocode}</TableCell>
-        <TableCell>{language.global_speakers}</TableCell>
-        <TableCell>{language.sc_speakers}</TableCell>
-        <TableCell>{language.endonym}</TableCell>
-        <TableCell>
-          <Button sx={{ mr: 1 }} variant="contained" onClick={handleEdit}>
-            Edit
-          </Button>
-          <Button variant="outlined" color="error" onClick={handleDelete}>
-            Delete
-          </Button>
-        </TableCell>
-      </TableRow>
-    </>
+    <TableRow hover role="checkbox" tabIndex={-1}>
+      <TableCell>{language.language}</TableCell>
+      <TableCell>{language.glottocode}</TableCell>
+      <TableCell>{language.global_speakers}</TableCell>
+      <TableCell>{language.sc_speakers}</TableCell>
+      <TableCell>{language.endonym}</TableCell>
+      <TableCell>{language.description}</TableCell>
+      <TableCell>{language.category_id}</TableCell>
+      <TableCell>
+        <Button sx={{ mr: 1 }} variant="contained" onClick={handleEdit}>
+          Edit
+        </Button>
+        <Button variant="outlined" color="error" onClick={handleDelete}>
+          Delete
+        </Button>
+      </TableCell>
+    </TableRow>
   );
 } //end AdminLanguageRow
