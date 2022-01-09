@@ -19,7 +19,7 @@ export default function EditLanguage(event, { language }) {
         payload: { property: property, value: event.target.value }
     });
 
-}
+
 
     //local state stores the value for category input
     const [editLanguage, setLanguage] = useState(language);
@@ -29,7 +29,6 @@ export default function EditLanguage(event, { language }) {
 
     return (
         <>
-    //form sends object with multiple values containing new language and associated values in DB
             <TableCell>
                 <TextField
                     required
