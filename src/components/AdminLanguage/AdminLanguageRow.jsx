@@ -23,19 +23,18 @@ export default function AdminLanguageRow({ language }) {
 
   //local state
   const [toggleEditView, setToggleEditView] = useState(false)
+
+  //object to send off edited language
   let newLanguage = {
     language: editLanguage.language,
     glottocode: editLanguage.glottocode,
     description: editLanguage.description,
     endonym: editLanguage.endonym,
-    global_speakers: editLanguage.global_speakers,
-    sc_speakers: editLanguage.sc_speakers,
+    global_speakers: Number(editLanguage.global_speakers),
+    sc_speakers: Number(editLanguage.sc_speakers),
     category_id: category || language.category_id,
-    examples: [{ link_text: "", hyperlink: "" }],
+    // examples: [{ link_text: "", hyperlink: "" }],
   };
-
-
-
 
 
   //toggles to edit view
@@ -49,8 +48,11 @@ export default function AdminLanguageRow({ language }) {
 
   // function handles edit for this ID
   const handleEdit = () => {
-    console.log("Edit", editLanguage);
-
+    console.log("SEND THIS Edit=====>", newLanguage);
+    dispatch({
+        type: 'UPDATE_LANGUAGE',
+        payload: newLanguage
+    })
   }
 
 

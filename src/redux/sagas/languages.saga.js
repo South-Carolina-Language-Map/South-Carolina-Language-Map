@@ -56,7 +56,7 @@ function* addLanguage(action) {
 function* updateLanguage(action) {
     try {
       //UPDATE request sent to languages.router based on ID
-      const response = yield axios.put(`/api/languages/${action.payload}`);
+      const response = yield axios.put(`/api/languages/${action.payload.id}`, action.payload);
   
       yield console.log('response', response);
     //call GET request to repopulate languages list
