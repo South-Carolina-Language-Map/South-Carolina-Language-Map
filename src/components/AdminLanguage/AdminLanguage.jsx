@@ -21,7 +21,6 @@ import {
 
 //components
 import AdminLanguageRow from "./AdminLanguageRow";
-import LanguageDialog from "./LanguageDialog";
 import LanguageForm from "./LanguageForm";
 
 function AdminLanguage() {

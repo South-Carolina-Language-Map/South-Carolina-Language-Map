@@ -19,7 +19,13 @@ export default function AdminLanguageRow({ language }) {
   const editLanguage = useSelector((store) => store.adminReducer.adminEditReducer);
   //bring in category ID stored in reducer
   const category = useSelector((store) => store.adminReducer.newLanguageCategoryIDReducer);
+  
   //will need to pull in example store *****
+
+ // Grabbing the categories data to parse through
+ const categories = useSelector(
+    (store) => store.adminReducer.adminCategoriesReducer
+  );
 
   //local state
   const [toggleEditView, setToggleEditView] = useState(false)
@@ -49,7 +55,7 @@ export default function AdminLanguageRow({ language }) {
 
   // function handles edit for this ID
   const handleEdit = () => {
-    console.log("SEND THIS Edit=====>", newLanguage);
+    // console.log("SEND THIS Edit=====>", newLanguage);
     dispatch({
         type: 'UPDATE_LANGUAGE',
         payload: newLanguage
@@ -65,11 +71,6 @@ export default function AdminLanguageRow({ language }) {
       payload: language.id,
     });
   };
-
-  // Grabbing the categories data to parse through
-  const categories = useSelector(
-    (store) => store.adminReducer.adminCategoriesReducer
-  );
 
   return (
       <>

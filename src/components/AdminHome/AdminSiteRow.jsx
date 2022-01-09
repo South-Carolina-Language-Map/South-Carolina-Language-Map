@@ -135,7 +135,7 @@ export default function AdminSiteRow({ regions, site, languages }) {
               </Button>
               <Button
                 color="error"
-                variant="contained"
+                variant="outlined"
                 onClick={toggleEditMode}
               >
                 Cancel

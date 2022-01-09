@@ -17,7 +17,7 @@ export default function EditLanguage({ language }) {
     //initialize dispatch
     const dispatch = useDispatch();
 
-    //store to grab language
+    //store to grab language sent from AdminLanguageRow component
     const editLanguage = useSelector((store) => store.adminReducer.adminEditReducer);
 
     //handle changing the language object in the reducer at every key stroke
