@@ -26,6 +26,7 @@ export default function AdminLanguageRow({ language }) {
 
   //object to send off edited language
   let newLanguage = {
+    id: language.id,
     language: editLanguage.language,
     glottocode: editLanguage.glottocode,
     description: editLanguage.description,

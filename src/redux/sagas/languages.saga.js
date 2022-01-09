@@ -40,7 +40,7 @@ function* fetchLanguage(action) {
 function* addLanguage(action) {
   try {
     //POST request to languages router
-    const response = yield axios.post(`/api/languages/`, action.payload);
+    const response = yield axios.post(`/api/languages/${action.payload}`, action.payload);
 
     yield console.log('response', response);
     //call GET request to repopulate languages list
@@ -49,7 +49,6 @@ function* addLanguage(action) {
     yield put({ type: "ADD_LANGUAGE_ERROR" });
     console.log("Error in addLanguage", err);
   }
-
 }
 
 //LANGUAGE PUT ROUTE

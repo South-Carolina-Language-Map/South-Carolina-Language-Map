@@ -109,7 +109,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 router.put('/:id', rejectUnauthenticated, (req, res) => {
   const id = req.params.id;
   const updatedLanguage = req.body;
-  console.log('==========================', req.body)
+  console.log('==========================', req.body, req.params.id)
 
   //security - for admin use only
   const clearanceLevel = req.user.clearance_level
