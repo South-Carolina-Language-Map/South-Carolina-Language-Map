@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 // React Imports
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-=======
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from "react-router-dom";
->>>>>>> development
 
 //components
 import "./Nav.css";
@@ -28,32 +21,29 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 function Nav() {
   //hooks
+  const history = useHistory();
   const dispatch = useDispatch();
+
   //stores
   const user = useSelector((store) => store.user);
 
-<<<<<<< HEAD
   // Variables
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
+  // Functions
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
-=======
-  //hooks
-  const dispatch = useDispatch();
-  const history = useHistory();
 
   const routeChange = () => {
-    console.log('click')
+    console.log("click");
     let path = `/home`;
     history.push(path);
-  }
->>>>>>> development
+  };
 
   return (
     <>
@@ -95,11 +85,14 @@ function Nav() {
         <Box sx={{ flexGrow: 1 }}>
           <AppBar position="static">
             <Toolbar>
-
-              <Button onClick={routeChange} variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Button
+                onClick={routeChange}
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1 }}
+              >
                 South Carolina Language Map
               </Button>
-
 
               <Button
                 color="inherit"
