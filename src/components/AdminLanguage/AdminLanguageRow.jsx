@@ -106,8 +106,8 @@ export default function AdminLanguageRow({ language }) {
           }
         })}
       </TableCell>
-      <TableCell>link_text</TableCell>
-      <TableCell>hyperlink</TableCell>
+      <TableCell>{language.link_text}</TableCell>
+      <TableCell>{language.hyperlink}</TableCell>
 
       <TableCell>
       <Stack direction="row" spacing={1}>
