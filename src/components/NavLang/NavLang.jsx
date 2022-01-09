@@ -4,6 +4,12 @@ import { Grid, Paper, Typography } from "@mui/material";
 function NavLang({ site }) {
   let currentLanguage = site;
 
+  //format hyperlink if it exists
+  if(currentLanguage.hyperlink &&
+    currentLanguage.hyperlink.substring(0,3) !== 'http'){
+    currentLanguage.hyperlink = 'http://' + currentLanguage.hyperlink;  
+  }
+
   return (
     <Grid container>
       {/* Start of overall Grid container */}
@@ -53,6 +59,25 @@ function NavLang({ site }) {
             {/* End of nested Grid #2 item #2  */}
           </Grid>
           {/* End of nested Grid #2 */}
+
+          {currentLanguage.hyperlink &&
+            
+             <Grid container sx={{ p: 1 }}>
+             {/* Start of nested Grid #2 */}
+             <Grid item xs={6}>
+               <Typography>Example:</Typography>
+             </Grid>
+             {/* End of nested Grid #2 item #1  */}
+             <Grid item xs={6}>
+              <a href={currentLanguage.hyperlink}
+              target='_blank'>
+                {currentLanguage.link_text}
+              </a>
+            </Grid>
+             {/* End of nested Grid #2 item #2  */}
+           </Grid>
+
+          }
         </Paper>
       </Grid>
       {/* End of Grid item #1 */}
