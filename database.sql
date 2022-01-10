@@ -124,6 +124,10 @@ VALUES('Cherokee','Cherokeee',2000,0,1,'','Current', 'Cher1273'),
 ('ASL','American Sign Language',500000,333,7,'','Current','Amer1248'),
 ('BASL','Black American Sign Language',200000,40000,7,'Black American Sign Language (BASL) or Black Sign Variation (BSV) is a dialect of American Sign Language (ASL) used most commonly by deaf African Americans in the United States. The divergence from ASL was influenced largely by the segregation of schools in the American South. Like other schools at the time, schools for the deaf were segregated based upon race, creating two language communities among deaf signers: white deaf signers at white schools and black deaf signers at black schools. Today, BASL is still used by signers in the South despite public schools having been legally desegregated since 1954. [Wikipedia]','Current','Amer1248');
 
+--Fill Examples Table
+INSERT INTO examples ("link_text", "hyperlink", "language_id")
+VALUES ('Interview on the history of BASL', 'youtu.be/vkJpg4H5mXQ?t=385', 31);
+
 INSERT INTO sites (address, region_id, site_name, language_id, longitude, latitude)
 VALUES('3688 Warrior Creek Church Road,Gray Court, SC 29645',4,'Warrior Creek Tribal Grounds',1,-82.031686,34.580612),
 ('996 Avenue of Nations',4,'Catawba Nation Cultural Center',2,-80.883596,34.904709),
