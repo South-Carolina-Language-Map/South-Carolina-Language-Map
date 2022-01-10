@@ -1,4 +1,5 @@
 // React Imports
+import * as  React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import AutoComplete from "../AutoComplete/AutoComplete";
 
 // MUI Imports
-import { Button, TableRow, TableCell, Stack, TextField } from "@mui/material";
+import { Button, TableRow, TableCell, Stack, TextField, Snackbar, Alert } from "@mui/material";
 
 export default function AdminSiteRow({ regions, site, languages }) {
   //Reducer set up for NewSite values for language and region ids
@@ -17,7 +18,8 @@ export default function AdminSiteRow({ regions, site, languages }) {
   //local state
   const [edit, setEdit] = useState(site);
   const [handleEditMode, setHandleEditMode] = useState(false);
-
+//Mui Snackbar
+const [openEdit, setOpenEdit] = React.useState(false);
   //hooks
   const dispatch = useDispatch();
 
@@ -39,6 +41,7 @@ export default function AdminSiteRow({ regions, site, languages }) {
       },
     });
     setHandleEditMode(!handleEditMode);
+    setOpenEdit(true)
   };
 
   //DELETE for this site ID
@@ -48,6 +51,14 @@ export default function AdminSiteRow({ regions, site, languages }) {
       payload: site.id,
     });
   };
+
+//closes snackbar
+const handleClose = (event, reason) => {
+  if (reason === 'clickaway') {
+    return;
+  }
+  setOpenEdit(false);
+}
 
   return (
     <>
@@ -144,6 +155,16 @@ export default function AdminSiteRow({ regions, site, languages }) {
           </TableCell>
         </TableRow>
       )}
+
+      <Snackbar
+        open={openEdit}
+        autoHideDuration={4000}
+        onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          "Success! {edit.site_name} has been updated."
+        </Alert>
+      </Snackbar>
+
     </>
   );
 } //end AdminSiteRow

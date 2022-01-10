@@ -50,7 +50,7 @@ function CategoryForm() {
       </form>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Category has been added.
+          Success! A new category has been added.
         </Alert>
       </Snackbar>
     </>

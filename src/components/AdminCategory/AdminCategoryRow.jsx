@@ -101,7 +101,7 @@ export default function AdminCategoryRow({ row }) {
 
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Information has been updated.
+        Success! {edit.name} has been updated.
         </Alert>
       </Snackbar>
     </>

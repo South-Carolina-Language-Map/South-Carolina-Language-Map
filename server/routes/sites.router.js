@@ -11,7 +11,7 @@ require('dotenv');
 
 // GET - GET all sites
 router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM sites`;
+    let queryText = `SELECT * FROM sites ORDER BY "site_name" ASC`;
 
     pool.query(queryText)
         .then((result) => {
