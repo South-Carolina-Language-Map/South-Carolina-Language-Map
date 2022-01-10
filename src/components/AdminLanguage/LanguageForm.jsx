@@ -35,6 +35,7 @@ function LanguageForm() {
     global_speakers: "",
     sc_speakers: "",
     category_id: category,
+    status: "",
     examples: [{ link_text: "", hyperlink: "" }],
   });
 
@@ -52,6 +53,7 @@ function LanguageForm() {
       global_speakers: "",
       sc_speakers: "",
       category_id: category,
+      status: "",
       examples: [{ link_text: "", hyperlink: "" }],})
   }
 
