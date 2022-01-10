@@ -122,7 +122,7 @@ VALUES('Cherokee','Cherokeee',2000,0,1,'','Current', 'Cher1273'),
 ('Charleston Dialect','“Charlestonian”',333,333,6,'','Current','NA'),
 ('Gullah','Gullah',5000,333,6,'','Current','Gull1241'),
 ('ASL','American Sign Language',500000,333,7,'','Current','Amer1248'),
-('BASL','Black American Sign Language',200000,40000,7,'Black American Sign Language (BASL) or Black Sign Variation (BSV) is a dialect of American Sign Language (ASL) used most commonly by deaf African Americans in the United States. The divergence from ASL was influenced largely by the segregation of schools in the American South. Like other schools at the time, schools for the deaf were segregated based upon race, creating two language communities among deaf signers: white deaf signers at white schools and black deaf signers at black schools. Today, BASL is still used by signers in the South despite public schools having been legally desegregated since 1954. [Wikipedia]','Current','Amer1248');
+('BASL','Black American Sign Language',200000,40000,7,'Black American Sign Language (BASL) or Black Sign Variation (BSV) is a dialect of American Sign Language (ASL) used most commonly by deaf African Americans in the United States. The divergence from ASL was influenced largely by the segregation of schools in the American South. [Wikipedia]','Current','Amer1248');
 
 --Fill Examples Table
 INSERT INTO examples ("link_text", "hyperlink", "language_id")
