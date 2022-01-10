@@ -142,25 +142,26 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
     pool.query(queryText, [id, updatedLanguage.language, updatedLanguage.glottocode, updatedLanguage.description,
       updatedLanguage.endonym, updatedLanguage.global_speakers, updatedLanguage.sc_speakers, updatedLanguage.category_id, updatedLanguage.status])
-      .then(() => {
+      .then(result => {
+        console.log('IN second Query =======> Checking this is right')
 
-    let examplesQueryText= `
-    UPDATE "examples"
-    SET "link_text" = $2,
-    "hyperlink" = $3
-    WHERE "id" = $1
-    `    
+        let examplesQueryText = `
+      UPDATE "examples"
+      SET "link_text" = $2,
+      "hyperlink" = $3
+      WHERE "id" = $1;
+        `;
 
-    pool.query(examplesQueryText, [updatedLanguage.language_id, updatedLanguage.link_text, updatedLanguage.hyper_link])
-        .then(() => {
-          res.sendStatus(200);
-        })
-        .catch((err) => {
-          res.sendStatus(500);
-          console.log('ERROR in Language PUT', err);
-        })//end second query
+        pool.query(examplesQueryText, [updatedLanguage.language_id, updatedLanguage.link_text, updatedLanguage.hyperlink])
+          .then(result => {
+            res.sendStatus(200);
+          })
+          .catch((err) => {
+            res.sendStatus(500);
+            console.log('ERROR in Language PUT', err);
+          })//end second query
 
-        
+
         console.log('PUT Language success');
       })
       .catch((err) => {

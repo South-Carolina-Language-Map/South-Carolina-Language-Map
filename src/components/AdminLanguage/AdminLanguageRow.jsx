@@ -55,6 +55,7 @@ export default function AdminLanguageRow({ language }) {
         setToggleEditView(true)
     }
 
+    
   // function handles edit for this ID
   const handleEdit = () => {
     console.log("SEND THIS Edit=====>", newLanguage);
@@ -62,6 +63,8 @@ export default function AdminLanguageRow({ language }) {
         type: 'UPDATE_LANGUAGE',
         payload: newLanguage
     })
+    //switch back to row view
+    setToggleEditView(false)
   }
 
 
