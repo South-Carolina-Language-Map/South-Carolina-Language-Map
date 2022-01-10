@@ -1,5 +1,5 @@
 // React Imports
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -28,6 +28,8 @@ function Nav() {
 
   //stores
   const user = useSelector((store) => store.user);
+  const approvals = useSelector(store => store.adminReducer.adminApprovalsReducer);
+  const adminView = useSelector(store => store.adminViewReducer);
 
   // Variables
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -56,6 +58,10 @@ function Nav() {
       backgroundColor: 'red',
     },
   }));
+
+  useEffect(() => {
+    dispatch({type: 'FETCH_UNAPPROVED'})
+  },[]);
 
   return (
     <>
@@ -118,7 +124,7 @@ function Nav() {
                   dispatch({ type: "SET_ADMIN_VIEW", payload: "approval" });
                 }}
               >
-                <StyledBadge badgeContent={0} color="primary">
+                <StyledBadge badgeContent={approvals.length} color="primary">
                   Approvals
                 </StyledBadge>
               </Button>

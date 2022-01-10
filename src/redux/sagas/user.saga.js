@@ -72,7 +72,10 @@ function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_UNAPPROVED', fetchAllUsers);
   yield takeLatest('DELETE_UNAPPROVED', deleteUser);
-  yield takeLatest('APPROVE_ADMIN', updateAdminApproval)
+  yield takeLatest('APPROVE_ADMIN', updateAdminApproval);
+
+  //ensures approvals are updated on whenever adminView changes
+  yield takeLatest('SET_ADMIN_VIEW', fetchAllUsers);
 }
 
 export default userSaga;
