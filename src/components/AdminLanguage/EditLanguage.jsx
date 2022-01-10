@@ -40,8 +40,8 @@ export default function EditLanguage({ language }) {
             glottocode: "Firs1234",
             description: "Combination of Hmong and English. Primarily spoken in the United States",
             endonym: "Hmong",
-            global_speakers: 37723,
-            sc_speakers: 37723,
+            global_speakers: 40000,
+            sc_speakers: 27723,
             category_id: 3,
             status: "Current",
             language_id: language.id,
@@ -61,6 +61,7 @@ export default function EditLanguage({ language }) {
                         helperText="ex. Hmong"
                         value={editLanguage.language}
                         onChange={(event) => handleChange(event, 'language')}
+                        sx = {{ width: 100}}
                     />
                 </TableCell>
                 <TableCell>
@@ -73,6 +74,7 @@ export default function EditLanguage({ language }) {
                         helperText="ex. Firs1234"
                         value={editLanguage.glottocode}
                         onChange={(event) => handleChange(event, 'glottocode')}
+                        sx = {{ width: 100}}
                     />
                 </TableCell>
 
@@ -87,6 +89,7 @@ export default function EditLanguage({ language }) {
                         helperText="ex. 2,700,000"
                         value={editLanguage.global_speakers}
                         onChange={(event) => handleChange(event, 'global_speakers')}
+                        sx = {{ width: 100}}
                     />
                 </TableCell>
 
@@ -99,6 +102,7 @@ export default function EditLanguage({ language }) {
                         helperText="ex. 3,772"
                         value={editLanguage.sc_speakers}
                         onChange={(event) => handleChange(event, 'sc_speakers')}
+                        sx = {{ width: 100}}
                     />
                 </TableCell>
 
@@ -111,6 +115,7 @@ export default function EditLanguage({ language }) {
                         helperText="ex. Hmong"
                         value={editLanguage.endonym}
                         onChange={(event) => handleChange(event, 'endonym')}
+                        sx = {{ width: 100}}
                     />
                 </TableCell>
 
@@ -122,6 +127,7 @@ export default function EditLanguage({ language }) {
                         variant="standard"
                         value={editLanguage.description}
                         onChange={(event) => handleChange(event, 'description')}
+                        sx = {{ width: 300}}
                     />
                 </TableCell>
 
@@ -138,6 +144,7 @@ export default function EditLanguage({ language }) {
                         helperText="Current"
                         value={editLanguage.status}
                         onChange={(event) => handleChange(event, 'status')}
+                        sx = {{ width: 100}}
                     />
                 </TableCell>
 
@@ -148,6 +155,7 @@ export default function EditLanguage({ language }) {
                         variant="standard"
                         value={editLanguage.link_text}
                         onChange={(event) => handleChange(event, 'link_text')}
+                        sx = {{ width: 150}}
                     />
                 </TableCell>
 
@@ -158,6 +166,7 @@ export default function EditLanguage({ language }) {
                         variant="standard"
                         value={editLanguage.hyperlink}
                         onChange={(event) => handleChange(event, 'hyperlink')}
+                        sx = {{ width: 150}}
                     />
                 </TableCell>
             </>

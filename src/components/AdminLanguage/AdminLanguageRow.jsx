@@ -99,13 +99,13 @@ export default function AdminLanguageRow({ language }) {
         :
         
     <TableRow hover role="checkbox" tabIndex={-1}>
-      <TableCell>{language.language}</TableCell>
+      <TableCell sx = {{ width: 100}}>{language.language}</TableCell>
       <TableCell>{language.glottocode}</TableCell>
       <TableCell>{language.global_speakers}</TableCell>
       <TableCell>{language.sc_speakers}</TableCell>
       <TableCell>{language.endonym}</TableCell>
-      <TableCell>{language.description}</TableCell>
-      <TableCell>
+      <TableCell  sx = {{ width: 200}}>{language.description}</TableCell>
+      <TableCell sx = {{ width: 100}}>
         {categories.map((category) => {
           if (language.category_id === category.id) {
             return category.name;
@@ -113,8 +113,8 @@ export default function AdminLanguageRow({ language }) {
         })}
       </TableCell>
       <TableCell>{language.status}</TableCell>
-      <TableCell>{language.link_text}</TableCell>
-      <TableCell>{language.hyperlink}</TableCell>
+      <TableCell sx = {{ width: 150}}>{language.link_text}</TableCell>
+      <TableCell sx = {{ width: 200}}>{language.hyperlink}</TableCell>
 
       <TableCell>
       <Stack direction="row" spacing={1}>
