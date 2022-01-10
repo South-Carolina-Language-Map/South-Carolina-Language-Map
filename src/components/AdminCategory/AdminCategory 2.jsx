@@ -5,15 +5,14 @@ import React from 'react';
 // It doesn't dispatch any redux actions or display any part of redux state
 // or even care what the redux state is'
 
-function AdminAbout() {
+function AdminCategory() {
   return (
     <div className="container">
       <div>
-        <p>This is the Admin About tab!</p>
-        <p>Boo! Haha, bet I scared ya</p>
+        <p>This is the admin category tab!</p>
       </div>
     </div>
   );
 }
 
-export default AdminAbout;
+export default AdminCategory;

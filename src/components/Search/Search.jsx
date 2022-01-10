@@ -54,6 +54,7 @@ function Search() {
   };
 
   const clearSearch = () => {
+    dispatch({ type: "SET_LIST_DEFAULT" })
     dispatch({ type: "FETCH_ALL" });
     setSearchText("");
   };
@@ -184,8 +185,8 @@ function Search() {
                       }}
                     >
                       <InputBase
-                        onChange={handleChange}
                         value={searchText}
+                        onChange={handleChange}
                         sx={{ ml: 1, flex: 1 }}
                         onKeyPress={onEnterPress}
                         placeholder="Search Categories"

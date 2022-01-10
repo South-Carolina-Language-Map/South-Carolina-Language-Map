@@ -11,10 +11,12 @@ import NavExploreItem from "../NavExploreItem/NavExploreItem";
 
 function NavExplorer() {
   let displayLangInfo;
+  const dispatch = useDispatch();
   const list = useSelector((store) => store.viewReducer.listReducer);
   const sites = useSelector((store) => store.viewReducer.sitesReducer);
   const listType = useSelector((store) => store.viewReducer.listTypeReducer);
-  const dispatch = useDispatch();
+  
+  //shared amongst children to accurately retrieve list item info
   const [activeKey, setActiveKey] = useState("name");
   const [prevState, setPrevState] = useState([
     {
@@ -37,7 +39,6 @@ function NavExplorer() {
     dispatch({ type: "SET_LIST_DEFAULT" });
   }, []);
 
-  console.log("prevState:", prevState);
 
   return (
     // {prevState[0].listType !== 'DEFAULT' && <Button>Back</Button>}
@@ -52,7 +53,11 @@ function NavExplorer() {
         xs={6}
         sx={{ p: 0.69 }}
         textAlign="right"
-        onClick={() => dispatch({ type: "FETCH_ALL" })}
+        onClick={() => {
+          dispatch({ type: "FETCH_ALL" })
+          // dispatch({ type: "SET_LIST_DEFAULT" });
+          dispatch({ type: "EXPLORE_TOGGLE" });
+        }}
       >
         <Button color="error" size="small" variant="outlined">
           Reset
@@ -62,13 +67,14 @@ function NavExplorer() {
       <Grid container spacing={2}>
         {list &&
           list.map((listObj, i) => {
+            let padding = list[0].name === 'Sites' ? 4 : 2;
             return (
               <NavExploreItem
                 key={i}
+                padding={padding}
                 listObj={listObj}
                 activeKey={activeKey}
                 setActiveKey={setActiveKey}
-                setPrevState={setPrevState}
               />
             );
           })}

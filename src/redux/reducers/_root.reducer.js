@@ -14,9 +14,12 @@ import queriesReducer from './viewReducers/view.queries.reducer';
 import sitesReducer from './viewReducers/view.sites.reducer';
 import newSiteReducer from './adminReducers/admin.newSite.reducer';
 import adminRegionsReducer from './adminReducers/admin.region.reducer';
+import newLanguageCategoryIDReducer from './adminReducers/admin.newLanguageCategoryID.reducer';
+import clearAutoCompleteReducer from './adminReducers/admin.clearAutoComplete.reducer';
 
 import sideBarView from './sideBarView.reducer';
 import adminView from './adminView.reducer';
+import exploreToggle from './viewReducers/view.exploreToggle.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -28,8 +31,10 @@ const adminReducer = combineReducers({
   adminCategoriesReducer,
   adminApprovalsReducer,
   adminEditReducer,
+  newLanguageCategoryIDReducer,
   newSiteReducer,
-  adminRegionsReducer
+  adminRegionsReducer,
+  clearAutoCompleteReducer
 })
 
 const viewReducer = combineReducers({
@@ -38,7 +43,7 @@ const viewReducer = combineReducers({
   listTypeReducer, // '' provide context for explore clicks
   queriesReducer, // [] holds previous queries
   sitesReducer, // [] holds current list of sites to map
-
+  exploreToggle,
 })
 
 // Lets make a bigger object for our store, with the objects from our reducers.
