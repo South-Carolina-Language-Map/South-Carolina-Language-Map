@@ -148,4 +148,4 @@ VALUES('3688 Warrior Creek Church Road,Gray Court, SC 29645',4,'Warrior Creek Tr
 ('138 Hagood Mill Rd. Pickens, SC 29671',4,'Hagood Mill',27,-82.722829,34.924995),
 ('51 Meeting St, Charleston, SC 29401',1,'Nathaniel Russell House',28,-79.931051,32.773964),
 ('355 Cedar Springs Road, Spartanburg, SC 29302',4,'South Carolina School for the Deaf and Blind',30,-81.881309,34.910471),
-('355 Cedar Springs Road, Spartanburg, SC 29302',4,'South Carolina School for the Deaf and Blind',31,-81.881309,34.910471);
+('355 Cedar Springs Road, Spartanburg, SC 29302',4,'South Carolina School for the Deaf and Blind',31,-81.880309,34.910471);
