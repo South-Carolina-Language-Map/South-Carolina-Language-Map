@@ -54,7 +54,6 @@ function AdminHomeForm() {
   //local state to store site name and address
   let [newLocation, setLocation] = useState(base);
 
-  console.log("Autokey", autoKey);
 
   return (
     <form onSubmit={handleSubmit}>
