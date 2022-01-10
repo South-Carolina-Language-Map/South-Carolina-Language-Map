@@ -59,8 +59,8 @@ CREATE TABLE "regions" (
 
 CREATE TABLE "examples" (
 	"id" serial NOT NULL,
-	"link_text" varchar(255) NOT NULL,
-	"hyperlink" varchar(255) NOT NULL,
+	"link_text" varchar(255),
+	"hyperlink" varchar(255),
 	"language_id" int NOT NULL,
 	CONSTRAINT "examples_pk" PRIMARY KEY ("id")
 ) WITH (
