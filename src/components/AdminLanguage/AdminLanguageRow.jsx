@@ -127,6 +127,15 @@ export default function AdminLanguageRow({ language }) {
         </Stack>
       </TableCell>
       
+      <Snackbar
+        open={open}
+        autoHideDuration={4000}
+        onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        "Success! Your language has been added."
+      </Alert>
+    </Snackbar>
+    
     </TableRow>}
     </>
   );

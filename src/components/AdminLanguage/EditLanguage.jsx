@@ -113,9 +113,9 @@ export default function EditLanguage({ language }) {
                 <TextField
                     required
                     id="filled-required"
-                    label="Global Speakers"
+                    label="Status"
                     variant="standard"
-                    helperText="ex. 2,700,000"
+                    helperText="ex. Current"
                     value={editLanguage.status}
                     onChange={(event) => handleChange(event, 'status')}
                 />
