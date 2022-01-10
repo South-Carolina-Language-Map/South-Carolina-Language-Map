@@ -12,6 +12,16 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
+//for presentation
+  let presentationFiller = {
+    username: "JBayl",
+    password: "12345",
+  }
+
+  const presentation = () => {
+    setUsername("JBayl");
+    setPassword("12345");
+  }
 
   const login = (event) => {
     event.preventDefault();
@@ -39,7 +49,7 @@ function LoginPage() {
           {/*  */}
           <Grid item xs={12} sx={{ mb: 2, textAlign: "center" }}>
             <Typography variant="h5">
-              <strong>LOG IN</strong>
+              <strong onClick={presentation}>LOG IN</strong>
             </Typography>
             <Typography variant="h6">To continue to Admin</Typography>
           </Grid>
