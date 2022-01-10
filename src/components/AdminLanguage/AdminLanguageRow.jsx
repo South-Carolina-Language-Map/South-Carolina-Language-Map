@@ -41,6 +41,7 @@ export default function AdminLanguageRow({ language }) {
     sc_speakers: Number(editLanguage.sc_speakers),
     category_id: category === -1 ? language.category_id : category,
     status: editLanguage.status,
+    language_id: editLanguage.language_id,
     link_text: editLanguage.link_text, 
     hyperlink: editLanguage.hyperlink
   };
