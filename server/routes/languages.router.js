@@ -149,12 +149,35 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
       UPDATE "examples"
       SET "link_text" = $2,
       "hyperlink" = $3
-      WHERE "id" = $1;
+      WHERE "language_id" = $1;
         `;
 
         pool.query(examplesQueryText, [updatedLanguage.language_id, updatedLanguage.link_text, updatedLanguage.hyperlink])
           .then(result => {
-            res.sendStatus(200);
+            
+            //if this row doesn't exist and this errors... insert a row
+            if (result.rowCount === 0) {
+              console.log('===================')
+              let addExampleQueryText = `
+              INSERT INTO "examples" (language_id, link_text, hyperlink)
+               VALUES ($1, $2, $3)
+              ;`;
+
+
+              pool.query(addExampleQueryText, [updatedLanguage.language_id, updatedLanguage.link_text, updatedLanguage.hyperlink])
+                .then(result => {
+                  res.sendStatus(200);
+                })
+                .catch((err) => {
+                  res.sendStatus(500);
+                  console.log('ERROR in Language PUT', err);
+                })
+
+            } else {
+              console.log('this is the RESULT................', result)
+              res.sendStatus(200);
+            }
+
           })
           .catch((err) => {
             res.sendStatus(500);
