@@ -44,7 +44,11 @@ function LanguageForm() {
 
    //submit form, clear inputs, snackbar
    const handleSubmit = () => {
-    dispatch({ type: "ADD_LANGUAGE", payload: newLanguage })
+     //send object to POST
+    dispatch({ type: "ADD_LANGUAGE", payload: newLanguage });
+    //clear autocomplete
+    dispatch({ type: "RESET_AUTOCOMPLETE"});
+    //clear other inputs
     setLanguage({
       language: "",
       glottocode: "",
@@ -54,7 +58,8 @@ function LanguageForm() {
       sc_speakers: "",
       category_id: category,
       status: "",
-      examples: [{ link_text: "", hyperlink: "" }],})
+      examples: [{ link_text: "", hyperlink: "" }],});
+
   }
 
 
