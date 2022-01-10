@@ -88,7 +88,6 @@ export default function AdminLanguageRow({ language }) {
       return;
     }
     setOpenEdit(false);
-    setOpenDelete(false)
   }
   
   return (

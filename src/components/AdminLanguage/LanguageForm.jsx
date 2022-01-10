@@ -74,7 +74,6 @@ function LanguageForm() {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
@@ -256,6 +255,8 @@ function LanguageForm() {
           </Grid>
         </Paper>
       </form>
+
+      {/* confirmation on successful post */}
       <Snackbar
         open={open}
         autoHideDuration={4000}
