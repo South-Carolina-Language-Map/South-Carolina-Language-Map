@@ -8,7 +8,19 @@ const router = express.Router();
 
 //GET all languages
 router.get('/', (req, res) => {
-  pool.query(`SELECT * FROM "languages";`)
+
+  //get everything except "examples".id so it doesn't overwrite "languages".id
+  const queryText = `
+  SELECT "languages".id, "languages".category_id, 
+  "languages".description, "languages".endonym, "languages".global_speakers, 
+  "languages".glottocode, "languages"."language", "languages".sc_speakers, 
+  "languages".status, "examples".language_id, "examples".hyperlink, "examples".link_text 
+  FROM "languages"
+  LEFT JOIN "examples" 
+  ON "languages".id = "examples".language_id 
+  ORDER BY "languages"."language" ASC;
+  `
+  pool.query(queryText)
     .then((response) => {
       res.send(response.rows);
       console.log('GET Languages success');
@@ -51,12 +63,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   if (clearanceLevel >= 1) {
     //query to create new language
     const queryText = `
-    INSERT INTO "languages" (language, glottocode, description, endonym, global_speakers, sc_speakers, category_id)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    INSERT INTO "languages" (language, glottocode, description, endonym, global_speakers, sc_speakers, category_id, status)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING "id";
     `;
     pool.query(queryText, [newLanguage.language, newLanguage.glottocode, newLanguage.description,
-    newLanguage.endonym, newLanguage.global_speakers, newLanguage.sc_speakers, newLanguage.category_id])
+    newLanguage.endonym, newLanguage.global_speakers, newLanguage.sc_speakers, newLanguage.category_id, newLanguage.status])
       .then((result) => {
         console.log('New language id:', result.rows[0].id);
 
@@ -105,6 +117,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 }); //end POST
 
+
 //PUT - edit a language
 router.put('/:id', rejectUnauthenticated, (req, res) => {
   const id = req.params.id;
@@ -115,6 +128,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
   if (clearanceLevel >= 1) {
 
+    //edit language database
     const queryText = `
   UPDATE "languages"
   SET "language" = $2,
@@ -123,14 +137,55 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
   "endonym" = $5,
   "global_speakers" = $6,
   "sc_speakers" = $7,
-  "category_id" = $8
+  "category_id" = $8,
+  "status" = $9
   WHERE "id" = $1
   ;`;
 
     pool.query(queryText, [id, updatedLanguage.language, updatedLanguage.glottocode, updatedLanguage.description,
-      updatedLanguage.endonym, updatedLanguage.global_speakers, updatedLanguage.sc_speakers, updatedLanguage.category_id])
-      .then(() => {
-        res.sendStatus(200);
+      updatedLanguage.endonym, updatedLanguage.global_speakers, updatedLanguage.sc_speakers, updatedLanguage.category_id, updatedLanguage.status])
+      .then(result => {
+
+        //edit the examples table
+        let examplesQueryText = `
+      UPDATE "examples"
+      SET "link_text" = $2,
+      "hyperlink" = $3
+      WHERE "language_id" = $1;
+        `;
+
+        pool.query(examplesQueryText, [updatedLanguage.language_id, updatedLanguage.link_text, updatedLanguage.hyperlink])
+          .then(result => {
+            
+            //if this row doesn't exist and this errors... insert a new row
+            if (result.rowCount === 0) {
+              console.log('===================')
+              let addExampleQueryText = `
+              INSERT INTO "examples" (language_id, link_text, hyperlink)
+               VALUES ($1, $2, $3)
+              ;`;
+
+              pool.query(addExampleQueryText, [updatedLanguage.language_id, updatedLanguage.link_text, updatedLanguage.hyperlink])
+                .then(result => {
+                  res.sendStatus(200);
+                })
+                .catch((err) => {
+                  res.sendStatus(500);
+                  console.log('ERROR in Language PUT', err);
+                }) 
+
+            } else {
+              console.log('this is the RESULT................', result)
+              res.sendStatus(200);
+            }
+
+          })
+          .catch((err) => {
+            res.sendStatus(500);
+            console.log('ERROR in Language PUT', err);
+          })//end second query
+
+
         console.log('PUT Language success');
       })
       .catch((err) => {

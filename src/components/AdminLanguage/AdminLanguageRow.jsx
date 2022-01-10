@@ -40,7 +40,10 @@ export default function AdminLanguageRow({ language }) {
     global_speakers: Number(editLanguage.global_speakers),
     sc_speakers: Number(editLanguage.sc_speakers),
     category_id: category === -1 ? language.category_id : category,
-    // examples: [{ link_text: "", hyperlink: "" }],
+    status: editLanguage.status,
+    language_id: language.id,
+    link_text: editLanguage.link_text, 
+    hyperlink: editLanguage.hyperlink
   };
 
 
@@ -53,6 +56,7 @@ export default function AdminLanguageRow({ language }) {
         setToggleEditView(true)
     }
 
+    
   // function handles edit for this ID
   const handleEdit = () => {
     console.log("SEND THIS Edit=====>", newLanguage);
@@ -60,6 +64,8 @@ export default function AdminLanguageRow({ language }) {
         type: 'UPDATE_LANGUAGE',
         payload: newLanguage
     })
+    //switch back to row view
+    setToggleEditView(false)
   }
 
 
@@ -72,6 +78,7 @@ export default function AdminLanguageRow({ language }) {
     });
   };
 
+  
   return (
       <>
     { toggleEditView ?
@@ -105,8 +112,9 @@ export default function AdminLanguageRow({ language }) {
           }
         })}
       </TableCell>
-      <TableCell>link_text</TableCell>
-      <TableCell>hyperlink</TableCell>
+      <TableCell>{language.status}</TableCell>
+      <TableCell>{language.link_text}</TableCell>
+      <TableCell>{language.hyperlink}</TableCell>
 
       <TableCell>
       <Stack direction="row" spacing={1}>
