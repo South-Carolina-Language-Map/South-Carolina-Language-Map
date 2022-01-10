@@ -53,7 +53,7 @@ export default function EditLanguage({ language }) {
             endonym: "Hmong",
             global_speakers: "3772,3",
             sc_speakers: "3772,3",
-            category_id: "",
+            category_id: "3",
             status: "Current",
             examples:
                 [{ link_text: "A new way of speaking for Hmong in the United States", hyperlink: "https://www.abebooks.com/9783659522956/Hmonglish-new-way-speaking-Hmong-3659522953/plp" }]}
