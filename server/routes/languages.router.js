@@ -117,6 +117,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 }); //end POST
 
+
 //PUT - edit a language
 router.put('/:id', rejectUnauthenticated, (req, res) => {
   const id = req.params.id;
@@ -127,6 +128,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
 
   if (clearanceLevel >= 1) {
 
+    //edit language database
     const queryText = `
   UPDATE "languages"
   SET "language" = $2,
@@ -143,8 +145,8 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [id, updatedLanguage.language, updatedLanguage.glottocode, updatedLanguage.description,
       updatedLanguage.endonym, updatedLanguage.global_speakers, updatedLanguage.sc_speakers, updatedLanguage.category_id, updatedLanguage.status])
       .then(result => {
-        console.log('IN second Query =======> Checking this is right', updatedLanguage)
 
+        //edit the examples table
         let examplesQueryText = `
       UPDATE "examples"
       SET "link_text" = $2,
@@ -155,14 +157,13 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         pool.query(examplesQueryText, [updatedLanguage.language_id, updatedLanguage.link_text, updatedLanguage.hyperlink])
           .then(result => {
             
-            //if this row doesn't exist and this errors... insert a row
+            //if this row doesn't exist and this errors... insert a new row
             if (result.rowCount === 0) {
               console.log('===================')
               let addExampleQueryText = `
               INSERT INTO "examples" (language_id, link_text, hyperlink)
                VALUES ($1, $2, $3)
               ;`;
-
 
               pool.query(addExampleQueryText, [updatedLanguage.language_id, updatedLanguage.link_text, updatedLanguage.hyperlink])
                 .then(result => {
@@ -171,7 +172,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
                 .catch((err) => {
                   res.sendStatus(500);
                   console.log('ERROR in Language PUT', err);
-                })
+                }) 
 
             } else {
               console.log('this is the RESULT................', result)
