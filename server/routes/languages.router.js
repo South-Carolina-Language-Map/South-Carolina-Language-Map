@@ -143,7 +143,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [id, updatedLanguage.language, updatedLanguage.glottocode, updatedLanguage.description,
       updatedLanguage.endonym, updatedLanguage.global_speakers, updatedLanguage.sc_speakers, updatedLanguage.category_id, updatedLanguage.status])
       .then(result => {
-        console.log('IN second Query =======> Checking this is right')
+        console.log('IN second Query =======> Checking this is right', updatedLanguage)
 
         let examplesQueryText = `
       UPDATE "examples"
