@@ -13,10 +13,6 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   const errors = useSelector((store) => store.errors);
 //for presentation
-  let presentationFiller = {
-    username: "JBayl",
-    password: "12345",
-  }
 
   const presentation = () => {
     setUsername("JBayl");

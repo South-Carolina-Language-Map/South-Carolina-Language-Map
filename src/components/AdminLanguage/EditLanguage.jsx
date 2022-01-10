@@ -40,13 +40,13 @@ export default function EditLanguage({ language }) {
             glottocode: "Firs1234",
             description: "Combination of Hmong and English. Primarily spoken in the United States",
             endonym: "Hmong",
-            global_speakers: "3772,3",
-            sc_speakers: "3772,3",
-            category_id: "3",
+            global_speakers: 37723,
+            sc_speakers: 37723,
+            category_id: 3,
             status: "Current",
             language_id: language.id,
-            link_text: "A new way of speaking for Hmong in the United States",
-            hyperlink: "https://www.abebooks.com/9783659522956/Hmonglish-new-way-speaking-Hmong-3659522953/plp" 
+            // link_text: "A new way of speaking for Hmong in the United States",
+            // hyperlink: "https://www.abebooks.com/9783659522956/Hmonglish-new-way-speaking-Hmong-3659522953/plp" 
         }})
     }
 
