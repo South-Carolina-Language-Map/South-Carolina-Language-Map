@@ -29,24 +29,13 @@ export default function EditLanguage({ language }) {
         });
     }
 
-    //for presentation
-    const [presentationFillerJulia, setPresentationFillerJulia] = useState({
-        language: "Hmonglish",
-        glottocode: "Firs1234",
-        description: "Combination of Hmong and English. Primarily spoken in the United States",
-        endonym: "Hmong",
-        global_speakers: "3772,3",
-        sc_speakers: "3772,3",
-        category_id: "",
-        status: "Current",
-        examples:
-            [{ link_text: "A new way of speaking for Hmong in the United States", hyperlink: "https://www.abebooks.com/9783659522956/Hmonglish-new-way-speaking-Hmong-3659522953/plp" }],
-    })
+
 //for presentation
     const functionPresentation = () => {
         dispatch({
             type: 'SET_EDIT_LANGUAGE',
             payload: {
+            id: language.id,
             language: "Hmonglish",
             glottocode: "Firs1234",
             description: "Combination of Hmong and English. Primarily spoken in the United States",
@@ -55,9 +44,10 @@ export default function EditLanguage({ language }) {
             sc_speakers: "3772,3",
             category_id: "3",
             status: "Current",
-            examples:
-                [{ link_text: "A new way of speaking for Hmong in the United States", hyperlink: "https://www.abebooks.com/9783659522956/Hmonglish-new-way-speaking-Hmong-3659522953/plp" }]}
-        })
+            language_id: language.id,
+            link_text: "A new way of speaking for Hmong in the United States",
+            hyperlink: "https://www.abebooks.com/9783659522956/Hmonglish-new-way-speaking-Hmong-3659522953/plp" 
+        }})
     }
 
         return (
@@ -143,9 +133,9 @@ export default function EditLanguage({ language }) {
                     <TextField
                         required
                         id="filled-required"
-                        label="Global Speakers"
+                        label="Status"
                         variant="standard"
-                        helperText="ex. 2,700,000"
+                        helperText="Current"
                         value={editLanguage.status}
                         onChange={(event) => handleChange(event, 'status')}
                     />

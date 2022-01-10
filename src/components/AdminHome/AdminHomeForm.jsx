@@ -32,6 +32,12 @@ function AdminHomeForm() {
     site_name: "",
     address: "",
   };
+
+  let presentationFiller = {
+    site_name: "Upper Richmond Community Center",
+    address: " 280 Camp Ground Rd, Columbia, SC 29203",
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     //sends over new object to saga/server to process and send to DB
@@ -110,6 +116,7 @@ function AdminHomeForm() {
           {/* If the error exists, display the following message provided in reducer */}
           {mapBoxMessage.length > 0 && <Typography>{mapBoxMessage}</Typography>}
         </Grid>
+        <Typography onClick={() => setLocation(presentationFiller)}>*</Typography>
       </Grid>
     </form>
   );
