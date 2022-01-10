@@ -63,12 +63,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
   if (clearanceLevel >= 1) {
     //query to create new language
     const queryText = `
-    INSERT INTO "languages" (language, glottocode, description, endonym, global_speakers, sc_speakers, category_id)
-    VALUES ($1, $2, $3, $4, $5, $6, $7)
+    INSERT INTO "languages" (language, glottocode, description, endonym, global_speakers, sc_speakers, category_id, status)
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
     RETURNING "id";
     `;
     pool.query(queryText, [newLanguage.language, newLanguage.glottocode, newLanguage.description,
-    newLanguage.endonym, newLanguage.global_speakers, newLanguage.sc_speakers, newLanguage.category_id])
+    newLanguage.endonym, newLanguage.global_speakers, newLanguage.sc_speakers, newLanguage.category_id, newLanguage.status])
       .then((result) => {
         console.log('New language id:', result.rows[0].id);
 
@@ -135,7 +135,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
   "endonym" = $5,
   "global_speakers" = $6,
   "sc_speakers" = $7,
-  "category_id" = $8
+  "category_id" = $8,
   "status" = $9
   WHERE "id" = $1
   ;`;
@@ -154,15 +154,13 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(examplesQueryText, [updatedLanguage.language_id, updatedLanguage.link_text, updatedLanguage.hyper_link])
         .then(() => {
           res.sendStatus(200);
-          console.log('PUT Language success');
         })
         .catch((err) => {
           res.sendStatus(500);
           console.log('ERROR in Language PUT', err);
         })//end second query
 
-
-        res.sendStatus(200);
+        
         console.log('PUT Language success');
       })
       .catch((err) => {
