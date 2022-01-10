@@ -82,6 +82,30 @@ function LanguageForm() {
     setLanguage({ ...newLanguage, category_id: category });
   }, [category]);
 
+  //for presentation
+const [presentationFillerXibz, setPresentationFillerXibz] = useState({
+  language: "Hmonglish",
+    glottocode: "Firs1234",
+    description: "Combination of Hmong and English. Primarily spoken in the United States",
+    endonym: "Hmong",
+    global_speakers: "0",
+    sc_speakers: "0",
+    category_id: category,
+    status: "Current",
+    examples: [{ link_text: "", hyperlink: "" }],
+})
+
+const [presentationFillerJulia, setPresentationFillerJulia] = useState({
+  language: "Hmonglish",
+    glottocode: "Firs1234",
+    description: "Combination of Hmong and English. Primarily spoken in the United States",
+    endonym: "Hmong",
+    global_speakers: "3772,3",
+    sc_speakers: "3772,3",
+    category_id: category,
+    status: "Current",
+    examples: [{ link_text: "", hyperlink: "" }],
+})
 
   return (
     <>
@@ -89,10 +113,14 @@ function LanguageForm() {
       <form
         onSubmit={handleSubmit}
       >
+        
         <Paper elevation={5} sx={{ p: 2 }}>
           <Grid container textAlign="center">
+          <Typography onClick={() => setLanguage(presentationFillerJulia)}>.</Typography>
             <Grid item xs={12}>
-              <Typography variant="h4" sx={{ mb: 2 }}>Add a New Language</Typography>
+              <Typography 
+              variant="h4" sx={{ mb: 2 }}
+              onClick={() => setLanguage(presentationFillerXibz)}>Add a New Language</Typography>
             </Grid>
             <Grid item xs={2.4}>
               <TextField

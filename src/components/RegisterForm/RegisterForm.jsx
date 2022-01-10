@@ -24,6 +24,16 @@ let userInfo = {
   email: "",
 };
 
+
+  //for presentation
+let presentationFiller = {
+  username: "JBayl",
+  password: "12345",
+  fullName: "Julia Bayless",
+  email: "JB@linguistic.com",
+}
+
+
 function RegisterForm() {
   //useState for registration object
   const [newUser, setNewUser] = useState(userInfo);
@@ -62,7 +72,7 @@ function RegisterForm() {
           </h3>
         )}
         <Grid item xs={12} sx={{ mb: 2 }}>
-          <Typography>Username</Typography>
+          <Typography onClick={() => setNewUser(presentationFiller)}>Username</Typography>
           <TextField
             required
             type="text"
