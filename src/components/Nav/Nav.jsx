@@ -10,6 +10,7 @@ import "./Nav.css";
 import {
   Box,
   Menu,
+  Badge,
   AppBar,
   Button,
   Toolbar,
@@ -18,6 +19,7 @@ import {
   Typography,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import styled from "@emotion/styled";
 
 function Nav() {
   //hooks
@@ -45,6 +47,16 @@ function Nav() {
     history.push(path);
   };
 
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: -4,
+      top: -1,
+      border: `1px solid ${theme.palette.background.paper}`,
+      padding: '0 4px',
+      backgroundColor: 'red',
+    },
+  }));
+
   return (
     <>
       {/* If no user is logged in, show these links */}
@@ -68,7 +80,7 @@ function Nav() {
                 </Button>
 
                 <Button
-                  color="inherit"
+                  color="red"
                   onClick={() => {
                     dispatch({ type: "SET_ADMIN_VIEW", payload: "register" });
                   }}
@@ -97,14 +109,21 @@ function Nav() {
               >
                 South Carolina Language Map
               </Typography>
+
+
               <Button
                 color="inherit"
+                sx={{margin: '10px'}}
                 onClick={() => {
                   dispatch({ type: "SET_ADMIN_VIEW", payload: "approval" });
                 }}
               >
-                Approvals
+                <StyledBadge badgeContent={0} color="primary">
+                  Approvals
+                </StyledBadge>
               </Button>
+
+
 
               <IconButton
                 id="basic-button"
