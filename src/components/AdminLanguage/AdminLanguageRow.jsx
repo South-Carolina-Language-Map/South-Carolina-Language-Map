@@ -40,7 +40,9 @@ export default function AdminLanguageRow({ language }) {
     global_speakers: Number(editLanguage.global_speakers),
     sc_speakers: Number(editLanguage.sc_speakers),
     category_id: category === -1 ? language.category_id : category,
-    // examples: [{ link_text: "", hyperlink: "" }],
+    status: editLanguage.status,
+    link_text: editLanguage.link_text, 
+    hyperlink: editLanguage.hyperlink
   };
 
 
@@ -72,7 +74,7 @@ export default function AdminLanguageRow({ language }) {
     });
   };
 
-  console.log(language)
+  
   return (
       <>
     { toggleEditView ?
