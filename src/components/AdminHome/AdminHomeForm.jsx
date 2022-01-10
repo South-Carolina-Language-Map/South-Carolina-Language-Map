@@ -101,7 +101,7 @@ function AdminHomeForm() {
           {/* Link will redirect you to ADD NEW LANGUAGE form  */}
           <a 
           onClick={() => dispatch({type: 'SET_ADMIN_VIEW', payload: 'language'})}
-          href='javascript:;'
+          href='#/admin'
           >{`Don't see your language? Click here!`}</a>
         </Grid>
         <Grid item xs={12} textAlign="center">
