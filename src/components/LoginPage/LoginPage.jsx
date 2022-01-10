@@ -42,6 +42,10 @@ function LoginPage() {
               <strong>LOG IN</strong>
             </Typography>
             <Typography variant="h6">To continue to Admin</Typography>
+            {errors.loginMessage && (
+          <h3 className="alert" role="alert">
+            {errors.loginMessage}
+          </h3>)}
           </Grid>
           {/*  */}
           {/* <form onSubmit={login}> */}
