@@ -95,17 +95,7 @@ const [presentationFillerXibz, setPresentationFillerXibz] = useState({
     examples: [{ link_text: "", hyperlink: "" }],
 })
 
-const [presentationFillerJulia, setPresentationFillerJulia] = useState({
-  language: "Hmonglish",
-    glottocode: "Firs1234",
-    description: "Combination of Hmong and English. Primarily spoken in the United States",
-    endonym: "Hmong",
-    global_speakers: "3772,3",
-    sc_speakers: "3772,3",
-    category_id: category,
-    status: "Current",
-    examples: [{ link_text: "", hyperlink: "" }],
-})
+
 
   return (
     <>
@@ -116,7 +106,6 @@ const [presentationFillerJulia, setPresentationFillerJulia] = useState({
         
         <Paper elevation={5} sx={{ p: 2 }}>
           <Grid container textAlign="center">
-          <Typography onClick={() => setLanguage(presentationFillerJulia)}>.</Typography>
             <Grid item xs={12}>
               <Typography 
               variant="h4" sx={{ mb: 2 }}
