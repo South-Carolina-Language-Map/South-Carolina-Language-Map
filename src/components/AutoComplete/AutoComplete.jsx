@@ -82,7 +82,7 @@ function AutoComplete({ table }) {
           {...props}
         >
           {/* These two options are the displayed values IN the drop down */}
-          {option.id}. {option[properties.option]}
+          {option[properties.option]}
         </Box>
       )}
       renderInput={(params) => (
@@ -91,7 +91,7 @@ function AutoComplete({ table }) {
           label={`Choose a ${properties.label}`}
           inputProps={{
             ...params.inputProps,
-            id: 1, // This is necessary to prevent browser autocomplete
+            id: Math.floor(Math.random()*100000), // This is necessary to prevent browser autocomplete
             autoComplete: "new-password", // disable browser autocomplete and autofill
           }}
         />
