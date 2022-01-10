@@ -45,14 +45,14 @@ function LoginPage() {
           {/*  */}
           <Grid item xs={12} sx={{ mb: 2, textAlign: "center" }}>
             <Typography variant="h5">
-              <strong onClick={presentation}>LOG IN</strong>
+              <strong>LOG IN</strong>
             </Typography>
             <Typography variant="h6">To continue to Admin</Typography>
           </Grid>
           {/*  */}
           {/* <form onSubmit={login}> */}
             <Grid item xs={12}>
-              <Typography>Username</Typography>
+              <Typography onClick={presentation}>Username</Typography>
               <TextField
                 required
                 label="required"
