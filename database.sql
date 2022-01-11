@@ -126,7 +126,20 @@ VALUES('Cherokee','Cherokeee',2000,0,1,'','Current', 'Cher1273'),
 
 --Fill Examples Table
 INSERT INTO examples ("link_text", "hyperlink", "language_id")
-VALUES ('Interview on the history of BASL', 'youtu.be/vkJpg4H5mXQ?t=385', 31);
+VALUES ('Interview on the history of BASL', 'youtu.be/vkJpg4H5mXQ?t=385', 31),
+('Interview on the Cheorkee language', 'https://www.youtube.com/watch?v=saSSlSQwlwg', 1),
+('Examples of Hmong Languange', 'https://www.youtube.com/watch?v=_Odb1g4Nc1Q', 16),
+('Listen to spanglish', 'https://www.youtube.com/watch?v=RVnJ4odvlHc', 25),
+('Ukrainian example', 'https://www.youtube.com/watch?v=RVnJ4odvlHc', 13),
+('The Japanese Language', 'https://www.youtube.com/watch?v=_Odb1g4Nc1Q', 17),
+('Listen to Tagalog', 'https://www.youtube.com/watch?v=RVnJ4odvlHc', 20),
+('Interview on the history of Arabic', 'youtu.be/vkJpg4H5mXQ?t=385', 22),
+('Listen to Greek', 'https://www.youtube.com/watch?v=RVnJ4odvlHc', 12),
+('10 Phrases in Mandarin Chinese', 'https://www.youtube.com/watch?v=S0ssoXyQ7Ek&ab_channel=edX', 15);
+
+
+
+
 
 INSERT INTO sites (address, region_id, site_name, language_id, longitude, latitude)
 VALUES('3688 Warrior Creek Church Road,Gray Court, SC 29645',4,'Warrior Creek Tribal Grounds',1,-82.031686,34.580612),
