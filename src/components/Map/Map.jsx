@@ -13,7 +13,7 @@ import ReactMapGL, {
   WebMercatorViewport
 } from 'react-map-gl';
 import { easeCubic, easeSinOut } from 'd3-ease';
-import '!mapbox-gl/dist/mapbox-gl.css';
+// import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map({flyDuration, zoomDuration}) {
   const dispatch = useDispatch();
