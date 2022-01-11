@@ -49,12 +49,11 @@ If you would like to name your database something else, you will need to change 
   REACT_APP_MAPBOX_ACCESS_TOKEN=mapboxAcessToken
   ```
    - Replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6`. The secret must be longer than 8 characters and not 'superDuperSecret' in order to avoid warnings.
-   - In addition, you will need to replace `mapboxAccessToken` with a token from [https://mapbox.com](https://mapbox.com)
+   - In addition, you will need to replace `mapboxAccessToken` with your own token from [https://mapbox.com](https://mapbox.com)
 - Start postgres if not running already by using `brew services start postgresql`
 - Run `npm run server`
 - Run `npm run client`
 - Navigate to `localhost:3000`
-- To access admin views, 
 
 ## Usage
 
@@ -66,3 +65,11 @@ User:
 5. Admins can access the admin login page via the 'Click Here' link on the info tab, or by appending '#/admin' directly to the url.
 
 Admin:
+1. At the login screen, click 'register' to set up a new admin.
+2. Complete the form and click submit to add a pending admin approval to the database. For development purposes, you will need to modify the first admin directly in the postgreSQL database to have `clearance_level: 1`. After that, a logged in admin can approve other pending administrators.
+3. After setting the clearance level or being approved by an admin, access the main admin views by logging in.
+4. On the default Sites view, add a new site to the database by filling the form at the top of the page and clicking submit; and view, edit, and delete existing entries via the controls in the table.
+5. Visit the languages page to add, edit, or delete languages from the database. This page can be accessed via the hamburger icon in the upper right.
+6. Visit the categories page, also accessible through the navigation menu, to add, edit, or delete categories from the database.
+7. A red number above the 'Approvals' link in the navbar signals that there are pending admin requests. Click 'Approvals to view a list of pending requests, and approve or decline them.
+8. Logout via the navigation menu.
