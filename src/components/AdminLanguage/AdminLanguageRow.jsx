@@ -121,10 +121,10 @@ export default function AdminLanguageRow({ language }) {
           <TableCell>{language.global_speakers}</TableCell>
           <TableCell>{language.sc_speakers}</TableCell>
           <TableCell>{language.endonym}</TableCell>
-          <TableCell sx={{ "&.MuiTableCell-root":{ minWidth: 400}}}>
+          <TableCell sx={{ minWidth: 400}}>
             {language.description}
           </TableCell>
-          <TableCell>
+          <TableCell sx={{ minWidth: 150}}>
             {categories.map((category) => {
               if (language.category_id === category.id) {
                 return category.name;
