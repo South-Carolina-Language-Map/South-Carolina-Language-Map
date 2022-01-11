@@ -8,13 +8,10 @@ function* fetchCategories() {
   try {
     //GET request sent to languages.router
     const response = yield axios.get("/api/categories");
-
-    yield console.log('response', response);
     //sets response to view.sites.reducer
     yield put({ type: "SET_CATEGORIES", payload: response.data });
   } catch (err) {
     yield put({ type: "FETCH_CATEGORIES_ERROR" });
-    console.log("Error in fetchCategories", err);
   }
 }
 
@@ -24,30 +21,25 @@ function* addCategory(action) {
   try {
     //POST request to categories router
     const response = yield axios.post(`/api/categories/`, action.payload);
-
     yield console.log('response', response);
     //call GET request to repopulate categories list
     yield put({ type: "FETCH_CATEGORIES"});
   } catch (err) {
     yield put({ type: "ADD_CATEGORY_ERROR" });
-    console.log("Error in addCategory", err);
   }
 
 }
 
 //CATEGORIES PUT ROUTE
 function* updateCategory(action) {
-  console.log('THIS IS UPDATECATAGORIES========', action.payload)
     try {
       //UPDATE request sent to categories.router based on ID
       const response = yield axios.put(`/api/categories/${action.payload.id}`, action.payload);
-  
       yield console.log('response', response);
     //call GET request to repopulate languages list
       yield put({ type: "FETCH_CATEGORIES" });
     } catch (err) {
       yield put({ type: "UPDATE_CATEGORIES_ERROR" });
-      console.log("Error in updateCategories", err);
     }
   
   }
@@ -63,7 +55,6 @@ function* deleteCategory(action) {
       yield put({ type: "FETCH_CATEGORIES" });
     } catch (err) {
       yield put({ type: "DELETE_CATEGORY_ERROR" });
-      console.log("Error in deleteCategory", err);
     }
   
 }
