@@ -8,7 +8,6 @@ const router = express.Router();
 
 //GET all from category list
 router.get('/', (req, res) => {
-  console.log(req.user)
   pool.query(`SELECT * FROM "categories" ORDER BY "name" ASC;`)
     .then((response) => {
       res.send(response.rows);
@@ -23,7 +22,6 @@ router.get('/', (req, res) => {
 
 //POST - add new category
 router.post('/', rejectUnauthenticated, (req, res) => {
-  console.log(req.user)
   const name = req.body.name;
 
   //security - for admin use only
@@ -38,7 +36,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [name])
       .then(() => {
         res.sendStatus(201);
-        console.log('POST Categories success');
       })
       .catch((err) => {
         sendStatus(500);
@@ -52,7 +49,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 //PUT - edit a specific category
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-  console.log('=================', req.params, req.body)
   const id = req.params.id;
   const name = req.body.name;
 
@@ -70,7 +66,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [name, id])
       .then(() => {
         res.sendStatus(200);
-        console.log('PUT Categories success');
       })
       .catch((err) => {
         res.sendStatus(500);
@@ -97,7 +92,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
     pool.query(queryText, [categoryID])
       .then(() => {
-        console.log('DELETE Categories success')
         res.sendStatus(200)
       })
       .catch((err) => {

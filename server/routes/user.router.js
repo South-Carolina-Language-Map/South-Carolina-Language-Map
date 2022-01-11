@@ -40,7 +40,6 @@ router.post('/register', (req, res, next) => {
 // this middleware will run our POST if successful
 // this middleware will send a 404 if not successful
 router.post('/login', userStrategy.authenticate('local'), (req, res) => {
-  console.log('WHAT IS HAPPENING');
   res.sendStatus(200);
 });
 
@@ -66,7 +65,6 @@ router.get('/admin/pending', (req, res) => {
 `)
       .then((response) => {
         res.send(response.rows);
-        console.log('Pending Admins GET successful');
       })
       .catch((err) => {
         res.sendStatus(500);
@@ -80,7 +78,6 @@ router.get('/admin/pending', (req, res) => {
 
 //ADMIN clearance_level set to 1 for approval
 router.put('/admin/:id', rejectUnauthenticated, (req, res) => {
-  console.log('===================', req.params)
   //this is the id of user to approve
   const userToApprove = req.params.id;
 

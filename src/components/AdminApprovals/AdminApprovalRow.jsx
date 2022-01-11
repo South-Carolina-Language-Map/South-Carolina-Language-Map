@@ -24,7 +24,6 @@ export default function AdminApprovalRow({ user }) {
 
   //opens dialogue for delete confirmation button
   const handleRejection = () => {
-    console.log("Delete", user.id);
     //opens dialogue option
     setOpenDelete(true);
   };
@@ -37,7 +36,6 @@ export default function AdminApprovalRow({ user }) {
     });
   };
 
-  //**needs to be fixed, do not delete */
   //opens dialogue for approval confirmation button
   const handleApproval = () => {
     console.log("Approve user", user.id);
@@ -47,7 +45,6 @@ export default function AdminApprovalRow({ user }) {
 
   //Approve user for admin clearance
   const handleConfirm = () => {
-    console.log(user.id, "to be confirmed");
     dispatch({
       type: "APPROVE_ADMIN",
       payload: user.id,

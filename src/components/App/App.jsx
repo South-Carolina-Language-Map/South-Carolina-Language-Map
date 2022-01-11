@@ -17,7 +17,6 @@ import "./App.css";
 import Admin from "../Admin/Admin";
 import GridView from "../GridView/GridView";
 import LoginPage from "../LoginPage/LoginPage";
-import AboutPage from "../AboutPage/AboutPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 
 function App() {
@@ -51,15 +50,6 @@ function App() {
           <Switch>
             {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
             <Redirect exact from="/" to="/home" />
-
-            {/* Visiting localhost:3000/about will show the about page. */}
-            <Route
-              // shows AboutPage at all times (logged in or not)
-              exact
-              path="/about"
-            >
-              <AboutPage />
-            </Route>
 
             <Route exact path="/home">
               <GridView />

@@ -41,8 +41,6 @@ function Admin() {
       currentAdminView = <p>There was an error, please try again later</p>;
       break;
   }
-
-  console.log("this is the admin view", adminView);
   //admin components called from here
   return (
     <>

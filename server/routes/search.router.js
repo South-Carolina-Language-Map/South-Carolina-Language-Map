@@ -5,8 +5,6 @@ const router = express.Router();
 
 //GET for search function
 router.get('/', (req, res) => {
-
-    console.log('this is req.query ==>', req.query);
     let values = [];
     let columns = [];
 
@@ -37,8 +35,6 @@ router.get('/', (req, res) => {
 
     
     //flexible search query connected to all databases
-    console.log('COLUMNS', columns)
-    console.log('VALUES', values);
     searchQueryText = `
     SELECT 
     sites.id, latitude, longitude, sites.language_id, site_name, region_id, address,
@@ -59,12 +55,10 @@ router.get('/', (req, res) => {
 
       //add the the ORDER BY at the end (arbitrarily ordered by the last column)
       searchQueryText += ` ORDER BY ${columns[columns.length -1]} ASC;`
-      console.log('-------', searchQueryText);
 
       //spread values to account for added interpolated data
     pool.query(searchQueryText, [...values])
         .then((result) => {
-            console.log('-------------', result, result.rows)
             res.send(result.rows);
         }).catch((error) => {
             console.log(error);
