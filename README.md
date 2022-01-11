@@ -13,16 +13,12 @@ Administrators have access to table views of the Sites, Languages, and Language 
 - [Node.js](https://nodejs.org/en/)
 - [PostgreSQL](https://www.postgresql.org/)
 
-## Create database and tables
-
-- Create a new database called `sc_language_map`
-- Run the code in database.sql to initialize the tables and import data
-
-If you would like to name your database something else, you will need to change `sc_language_map` to the name of your new database name in `server/modules/pool.js`
-
 ## Development Setup Instructions
 
 - Fork and Clone
+- Create a new database called `sc_language_map`
+- Run the code in database.sql to initialize the tables and import data
+  - If you would like to name your database something else, you will need to change `sc_language_map` to the name of your new database name in `server/modules/pool.js`
 - Babel needs extra configuration to avoid attempting to transpile Mapbox. To make sure the map canvas renders appropriately, follow these instructions:
   - Paste the following into package.json:
     ```
@@ -73,3 +69,25 @@ Admin:
 6. Visit the categories page, also accessible through the navigation menu, to add, edit, or delete categories from the database.
 7. A red number above the 'Approvals' link in the navbar signals that there are pending admin requests. Click 'Approvals to view a list of pending requests, and approve or decline them.
 8. Logout via the navigation menu.
+
+## Built With
+
+- Node.js
+- Express.js
+- PostgreSQL
+- Mapbox API
+- react-map-gl
+- React
+- React-Redux
+- Redux-Saga
+- Passport.js
+- Axios
+- Material UI
+
+## Acknowledgements
+
+Special thanks to Stephen Davis, who pitched this project and entrusted it to us. Additional thanks to the staff at Prime Academy as well as our peers in the Solinas Cohort for their help and support. 
+
+## Support
+
+Questions can be directed to southcarolinalanguagemap@gmail.com.
