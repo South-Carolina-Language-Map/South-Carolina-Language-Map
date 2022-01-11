@@ -1,49 +1,38 @@
-# South Carolina Language Map
 
-## Description:
+# EDA Project
+This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
-A Full Stack web application for collecting and displaying sites in South Carolina where specific languages are spoken. Sites are displayed on a map, are searchable, and display the details of the language spoken there.
+We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
 
-Administrators have access to table views of the Sites, Languages, and Language Categories, with the ability to add, remove, and edit them. Administrators also have the ability to add other administrators.
+## Use the Template for This Repository (Don't Clone)
 
-## Screen Shot
+- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
+
 
 ## Prerequisites
 
 Before you get started, make sure you have the following software installed on your computer:
 
 - [Node.js](https://nodejs.org/en/)
-- [PostgreSQL](https://www.postgresql.org/)
+- [PostrgeSQL](https://www.postgresql.org/)
+- [Nodemon](https://nodemon.io/)
 
-## Create database and tables
+## Create database and table
 
-- Create a new database called `sc_language_map`
-- Run the code in database.sql to initialize the tables and import data
+Create a new database called `prime_app` and create a `user` table:
 
-If you would like to name your database something else, you will need to change `sc_language_map` to the name of your new database name in `server/modules/pool.js`
+```SQL
+CREATE TABLE "user" (
+    "id" SERIAL PRIMARY KEY,
+    "username" VARCHAR (80) UNIQUE NOT NULL,
+    "password" VARCHAR (1000) NOT NULL
+);
+```
+
+If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
 
 ## Development Setup Instructions
 
-- Fork and Clone
-- Babel needs extra configuration to avoid attempting to transpile Mapbox. To make sure the map canvas renders appropriately, follow these instructions:
-  - Paste the following into package.json:
-    ```
-    "browserslist": {
-      "production": [
-        ">0.2%",
-        "not dead",
-        "not op_mini all",
-        "not chrome < 51",
-        "not safari < 10"
-      ],
-      "development": [
-        "last 1 chrome version",
-        "last 1 firefox version",
-        "last 1 safari version"
-      ]
-    }
-    ```
-  - run `npx browserslist@latest --update-db` 
 - Run `npm install`
 - Create a `.env` file at the root of the project and paste this line into the file:
   ```
