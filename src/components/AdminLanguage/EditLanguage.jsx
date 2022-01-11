@@ -30,8 +30,6 @@ export default function EditLanguage({ language }) {
         });
     }
 
-
-
     return (
         <>
             <TableCell>

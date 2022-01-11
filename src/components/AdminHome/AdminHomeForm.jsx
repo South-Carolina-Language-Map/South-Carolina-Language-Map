@@ -13,19 +13,15 @@ import { Typography, Grid, TextField, Button, Alert, Snackbar} from "@mui/materi
 function AdminHomeForm() {
   const dispatch = useDispatch();
   //Reducer set up for NewSite values for language and region ids
-  const dropDownValues = useSelector(
-    (store) => store.adminReducer.newSiteReducer
-  );
+  const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
   //Reducer set up for error catching
   const mapBoxMessage = useSelector((store) => store.errors.mapBoxMessage);
-
-  let clearAutoComplete = useSelector(
-    (store) => store.adminReducer.clearAutoCompleteReducer
-  );
+  //Reducer set up for clearing the Input
+  let clearAutoComplete = useSelector((store) => store.adminReducer.clearAutoCompleteReducer);
 
   //Mui Snackbar
   const [open, setOpen] = React.useState(false);
-
+  //Initialize value for clearing 
   let autoKey = clearAutoComplete ? 1 : 2;
 
   //default values for site_name and addresses - set to empty strings
@@ -33,6 +29,7 @@ function AdminHomeForm() {
     site_name: "",
     address: "",
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     //sends over new object to saga/server to process and send to DB
@@ -63,11 +60,9 @@ function AdminHomeForm() {
   //local state to store site name and address
   let [newLocation, setLocation] = useState(base);
 
-
   return (
     <form onSubmit={handleSubmit}>
       <Grid container>
-        {/*  */}
         <Grid item xs={3}>
           {/* Text field used for Site Name input */}
           <TextField
