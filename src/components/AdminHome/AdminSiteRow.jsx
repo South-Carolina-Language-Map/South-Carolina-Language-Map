@@ -103,7 +103,7 @@ const handleClose = (event, reason) => {
         <TableRow hover role="checkbox" tabIndex={-1}>
           <TableCell>
             <TextField
-              label="Standard"
+              label="Site Name"
               variant="standard"
               id="standard-basic"
               value={edit.site_name}
@@ -118,7 +118,7 @@ const handleClose = (event, reason) => {
 
           <TableCell>
             <TextField
-              label="Standard"
+              label="Address"
               variant="standard"
               id="standard-basic"
               value={edit.address}
