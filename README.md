@@ -54,3 +54,15 @@ If you would like to name your database something else, you will need to change 
 - Run `npm run server`
 - Run `npm run client`
 - Navigate to `localhost:3000`
+- To access admin views, 
+
+## Usage
+
+User:
+1. Navigate the map view by clicking and dragging, scrolling with the mouse or trackpad, or clicking the zoom buttons in the lower right.
+2. Navigate between the Search, Explore, and Info panels by clicking the navbar in the lower-left.
+3. On the search panel: Select a criteria to search by, input your search query in the text box, and press enter or click the search icon to filter the sites shown on the map. Search will match all or parts of words, case insensitive. 'Clear Search' resets the map to show all locations.
+4. On the explore panel: Select one of the listed criteria to show options to filter by. Clicking one of these displayed options will filter the displayed locations to show only those that fit the criteria. Clicking the 'Reset' button will restart this process from the beginning.
+5. Admins can access the admin login page via the 'Click Here' link on the info tab, or by appending '#/admin' directly to the url.
+
+Admin:
