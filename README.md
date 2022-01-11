@@ -41,7 +41,7 @@ Administrators have access to table views of the Sites, Languages, and Language 
       ]
     }
     ```
-  - run `npx browserslist@latest --update-db` 
+  - run `npx browserslist@latest --update-db` to ensure your system reads the changes
 - Run `npm install`
 - Create a `.env` file at the root of the project and paste this line into the file:
   ```

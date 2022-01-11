@@ -176,14 +176,6 @@ function Nav() {
                 <MenuItem
                   onClick={() => {
                     handleClose;
-                    dispatch({ type: "SET_ADMIN_VIEW", payload: "about" });
-                  }}
-                >
-                  About
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    handleClose;
                     dispatch({ type: "LOGOUT" });
                   }}
                 >
