@@ -48,8 +48,10 @@ If you would like to name your database something else, you will need to change 
 - Create a `.env` file at the root of the project and paste this line into the file:
   ```
   SERVER_SESSION_SECRET=superDuperSecret
+  REACT_APP_MAPBOX_ACCESS_TOKEN=mapboxAcessToken
   ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+   - While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+   - In addition, you will need to replace `mapboxAccessToken` with a personal or public token from [https://mapbox.com](https://mapbox.com)
 - Start postgres if not running already by using `brew services start postgresql`
 - Run `npm run server`
 - Run `npm run client`

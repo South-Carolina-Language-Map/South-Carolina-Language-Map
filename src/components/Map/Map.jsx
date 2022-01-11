@@ -17,6 +17,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map({flyDuration, zoomDuration}) {
   const dispatch = useDispatch();
+  const MAPBOX_KEY = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   // set map height
   const windowSmall = window.innerWidth < 600;
@@ -150,7 +151,7 @@ function Map({flyDuration, zoomDuration}) {
           {...viewport}
           mapStyle={mapStyles[0]}
           onViewportChange={setViewport}
-          mapboxApiAccessToken={"pk.eyJ1IjoiYmxpbmd1c2Jsb25ndXMiLCJhIjoiY2t4MGt6Y3F5MGFrcDJzczZ0YjZnNXJlbCJ9.6EvtO1ovuEE8tBAePGwAag"}
+          mapboxApiAccessToken={MAPBOX_KEY}
         >
 
           {/* Render each site as a mapbox marker consisting of a rounded div */}
