@@ -59,8 +59,8 @@ CREATE TABLE "regions" (
 
 CREATE TABLE "examples" (
 	"id" serial NOT NULL,
-	"link_text" varchar(255) NOT NULL,
-	"hyperlink" varchar(255) NOT NULL,
+	"link_text" varchar(255),
+	"hyperlink" varchar(255),
 	"language_id" int NOT NULL,
 	CONSTRAINT "examples_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -122,7 +122,7 @@ VALUES('Cherokee','Cherokeee',2000,0,1,'','Current', 'Cher1273'),
 ('Charleston Dialect','“Charlestonian”',333,333,6,'','Current','NA'),
 ('Gullah','Gullah',5000,333,6,'','Current','Gull1241'),
 ('ASL','American Sign Language',500000,333,7,'','Current','Amer1248'),
-('BASL','Black American Sign Language',200000,40000,7,'Black American Sign Language (BASL) or Black Sign Variation (BSV) is a dialect of American Sign Language (ASL) used most commonly by deaf African Americans in the United States. The divergence from ASL was influenced largely by the segregation of schools in the American South. Like other schools at the time, schools for the deaf were segregated based upon race, creating two language communities among deaf signers: white deaf signers at white schools and black deaf signers at black schools. Today, BASL is still used by signers in the South despite public schools having been legally desegregated since 1954. [Wikipedia]','Current','Amer1248');
+('BASL','Black American Sign Language',200000,40000,7,'Black American Sign Language (BASL) or Black Sign Variation (BSV) is a dialect of American Sign Language (ASL) used most commonly by deaf African Americans in the United States. The divergence from ASL was influenced largely by the segregation of schools in the American South. [Wikipedia]','Current','Amer1248');
 
 --Fill Examples Table
 INSERT INTO examples ("link_text", "hyperlink", "language_id")
@@ -148,4 +148,4 @@ VALUES('3688 Warrior Creek Church Road,Gray Court, SC 29645',4,'Warrior Creek Tr
 ('138 Hagood Mill Rd. Pickens, SC 29671',4,'Hagood Mill',27,-82.722829,34.924995),
 ('51 Meeting St, Charleston, SC 29401',1,'Nathaniel Russell House',28,-79.931051,32.773964),
 ('355 Cedar Springs Road, Spartanburg, SC 29302',4,'South Carolina School for the Deaf and Blind',30,-81.881309,34.910471),
-('355 Cedar Springs Road, Spartanburg, SC 29302',4,'South Carolina School for the Deaf and Blind',31,-81.881309,34.910471);
+('355 Cedar Springs Road, Spartanburg, SC 29302',4,'South Carolina School for the Deaf and Blind',31,-81.880309,34.910471);

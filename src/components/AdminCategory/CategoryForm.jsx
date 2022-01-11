@@ -5,29 +5,29 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Grid, TextField, Button, Typography } from "@mui/material";
 import PublishIcon from "@mui/icons-material/Publish";
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 function CategoryForm() {
-    //initialize dispatch 
+  //initialize dispatch
   const dispatch = useDispatch();
   //local state stores the value for category input
   const [newCategory, setCategory] = useState("");
 
-   //Mui Snackbar
-   const [open, setOpen] = useState(false);
+  //Mui Snackbar
+  const [open, setOpen] = useState(false);
 
-   const handleClose = (event, reason) => {
-       if (reason === 'clickaway') {
-           return;
-       }
-       setOpen(false);
-   };
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
-   const handleSubmit = () => {dispatch({ type: "ADD_CATEGORY", 
-   payload: newCategory })
-   setOpen(true);
-  }
+  const handleSubmit = () => {
+    dispatch({ type: "ADD_CATEGORY", payload: newCategory });
+    setOpen(true);
+  };
 
   return (
     //form sends object with one key value pair containing new category name
@@ -36,7 +36,7 @@ function CategoryForm() {
         <Typography variant="h4">Add a new category</Typography>
         <TextField
           required
-          sx={{mb:2}}
+          sx={{ mb: 2 }}
           variant="standard"
           id="filled-required"
           label="Category Name"
@@ -50,7 +50,7 @@ function CategoryForm() {
       </form>
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Category has been added.
+          Success! A new category has been added.
         </Alert>
       </Snackbar>
     </>

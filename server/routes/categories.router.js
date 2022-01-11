@@ -9,7 +9,7 @@ const router = express.Router();
 //GET all from category list
 router.get('/', (req, res) => {
   console.log(req.user)
-  pool.query(`SELECT * FROM "categories";`)
+  pool.query(`SELECT * FROM "categories" ORDER BY "name" ASC;`)
     .then((response) => {
       res.send(response.rows);
       console.log('GET Categories success');
