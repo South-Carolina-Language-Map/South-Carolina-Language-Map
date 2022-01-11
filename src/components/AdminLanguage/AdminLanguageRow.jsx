@@ -114,41 +114,6 @@ export default function AdminLanguageRow({ language }) {
             </Stack>
           </TableCell>
         </TableRow>
-<<<<<<< HEAD
-
-        :
-        
-    <TableRow hover role="checkbox" tabIndex={-1}>
-      <TableCell sx = {{ width: 100}}>{language.language}</TableCell>
-      <TableCell>{language.glottocode}</TableCell>
-      <TableCell>{language.global_speakers}</TableCell>
-      <TableCell>{language.sc_speakers}</TableCell>
-      <TableCell>{language.endonym}</TableCell>
-      <TableCell  sx = {{ width: 200}}>{language.description}</TableCell>
-      <TableCell sx = {{ width: 100}}>
-        {categories.map((category) => {
-          if (language.category_id === category.id) {
-            return category.name;
-          }
-        })}
-      </TableCell>
-      <TableCell>{language.status}</TableCell>
-      <TableCell sx = {{ width: 150}}>{language.link_text}</TableCell>
-      <TableCell sx = {{ width: 200}}>{language.hyperlink}</TableCell>
-
-      <TableCell>
-      <Stack direction="row" spacing={1}>
-        <Button sx={{ mr: 1 }} variant="contained" onClick={handleEditView}>
-          Edit
-        </Button>
-        <Button variant="outlined" color="error" onClick={handleDelete}>
-          Delete
-        </Button>
-        </Stack>
-      </TableCell>
-      
-    </TableRow>}
-=======
       ) : (
         <TableRow sx={{ maxHeight: 5 }} hover role="checkbox" tabIndex={-1}>
           <TableCell>{language.language}</TableCell>
@@ -186,7 +151,6 @@ export default function AdminLanguageRow({ language }) {
           </TableCell>
         </TableRow>
       )}
->>>>>>> development
     </>
   );
 } //end AdminLanguageRow

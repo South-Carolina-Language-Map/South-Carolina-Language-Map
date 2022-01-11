@@ -30,14 +30,11 @@ function AdminHomeForm() {
     address: "",
   };
 
-<<<<<<< HEAD
   let presentationFiller = {
     site_name: "Upper Richmond Community Center",
     address: " 280 Camp Ground Rd, Columbia, SC 29203",
   };
 
-=======
->>>>>>> development
   const handleSubmit = (event) => {
     event.preventDefault();
     //sends over new object to saga/server to process and send to DB
