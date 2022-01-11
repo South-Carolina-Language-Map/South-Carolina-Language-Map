@@ -65,8 +65,8 @@ User:
 5. Admins can access the admin login page via the 'Click Here' link on the info tab, or by appending '#/admin' directly to the url.
 
 Admin:
-1. At the login screen, click 'register' to set up a new admin.
-2. Complete the form and click submit to add a pending admin approval to the database. For development purposes, you will need to modify the first admin directly in the postgreSQL database to have `clearance_level: 1`. After that, a logged in admin can approve other pending administrators.<img src="documentation/images/admin_register.png" alt="Languages Table" width="40%" align="right" margin="3px"/>
+1. <img src="documentation/images/admin_register.png" alt="Languages Table" width="50%" align="right" margin="3px"/>At the login screen, click 'register' to set up a new admin.
+2. Complete the form and click submit to add a pending admin approval to the database. For development purposes, you will need to modify the first admin directly in the postgreSQL database to have `clearance_level: 1`. After that, a logged in admin can approve other pending administrators.
 3. After setting the clearance level or being approved by an admin, access the main admin views by logging in.
 4. On the default Sites view, add a new site to the database by filling the form at the top of the page and clicking submit; and view, edit, and delete existing entries via the controls in the table.
 5. Visit the languages page to add, edit, or delete languages from the database. This page can be accessed via the hamburger icon in the upper right.
