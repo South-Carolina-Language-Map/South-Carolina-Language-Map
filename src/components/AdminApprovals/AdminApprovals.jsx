@@ -29,7 +29,7 @@ function AdminApprovals() {
   return (
     <Grid container sx={{ pt: 3 }}>
       <Typography variant="h3" textAlign="center" sx={{ mt: 4, ml: 'auto', mr: 'auto' }}>
-          Pending Requests
+          Approvals
         </Typography>
       <Grid item xs={1} />
       <Grid item xs={10}>
