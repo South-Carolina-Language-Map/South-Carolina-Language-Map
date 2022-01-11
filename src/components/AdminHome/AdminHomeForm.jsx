@@ -13,18 +13,12 @@ import { Typography, Grid, TextField, Button } from "@mui/material";
 function AdminHomeForm() {
   const dispatch = useDispatch();
   //Reducer set up for NewSite values for language and region ids
-  const dropDownValues = useSelector(
-    (store) => store.adminReducer.newSiteReducer
-  );
+  const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
   //Reducer set up for error catching
   const mapBoxMessage = useSelector((store) => store.errors.mapBoxMessage);
-
-  let clearAutoComplete = useSelector(
-    (store) => store.adminReducer.clearAutoCompleteReducer
-  );
-
-  console.log("resetAuto", clearAutoComplete);
-
+  //Reducer for setting up clear values in AutoComplete
+  let clearAutoComplete = useSelector((store) => store.adminReducer.clearAutoCompleteReducer);
+  //Initialize value for clearing 
   let autoKey = clearAutoComplete ? 1 : 2;
 
   //default values for site_name and addresses - set to empty strings
@@ -32,6 +26,7 @@ function AdminHomeForm() {
     site_name: "",
     address: "",
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     //sends over new object to saga/server to process and send to DB
@@ -43,9 +38,6 @@ function AdminHomeForm() {
     };
     //sends action to saga with newSite object to create a new GeoTag
     dispatch({ type: "ADD_SITE", payload: newSite });
-
-    //still need to empty auto completes
-
     //empty inputs
     setLocation(base);
     dispatch({ type: "RESET_AUTOCOMPLETE" });
@@ -54,11 +46,9 @@ function AdminHomeForm() {
   //local state to store site name and address
   let [newLocation, setLocation] = useState(base);
 
-
   return (
     <form onSubmit={handleSubmit}>
       <Grid container>
-        {/*  */}
         <Grid item xs={3}>
           {/* Text field used for Site Name input */}
           <TextField

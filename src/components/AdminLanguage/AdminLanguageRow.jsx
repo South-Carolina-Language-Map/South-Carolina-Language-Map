@@ -98,13 +98,13 @@ export default function AdminLanguageRow({ language }) {
 
         :
         
-    <TableRow hover role="checkbox" tabIndex={-1}>
+    <TableRow sx={{maxHeight: 5 }} hover role="checkbox" tabIndex={-1}>
       <TableCell>{language.language}</TableCell>
       <TableCell>{language.glottocode}</TableCell>
       <TableCell>{language.global_speakers}</TableCell>
       <TableCell>{language.sc_speakers}</TableCell>
       <TableCell>{language.endonym}</TableCell>
-      <TableCell>{language.description}</TableCell>
+      <TableCell sx={{overflow: 'scroll'}}>{language.description}</TableCell>
       <TableCell>
         {categories.map((category) => {
           if (language.category_id === category.id) {
