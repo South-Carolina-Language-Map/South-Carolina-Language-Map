@@ -7,12 +7,10 @@ A Full Stack web application for collecting and displaying sites in South Caroli
 Administrators have access to table views of the Sites, Languages, and Language Categories, with the ability to add, remove, and edit them. Administrators also have the ability to add other administrators.
 
 ## Screen Shots
+| | |
 | -------------- | ----------- | 
-
-
-<img src="documentation/images/search_view.png" alt="Search View" width="75%"/>
-<img src="documentation/images/explore_view.png" alt="Explore View" width="75%"/>
-<img src="documentation/images/explore_view.png" alt="Explore View" width="75%"/>
+| <img src="documentation/images/search_view.png" alt="Search View" width="100%"/> | <img src="documentation/images/explore_view.png" alt="Explore View" width="100%"/> |
+|<img src="documentation/images/admin_sites.png" alt="Sites View" width="100%"/>| <img src="documentation/images/admin_languages.png" alt="Languages Table" width="100%"/> |
 
 ## Prerequisites
 
@@ -68,7 +66,7 @@ User:
 
 Admin:
 1. At the login screen, click 'register' to set up a new admin.
-2. Complete the form and click submit to add a pending admin approval to the database. For development purposes, you will need to modify the first admin directly in the postgreSQL database to have `clearance_level: 1`. After that, a logged in admin can approve other pending administrators.
+2. Complete the form and click submit to add a pending admin approval to the database. For development purposes, you will need to modify the first admin directly in the postgreSQL database to have `clearance_level: 1`. After that, a logged in admin can approve other pending administrators.<img src="documentation/images/admin_register.png" alt="Languages Table" width="40%" align="right" margin="3px"/>
 3. After setting the clearance level or being approved by an admin, access the main admin views by logging in.
 4. On the default Sites view, add a new site to the database by filling the form at the top of the page and clicking submit; and view, edit, and delete existing entries via the controls in the table.
 5. Visit the languages page to add, edit, or delete languages from the database. This page can be accessed via the hamburger icon in the upper right.
