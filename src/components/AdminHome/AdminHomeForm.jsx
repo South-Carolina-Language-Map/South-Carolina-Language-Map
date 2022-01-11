@@ -2,29 +2,26 @@
 import AutoComplete from "../AutoComplete/AutoComplete";
 
 // React imports
+import * as React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 //MUI Imports
 import PublishIcon from "@mui/icons-material/Publish";
-import { Typography, Grid, TextField, Button } from "@mui/material";
+import { Typography, Grid, TextField, Button, Alert, Snackbar} from "@mui/material";
 
 function AdminHomeForm() {
   const dispatch = useDispatch();
   //Reducer set up for NewSite values for language and region ids
-  const dropDownValues = useSelector(
-    (store) => store.adminReducer.newSiteReducer
-  );
+  const dropDownValues = useSelector((store) => store.adminReducer.newSiteReducer);
   //Reducer set up for error catching
   const mapBoxMessage = useSelector((store) => store.errors.mapBoxMessage);
+  //Reducer set up for clearing the Input
+  let clearAutoComplete = useSelector((store) => store.adminReducer.clearAutoCompleteReducer);
 
-  let clearAutoComplete = useSelector(
-    (store) => store.adminReducer.clearAutoCompleteReducer
-  );
-
-  console.log("resetAuto", clearAutoComplete);
-
+  //Mui Snackbar
+  const [open, setOpen] = React.useState(false);
+  //Initialize value for clearing 
   let autoKey = clearAutoComplete ? 1 : 2;
 
   //default values for site_name and addresses - set to empty strings
@@ -32,6 +29,7 @@ function AdminHomeForm() {
     site_name: "",
     address: "",
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     //sends over new object to saga/server to process and send to DB
@@ -43,22 +41,28 @@ function AdminHomeForm() {
     };
     //sends action to saga with newSite object to create a new GeoTag
     dispatch({ type: "ADD_SITE", payload: newSite });
-
-    //still need to empty auto completes
-
     //empty inputs
     setLocation(base);
     dispatch({ type: "RESET_AUTOCOMPLETE" });
+      //opens snackbar
+      setOpen(true);
+  };
+
+
+  //closes snackbar
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
 
   //local state to store site name and address
   let [newLocation, setLocation] = useState(base);
 
-
   return (
     <form onSubmit={handleSubmit}>
       <Grid container>
-        {/*  */}
         <Grid item xs={3}>
           {/* Text field used for Site Name input */}
           <TextField
@@ -98,9 +102,9 @@ function AdminHomeForm() {
           {/* Drop down autofill input for languages provided by university */}
           <AutoComplete table="language" key={autoKey} />
           {/* Link will redirect you to ADD NEW LANGUAGE form  */}
-          <a 
-          onClick={() => dispatch({type: 'SET_ADMIN_VIEW', payload: 'language'})}
-          href='#/admin'
+          <a
+            onClick={() => dispatch({ type: 'SET_ADMIN_VIEW', payload: 'language' })}
+            href='#/admin'
           >{`Don't see your language? Click here!`}</a>
         </Grid>
         <Grid item xs={12} textAlign="center">
@@ -111,6 +115,17 @@ function AdminHomeForm() {
           {mapBoxMessage.length > 0 && <Typography>{mapBoxMessage}</Typography>}
         </Grid>
       </Grid>
+
+      {/* confirmation on successful post */}
+      <Snackbar
+        open={open}
+        autoHideDuration={4000}
+        onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+          "Success! A new site has been added."
+        </Alert>
+      </Snackbar>
+
     </form>
   );
 }

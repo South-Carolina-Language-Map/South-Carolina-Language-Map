@@ -26,18 +26,14 @@ function AdminHome() {
   const [rowsPerPage, setRowsPerPage] = useState(10);
 
   // Grabbing needed data from the store:
-  const regions = useSelector(
-    (store) => store.adminReducer.adminRegionsReducer
-  );
+  const regions = useSelector((store) => store.adminReducer.adminRegionsReducer);
   const sites = useSelector((store) => store.adminReducer.adminSiteReducer);
   const languages = useSelector(
     (store) => store.adminReducer.adminLanguagesReducer
   );
 
   // The below 2 functions allow there to be multiple pages on the table.
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
+  const handleChangePage = (event, newPage) => {setPage(newPage);};
 
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
@@ -53,14 +49,12 @@ function AdminHome() {
   
   return (
     <Grid container>
-      {/*  */}
       <Grid item xs={12} sx={{ m: 4 }}>
         <Typography variant="h4" textAlign="center" sx={{ p: 2 }}>
           Add New Site
         </Typography>
         <AdminHomeForm />
       </Grid>
-      {/*  */}
       <Grid item xs={12} sx={{ m: 2 }}>
         <Typography variant="h3" textAlign="center" sx={{ p: 2 }}>
           All Sites

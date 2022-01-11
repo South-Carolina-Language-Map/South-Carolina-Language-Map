@@ -11,7 +11,7 @@ require('dotenv');
 
 // GET - GET all sites
 router.get('/', (req, res) => {
-    let queryText = `SELECT * FROM sites`;
+    let queryText = `SELECT * FROM sites ORDER BY "site_name" ASC`;
 
     pool.query(queryText)
         .then((result) => {
@@ -26,9 +26,6 @@ router.post('/', rejectUnauthenticated, (req, res) => createGeoTag(req, res)); /
 
 //function to create geotags for POST route - being called in POST
 async function createGeoTag(req, res) {
-    console.log('This is req.body in POST sites', req.body)
-    console.log(req.user)
-
     //security - for admin use only
     const clearanceLevel = req.user.clearance_level
 
@@ -72,7 +69,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => createGeoTagPUT(req, res
 
 //function to create geotags for PUT route - being called in PUT
 async function createGeoTagPUT(req, res) {
-    console.log('IN SITES PUT ================>', req.body, req.params.id)
     const siteID = req.params.id;
     const editedSite = req.body;
 
@@ -102,7 +98,6 @@ async function createGeoTagPUT(req, res) {
         editedSite.site_name, editedSite.region_id, editedSite.language_id, siteID])
             .then(() => {
                 res.sendStatus(200);
-                console.log('PUT Site success');
             })
             .catch((err) => {
                 res.sendStatus(500);
@@ -131,7 +126,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         pool.query(deleteSiteQueryText, [siteID])
             .then(() => {
                 res.sendStatus(204);
-                console.log('DELETE Site success');
             })
             .catch((err) => {
                 res.sendStatus(500);

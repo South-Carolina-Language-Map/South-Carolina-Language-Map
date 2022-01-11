@@ -23,7 +23,6 @@ router.get('/', (req, res) => {
   pool.query(queryText)
     .then((response) => {
       res.send(response.rows);
-      console.log('GET Languages success');
     })
     .catch((err) => {
       res.sendStatus(500);
@@ -43,11 +42,10 @@ router.get('/:id', (req, res) => {
   pool.query(queryText, [languageID])
     .then((result) => {
       res.send(result.rows);
-      console.log('GET Language by id success');
     })
     .catch((err) => {
       res.sendStatus(500);
-      console.log('ERROR in GET Language by id');
+      console.log('ERROR in GET Language by id', err);
     })
 });
 
@@ -70,8 +68,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [newLanguage.language, newLanguage.glottocode, newLanguage.description,
     newLanguage.endonym, newLanguage.global_speakers, newLanguage.sc_speakers, newLanguage.category_id, newLanguage.status])
       .then((result) => {
-        console.log('New language id:', result.rows[0].id);
-
         //new language ID
         const newLangId = result.rows[0].id;
 
@@ -94,8 +90,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
           newExampleArray.push(example.hyperlink)
         }
         //call every other in pool.query
-
-        console.log('This is newExampleArray', newExampleArray)
         pool.query(insertExamplesQuery, [newLangId, ...newExampleArray])
           .then(result => {
             res.sendStatus(201)
@@ -104,7 +98,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             console.log('SECOND QUERY FOR POST', error);
             res.sendStatus(500);
           }) //end second query
-        console.log('POST New Language success');
       })
       .catch((err) => {
         res.sendStatus(500);
@@ -159,7 +152,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             
             //if this row doesn't exist and this errors... insert a new row
             if (result.rowCount === 0) {
-              console.log('===================')
               let addExampleQueryText = `
               INSERT INTO "examples" (language_id, link_text, hyperlink)
                VALUES ($1, $2, $3)
@@ -175,7 +167,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
                 }) 
 
             } else {
-              console.log('this is the RESULT................', result)
               res.sendStatus(200);
             }
 
@@ -218,7 +209,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     pool.query(queryText, [languageID])
       .then(() => {
         res.sendStatus(204);
-        console.log('DELETE Language success');
       })
       .catch((err) => {
         res.sendStatus(500);

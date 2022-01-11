@@ -74,7 +74,6 @@ function LanguageForm() {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
@@ -256,12 +255,17 @@ function LanguageForm() {
           </Grid>
         </Paper>
       </form>
+
+      {/* confirmation on successful post */}
       <Snackbar
         open={open}
         autoHideDuration={4000}
-        onClose={handleClose}
-        message="Success! Your language has been added."
-      />
+        onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        "Success! Your language has been added."
+      </Alert>
+    </Snackbar>
+    
     </>
   );
 }

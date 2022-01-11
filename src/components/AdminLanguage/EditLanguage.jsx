@@ -28,22 +28,19 @@ export default function EditLanguage({ language }) {
         });
     }
 
-
-
     return (
         <>
             <TableCell>
                 <TextField
                     required
                     id="filled-required"
-
                     variant="standard"
                     helperText="ex. Hmong"
-                    value={editLanguage.language}
+                    value={editLanguage.language || ''}
                     onChange={(event) => handleChange(event, 'language')}
                 />
             </TableCell>
-
+            
             <TableCell>
                 <TextField
                     required
@@ -51,12 +48,10 @@ export default function EditLanguage({ language }) {
                     label="Glottocode"
                     variant="standard"
                     helperText="ex. Firs1234"
-                    value={editLanguage.glottocode}
+                    value={editLanguage.glottocode || ''}
                     onChange={(event) => handleChange(event, 'glottocode')}
                 />
             </TableCell>
-
-
 
             <TableCell>
                 <TextField
@@ -65,7 +60,7 @@ export default function EditLanguage({ language }) {
                     label="Global Speakers"
                     variant="standard"
                     helperText="ex. 2,700,000"
-                    value={editLanguage.global_speakers}
+                    value={editLanguage.global_speakers || ''}
                     onChange={(event) => handleChange(event, 'global_speakers')}
                 />
             </TableCell>
@@ -77,7 +72,7 @@ export default function EditLanguage({ language }) {
                     label="SC Speakers"
                     variant="standard"
                     helperText="ex. 3,772"
-                    value={editLanguage.sc_speakers}
+                    value={editLanguage.sc_speakers || ''}
                     onChange={(event) => handleChange(event, 'sc_speakers')}
                 />
             </TableCell>
@@ -89,7 +84,7 @@ export default function EditLanguage({ language }) {
                     label="Endonym"
                     variant="standard"
                     helperText="ex. Hmong"
-                    value={editLanguage.endonym}
+                    value={editLanguage.endonym || ''}
                     onChange={(event) => handleChange(event, 'endonym')}
                 />
             </TableCell>
@@ -100,7 +95,7 @@ export default function EditLanguage({ language }) {
                     id="filled-required"
                     label="Description"
                     variant="standard"
-                    value={editLanguage.description}
+                    value={editLanguage.description || ''}
                     onChange={(event) => handleChange(event, 'description')}
                 />
             </TableCell>
@@ -113,10 +108,10 @@ export default function EditLanguage({ language }) {
                 <TextField
                     required
                     id="filled-required"
-                    label="Global Speakers"
+                    label="Status"
                     variant="standard"
-                    helperText="ex. 2,700,000"
-                    value={editLanguage.status}
+                    helperText="ex. Current"
+                    value={editLanguage.status || ''}
                     onChange={(event) => handleChange(event, 'status')}
                 />
             </TableCell>
@@ -126,7 +121,7 @@ export default function EditLanguage({ language }) {
                     id="filled-required"
                     label="Link Title"
                     variant="standard"
-                    value={editLanguage.link_text}
+                    value={editLanguage.link_text || ''}
                     onChange={(event) => handleChange(event, 'link_text')}
                 />
             </TableCell>
@@ -136,7 +131,7 @@ export default function EditLanguage({ language }) {
                     id="filled-required"
                     label="Hyperlink"
                     variant="standard"
-                    value={editLanguage.hyperlink}
+                    value={editLanguage.hyperlink || ''}
                     onChange={(event) => handleChange(event, 'hyperlink')}
                 />
             </TableCell>

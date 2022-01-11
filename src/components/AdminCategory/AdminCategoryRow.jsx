@@ -22,13 +22,11 @@ export default function AdminCategoryRow({ row }) {
 
   //toggles to input view
   const CallEditMode = () => {
-    console.log("CallEditMode", row.id);
     setHandleEditMode(true);
   };
 
   // function dispatch new edit to database
   const handleEdit = () => {
-    console.log("HandleEdit", edit);
     dispatch({
       type: "UPDATE_CATEGORY",
       payload: edit,
@@ -40,7 +38,6 @@ export default function AdminCategoryRow({ row }) {
 
   //function to delete this row associated with ID
   const handleDelete = () => {
-    console.log("Delete", row.id);
     dispatch({
       type: "DELETE_CATEGORY",
       payload: row.id,
@@ -101,7 +98,7 @@ export default function AdminCategoryRow({ row }) {
 
       <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
-          Information has been updated.
+        Success! {edit.name} has been updated.
         </Alert>
       </Snackbar>
     </>
