@@ -46,7 +46,7 @@ function Map({flyDuration, zoomDuration}) {
   const mapStyles = [
     `mapbox://styles/blingusblongus/cky527chq3w1g14qj7ucfaq82`,
     `mapbox://styles/mapbox/light-v10`,
-    `mapbox://styles/mapbox/dark-v10`,
+    `mapbox://styles/mapbox/dark-v10&access_token`,
   ]
 
   const resetView = () => {
@@ -142,6 +142,8 @@ function Map({flyDuration, zoomDuration}) {
       window.removeEventListener('resize', handleResize);
     }
   })
+
+  console.log(MAPBOX_KEY);
 
   return (
     <div className="App">
