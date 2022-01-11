@@ -121,7 +121,7 @@ export default function AdminLanguageRow({ language }) {
           <TableCell>{language.global_speakers}</TableCell>
           <TableCell>{language.sc_speakers}</TableCell>
           <TableCell>{language.endonym}</TableCell>
-          <TableCell sx={{ width: 500 }} >
+          <TableCell sx={{ "&.MuiTableCell-root":{ minWidth: 400}}}>
             {language.description}
           </TableCell>
           <TableCell>
