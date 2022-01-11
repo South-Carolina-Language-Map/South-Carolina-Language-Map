@@ -7,6 +7,12 @@ A Full Stack web application for collecting and displaying sites in South Caroli
 Administrators have access to table views of the Sites, Languages, and Language Categories, with the ability to add, remove, and edit them. Administrators also have the ability to add other administrators.
 
 ## Screen Shots
+| -------------- | ----------- | 
+
+
+<img src="documentation/images/search_view.png" alt="Search View" width="75%"/>
+<img src="documentation/images/explore_view.png" alt="Explore View" width="75%"/>
+<img src="documentation/images/explore_view.png" alt="Explore View" width="75%"/>
 
 ## Prerequisites
 
