@@ -1,24 +1,32 @@
-import * as  React from "react";
+import * as React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // MUI Imports
-import { Button, TableRow, TableCell, Stack, Snackbar, Alert } from "@mui/material";
+import {
+  Button,
+  TableRow,
+  TableCell,
+  Stack,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 
 //local files
 import EditLanguage from "./EditLanguage";
-
-
-
 
 export default function AdminLanguageRow({ language }) {
   //hooks
   const dispatch = useDispatch();
 
   //store to grab edited language
-  const editLanguage = useSelector((store) => store.adminReducer.adminEditReducer);
+  const editLanguage = useSelector(
+    (store) => store.adminReducer.adminEditReducer
+  );
   //bring in category ID stored in reducer
-  const category = useSelector((store) => store.adminReducer.newLanguageCategoryIDReducer);
+  const category = useSelector(
+    (store) => store.adminReducer.newLanguageCategoryIDReducer
+  );
 
   //will need to pull in example store *****
 
@@ -31,7 +39,7 @@ export default function AdminLanguageRow({ language }) {
   const [openEdit, setOpenEdit] = React.useState(false);
 
   //local state
-  const [toggleEditView, setToggleEditView] = useState(false)
+  const [toggleEditView, setToggleEditView] = useState(false);
 
   //object to send off edited language
   let newLanguage = {
@@ -46,32 +54,29 @@ export default function AdminLanguageRow({ language }) {
     status: editLanguage.status,
     language_id: language.id,
     link_text: editLanguage.link_text,
-    hyperlink: editLanguage.hyperlink
+    hyperlink: editLanguage.hyperlink,
   };
-
 
   //toggles to edit view
   const handleEditView = () => {
     dispatch({
-      type: 'SET_EDIT_LANGUAGE',
-      payload: language
-    })
-    setToggleEditView(true)
-  }
-
+      type: "SET_EDIT_LANGUAGE",
+      payload: language,
+    });
+    setToggleEditView(true);
+  };
 
   // function handles edit for this ID
   const handleEdit = () => {
     dispatch({
-      type: 'UPDATE_LANGUAGE',
-      payload: newLanguage
-    })
+      type: "UPDATE_LANGUAGE",
+      payload: newLanguage,
+    });
     //switch back to row view
     setToggleEditView(false);
     //snackbar
     setOpenEdit(true);
-  }
-
+  };
 
   //function deletes this id
   const handleDelete = () => {
@@ -81,18 +86,17 @@ export default function AdminLanguageRow({ language }) {
     });
   };
 
-
   //closes snackbar
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpenEdit(false);
-  }
-  
+  };
+
   return (
     <>
-      {toggleEditView ?
+      {toggleEditView ? (
         <TableRow hover role="checkbox" tabIndex={-1}>
           <EditLanguage language={language} />
           <TableCell>
@@ -100,22 +104,26 @@ export default function AdminLanguageRow({ language }) {
               <Button sx={{ mr: 1 }} variant="contained" onClick={handleEdit}>
                 Submit
               </Button>
-              <Button variant="outlined" color="error" onClick={() => setToggleEditView(false)}>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => setToggleEditView(false)}
+              >
                 Cancel
               </Button>
             </Stack>
           </TableCell>
         </TableRow>
-
-        :
-
-        <TableRow hover role="checkbox" tabIndex={-1}>
+      ) : (
+        <TableRow sx={{ maxHeight: 5 }} hover role="checkbox" tabIndex={-1}>
           <TableCell>{language.language}</TableCell>
           <TableCell>{language.glottocode}</TableCell>
           <TableCell>{language.global_speakers}</TableCell>
           <TableCell>{language.sc_speakers}</TableCell>
           <TableCell>{language.endonym}</TableCell>
-          <TableCell>{language.description}</TableCell>
+          <TableCell sx={{ overflow: "scroll" }}>
+            {language.description}
+          </TableCell>
           <TableCell>
             {categories.map((category) => {
               if (language.category_id === category.id) {
@@ -129,7 +137,11 @@ export default function AdminLanguageRow({ language }) {
 
           <TableCell>
             <Stack direction="row" spacing={1}>
-              <Button sx={{ mr: 1 }} variant="contained" onClick={handleEditView}>
+              <Button
+                sx={{ mr: 1 }}
+                variant="contained"
+                onClick={handleEditView}
+              >
                 Edit
               </Button>
               <Button variant="outlined" color="error" onClick={handleDelete}>
@@ -137,18 +149,8 @@ export default function AdminLanguageRow({ language }) {
               </Button>
             </Stack>
           </TableCell>
-
-          {/* confirmation on edit */}
-          <Snackbar
-            open={openEdit}
-            autoHideDuration={4000}
-            onClose={handleClose}>
-            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-              "Success! {language.language} has been updated."
-            </Alert>
-          </Snackbar>
-
-        </TableRow>}
+        </TableRow>
+      )}
     </>
   );
 } //end AdminLanguageRow
