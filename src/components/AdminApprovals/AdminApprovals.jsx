@@ -10,6 +10,7 @@ import {
   TableBody,
   TableCell,
   TableHead,
+  Typography,
 } from "@mui/material";
 
 //components
@@ -27,6 +28,9 @@ function AdminApprovals() {
 
   return (
     <Grid container sx={{ pt: 3 }}>
+      <Typography variant="h3" textAlign="center" sx={{ mt: 4, ml: 'auto', mr: 'auto' }}>
+          Approvals
+        </Typography>
       <Grid item xs={1} />
       <Grid item xs={10}>
         <Table stickyHeader aria-label="sticky table">
