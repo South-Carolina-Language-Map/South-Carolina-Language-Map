@@ -11,9 +11,9 @@ import ReactMapGL, {
   Marker,
   LinearInterpolator,
   WebMercatorViewport
-} from 'react-map-gl';
+} from '!react-map-gl';
 import { easeCubic, easeSinOut } from 'd3-ease';
-// import 'mapbox-gl/dist/mapbox-gl.css';
+import '!mapbox-gl/dist/mapbox-gl.css';
 
 function Map({flyDuration, zoomDuration}) {
   const dispatch = useDispatch();
