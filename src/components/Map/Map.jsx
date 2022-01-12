@@ -47,7 +47,7 @@ function Map({flyDuration, zoomDuration}) {
   const mapStyles = [
     `mapbox://styles/blingusblongus/cky527chq3w1g14qj7ucfaq82`,
     `mapbox://styles/mapbox/light-v10`,
-    `mapbox://styles/mapbox/dark-v10&access_token`,
+    `mapbox://styles/mapbox/dark-v10`,
   ]
 
   const resetView = () => {
