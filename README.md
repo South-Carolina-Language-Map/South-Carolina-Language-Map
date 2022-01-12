@@ -6,6 +6,8 @@ A Full Stack web application for collecting and displaying sites in South Caroli
 
 Administrators have access to table views of the Sites, Languages, and Language Categories, with the ability to add, remove, and edit them. Administrators also have the ability to add other administrators.
 
+A live version of the site is available at [languagemapsc.herokuapp.com](https://languagemapsc.herokuapp.com).
+
 ## Screen Shots
 | | |
 | -------------- | ----------- | 
