@@ -150,7 +150,7 @@ function Map({flyDuration, zoomDuration}) {
         {/* Configure and mount map canvas */}
         <ReactMapGL
           {...viewport}
-          mapStyle={mapStyles[2]}
+          mapStyle={mapStyles[0]}
           onViewportChange={setViewport}
           mapboxApiAccessToken={MAPBOX_KEY}
         >
