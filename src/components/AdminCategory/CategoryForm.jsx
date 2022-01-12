@@ -12,7 +12,7 @@ function CategoryForm() {
   //initialize dispatch
   const dispatch = useDispatch();
   //local state stores the value for category input
-  const [newCategory, setCategory] = useState("");
+  const [newCategory, setCategory] = useState({name: ""});
 
   //Mui Snackbar
   const [open, setOpen] = useState(false);
@@ -24,9 +24,11 @@ function CategoryForm() {
     setOpen(false);
   };
 
+
   const handleSubmit = () => {
     dispatch({ type: "ADD_CATEGORY", payload: newCategory });
     setOpen(true);
+    setCategory({name: ""})
   };
 
   return (
@@ -41,6 +43,7 @@ function CategoryForm() {
           id="filled-required"
           label="Category Name"
           helperText="ex. Native American"
+          value={newCategory.name}
           onChange={(event) => setCategory({ name: event.target.value })}
         />
         <br />
