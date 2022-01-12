@@ -20,8 +20,6 @@ export default function EditLanguage({ language }) {
     //store to grab language sent from AdminLanguageRow component
     const editLanguage = useSelector((store) => store.adminReducer.adminEditReducer);
 
-    
-
     //handle changing the language object in the reducer at every key stroke
     function handleChange(event, property) {
         dispatch({
@@ -30,22 +28,19 @@ export default function EditLanguage({ language }) {
         });
     }
 
-
-
     return (
         <>
             <TableCell>
                 <TextField
                     required
                     id="filled-required"
-
                     variant="standard"
                     helperText="ex. Hmong"
                     value={editLanguage.language || ''}
                     onChange={(event) => handleChange(event, 'language')}
                 />
             </TableCell>
-
+            
             <TableCell>
                 <TextField
                     required
@@ -57,8 +52,6 @@ export default function EditLanguage({ language }) {
                     onChange={(event) => handleChange(event, 'glottocode')}
                 />
             </TableCell>
-
-
 
             <TableCell>
                 <TextField

@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
 import AdminHome from "../AdminHome/AdminHome";
-import AdminAbout from "../AdminAbout/AdminAbout";
 import AdminLanguage from "../AdminLanguage/AdminLanguage";
 import AdminCategory from "../AdminCategory/AdminCategory";
 import AdminApprovals from "../AdminApprovals/AdminApprovals";
@@ -41,8 +40,6 @@ function Admin() {
       currentAdminView = <p>There was an error, please try again later</p>;
       break;
   }
-
-  console.log("this is the admin view", adminView);
   //admin components called from here
   return (
     <>

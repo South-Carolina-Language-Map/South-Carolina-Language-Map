@@ -17,7 +17,8 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 function Map({flyDuration, zoomDuration}) {
   const dispatch = useDispatch();
-  const MAPBOX_KEY = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+  const MAPBOX_KEY = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN || 
+    'pk.eyJ1Ijoic2MtbGFuZ3VhZ2UtbWFwIiwiYSI6ImNreWFpa3Y2dDA1eWszMW1yM2ZpaDJ4dWEifQ.tSM8PZfF3O-6YqvWTuNGhQ';
 
   // set map height
   const windowSmall = window.innerWidth < 600;

@@ -7,7 +7,6 @@ router.get('/', (req, res) => {
   pool.query(`SELECT * FROM "regions";`)
   .then((response) => {
     res.send(response.rows);
-    console.log('Regions GET successful');
   })
   .catch((err) => {
     res.sendStatus(500);
