@@ -28,7 +28,7 @@ Administrators have access to table views of the Sites, Languages, and Language 
     ```
     "browserslist": {
       "production": [
-        ">0.2%",
+        ">0.2% and supports es6-class",
         "not dead",
         "not op_mini all",
         "not chrome < 51",
